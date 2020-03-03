@@ -1,0 +1,10 @@
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Data" Assembly="DevExpress.Data.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<%@ Register TagPrefix="dx" Namespace="DevExpress.XtraReports.Web" Assembly="DevExpress.XtraReports.v14.2.Web, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<dx:ReportViewer runat="server" CssFilePath="{0}/styles.css" CssPostfix="Office2010Blue" SpriteCssFilePath="{0}/sprite.css">
+    <LoadingPanelStyle ForeColor="#1e395b" ImageSpacing="5">
+        <Paddings PaddingTop="10" PaddingRight="14" PaddingBottom="10" PaddingLeft="14" />
+        <Border BorderWidth="1" BorderStyle="Solid" BorderColor="#859ebf" />
+    </LoadingPanelStyle>
+    <LoadingPanelImage Url="Web/Loading.gif" />
+</dx:ReportViewer>
+

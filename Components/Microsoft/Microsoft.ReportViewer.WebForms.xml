@@ -1,0 +1,2204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.ReportViewer.WebForms</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Reporting.WebForms.AspNetSessionExpiredException">
+      <summary>ASP.NET 会话已过期时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.BackEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Back" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.BackEventArgs.#ctor(Microsoft.Reporting.WebForms.Report)">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.BackEventArgs" /> 类的新实例。</summary>
+      <param name="parentReport">钻取报表的父报表。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.BackEventArgs.ParentReport">
+      <summary>获取钻取报表的父报表。</summary>
+      <returns>A  <see cref="T:Microsoft.Reporting.WebForms.LocalReport" />（如果报表是在本地处理模式） 或 <see cref="T:Microsoft.Reporting.WebForms.ServerReport" />对象（如果在远程处理模式 ReportViewer 控件） 包含父报表的钻取报表。 </returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.BackEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="T:Microsoft.Reporting.WebForms.Back" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">包含事件参数的 <see cref="T:Microsoft.Reporting.WebForms.BackEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.BookmarkNavigationEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.BookmarkNavigation" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.BookmarkNavigationEventArgs.#ctor(System.String)">
+      <summary>构造一个 BookmarkNavigationEventArgs 对象。</summary>
+      <param name="bookmarkId">书签标识字符串。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.BookmarkNavigationEventArgs.BookmarkId">
+      <summary>获取书签标识字符串。</summary>
+      <returns>一个只读 String 对象。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.BookmarkNavigationEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="T:Microsoft.Reporting.WebForms.BookmarkNavigation" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">包含事件参数的 <see cref="T:Microsoft.Reporting.WebForms.BookmarkNavigationEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ClientRenderingException">
+      <summary>表示当 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件将报表页布局 (RPL) 格式的已处理报表呈现为 HTML 格式时发生的错误。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ContentDisposition">
+      <summary>指明报表内容的存在方式。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ContentDisposition.AlwaysInline">
+      <summary>指明不论内容是哪种格式，均以内联方式存在。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ContentDisposition.AlwaysAttachment">
+      <summary>指明不论内容是哪种格式，始终作为附件存在。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ContentDisposition.OnlyHtmlInline">
+      <summary>指明 HTML 格式的内容以内联方式存在，其他所有内容都作为附件存在。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.CreateStreamCallback">
+      <summary>为 ReportViewer 控件提供流以进行呈现。</summary>
+      <returns>ReportViewer 控件可以写入数据的 Stream 对象。</returns>
+      <param name="name">流的名称。</param>
+      <param name="extension">创建文件流时要使用的文件扩展名。</param>
+      <param name="encoding">指定流的字符编码的 Encoding 枚举器值。如果流不包含字符，则此值可能为 null。</param>
+      <param name="mimeType">一个包含流的 MIME 类型的字符串。</param>
+      <param name="willSeek">指示流是否需要支持查找的 Boolean 值。如果值为 false，则流将为只前推，并将按其创建顺序发送到块区中的客户端。如果值为 true，则流可以任何顺序写入。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DataSourceCredentials">
+      <summary>表示数据源凭据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DataSourceCredentials.#ctor">
+      <summary>构造一个 DataSourceCredentials 对象。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DataSourceCredentials.Name">
+      <summary>获取或设置数据源为连接到报表服务器使用的用户名。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DataSourceCredentials.Password">
+      <summary>获取或设置数据源为连接到报表服务器使用的密码。</summary>
+      <returns>一个包含密码的字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DataSourceCredentials.UserId">
+      <summary>获取或设置数据源为连接到报表服务器使用的用户标识。</summary>
+      <returns>一个包含用户 ID 的字符串。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DataSourceCredentialsCollection">
+      <summary>表示 <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 对象的集合。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DataSourceCredentialsCollection.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentialsCollection" /> 类的新实例。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DataSourceCredentialsCollection.Item(System.String)">
+      <summary>从集合中获取指定名称的 <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 对象。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 对象。</returns>
+      <param name="name">
+        <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 对象的名称。此参数不区分大小写。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DeviceInfo">
+      <summary>包含一个名称/值对，表示不区分大小写的设备信息设置。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DeviceInfo.#ctor(System.String,System.String)">
+      <summary>类的新实例的<see cref="T:Microsoft.Reporting.WebForms.DeviceInfo" />类。</summary>
+      <param name="name">设备信息的名称。</param>
+      <param name="value">设备信息的值。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DeviceInfo.Name">
+      <summary>获取设备信息的名称。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DeviceInfo.Value">
+      <summary>获取设备信息的值。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DeviceInfoCollection">
+      <summary>表示设备信息设置的集合。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DeviceInfoCollection.Add(System.String,System.String)">
+      <summary>使用指定的名称和值将 <see cref="T:Microsoft.Reporting.WebForms.DeviceInfo" /> 对象添加到集合。</summary>
+      <param name="name">设备信息设置的名称。</param>
+      <param name="value">设备信息设置的值。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DocumentMapNavigationEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.DocumentMapNavigation" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DocumentMapNavigationEventArgs.#ctor(System.String)">
+      <summary>构造一个 DocumentMapNavigationEventArgs 对象。</summary>
+      <param name="docMapID">一个包含文档结构图节点 ID 的字符串值。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DocumentMapNavigationEventArgs.DocumentMapId">
+      <summary>获取选择的文档结构图节点的唯一标识符。</summary>
+      <returns>一个包含文档结构图节点 ID 的只读字符串值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DocumentMapNavigationEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.DocumentMapNavigation" /> 事件的方法。</summary>
+      <param name="sender">引发该事件的对象。</param>
+      <param name="e">一个包含事件参数的 <see cref="T:Microsoft.Reporting.WebForms.DocumentMapNavigationEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DocumentMapNode">
+      <summary>表示文档结构图中的单个节点。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DocumentMapNode.Children">
+      <summary>获取子文档结构图节点的集合。</summary>
+      <returns>一组只读 <see cref="T:Microsoft.Reporting.WebForms.DocumentMapNode" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DocumentMapNode.Id">
+      <summary>获取文档结构图节点的唯一标识符。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DocumentMapNode.Label">
+      <summary>获取与文档结构图节点相关的标签。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DrillthroughEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Drillthrough" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.DrillthroughEventArgs.#ctor(System.String,Microsoft.Reporting.WebForms.Report)">
+      <summary>构造一个 DrillthroughEventArgs 对象。</summary>
+      <param name="reportPath">钻取报表的路径。</param>
+      <param name="targetReport">钻取操作的目标报表。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DrillthroughEventArgs.Report">
+      <summary>获取钻取操作的目标报表。</summary>
+      <returns>只读 <see cref="T:Microsoft.Reporting.WebForms.LocalReport" /> 或 <see cref="T:Microsoft.Reporting.WebForms.ServerReport" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.DrillthroughEventArgs.ReportPath">
+      <summary>获取钻取报表的路径。</summary>
+      <returns>一个只读 String 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.DrillthroughEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Drillthrough" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">包含事件数据的 <see cref="T:Microsoft.Reporting.WebForms.DrillthroughEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.HttpHandler"></member>
+    <member name="M:Microsoft.Reporting.WebForms.HttpHandler.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.HttpHandler.IsReusable"></member>
+    <member name="M:Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(System.Web.HttpContext)"></member>
+    <member name="T:Microsoft.Reporting.WebForms.InteractivityPostBackMode">
+      <summary>在用户与报表查看器以及当前显示的报表进行交互时指定 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件的回发模式。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.InteractivityPostBackMode.AlwaysAsynchronous">
+      <summary>始终执行异步回发。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.InteractivityPostBackMode.AlwaysSynchronous">
+      <summary>始终执行同步回发。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.InteractivityPostBackMode.SynchronousOnDrillthrough">
+      <summary>对钻取操作执行同步回发，对其他操作执行异步回发。在此模式下，单击钻取报表和单击“返回到父级”按钮都将导致同步回发。有关钻取报表的更多信息，请参见 SQL Server 联机丛书中的Adding Drillthrough Reports。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.InvalidConfigFileTypeException">
+      <summary>当通过 Web.config 文件中的条目所提供的对象缺失或无效时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.InvalidTemporaryStorageStreamException">
+      <summary>当临时流不支持查找、读取或写入时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportServerConnection">
+      <summary>提供在未启用会话状态下使用 ReportViewer Web 窗体控件时的报表服务器连接信息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerConnection.ReportServerUrl">
+      <summary>返回报表服务器的 URL。</summary>
+      <returns>包含报表服务器的 URL 的 Uri 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerConnection.Timeout">
+      <summary>获取等待服务器通信的毫秒数。</summary>
+      <returns>包含等待服务器通信的毫秒数的整数值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportServerConnection2">
+      <summary>提供在未启用会话状态下使用“ReportViewer”Web 窗体控件时的报表服务器连接信息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerConnection2.Cookies">
+      <summary>获取要发送到报表服务器的自定义 Cookie 的集合。</summary>
+      <returns>一个包含自定义 Cookie 的 <see cref="T:System.Net.Cookie" /> 对象的集合。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerConnection2.Headers">
+      <summary>获取要发送到报表服务器的自定义标头的集合。</summary>
+      <returns>一个包含自定义标头值的 string 对象的集合。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportServerCredentials">
+      <summary>允许应用程序提供用于连接到 Reporting Services 报表服务器的凭据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportServerCredentials.GetFormsCredentials(System.Net.Cookie@,System.String@,System.String@,System.String@)">
+      <summary>提供用于连接到配置为使用 Forms 身份验证的报表服务器的信息。</summary>
+      <returns>如果应该使用 Forms 身份验证，则为 true；否则为 false。</returns>
+      <param name="authCookie">[out] 报表服务器身份验证 Cookie。</param>
+      <param name="userName">[out] 用户名。</param>
+      <param name="password">[out] 用户密码。</param>
+      <param name="authority">[out] 对用户进行身份验证时要使用的机构，如 Microsoft Windows 域。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerCredentials.ImpersonationUser">
+      <summary>获取或设置当 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件连接到报表服务器时要模拟的用户的 <see cref="T:System.Security.Principal.WindowsIdentity" />。</summary>
+      <returns>一个表示要模拟的用户的 <see cref="T:System.Security.Principal.WindowsIdentity" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportServerCredentials.NetworkCredentials">
+      <summary>获取或设置向报表服务器进行身份验证时使用的网络凭据。</summary>
+      <returns>
+        <see cref="T:System.Net.ICredentials" /> 的实现，它包含用于连接到报表服务器的凭据信息。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportViewerMessages">
+      <summary>允许应用程序提供自定义的用户界面消息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.BackButtonToolTip">
+      <summary>提供“上一步”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ChangeCredentialsText">
+      <summary>为“更改凭据”按钮提供文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ChangeCredentialsToolTip">
+      <summary>为“更改凭据”按钮提供工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.CurrentPageTextBoxToolTip">
+      <summary>为“当前页”文本框提供工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.DocumentMap">
+      <summary>为“文档结构图”面板提供标题文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.DocumentMapButtonToolTip">
+      <summary>为“文档结构图”按钮提供工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ExportButtonText">
+      <summary>提供“导出”按钮的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ExportButtonToolTip">
+      <summary>提供“导出”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ExportFormatsToolTip">
+      <summary>为“导出格式”下拉列表框提供工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FalseValueText">
+      <summary>提供 false 值的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FindButtonText">
+      <summary>提供“查找”按钮的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FindButtonToolTip">
+      <summary>提供“查找”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FindNextButtonText">
+      <summary>提供“查找下一个”按钮的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FindNextButtonToolTip">
+      <summary>提供“查找下一个”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.FirstPageButtonToolTip">
+      <summary>提供“首页”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.InvalidPageNumber">
+      <summary>提供无效页码消息的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.LastPageButtonToolTip">
+      <summary>提供“最后一页”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.NextPageButtonToolTip">
+      <summary>提供“下一页”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.NoMoreMatches">
+      <summary>提供没有其他匹配项的消息的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.NullCheckBoxText">
+      <summary>提供 Null 复选框的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.NullValueText">
+      <summary>提供 null 值的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.PageOf">
+      <summary>提供分页消息的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ParameterAreaButtonToolTip">
+      <summary>提供“参数区域”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.PasswordPrompt">
+      <summary>提供密码提示的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.PreviousPageButtonToolTip">
+      <summary>提供“上一页”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.PrintButtonToolTip">
+      <summary>提供“打印”按钮的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ProgressText">
+      <summary>提供在处理报表时显示的进度消息的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.RefreshButtonToolTip">
+      <summary>提供“刷新”按钮的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.SearchTextBoxToolTip">
+      <summary>提供“搜索”文本框的工具提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.SelectAll">
+      <summary>为多值下拉列表框中的“全选”项提供文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.SelectAValue">
+      <summary>提供“选择一个值”提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.SelectFormat">
+      <summary>提供选择格式提示文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.TextNotFound">
+      <summary>提供“未找到文本”消息文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.TodayIs">
+      <summary>提供日历控件中的“今天是…”消息文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.TrueValueText">
+      <summary>提供 true 值的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.UserNamePrompt">
+      <summary>提供用户名提示的文本。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ViewReportButtonText">
+      <summary>提供“查看报表”按钮的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ZoomControlToolTip">
+      <summary>为“缩放”控件提供工具提示。</summary>
+      <returns>A 字符串的值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ZoomToPageWidth">
+      <summary>提供“缩放到页宽”选项的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages.ZoomToWholePage">
+      <summary>提供“缩放到整页”项的文本。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportViewerMessages2">
+      <summary>定义方法和属性来实现自定义用户界面消息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages2.ClientNoScript">
+      <summary>获取在客户端浏览器上禁用脚本时要显示的文本。</summary>
+      <returns>一个字符串，包含在客户端浏览器上禁用脚本时要显示的文本。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages2.ClientPrintControlLoadFailed">
+      <summary>获取在客户端加载打印控件时如果发生错误则显示的文本。</summary>
+      <returns>一个文本字符串，包含在客户端加载打印控件时如果发生错误则显示的文本。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportViewerMessages2.CredentialMissingUserNameError(System.String)">
+      <summary>返回在没有为数据源凭据提供用户名时要显示的错误文本。</summary>
+      <returns>返回一个 String，该字符串包含在没有为数据源凭据提供用户名时要显示的错误文本。</returns>
+      <param name="dataSourcePrompt">标识哪个数据源缺少值的提示值。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportViewerMessages2.GetLocalizedNameForRenderingExtension(System.String)">
+      <summary>返回当前导出格式的本地化名称。</summary>
+      <returns>返回一个字符串，该字符串包含当前导出格式的本地化名称。</returns>
+      <param name="format">当前导出格式（例如，EXCEL、PDF）的名称。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages2.ParameterDropDownToolTip">
+      <summary>获取当指针悬停在多值参数下拉列表的向下箭头上时要显示的工具提示文本。</summary>
+      <returns>一个文本字符串，包含当指针悬停在多值参数下拉列表的向下箭头上时要显示的工具提示文本。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportViewerMessages2.ParameterMissingSelectionError(System.String)">
+      <summary>返回在没有针对多值报表参数做出选择时要显示的错误文本。</summary>
+      <returns>返回一个字符串，该字符串包含在没有针对多值报表参数做出选择时要显示的错误文本。</returns>
+      <param name="parameterPrompt">标识哪个报表参数尚未指定的提示值。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportViewerMessages2.ParameterMissingValueError(System.String)">
+      <summary>返回在尚未指定报表参数的值时要显示的错误文本。</summary>
+      <returns>返回一个字符串，该字符串包含在尚未指定报表参数时要显示的错误文本。</returns>
+      <param name="parameterPrompt">标识哪个报表参数尚未指定的提示值。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.IReportViewerMessages3">
+      <summary>允许应用程序提供自定义的用户界面消息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages3.CalendarLoading">
+      <summary>获取当控件等待 Web 服务器生成给定月份的日历时，在日期时间选择器中显示的文本。</summary>
+      <returns>一个 string 值，该值表示当控件等待 Web 服务器生成给定月份的日历时显示的文本。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.IReportViewerMessages3.CancelLinkText">
+      <summary>获取等待控件中的“取消”链接的文本。</summary>
+      <returns>一个 string 值，该值表示“取消”链接文本。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.IReportViewerMessages3.TotalPages(System.Int32,Microsoft.Reporting.WebForms.PageCountMode)">
+      <summary>返回默认工具栏上的字符串，该字符串表示当前报表中的总页数以及使用的页计数模式。</summary>
+      <returns>一个本地化字符串，用于表示总页数和页计数模式。</returns>
+      <param name="pageCount">当前报表中的页数。</param>
+      <param name="pageCountMode">指示 <paramref name="pageCount" /> 参数是表示估计页数还是实际页数。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ITemporaryStorage">
+      <summary>为临时数据提供自定义存储。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ITemporaryStorage.CreateTemporaryStream">
+      <summary>提供用于存储临时数据的流。</summary>
+      <returns>用于存储临时数据的 Stream 对象。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.LocalProcessingException">
+      <summary>表示查看本地处理的报表时发生的错误。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.LocalReport">
+      <summary>表示不用连接到报表服务器而在本地处理和呈现的报表。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.LocalReport" /> 类的一个新实例。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.AddFullTrustModuleInSandboxAppDomain(System.Security.Policy.StrongName)">
+      <summary>将提供的程序集添加到在沙盒应用程序域中以完全信任模式运行的程序集列表。</summary>
+      <param name="assemblyName">要添加的程序集的名称。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.AddTrustedCodeModuleInCurrentAppDomain(System.String)">
+      <summary>将提供的程序集添加至可以在当前 <see cref="T:System.AppDomain" /> 中执行的程序集列表。</summary>
+      <param name="assemblyName">要添加的程序集的名称。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.DataSources">
+      <summary>获取报表使用的数据源集合。</summary>
+      <returns>只读 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceCollection" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.Dispose">
+      <summary>释放所有资源所使用的<see cref="T:Microsoft.Reporting.WebForms.LocalReport" />对象。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.EnableExternalImages">
+      <summary>指示在报表包含外部图像时是否可以呈现。</summary>
+      <returns>一个 Boolean 值。true 值指示在本地报表包含外部图像时可以呈现。默认值为 false。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.EnableHyperlinks">
+      <summary>指示在报表包含超链接操作时是否可以呈现。</summary>
+      <returns>一个 Boolean 值。true 值指示在报表包含超链接操作时可以呈现。默认值为 false。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.ExecuteReportInCurrentAppDomain(System.Security.Policy.Evidence)">
+      <summary>导致在当前 <see cref="T:System.AppDomain" /> 中执行报表中的处理扩展插件和表达式。</summary>
+      <param name="reportEvidence">包含有关报表的安全信息的 <see cref="P:System.AppDomain.Evidence" /> 对象。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.ExecuteReportInSandboxAppDomain">
+      <summary>导致处理扩展插件和表达式以有限权限在应用程序域中运行。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.GetDataSourceNames">
+      <summary>返回本地报表中使用的所有数据集的名称。</summary>
+      <returns>包含数据集名称列表的 String 对象的数组。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.GetDefaultPageSettings">
+      <summary>获取在本地报表中指定的默认页设置。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportPageSettings" /> 对象，包含本地报表中的默认页设置。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.GetParameters">
+      <summary>返回报表的报表参数属性。</summary>
+      <returns>包含 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfo" /> 对象数组的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.GetTotalPages(Microsoft.Reporting.WebForms.PageCountMode@)">
+      <summary>在报表中返回的软页面总数和<see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />枚举值，指示当前页计数模式。</summary>
+      <returns>一个 integer 值，其中包含报表中的软页总数。有关软页的更多信息，请参见Understanding Rendering Behaviors。</returns>
+      <param name="pageCountMode">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 枚举值，指示用于计算软页总数的页计数模式。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.ListRenderingExtensions">
+      <summary>返回本地报表的所有可用的呈现扩展插件。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.RenderingExtension" /> 对象数组。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.LoadReportDefinition(System.IO.TextReader)">
+      <summary>从本地文件系统使用加载报表定义 <see cref="T:System.IO.TextReader" />.</summary>
+      <param name="report">包含本地报表的报表定义的 <see cref="T:System.IO.TextReader" /> 类。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.LoadSubreportDefinition(System.String,System.IO.Stream)">
+      <summary>使用 <see cref="T:System.IO.Stream" /> 加载子报表定义。</summary>
+      <param name="reportName">子报表定义的路径和文件名。</param>
+      <param name="report">包含子报表的报表定义的 <see cref="T:System.IO.Stream" /> 类。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.LoadSubreportDefinition(System.String,System.IO.TextReader)">
+      <summary>使用 <see cref="T:System.IO.TextReader" /> 加载子报表定义。</summary>
+      <param name="reportName">子报表定义的路径和文件名。</param>
+      <param name="report">一个将包含子报表的报表定义语言 (RDL) 的 <see cref="T:System.IO.TextReader" /> 对象。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.MapTileServerConfiguration">
+      <summary>定义报表中的报表项提供平铺背景映射的微软必应地图SOAP服务的配置设置。 </summary>
+      <returns>返回 <see cref="T:Microsoft.Reporting.WebForms.MapTileServerConfiguration" />.</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.OriginalParametersToDrillthrough">
+      <summary>返回从父报表传递到此报表（如果它是钻取报表）的参数。</summary>
+      <returns>
+        <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象的 <see cref="T:System.Collections.Generic.IList`1" />，这些对象表示从父报表传递到钻取报表的参数；如果此报表不是钻取报表，则为空集合。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.Refresh">
+      <summary>导致用新数据呈现本地报表。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.ReleaseSandboxAppDomain">
+      <summary>导致<see cref="T:Microsoft.Reporting.WebForms.LocalReport" />对象发布及其对沙盒应用程序的引用域立即。  </summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.Render(System.String,System.String,Microsoft.Reporting.WebForms.CreateStreamCallback,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>处理报表，并使用回调函数提供的流以指定的格式呈现报表。</summary>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。支持的格式包括 Excel、PDF、Word 和 Image。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.LocalReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="createStream">A <see cref="T:Microsoft.Reporting.WebForms.CreateStreamCallback" />委托函数，用于提供   <see cref="T:System.IO.Stream" />对象的绘制。 </param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，用于描述在处理和呈现报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.Render(System.String,System.String,Microsoft.Reporting.WebForms.PageCountMode,Microsoft.Reporting.WebForms.CreateStreamCallback,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>使用指定页计数模式处理报表，并使用回调函数提供的流以指定格式呈现报表。</summary>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。支持的格式包括 Excel、PDF、Word 和 Image。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.LocalReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="pageCountMode">A <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />枚举值，它指定的页计数模式。 此参数对于硬页呈现器没有作用。软、 硬页呈现器的详细信息，请参阅 d57866f5-d876-41ce-bc49-0e72486a9617。了解呈现行为</param>
+      <param name="createStream">A <see cref="T:Microsoft.Reporting.WebForms.CreateStreamCallback" />委托函数，用于提供   <see cref="T:System.IO.Stream" />对象的绘制。 </param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，用于描述在处理和呈现报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.Render(System.String,System.String,Microsoft.Reporting.WebForms.PageCountMode,System.String@,System.String@,System.String@,System.String[]@,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>以指定页计数模式处理报表，并以指定格式呈现报表。</summary>
+      <returns>具有指定格式的报表的 <see cref="T:System.Byte" /> 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。支持的格式包括 Excel、PDF、Word 和 Image。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.LocalReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="pageCountMode">A <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />枚举值，它指定的页计数模式。 </param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="encoding">[out] 呈现报表内容时所使用的编码。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+      <param name="streams">[out] 流标识符。您可以使用它们来呈现与报表关联的外部资源（例如图像）。</param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，用于描述在处理和呈现报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.ReportEmbeddedResource">
+      <summary>获取或设置报表嵌入资源的名称。</summary>
+      <returns>一个包含嵌入资源名称的字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.ReportPath">
+      <summary>获取或设置本地报表的本地文件系统路径。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.SetBasePermissionsForSandboxAppDomain(System.Security.PermissionSet)">
+      <summary>使用提供的权限集设置沙盒应用程序域的基本权限。</summary>
+      <param name="permissions">要设置的 <see cref="T:System.Security.PermissionSet" />。默认基本权限为 Execution。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.SetParameters(System.Collections.Generic.IEnumerable{Microsoft.Reporting.WebForms.ReportParameter})">
+      <summary>设置本地报表的报表参数属性。</summary>
+      <param name="parameters">
+        <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象的 <see cref="T:System.Collections.Generic.IEnumerable`1" />，包含报表参数属性列表。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.LocalReport.ShowDetailedSubreportMessages">
+      <summary>获取或设置一个 Boolean 值，该值指示当子报表中出错时是否应显示详细消息。</summary>
+      <returns>如果应显示详细消息，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.LocalReport.SubreportProcessing">
+      <summary>在处理子报表时发生。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.LocalReport.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="T:Microsoft.Reporting.WebForms.MapTileServerConfiguration">
+      <summary>定义报表中的报表项提供平铺背景映射的微软必应地图SOAP服务的配置设置。 </summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.MapTileServerConfiguration.AppID">
+      <summary>获取或设置应用程序标识符用于 Bing 地图SOAP服务 （应用程序标识）。</summary>
+      <returns>返回 <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.MapTileServerConfiguration.MaxConnections">
+      <summary>获取或设置 Bing 地图SOAP服务的最大连接数。</summary>
+      <returns>返回 <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.MapTileServerConfiguration.Timeout">
+      <summary>获取或设置超时值以秒为单位，等待来自 Bing 地图SOAP服务的响应。</summary>
+      <returns>返回 <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingDataSourceCredentialsException">
+      <summary>表示在没有为报表使用的数据源提供凭据时发生的异常。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingDataSourceException">
+      <summary>表示在没有提供报表所需数据源时出现的错误。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingEndpointException">
+      <summary>表示无法访问 ReportViewer 控件使用的 SOAP 端点时出现的错误。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingParameterException">
+      <summary>表示在没有提供报表所需参数时发生的异常。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingReportServerConnectionInformationException">
+      <summary>未启用会话状态且没有通过 Web.config 文件提供实现 <see cref="T:Microsoft.Reporting.WebForms.IReportServerConnection" /> 界面的对象时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.MissingReportSourceException">
+      <summary>表示没有指定报表资源时发生的异常。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.MissingReportSourceException.#ctor"></member>
+    <member name="T:Microsoft.Reporting.WebForms.PageCountMode">
+      <summary>表示用于控制是计算实际页计数还是使用估计页计数的值。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.PageCountMode.Actual">
+      <summary>计算报表的实际页计数。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.PageCountMode.Estimate">
+      <summary>提供报表的估计页计数，而不是计算实际页计数。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.PageNavigationEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.PageNavigation" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.PageNavigationEventArgs.#ctor(System.Int32)">
+      <summary>构造一个新的 PageNavigationEventArgs 对象。</summary>
+      <param name="newPage">一个包含新页码的 integer 值。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.PageNavigationEventArgs.NewPage">
+      <summary>获取由 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.PageNavigation" /> 事件得到的页码。</summary>
+      <returns>一个包含新页码的 integer 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.PageNavigationEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.PageNavigation" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">包含此事件的参数的 <see cref="T:Microsoft.Reporting.WebForms.PageNavigationEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ParameterDataType">
+      <summary>指定参数的数据类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterDataType.Boolean">
+      <summary>表示 true 或 false 状态的 Boolean 数据类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterDataType.DateTime">
+      <summary>表示日期和时间的 DateTime 数据类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterDataType.Float">
+      <summary>表示浮点十进制值的 Float 数据类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterDataType.Integer">
+      <summary>Integer 数据类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterDataType.String">
+      <summary>表示一组字符的 String 数据类型。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ParameterState">
+      <summary>指定参数的状态。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterState.HasValidValue">
+      <summary>存在有效的参数值。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterState.MissingValidValue">
+      <summary>不存在有效的参数值。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterState.HasOutstandingDependencies">
+      <summary>参数具有未处理的依赖关系。这通常出现在参数的有效值或默认值是基于查询的，且存在未提交到 <see cref="M:Microsoft.Reporting.WebForms.Report.GetParameters" /> 方法的依赖关系时。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ParameterState.DynamicValuesUnavailable">
+      <summary>参数值不可用。此状态指明查询没有返回基于查询的有效值。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ProcessingMode">
+      <summary>用于指定 ReportViewer 控件的处理模式。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ProcessingMode.Local">
+      <summary>指定将使用由 ReportViewer 控件提供的报表引擎处理和呈现报表。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ProcessingMode.Remote">
+      <summary>指定对于 Reporting Services 报表服务器的远程处理模式。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.RenderingExtension">
+      <summary>包装可用于 ReportViewer 的报表的呈现扩展插件。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.RenderingExtension.LocalizedName">
+      <summary>获取呈现扩展插件的本地化显示名称。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.RenderingExtension.Name">
+      <summary>获取呈现扩展插件的名称。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.RenderingExtension.Visible">
+      <summary>指示呈现扩展插件在用户界面中是否可见。</summary>
+      <returns>一个 Boolean 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Report">
+      <summary>包含可应用于本地报表和服务器报表的方法和属性。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Report.DisplayName">
+      <summary>获取或设置报表的显示名称。</summary>
+      <returns>一个包含报表的显示名称的字符串。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.GetDefaultPageSettings">
+      <summary>获取报表中指定的默认页设置。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportPageSettings" /> 对象，包含本地报表中的默认页设置。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.GetDocumentMap">
+      <summary>返回本地报表的文档结构图的表示形式。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.DocumentMapNode" /> 对象，其中包含报表的文档结构图层次结构的顶级节点。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.GetParameters">
+      <summary>返回报表的报表参数属性。</summary>
+      <returns>
+        <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfo" /> 对象的集合。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.GetTotalPages">
+      <summary>返回报表中的软页总数。</summary>
+      <returns>一个 integer 值，其中包含报表中的软页总数。有关软页的更多信息，请参见Understanding Rendering Behaviors。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.GetTotalPages(Microsoft.Reporting.WebForms.PageCountMode@)">
+      <summary>返回报表中的软页总数以及用于指示当前页计数模式的 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 值。</summary>
+      <returns>一个 integer 值，其中包含报表中的软页总数。有关软页的更多信息，请参见Understanding Rendering Behaviors。</returns>
+      <param name="pageCountMode">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 枚举值，指示用于计算软页总数的页计数模式。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Report.IsDrillthroughReport">
+      <summary>指示该报表是否为钻取报表。</summary>
+      <returns>一个 Boolean 值。值为 True 表示这是一个钻取报表。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Report.IsReadyForRendering">
+      <summary>获取一个 Boolean 值，该值指示是否已指定报表定义及所有参数，以及是否所有数据源已经可供使用。</summary>
+      <returns>如果已指定报表定义和所有必需参数，且所有数据源已经可供使用，则为 true；否则为 false。默认值为 false。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.ListRenderingExtensions">
+      <summary>返回报表的所有可用的呈现扩展插件。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.RenderingExtension" /> 对象数组。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.LoadReportDefinition(System.IO.Stream)">
+      <summary>使用 <see cref="T:System.IO.Stream" /> 加载要处理的报表定义。</summary>
+      <param name="report">A <see cref="T:System.IO.Stream" />类，包含报表的报表定义。 </param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.LoadReportDefinition(System.IO.TextReader)">
+      <summary>加载报表定义用于处理使用 <see cref="T:System.IO.TextReader" />.</summary>
+      <param name="report">包含报表的报表定义的 <see cref="T:System.IO.TextReader" /> 类。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.Refresh">
+      <summary>使报表用新数据来呈现。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.Render(System.String)">
+      <summary>处理报表并以指定的格式呈现该报表。</summary>
+      <returns>具有指定格式的报表的 byte 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。在本地处理模式中，支持的扩展插件为 Excel、PDF、Word 和 Image。在远程处理模式中，支持的扩展插件取决于报表服务器支持的扩展插件。根据处理模式（请参见 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" />），可以使用 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ServerReport" /> 或 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.LocalReport" /> 中的 ListRenderingExtensions 方法来访问可用呈现扩展插件列表。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.Render(System.String,System.String)">
+      <summary>处理报表并以指定的格式呈现该报表。</summary>
+      <returns>具有指定格式的报表的 byte 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。在本地处理模式中，支持的扩展插件为 Excel、PDF、Word 和 Image。在远程处理模式中，支持的扩展插件取决于报表服务器支持的扩展插件。根据处理模式（请参见 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" />），可以使用 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ServerReport" /> 或 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.LocalReport" /> 中的 ListRenderingExtensions 方法来访问可用呈现扩展插件列表。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.Render(System.String,System.String,Microsoft.Reporting.WebForms.PageCountMode,System.String@,System.String@,System.String@,System.String[]@,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>处理具有指定 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 值的报表，并用指定的格式呈现该报表。</summary>
+      <returns>具有指定格式的报表的 byte 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。在本地处理模式中，支持的扩展插件为 Excel、PDF、Word 和 Image。在远程处理模式中，支持的扩展插件取决于报表服务器支持的扩展插件。根据处理模式（请参见 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" />），可以使用 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ServerReport" /> 或 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.LocalReport" /> 中的 ListRenderingExtensions 方法来访问可用呈现扩展插件列表。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="pageCountMode">A <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />枚举值，它指定页计数模式。 </param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="encoding">[out] 呈现报表内容时所使用的编码。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+      <param name="streams">[out] 流标识符。您可以使用它们来呈现与报表关联的外部资源（例如图像）。</param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，描述在处理报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.Render(System.String,System.String,System.String@,System.String@,System.String@,System.String[]@,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>处理报表并以指定的格式呈现该报表。</summary>
+      <returns>具有指定格式的报表的 <see cref="T:System.Byte" /> 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。在本地处理模式中，支持的扩展插件为 Excel、PDF、Word 和 Image。在远程处理模式中，支持的扩展插件取决于报表服务器支持的扩展插件。根据处理模式（请参见 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" />），可以使用 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ServerReport" /> 或 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.LocalReport" /> 中的 ListRenderingExtensions 方法来访问可用呈现扩展插件列表。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="encoding">[out] 呈现报表内容时所使用的编码。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+      <param name="streams">[out] 流标识符，您可以使用它们来呈现与报表相关联的外部资源（例如，图像）。</param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，描述在处理报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.SetParameters(Microsoft.Reporting.WebForms.ReportParameter)">
+      <summary>设置报表的报表参数属性。</summary>
+      <param name="parameter">一个 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.Report.SetParameters(System.Collections.Generic.IEnumerable{Microsoft.Reporting.WebForms.ReportParameter})">
+      <summary>设置报表的报表参数属性。</summary>
+      <param name="parameters">一个 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象数组，该数组包含报表参数属性列表。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportAreaContent">
+      <summary>指定报表区域中显示的内容类型。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ReportAreaContent.Unknown">
+      <summary>该报表区域中显示的当前内容类型是未知的。有关更多信息，请参见 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ReportAreaContentType" />。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ReportAreaContent.None">
+      <summary>该报表区域不显示任何内容。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ReportAreaContent.ReportPage">
+      <summary>该报表区域显示报表页。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ReportAreaContent.Error">
+      <summary>该报表区域显示错误消息。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportCredentialsEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingDataSourceCredentials" /> 事件提供数据。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportCredentialsEventArgs.Credentials">
+      <summary>获取 <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 的集合。</summary>
+      <returns>
+        <see cref="T:Microsoft.Reporting.WebForms.DataSourceCredentials" /> 对象的集合。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportCredentialsEventHandler">
+      <summary>表示用来处理 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingDataSourceCredentials" /> 事件的方法。</summary>
+      <param name="sender">事件的源。</param>
+      <param name="e">一个包含事件数据的 <see cref="T:Microsoft.Reporting.WebForms.ReportCredentialsEventArgs" />。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportDataSource">
+      <summary>表示报表的数据源。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor">
+      <summary>构造空的数据源。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String)">
+      <summary>构造命名数据源。</summary>
+      <param name="name">数据源的名称。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String,System.Collections.IEnumerable)">
+      <summary>构造命名的数据源与<see cref="T:System.Collections.IEnumerable" />的 <see cref="P:Microsoft.Reporting.WebForms.ReportDataSource.Value" />属性。 </summary>
+      <param name="name">数据源的名称，如当前报表的报表定义中所指定。</param>
+      <param name="dataSourceValue">包含数据的 <see cref="T:System.Collections.IEnumerable" /> 对象。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String,System.Data.DataTable)">
+      <summary>使用 <see cref="P:Microsoft.Reporting.WebForms.ReportDataSource.Value" /> 属性中的 <see cref="T:System.Data.DataTable" /> 构造命名数据源。</summary>
+      <param name="name">数据源的名称，如当前报表的报表定义中所指定。</param>
+      <param name="dataSourceValue">A <see cref="T:System.Data.DataTable" />对象包含的数据。 </param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String,System.Object)">
+      <summary>使用值构造命名数据源。</summary>
+      <param name="name">数据源的名称。</param>
+      <param name="dataSourceValue">数据源的值。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String,System.String)">
+      <summary>构造带有数据源 ID 的命名数据源。</summary>
+      <param name="name">数据源的名称。</param>
+      <param name="dataSourceId">数据源的 ID。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSource.#ctor(System.String,System.Web.UI.IDataSource)">
+      <summary>构造命名的数据源与<see cref="T:System.Web.UI.IDataSource" />的 <see cref="P:Microsoft.Reporting.WebForms.ReportDataSource.Value" />属性。 </summary>
+      <param name="name">数据源的名称，如当前报表的报表定义中所指定。</param>
+      <param name="dataSourceValue">
+        <see cref="T:System.Web.UI.IDataSource" />对象包含的数据。 </param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSource.DataMember">
+      <summary>指定要绑定的数据列表的名称。</summary>
+      <returns>一个 <see cref="T:System.String" /> 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSource.DataSourceId">
+      <summary>获取或设置数据源 ID。</summary>
+      <returns>一个 <see cref="T:System.String" /> 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSource.Name">
+      <summary>获取或设置报表数据源的名称。</summary>
+      <returns>A 字符串包含数据源的名称。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSource.Value">
+      <summary>获取或设置报表数据源实例。</summary>
+      <returns>一个包含报表数据源实例的 Object。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportDataSourceCollection">
+      <summary>包含 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSource" /> 对象的集合。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSourceCollection.Item(System.String)">
+      <summary>从与指定名称匹配的集合返回报表数据源。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSource" /> 对象。</returns>
+      <param name="name">要从集合检索的报表数据源的名称。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportDataSourceCollection.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo">
+      <summary>表示有关报表数据源的信息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSourceInfo.Name">
+      <summary>获取报表数据源的名称。</summary>
+      <returns>一个包含报表数据源的名称的字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSourceInfo.Prompt">
+      <summary>获取数据源的提示。</summary>
+      <returns>一个包含数据源的提示的字符串。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportDataSourceInfoCollection">
+      <summary>表示 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象集合。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportDataSourceInfoCollection.Item(System.String)">
+      <summary>返回集合中的某特定 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象。</returns>
+      <param name="name">要返回的 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象的名称。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportErrorEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.ReportError" /> 事件提供数据。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportErrorEventArgs.Exception">
+      <summary>返回包含报表错误信息的 Exception 对象。</summary>
+      <returns>一个包含报表错误信息的 Exception 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportErrorEventArgs.Handled">
+      <summary>指示宿主应用程序是否已经处理错误。</summary>
+      <returns>一个指示宿主应用程序是否已经处理错误的 Boolean 值。默认值为 false。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportErrorEventHandler">
+      <summary>表示用来处理 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.ReportError" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">一个包含事件有关信息的 <see cref="T:Microsoft.Reporting.WebForms.ReportErrorEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportPageSettings">
+      <summary>表示报表的页设置。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportPageSettings.IsLandscape">
+      <summary>指示报表定义文件中定义的报表方向是否为横向。</summary>
+      <returns>如果报表定义文件中定义的报表方向为横向，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportPageSettings.Margins">
+      <summary>表示报表页的边距。只读。</summary>
+      <returns>包含有关报表页的边距信息的只读 Margins 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportPageSettings.PaperSize">
+      <summary>表示报表页的纸张大小设置。只读。</summary>
+      <returns>包含有关报表页大小的信息的只读 PaperSize 对象。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParameter">
+      <summary>表示报表的参数。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor">
+      <summary>实例化新的 ReportParameter。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor(System.String)">
+      <summary>使用名称实例化新的 ReportParameter。</summary>
+      <param name="name">参数名。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor(System.String,System.String)">
+      <summary>使用名称和值实例化新的 ReportParameter。</summary>
+      <param name="name">参数名。</param>
+      <param name="value">参数的值。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor(System.String,System.String,System.Boolean)">
+      <summary>使用名称、值和可见性标志实例化新的 ReportParameter。</summary>
+      <param name="name">参数名。</param>
+      <param name="value">参数的值。</param>
+      <param name="visible">确定参数是否显示在用户界面中。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor(System.String,System.String[])">
+      <summary>使用名称实例化新的多值 ReportParameter。</summary>
+      <param name="name">参数名。</param>
+      <param name="values">参数的值。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameter.#ctor(System.String,System.String[],System.Boolean)">
+      <summary>使用名称、可见性标志和多个值实例化新的 ReportParameter。</summary>
+      <param name="name">参数名。</param>
+      <param name="values">参数的值。</param>
+      <param name="visible">确定参数是否显示在用户界面中。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameter.Name">
+      <summary>获取或设置参数的名称。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameter.Values">
+      <summary>获取包含一个或多个参数值的 string 对象的集合。</summary>
+      <returns>StringCollection 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameter.Visible">
+      <summary>确定参数是否可显示在用户界面中。</summary>
+      <returns>一个 Boolean 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParameterCollection">
+      <summary>表示 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象的集合。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportParameterCollection.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterCollection" /> 类的新实例。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterCollection.Item(System.String)">
+      <summary>按名称获取 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 集合中的对象。</summary>
+      <returns>具有指定名称的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" />（如果找到的话）；否则为一个 null 引用（在 Visual Basic 中为 Nothing）。</returns>
+      <param name="name">要获取的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" /> 对象的名称。这是 <see cref="P:Microsoft.Reporting.WebForms.ReportParameter.Name" /> 属性的值。此参数不区分大小写。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParameterInfo">
+      <summary>包装有关报表参数的信息。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.AllowBlank">
+      <summary>指示空字符串是否为有效的参数值。只读。</summary>
+      <returns>一个 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.AreDefaultValuesQueryBased">
+      <summary>指示参数的默认值是否基于查询。只读。</summary>
+      <returns>一个 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.AreValidValuesQueryBased">
+      <summary>指示参数的有效值是否基于查询。只读。</summary>
+      <returns>一个只读 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.DataType">
+      <summary>获取参数的数据类型。只读。</summary>
+      <returns>一个只读 <see cref="T:Microsoft.Reporting.WebForms.ParameterDataType" /> 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Dependencies">
+      <summary>获取一组参数，这些参数的值用于在查询中检索其他参数值。只读。</summary>
+      <returns>一个只读 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection" />。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Dependents">
+      <summary>一组参数，这些参数将此参数的值作为参数用于查询中以检索 <see cref="P:Microsoft.Reporting.WebForms.ReportParameterInfo.ValidValues" /> 和/或 <see cref="F:Microsoft.SqlServer.ReportingServices.ReportParameter.DefaultValues" />。</summary>
+      <returns>一个只读 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection" />。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.ErrorMessage">
+      <summary>获取参数验证失败时返回的错误消息。只读。</summary>
+      <returns>一个包含错误消息的文本的只读字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.IsQueryParameter">
+      <summary>指示参数是否用于针对外部数据源的查询中。只读。</summary>
+      <returns>一个只读 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.MultiValue">
+      <summary>指示参数是否可以为多值参数。只读。</summary>
+      <returns>一个只读 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Name">
+      <summary>获取参数的名称。只读。</summary>
+      <returns>一个包含参数名称的字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Nullable">
+      <summary>指示参数的值是否可以为 null。只读。</summary>
+      <returns>一个只读 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Prompt">
+      <summary>提示用户提供参数值的文本。</summary>
+      <returns>一个包含提示文本的字符串。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.PromptUser">
+      <summary>指示是否提示用户提供参数值。</summary>
+      <returns>一个只读 Boolean 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.State">
+      <summary>描述参数的状态。只读。</summary>
+      <returns>只读 <see cref="T:Microsoft.Reporting.WebForms.ParameterState" /> 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.ValidValues">
+      <summary>获取可用的有效参数值。只读。</summary>
+      <returns>一组只读 <see cref="T:Microsoft.Reporting.WebForms.ValidValue" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Values">
+      <summary>获取参数值。</summary>
+      <returns>一组只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfo.Visible">
+      <summary>确定参数是否可显示在用户界面中。</summary>
+      <returns>一个 Boolean 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection">
+      <summary>
+        <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfo" /> 对象的集合。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParameterInfoCollection.Item(System.String)">
+      <summary>从 ReportParameterInfoCollection 返回指定项。</summary>
+      <returns>集合中的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfo" /> 对象。</returns>
+      <param name="name">要检索的项的名称。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParametersEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingParameterValues" /> 事件提供数据。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParametersEventArgs.AutoSubmit">
+      <summary>获取一个值，该值指示 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingParameterValues" /> 事件是否由基于报表参数之间的依赖关系而进行的报表参数自动提交触发。</summary>
+      <returns>如果 <see cref="E:Microsoft.Reporting.WinForms.ReportViewer.SubmittingParameterValues" /> 事件由报表参数的自动提交而触发，则为 true；如果通过用户单击“查看报表”按钮而触发，则为 false。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportParametersEventArgs.Parameters">
+      <summary>获取用户要提交到报表服务器的参数提示区域的参数。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterCollection" /> 对象，包含用户提交的参数值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportParametersEventHandler">
+      <summary>表示用来处理 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingParameterValues" /> 事件的回调方法。</summary>
+      <param name="sender">事件的源。</param>
+      <param name="e">一个包含事件数据的 <see cref="T:Microsoft.Reporting.WebForms.ReportParametersEventArgs" />。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportSecurityException">
+      <summary>表示报表包含安全冲突时出现的错误。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportServerException">
+      <summary>表示当连接到报表服务器时发生的错误，以及当处理服务器报表或将报表呈现为报表页布局 (RPL) 格式时报表服务器上发生的错误。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportServerException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportServerException.#ctor(System.String,System.String,System.Exception)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportServerException.ErrorCode">
+      <summary>从异常返回错误代码。</summary>
+      <returns>一个 string 值，其中包含报表服务器返回的错误代码，如果与报表服务器进行连接的尝试不成功，则为 null。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportServerException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportViewer">
+      <summary>包装用于“ReportViewer”控件的方法和属性。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 类的一个新实例。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.AsyncRendering">
+      <summary>获取或设置一个 Boolean 值，该值指示当加载网页时报表的呈现是否与网页的其余部分异步。</summary>
+      <returns>如果报表以异步方式呈现，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.Back">
+      <summary>当用户从钻取报表向回导航至父报表时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.BackColor">
+      <summary>获取或设置控件的报表区域的背景色。</summary>
+      <returns>指示控件的报表区域的背景色的 <see cref="T:System.Drawing.Color" /> 值。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.BookmarkNavigation">
+      <summary>当用户浏览至报表中的书签时发生。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.CreateChildControls"></member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.CreateControlStyle"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.CurrentPage">
+      <summary>获取或设置“ReportViewer”控件的活动报表的当前页。</summary>
+      <returns>一个包含报表的当前页的整数值。默认值为 0。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.Dispose"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.DocumentMapCollapsed">
+      <summary>获取或设置文档结构图的折叠状态。</summary>
+      <returns>如果文档结构图处于折叠状态，则为 true；否则为 false。默认值为 false。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.DocumentMapNavigation">
+      <summary>当选择了文档结构图节点时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.DocumentMapWidth">
+      <summary>获取或设置文档结构图的宽度。</summary>
+      <returns>一个表示文档结构图宽度的 <see cref="T:System.Web.UI.WebControls.Unit" /> 对象。默认情况下，返回 <see cref="T:System.Web.UI.WebControls.Unit" /> 对象，该对象表示 ReportViewer 的 25% 的宽度。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.Drillthrough">
+      <summary>当选择了钻取项时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ExportContentDisposition">
+      <summary>获取或设置一个指示内容应以内联方式存在还是作为附件存在的值。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ContentDisposition" /> 枚举值，用于指明内容的存在方式。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.Find(System.String,System.Int32)">
+      <summary>从指定的页码开始搜索报表区域中的报表，以查找指定的文本字符串。</summary>
+      <param name="searchText">搜索字符串。</param>
+      <param name="startPage">开始搜索的页码。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.GetPageSettings">
+      <summary>返回“ReportViewer”控件中用于打印当前报表的页设置。</summary>
+      <returns>一个包含“ReportViewer”控件中用于打印当前报表的页设置的 <see cref="T:System.Drawing.Printing.PageSettings" /> 对象；如果“ReportViewer”控件尚未处理报表，则为“null”。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.Height">
+      <summary>获取或设置控件的高度。</summary>
+      <returns>一个表示控件高度的 <see cref="System.Web.UI.WebControls.Unit" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.HyperlinkTarget">
+      <summary>获取或设置单击报表中的超链接时返回的网页内容的目标窗口或框架。</summary>
+      <returns>一个字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ID">
+      <summary>指定控件的 ID。</summary>
+      <returns>一个表示控件 ID 的 string 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.InteractiveDeviceInfos">
+      <summary>获取“ReportViewer”控件用于将报表区域中的报表呈现为 HTML 的 <see cref="T:Microsoft.Reporting.WebForms.DeviceInfoCollection" /> 对象。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.DeviceInfoCollection" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.InteractivityPostBackMode">
+      <summary>获取或设置一个 <see cref="T:Microsoft.Reporting.WebForms.InteractivityPostBackMode" /> 值，该值指示 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件的回发模式。</summary>
+      <returns>一个指示回发模式的 <see cref="T:Microsoft.Reporting.WebForms.InteractivityPostBackMode" /> 值。默认值为 <see cref="F:Microsoft.Reporting.WebForms.InteractivityPostBackMode.AlwaysAsynchronous" />。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.InternalBorderColor">
+      <summary>获取或设置控件的内部边框颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明控件的内部边框颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.InternalBorderStyle">
+      <summary>获取或设置控件的内部边框样式。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.BorderStyle" /> 值，用于指明控件的内部边框样式。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.InternalBorderWidth">
+      <summary>获取或设置控件的内部边框宽度。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.Unit" /> 值，包含控件的内部边框宽度。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.JumpToBookmark(System.String)">
+      <summary>将报表的焦点移至指定的书签。</summary>
+      <param name="bookmarkId">书签的 ID。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.JumpToDocumentMapId(System.String)">
+      <summary>将文档结构图的焦点移至指定的节点。</summary>
+      <param name="documentMapId">文档结构图节点的 ID。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.KeepSessionAlive">
+      <summary>获取或设置一个 Boolean 值，该值指示当网页显示在浏览器中时是否阻止用户会话过期。</summary>
+      <returns>如果阻止用户会话过期，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.LinkActiveColor">
+      <summary>获取或设置控件中的活动链接的颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明活动链接的颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.LinkActiveHoverColor">
+      <summary>获取或设置当鼠标指针处于控件中的活动链接上时该链接的颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明活动链接处于悬停状态时的颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.LinkDisabledColor">
+      <summary>获取或设置控件中的禁用链接的颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明禁用链接的颜色。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.LoadViewState(System.Object)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.LocalReport">
+      <summary>获取当 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件的 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" /> 设置为 <see cref="F:Microsoft.Reporting.WebForms.ProcessingMode.Local" /> 时使用的 <see cref="T:Microsoft.Reporting.WebForms.Report" /> 类的实例。</summary>
+      <returns>一个包含“ReportViewer”控件中的本地报表的 <see cref="T:Microsoft.Reporting.WebForms.LocalReport" /> 对象。</returns>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ReportViewer.MaximumPageCount">
+      <summary>一个常数，该常数表示当前页计数模式为 <see cref="F:Microsoft.Reporting.WebForms.PageCountMode.Estimate" /> 时报表中的最大页数。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.OnInit(System.EventArgs)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.OnPreRender(System.EventArgs)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.PageCountMode">
+      <summary>获取或设置一个 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 枚举值，该值指示当在报表区域中呈现报表时使用的默认页计数模式。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 枚举值。默认值为 <see cref="F:Microsoft.Reporting.WebForms.PageCountMode.Estimate" />。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.PageNavigation">
+      <summary>当用户移至报表中的其他页时发生。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.PerformBack">
+      <summary>通过“ReportViewer”控件从钻取报表向回导航至父报表。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode">
+      <summary>获取或设置“ReportViewer”控件的处理模式。</summary>
+      <returns>值为 Local 或 Remote 的 <see cref="T:Microsoft.Reporting.WebForms.ProcessingMode" /> 枚举值。默认值为 Local。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.PromptAreaCollapsed">
+      <summary>获取或设置参数提示区域或凭据提示区域的折叠状态。</summary>
+      <returns>如果提示区域处于折叠状态，则为 true；否则为 false。默认值为 false。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.RegisterPostBackControl(System.Web.UI.Control)">
+      <summary>向“ReportViewer”控件注册指定的控件。“ReportViewer”控件在注册的控件导致回发时显示等待控件。</summary>
+      <param name="control">作为“ReportViewer”回发的触发器注册的控件。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.Render(System.Web.UI.HtmlTextWriter)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ReportAreaContentType">
+      <summary>获取一个 <see cref="T:Microsoft.Reporting.WebForms.ReportAreaContent" /> 对象，该对象表示报表区域的当前内容类型。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportAreaContent" /> 对象。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.ReportError">
+      <summary>在报表中发现错误时发生。</summary>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.ReportRefresh">
+      <summary>当刷新报表时发生。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.Reset">
+      <summary>将控件重置为其默认值。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.ResetPageSettings">
+      <summary>将“ReportViewer”控件中当前报表的页设置还原为报表定义中的设置。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.SaveViewState"></member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.Search">
+      <summary>当单击“查找”或“查找下一个”按钮或以编程方式调用搜索操作时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.SearchState">
+      <summary>获取当前报表搜索操作的搜索文本和开始页。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.SearchState" /> 对象；如果没有正在进行的报表搜索操作，则为“null”。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ServerReport">
+      <summary>获取当 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 控件的 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ProcessingMode" /> 设置为 <see cref="F:Microsoft.Reporting.WebForms.ProcessingMode.Remote" /> 时使用的 <see cref="T:Microsoft.Reporting.WebForms.Report" /> 类的实例。</summary>
+      <returns>一个包含“ReportViewer”控件中的服务器报表的 <see cref="T:Microsoft.Reporting.WebForms.ServerReport" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.SetPageSettings(System.Drawing.Printing.PageSettings)">
+      <summary>设置用于打印“ReportViewer”控件中当前报表的页设置。</summary>
+      <param name="pageSettings">一个 <see cref="T:System.Drawing.Printing.PageSettings" /> 对象，包含新的页设置。此参数不能为 null。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowBackButton">
+      <summary>获取或设置一个指示“后退”按钮在工具栏上是否可见的值。</summary>
+      <returns>如果“后退”按钮在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowCredentialPrompts">
+      <summary>获取或设置一个值，该值指示是否显示要求提供用户凭据的提示。</summary>
+      <returns>如果向用户显示要求提供凭据的提示，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowDocumentMapButton">
+      <summary>获取或设置一个值，该值指示用于显示和折叠文档结构图的按钮是否在拆分栏上可见。</summary>
+      <returns>如果该按钮在拆分栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowExportControls">
+      <summary>获取或设置一个指示“Export”控件在工具栏上是否可见的值。</summary>
+      <returns>如果“Export”控件在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowFindControls">
+      <summary>获取或设置一个指示“查找”文本框在工具栏上是否可见的值。</summary>
+      <returns>如果“查找”文本框在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowPageNavigationControls">
+      <summary>获取或设置一个指示页导航控件在工具栏上是否可见的值。</summary>
+      <returns>如果页导航控件在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowParameterPrompts">
+      <summary>获取或设置一个指示是否显示参数提示的值。</summary>
+      <returns>如果显示参数提示，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowPrintButton">
+      <summary>获取或设置一个指示“打印”按钮在工具栏上是否可见的值。</summary>
+      <returns>如果“打印”按钮在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowPromptAreaButton">
+      <summary>获取或设置一个值，该值指示用于显示和折叠提示区域的按钮是否在拆分栏上可见。</summary>
+      <returns>如果该按钮在拆分栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowRefreshButton">
+      <summary>获取或设置一个指示“刷新”按钮是否可见的值。</summary>
+      <returns>如果“刷新”按钮在工具栏上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowReportBody">
+      <summary>获取或设置一个指示表体在控件上是否可见的值。</summary>
+      <returns>如果表体在控件上可见，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowToolBar">
+      <summary>获取或设置一个指示工具栏在控件上是否可见的值。</summary>
+      <returns>一个 Boolean 值。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowWaitControlCancelLink">
+      <summary>获取或设置一个 Boolean 值，该值控制是否在等待控件中显示“取消”链接。</summary>
+      <returns>如果应显示“取消”链接，则为 true；否则为 false。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ShowZoomControl">
+      <summary>获取或设置一个指示“缩放”列表框是否可见的值。</summary>
+      <returns>一个 Boolean 值。默认值为 true。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.SizeToReportContent">
+      <summary>获取或设置一个值，该值指示“ReportViewer”控件是否应自动调整大小以容纳报表内容。</summary>
+      <returns>一个 Boolean 值。值 true 指示该控件应自动调整大小以容纳报表内容。默认值为 false。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.Sort">
+      <summary>当用户激活报表数据的排序时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.SplitterBackColor">
+      <summary>获取或设置文档结构图拆分栏和提示区域拆分栏的背景色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 对象。默认颜色的 RGB 值为 (236,233,216)。</returns>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingDataSourceCredentials">
+      <summary>当用户使用数据源提示区域提交新数据源凭据时发生。</summary>
+    </member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.SubmittingParameterValues">
+      <summary>当报表参数值提交到报表服务器时发生。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.System#Web#UI#IScriptControl#GetScriptDescriptors"></member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewer.System#Web#UI#IScriptControl#GetScriptReferences"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.TagKey"></member>
+    <member name="E:Microsoft.Reporting.WebForms.ReportViewer.Toggle">
+      <summary>当用户切换报表中的项的可见性时发生。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemBorderColor">
+      <summary>获取或设置工具栏上某一项的边框颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明工具栏项的颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemBorderStyle">
+      <summary>获取或设置工具栏上某一项的边框样式。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.BorderStyle" /> 值，包含工具栏项的边框样式。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemBorderWidth">
+      <summary>获取或设置工具栏项的边框宽度。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.Unit" /> 值，包含工具栏项的边框宽度。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemHoverBackColor">
+      <summary>获取或设置当鼠标指针位于工具栏项上时该项的背景颜色。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，指示在处于悬停状态时工具栏项的背景颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemPressedBorderColor">
+      <summary>此属性不再适用，它存在的目的是向后兼容。“ReportViewer”控件不再使用按下的按钮。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，用于指明工具栏项处于按下状态时的颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemPressedBorderStyle">
+      <summary>此属性不再适用，它存在的目的是向后兼容。“ReportViewer”控件不再使用按下的按钮。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.BorderStyle" /> 值，包含处于选中状态的工具栏项的边框样式。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemPressedBorderWidth">
+      <summary>此属性不再适用，它存在的目的是向后兼容。“ReportViewer”控件不再使用按下的按钮。</summary>
+      <returns>一个 <see cref="T:System.Web.UI.WebControls.Unit" /> 值，包含选中工具栏项时该项的边框宽度。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ToolBarItemPressedHoverBackColor">
+      <summary>此属性不再适用，它存在的目的是向后兼容。“ReportViewer”控件不再使用按下的按钮。</summary>
+      <returns>一个 <see cref="T:System.Drawing.Color" /> 值，指示在处于悬停状态时工具栏项的背景颜色。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.WaitControlDisplayAfter">
+      <summary>获取或设置当加载报表时在向用户显示等待控件之前的延迟（以毫秒为单位）。</summary>
+      <returns>一个指定时间（以毫秒为单位）的 int 值。默认值为 1000（1 秒）。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.WaitMessageFont">
+      <summary>获取在执行报表时显示的消息所采用的字体。</summary>
+      <returns>一个包含该字体值的 <see cref="T:System.Web.UI.WebControls.FontInfo" /> 对象。默认字体为 14 磅宋体。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.Width">
+      <summary>获取或设置控件的宽度。</summary>
+      <returns>一个表示控件宽度的 <see cref="System.Web.UI.WebControls.Unit" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ZoomMode">
+      <summary>获取或设置控件的缩放模式。</summary>
+      <returns>指示控件的缩放模式的 <see cref="P:Microsoft.Reporting.WebForms.ReportViewer.ZoomMode" /> 枚举器值。默认值为 100%。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ReportViewer.ZoomPercent">
+      <summary>获取或设置显示报表时要使用的缩放百分比。</summary>
+      <returns>一个包含缩放百分比的 integer 值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportViewerCookieCollection">
+      <summary>表示 <see cref="T:System.Net.Cookie" /> 对象的集合。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportViewerException">
+      <summary>表示查看或配置报表时发生的错误。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewerException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewerException.#ctor(System.String)">
+      <summary>此构造函数支持 .NET Framework 基础结构，但不适合直接在代码中使用。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ReportViewerException.#ctor(System.String,System.Exception)">
+      <summary>此构造函数支持 .NET Framework 基础结构，但不适合直接在代码中使用。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ReportViewerHeaderCollection">
+      <summary>表示包含自定义标头的字符串的集合。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ScriptManagerNotFoundException">
+      <summary>如果在 Web 窗体中找不到 <see cref="T:System.Web.UI.ScriptManager" /> 控件，将引发异常。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SearchEventArgs">
+      <summary>为 ReportViewer 控件中的 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Search" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.SearchEventArgs.#ctor(System.String,System.Int32,System.Boolean)">
+      <summary>构造一个新的 SearchEventArgs 对象。</summary>
+      <param name="searchString">搜索字符串。</param>
+      <param name="startPage">开始搜索的页。</param>
+      <param name="isFindNext">指示此事件是由于执行“查找下一个”命令引起的。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SearchEventArgs.IsFindNext">
+      <summary>指示此事件是由于执行“查找下一个”命令引起的。</summary>
+      <returns>一个 Boolean 值。值为 true 表示由于执行“查找下一个”命令导致发生此事件。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SearchEventArgs.SearchString">
+      <summary>返回搜索使用的搜索字符串。</summary>
+      <returns>一个包含搜索字符串的字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SearchEventArgs.StartPage">
+      <summary>返回开始搜索的页码。</summary>
+      <returns>一个包含要搜索的开始页码的整数。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SearchEventHandler">
+      <summary>表示用来处理 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Search" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">一个包含事件有关信息的 <see cref="T:Microsoft.Reporting.WebForms.ReportErrorEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SearchState">
+      <summary>包含搜索操作的搜索文本和开始页。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SearchState.StartPage">
+      <summary>获取搜索操作的开始页。</summary>
+      <returns>一个 int 值，该值表示搜索操作的开始页。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SearchState.Text">
+      <summary>获取搜索文本。</summary>
+      <returns>一个 string，该值表示搜索文本。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ServerReport">
+      <summary>表示在报表服务器上处理的报表。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Reporting.WebForms.ServerReport" /> 类的新实例。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.Cookies">
+      <summary>获取 <see cref="T:System.Net.Cookie" /> 对象的集合。<see cref="T:Microsoft.Reporting.WebForms.ServerReport" /> 对象在进行服务器请求时使用此集合中的 Cookie。</summary>
+      <returns>一个包含 <see cref="T:System.Net.Cookie" /> 对象的集合的 <see cref="T:Microsoft.Reporting.WebForms.ReportViewerCookieCollection" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetDataSources">
+      <summary>检索有关用于报表的数据源的信息。</summary>
+      <returns>一个包含 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象的 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfoCollection" />。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetDataSources(System.Boolean@)">
+      <summary>检索有关用于报表的数据源的信息，包括是否已为报表数据源提供了所有必需的凭据。</summary>
+      <returns>一个包含 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfo" /> 对象的 <see cref="T:Microsoft.Reporting.WebForms.ReportDataSourceInfoCollection" />。</returns>
+      <param name="allCredentialsSet">[out] 指示是否已为服务器报表使用的数据源提供了所有必需的凭据。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetDefaultPageSettings">
+      <summary>获取报表定义中指定的默认页设置。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportPageSettings" /> 对象，包含本地报表中的默认页设置。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetExecutionId">
+      <summary>返回当前的执行 ID，或者返回 Null（在 Visual Basic 中为 Nothing）（如果没有执行 ID 可用）。</summary>
+      <returns>一个包含执行 ID 的字符串。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetParameters">
+      <summary>返回报表的报表参数属性。</summary>
+      <returns>一个包含 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfo" /> 对象数组的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetServerVersion">
+      <summary>返回报表服务器的版本。</summary>
+      <returns>A 字符串值，其中包含服务器的版本信息。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.GetTotalPages(Microsoft.Reporting.WebForms.PageCountMode@)">
+      <summary>返回报表中的软页总数以及用于指示当前页计数模式的 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 值。</summary>
+      <returns>一个 integer 值，其中包含报表中的软页总数。有关软页的更多信息，请参见Understanding Rendering Behaviors。</returns>
+      <param name="pageCountMode">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" /> 枚举值，指示用于计算软页总数的页计数模式。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.Headers">
+      <summary>获取一个包含自定义标头的字符串的集合。</summary>
+      <returns>一个包含自定义标头集合的 <see cref="T:Microsoft.Reporting.WebForms.ReportViewerHeaderCollection" /> 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.HistoryId">
+      <summary>获取或设置用于服务器报表的报表历史记录快照的唯一标识符。</summary>
+      <returns>一个 string 值，该值包含用于服务器报表的报表历史记录快照的唯一标识符。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.IsQueryExecutionAllowed">
+      <summary>指示报表是否可以执行查询。</summary>
+      <returns>一个指示报表是否可以执行查询的 Boolean 值。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.ListRenderingExtensions">
+      <summary>返回服务器报表的所有可用呈现扩展插件。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.RenderingExtension" /> 对象数组。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.LoadReportDefinition(System.IO.TextReader)">
+      <summary>使用 <see cref="T:System.IO.TextReader" /> 在报表服务器上加载报表定义以进行远程处理。</summary>
+      <param name="report">一个 <see cref="T:System.IO.TextReader" /> 类，可用来读取报表对应的报表定义语言 (RDL) 文件。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.Refresh">
+      <summary>使报表用新数据来呈现。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.Render(System.String,System.String,Microsoft.Reporting.WebForms.PageCountMode,System.String@,System.String@,System.String@,System.String[]@,Microsoft.Reporting.WebForms.Warning[]@)">
+      <summary>处理报表与指定的<see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />值并呈现中指定的格式。</summary>
+      <returns>具有指定格式的报表的 <see cref="T:System.Byte" /> 数组。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。可以使用报表服务器上任何可用的格式设置扩展插件。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.ServerReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 <paramref name="format" /> 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="pageCountMode">A <see cref="T:Microsoft.Reporting.WebForms.PageCountMode" />枚举值，它指定页计数模式。 </param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="encoding">[out] 呈现报表内容时所使用的编码。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+      <param name="streams">[out] 流标识符。您可以使用它们来呈现与报表关联的外部资源（例如图像）。</param>
+      <param name="warnings">[out] 一个 <see cref="T:Microsoft.Reporting.WebForms.Warning" /> 对象数组，描述在处理报表的过程中出现的任何警告。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.Render(System.String,System.String,System.Collections.Specialized.NameValueCollection,System.IO.Stream,System.String@,System.String@)">
+      <summary>使用可选的 URL 访问参数呈现报表。</summary>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。可以使用报表服务器上任何可用的呈现扩展插件。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.ServerReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 format 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="urlAccessParameters">要传递给报表服务器的 URL 访问参数。有关更多信息，请参见 SQL Server 联机丛书中有关“URL 访问”的文档。此参数可以设置为 Null。</param>
+      <param name="reportStream">要将呈现的报表写入其中的流。</param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.Render(System.String,System.String,System.Collections.Specialized.NameValueCollection,System.String@,System.String@)">
+      <summary>使用可选的 URL 访问参数呈现报表。</summary>
+      <returns>一个包含呈现的报表的 <see cref="T:System.IO.Stream" />。</returns>
+      <param name="format">呈现报表所用的格式。此参数将映射到某个呈现扩展插件。可以使用报表服务器上任何可用的呈现扩展插件。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.ServerReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 <paramref name="format" /> 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="urlAccessParameters">要传递给报表服务器的 URL 访问参数。有关更多信息，请参见 SQL Server 联机丛书中有关“URL 访问”的文档。此参数可以设置为 Null。</param>
+      <param name="mimeType">[out] 呈现的报表的 MIME 类型。</param>
+      <param name="fileNameExtension">[out] 输出文件所使用的文件扩展名。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.RenderStream(System.String,System.String,System.String,System.String@,System.String@)">
+      <summary>返回与处理的报表关联的辅助流。</summary>
+      <returns>一个由采用指定格式的流组成的 <see cref="T:System.Byte" /> 数组。有关此数据类型的更多信息，请参见 .NET Framework 文档中有关“字节结构”的部分。</returns>
+      <param name="format">用来呈现流的格式。此参数将映射到某个呈现扩展插件。可以使用报表服务器上任何可用的呈现扩展插件。若要访问可用呈现扩展插件列表，请使用 <see cref="M:Microsoft.Reporting.WebForms.ServerReport.ListRenderingExtensions" /> 方法。</param>
+      <param name="streamId">流标识符。</param>
+      <param name="deviceInfo">一个 XML 字符串，包含 <paramref name="format" /> 参数中所指定的呈现扩展插件所需的设备特定内容。有关特定输出格式的设备信息设置的更多信息，请参见《SQL Server 联机丛书》中有关设备信息设置的部分。</param>
+      <param name="mimeType">流的 MIME 类型。</param>
+      <param name="encoding"> Microsoft .NET Framework 编码类名。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.ReportPath">
+      <summary>获取或设置到服务器上的报表的路径。</summary>
+      <returns>一个 string 值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.ReportServerCredentials">
+      <summary>获取或设置要用于报表服务器的凭据。</summary>
+      <returns>一个 <see cref="T:Microsoft.Reporting.WebForms.ReportServerCredentials" /> 对象，包含与报表服务器配合使用的凭据。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.ReportServerUrl">
+      <summary>获取或设置报表服务器的 URL。</summary>
+      <returns>一个包含报表服务器的 URL 的 <see cref="T:System.Uri" /> 对象。</returns>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.SetDataSourceCredentials(System.Collections.Generic.IEnumerable{Microsoft.Reporting.WebForms.DataSourceCredentials})">
+      <summary>设置报表的数据源凭据。</summary>
+      <param name="credentials">要提交给报表服务器的一组数据源凭据。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.SetExecutionId(System.String)">
+      <summary>使用服务器上的特定报表执行初始化服务器报表。</summary>
+      <param name="executionId">一个包含要使用的执行 ID 的 String。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.SetParameters(System.Collections.Generic.IEnumerable{Microsoft.Reporting.WebForms.ReportParameter})">
+      <summary>设置报表的报表参数属性。</summary>
+      <param name="parameters">
+        <see cref="T:System.Collections.Generic.IEnumerable" />的  <see cref="T:Microsoft.Reporting.WebForms.ReportParameter" />对象，它包含列表中的报表参数属性。</param>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.ServerReport.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.ServerReport.Timeout">
+      <summary>获取或设置等待服务器通信的毫秒数。</summary>
+      <returns>一个包含服务器超时（以毫秒为单位）的 integer 值。默认值为 600000 毫秒。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SessionDisabledException">
+      <summary>当 ASP.NET 会话已禁用时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Severity">
+      <summary>指定警告的严重性。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Severity.Warning">
+      <summary>警告的严重级别为 Warning。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Severity.Error">
+      <summary>警告的严重级别为 Error。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SoapVersionMismatchException">
+      <summary>表示当报表服务器版本与报表控件不兼容时发生的异常。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SortEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Sort" /> 事件提供数据。</summary>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.SortEventArgs.#ctor(System.String,Microsoft.Reporting.WebForms.SortOrder,System.Boolean)">
+      <summary>构造一个新的 SortEventArgs 对象。</summary>
+      <param name="sortId">排序操作的 ID。</param>
+      <param name="sortDirection">一个指示排序方向的 <see cref="T:Microsoft.Reporting.WebForms.SortOrder" /> 枚举值。默认值为 none。</param>
+      <param name="clearSort">一个指示是否应该清除所有其他现有排序的 Boolean 值。默认值为 false。</param>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SortEventArgs.ClearSort">
+      <summary>指示是否应该清除所有其他现有排序。</summary>
+      <returns>一个指示是否应该清除所有其他现有排序的 Boolean 值。默认值为 false。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SortEventArgs.SortDirection">
+      <summary>获取指示排序方向的枚举值。</summary>
+      <returns>一个指示排序方向的 <see cref="T:Microsoft.Reporting.WebForms.SortOrder" /> 枚举值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SortEventArgs.SortId">
+      <summary>获取排序操作的唯一标识符。</summary>
+      <returns>一个包含排序操作的 ID 的字符串。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SortEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="E:Microsoft.Reporting.WebForms.ReportViewer.Sort" /> 事件的方法。</summary>
+      <param name="sender">引发该事件的对象。</param>
+      <param name="e">一个包含事件有关信息的 <see cref="T:Microsoft.Reporting.WebForms.SortEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SortOrder">
+      <summary>指示排序操作的方向。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.SortOrder.Ascending">
+      <summary>指示升序排序。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.SortOrder.Descending">
+      <summary>指示降序排序。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs">
+      <summary>为 <see cref="E:Microsoft.Reporting.WebForms.LocalReport.SubreportProcessing" /> 事件提供数据。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs.DataSourceNames">
+      <summary>获取子报表数据源名称的列表。</summary>
+      <returns>一个包含子报表的数据源名称的 string 对象列表。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs.DataSources">
+      <summary>返回子报表数据源的集合。</summary>
+      <returns>
+        <see cref="T:Microsoft.Reporting.WebForms.ReportDataSource" /> 对象的集合。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs.Parameters">
+      <summary>获取子报表参数的集合。</summary>
+      <returns>包含子报表参数信息的 <see cref="T:Microsoft.Reporting.WebForms.ReportParameterInfoCollection" />。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs.ReportPath">
+      <summary>返回子报表的名称。</summary>
+      <returns>一个包含子报表名称的字符串。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SubreportProcessingEventHandler">
+      <summary>表示将用来处理 <see cref="T:Microsoft.Reporting.WebForms.ReportViewer" /> 的 <see cref="E:Microsoft.Reporting.WebForms.LocalReport.SubreportProcessing" /> 事件的方法。</summary>
+      <param name="sender">引发事件的对象。</param>
+      <param name="e">一个包含事件有关信息的 <see cref="T:Microsoft.Reporting.WebForms.SubreportProcessingEventArgs" /> 对象。</param>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.SyncList`1">
+      <typeparam name="TListType"></typeparam>
+    </member>
+    <member name="M:Microsoft.Reporting.WebForms.SyncList`1.ClearItems"></member>
+    <member name="M:Microsoft.Reporting.WebForms.SyncList`1.InsertItem(System.Int32,`0)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.SyncList`1.RemoveItem(System.Int32)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.SyncList`1.SetItem(System.Int32,`0)"></member>
+    <member name="T:Microsoft.Reporting.WebForms.ValidValue">
+      <summary>表示可能有效的参数值。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ValidValue.Label">
+      <summary>获取有效值的标签。</summary>
+      <returns>一个只读 string 对象。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.ValidValue.Value">
+      <summary>获取有效值。</summary>
+      <returns>一个只读 string 对象。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ViewStateDisabledException">
+      <summary>当“ReportViewer”控件检测到禁用视图状态时发生。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Warning">
+      <summary>表示在呈现或处理报表时返回的错误或警告列表。</summary>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Warning.Code">
+      <summary>获取为警告指定的错误代码。只读。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Warning.Message">
+      <summary>获取描述错误或警告的消息。只读。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Warning.ObjectName">
+      <summary>获取报表定义中为警告分配的对象的名称。只读。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Warning.ObjectType">
+      <summary>获取报表定义中导致出现错误或警告的对象的类型。只读。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="P:Microsoft.Reporting.WebForms.Warning.Severity">
+      <summary>获取错误或警告的严重性类型。只读。</summary>
+      <returns>一个只读字符串值。</returns>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.ZoomMode">
+      <summary>指定 ReportViewer 控件的缩放模式。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ZoomMode.FullPage">
+      <summary>将缩放模式设置为整页。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ZoomMode.PageWidth">
+      <summary>将缩放模式设置为页宽。</summary>
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.ZoomMode.Percent">
+      <summary>将缩放模式设置为百分比。</summary>
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials.DataSourceName"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials.Password"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials.UserName"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourcePrompt"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourcePrompt.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourcePrompt.DataSourceID"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourcePrompt.Name"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourcePrompt.Prompt"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DocumentMapNode"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DocumentMapNode.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DocumentMapNode.Children"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DocumentMapNode.Label"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DocumentMapNode.UniqueName"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionHeader"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionHeader.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionHeader.AnyAttr"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionHeader.ExecutionID"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.AllowQueryExecution"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.AutoRefreshInterval"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.CredentialsRequired"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.DataSourcePrompts"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ExecutionDateTime"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ExecutionID"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ExpirationDateTime"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.HasDocumentMap"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.HasSnapshot"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.HistoryID"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.NeedsProcessing"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.NumPages"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.Parameters"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ParametersRequired"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ReportPageSettings"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo.ReportPath"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo2"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo2.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo2.PageCountMode"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.ExtensionType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.IsModelGenerationSupported"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.LocalizedName"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.Name"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Extension.Visible"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExtensionTypeEnum"></member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExtensionTypeEnum.Delivery">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExtensionTypeEnum.Render">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExtensionTypeEnum.Data">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExtensionTypeEnum.All">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.FindStringCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.FindStringCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.FindStringCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetDocumentMapCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetDocumentMapCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetDocumentMapCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfo2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfo2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfo2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfoCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfoCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetExecutionInfoCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetRenderResourceCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetRenderResourceCompletedEventArgs.MimeType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetRenderResourceCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.GetRenderResourceCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListRenderingExtensionsCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListRenderingExtensionsCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListRenderingExtensionsCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListSecureMethodsCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListSecureMethodsCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ListSecureMethodsCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTarget2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTarget2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTarget2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTargetCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTargetCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadDrillthroughTargetCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReport2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReport2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReport2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinition2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinition2CompletedEventArgs.Result"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinition2CompletedEventArgs.warnings"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinition2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinitionCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinitionCompletedEventArgs.Result"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinitionCompletedEventArgs.warnings"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LoadReportDefinitionCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LogoffCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.LogonUserCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateBookmarkCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateBookmarkCompletedEventArgs.Result"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateBookmarkCompletedEventArgs.UniqueName"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateBookmarkCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateDocumentMapCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateDocumentMapCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.NavigateDocumentMapCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode"></member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode.Actual">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode.Estimate">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageSettings"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageSettings.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageSettings.Margins"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageSettings.PaperSize"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterStateEnum"></member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterStateEnum.HasValidValue">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterStateEnum.MissingValidValue">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterStateEnum.HasOutstandingDependencies">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterStateEnum.DynamicValuesUnavailable">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum"></member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum.Boolean">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum.DateTime">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum.Integer">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum.Float">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterTypeEnum.String">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue.Label"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue.Name"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue.Value"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValueOrFieldReference"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValueOrFieldReference.#ctor"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PrintControlClsidHeader"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PrintControlClsidHeader.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PrintControlClsidHeader.AnyAttr"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PrintControlClsidHeader.Clsid32"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PrintControlClsidHeader.Clsid64"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.Encoding"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.Extension"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.MimeType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.Result"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.StreamIds"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventArgs.Warnings"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Render2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.Encoding"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.Extension"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.MimeType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.Result"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.StreamIds"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventArgs.Warnings"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderStreamCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderStreamCompletedEventArgs.Encoding"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderStreamCompletedEventArgs.MimeType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderStreamCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RenderStreamCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.#ctor"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginFindString(System.Int32,System.Int32,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginGetDocumentMap(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginGetExecutionInfo(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginGetExecutionInfo2(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginGetRenderResource(System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginListRenderingExtensions(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginListSecureMethods(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadDrillthroughTarget(System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadDrillthroughTarget2(System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadReport(System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadReport2(System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadReportDefinition(System.Byte[],System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLoadReportDefinition2(System.Byte[],System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLogoff(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginLogonUser(System.String,System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginNavigateBookmark(System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginNavigateDocumentMap(System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginRender(System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginRender2(System.String,System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginRenderStream(System.String,System.String,System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginResetExecution(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginResetExecution2(System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSetExecutionCredentials(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[],System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSetExecutionCredentials2(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[],System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSetExecutionParameters(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSetExecutionParameters2(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSort(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginSort2(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.BeginToggleItem(System.String,System.AsyncCallback,System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.CancelAsync(System.Object)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndFindString(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndGetDocumentMap(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndGetExecutionInfo(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndGetExecutionInfo2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndGetRenderResource(System.IAsyncResult,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndListRenderingExtensions(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndListSecureMethods(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadDrillthroughTarget(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadDrillthroughTarget2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadReport(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadReport2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadReportDefinition(System.IAsyncResult,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLoadReportDefinition2(System.IAsyncResult,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLogoff(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndLogonUser(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndNavigateBookmark(System.IAsyncResult,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndNavigateDocumentMap(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndRender(System.IAsyncResult,System.String@,System.String@,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@,System.String[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndRender2(System.IAsyncResult,System.String@,System.String@,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@,System.String[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndRenderStream(System.IAsyncResult,System.String@,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndResetExecution(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndResetExecution2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSetExecutionCredentials(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSetExecutionCredentials2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSetExecutionParameters(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSetExecutionParameters2(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSort(System.IAsyncResult,System.String@,System.Int32@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndSort2(System.IAsyncResult,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo2@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.EndToggleItem(System.IAsyncResult)"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ExecutionHeaderValue"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.FindString(System.Int32,System.Int32,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.FindStringAsync(System.Int32,System.Int32,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.FindStringAsync(System.Int32,System.Int32,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.FindStringCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetDocumentMap"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetDocumentMapAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetDocumentMapAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetDocumentMapCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfo"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfo2"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfo2Async"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfo2Async(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfo2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfoAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfoAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetExecutionInfoCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetRenderResource(System.String,System.String,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetRenderResourceAsync(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetRenderResourceAsync(System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.GetRenderResourceCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Invoke(System.String,System.Object[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListRenderingExtensions"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListRenderingExtensionsAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListRenderingExtensionsAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListRenderingExtensionsCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListSecureMethods"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListSecureMethodsAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListSecureMethodsAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ListSecureMethodsCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTarget(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTarget2(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTarget2Async(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTarget2Async(System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTarget2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTargetAsync(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTargetAsync(System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadDrillthroughTargetCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReport(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReport2(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReport2Async(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReport2Async(System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReport2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportAsync(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportAsync(System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinition(System.Byte[],Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinition2(System.Byte[],Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinition2Async(System.Byte[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinition2Async(System.Byte[],System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinition2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinitionAsync(System.Byte[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinitionAsync(System.Byte[],System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LoadReportDefinitionCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Logoff"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogoffAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogoffAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogoffCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogonUser(System.String,System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogonUserAsync(System.String,System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogonUserAsync(System.String,System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.LogonUserCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateBookmark(System.String,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateBookmarkAsync(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateBookmarkAsync(System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateBookmarkCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateDocumentMap(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateDocumentMapAsync(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateDocumentMapAsync(System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.NavigateDocumentMapCompleted"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.PrintControlClsidHeaderValue"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Render(System.String,System.String,System.String@,System.String@,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@,System.String[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Render2(System.String,System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.String@,System.String@,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning[]@,System.String[]@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Render2Async(System.String,System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Render2Async(System.String,System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Render2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderAsync(System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderAsync(System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderStream(System.String,System.String,System.String,System.String@,System.String@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderStreamAsync(System.String,System.String,System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderStreamAsync(System.String,System.String,System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.RenderStreamCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecution"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecution2"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecution2Async"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecution2Async(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecution2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecutionAsync"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecutionAsync(System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ResetExecutionCompleted"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ServerInfoHeaderValue"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentials(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentials2(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentials2Async(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentials2Async(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[],System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentials2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentialsAsync(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[])"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentialsAsync(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.DataSourceCredentials[],System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionCredentialsCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParameters(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParameters2(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParameters2Async(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParameters2Async(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParameters2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParametersAsync(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParametersAsync(Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ParameterValue[],System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SetExecutionParametersCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Sort(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,System.String@,System.Int32@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Sort2(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.String@,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ExecutionInfo2@)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Sort2Async(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Sort2Async(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.PageCountMode,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.Sort2Completed"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SortAsync(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SortAsync(System.String,Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum,System.Boolean,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.SortCompleted"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ToggleItem(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ToggleItemAsync(System.String)"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ToggleItemAsync(System.String,System.Object)"></member>
+    <member name="E:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.ToggleItemCompleted"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportExecutionService.TrustedUserHeaderValue"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins.Bottom"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins.Left"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins.Right"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportMargins.Top"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportPaperSize"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportPaperSize.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportPaperSize.Height"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportPaperSize.Width"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.AllowBlank"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.AllowBlankSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.DefaultValues"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.DefaultValuesQueryBased"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.DefaultValuesQueryBasedSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.Dependencies"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.ErrorMessage"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.MultiValue"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.MultiValueSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.Name"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.Nullable"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.NullableSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.Prompt"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.PromptUser"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.PromptUserSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.QueryParameter"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.QueryParameterSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.State"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.StateSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.Type"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.TypeSpecified"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.ValidValues"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.ValidValuesQueryBased"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ReportParameter.ValidValuesQueryBasedSpecified"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecution2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecution2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecution2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecutionCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecutionCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ResetExecutionCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.AnyAttr"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.ReportServerDateTime"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.ReportServerEdition"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.ReportServerVersion"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ServerInfoHeader.ReportServerVersionNumber"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentials2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentials2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentials2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentialsCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentialsCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionCredentialsCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParameters2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParameters2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParameters2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParametersCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParametersCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SetExecutionParametersCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Sort2CompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Sort2CompletedEventArgs.ExecutionInfo"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Sort2CompletedEventArgs.ReportItem"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Sort2CompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Sort2CompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortCompletedEventArgs.NumPages"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortCompletedEventArgs.ReportItem"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum"></member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum.None">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum.Ascending">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.SortDirectionEnum.Descending">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ToggleItemCompletedEventArgs"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ToggleItemCompletedEventArgs.Result"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ToggleItemCompletedEventHandler"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.TrustedUserHeader"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.TrustedUserHeader.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.TrustedUserHeader.AnyAttr"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.TrustedUserHeader.UserName"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.TrustedUserHeader.UserToken"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ValidValue"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ValidValue.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ValidValue.Label"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.ValidValue.Value"></member>
+    <member name="T:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning"></member>
+    <member name="M:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.#ctor"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.Code"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.Message"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.ObjectName"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.ObjectType"></member>
+    <member name="P:Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.Warning.Severity"></member>
+  </members>
+</doc>

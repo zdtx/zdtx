@@ -1,0 +1,746 @@
+﻿.mainFrame {
+}
+
+.mainTop {
+}
+
+.mainRight {
+}
+
+.panWhite {
+    padding: 15px;
+    background-color: White;
+    border: 1px dashed red;
+}
+
+.panBorder {
+    border: 1px dashed red;
+}
+
+.pan {
+    padding: 10px;
+    background-color: #F0F0F0;
+}
+
+.toolbar {
+    background-color: #F0F0F0;
+}
+
+.darkBar {
+    border-top: solid 1px #9F9F9F;
+    border-bottom: solid 1px #9F9F9F;
+    background-color: #DCDCDC;
+    padding: 1px;
+}
+
+.buttonBar {
+    border-spacing: 0px;
+}
+
+    .buttonBar .cell {
+        padding-right: 3px;
+    }
+
+.headerBar {
+    background-color: #F0F0F0;
+    background: url(../images/headerbar.gif) bottom center repeat-x;
+    padding: 5px 3px 3px 3px;
+    font-weight: bold;
+}
+
+.headerTB {
+    border-top: solid 1px #9F9F9F;
+    border-bottom: solid 1px #9F9F9F;
+}
+
+    .headerTB .txt {
+        float: right;
+        margin-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        padding-bottom: 1px;
+    }
+
+        .headerTB .txt td {
+            padding-left: 5px;
+        }
+
+.grid {
+    border-spacing: 1px;
+}
+
+    .grid td {
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+
+    .grid th {
+        background-color: #DCDCDC;
+    }
+
+.gridRow:hover {
+    background-color: #DCDCDC;
+}
+
+.gridRow-selected {
+    background-color: #F9E5E6;
+}
+
+.gridFooter {
+    height: 25px;
+}
+
+.gridHeader {
+    background-color: #DCDCDC;
+}
+
+    .gridHeader th {
+        padding: 2px 5px 2px 5px;
+        font-weight: normal;
+        border-color: #9F9F9F;
+        border-top: solid 1px white;
+        border-bottom: solid 1px #9F9F9F;
+        white-space: nowrap;
+        text-wrap: none;
+    }
+
+.gridItem-bound {
+    padding: 4px 5px 2px 5px;
+    border-left: solid 1px #CFCFCF;
+    border-bottom: solid 1px #CFCFCF;
+}
+
+.gridItem-bound-n {
+    padding: 4px 5px 2px 5px;
+    border-left: none;
+    border-bottom: solid 1px #CFCFCF;
+}
+
+.gridItem-bound-n-b {
+    padding: 4px 0px 2px 5px;
+    border-left: none;
+    border-bottom: solid 1px #CFCFCF;
+}
+
+.gridItem-hidden {
+    border-bottom: solid 1px #CFCFCF;
+    width: 1px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.gridItem-template {
+    padding: 4px 5px 2px 5px;
+    border-left: solid 1px #CFCFCF;
+    border-bottom: solid 1px #CFCFCF;
+}
+
+.gridItem-template-n {
+    padding: 4px 5px 2px 5px;
+    border-left: none;
+    border-bottom: solid 1px #CFCFCF;
+}
+
+.gridItem-number {
+    padding-right: 5px;
+    background: #F9E5E6;
+    border-bottom: 1px solid #E8AAAD;
+    border-right: 1px solid #E8AAAD;
+}
+
+/* 列表 grid 使用的 */
+.gdList {
+    border-spacing: 1px;
+}
+
+    .gdList .hd {
+        background-color: #DCDCDC;
+    }
+
+        .gdList .hd th {
+            padding: 3px;
+            font-weight: normal;
+            border-color: #9F9F9F;
+            border-top: solid 1px white;
+            border-bottom: solid 1px #9F9F9F;
+            white-space: nowrap;
+            text-wrap: none;
+            text-align: left;
+        }
+
+    .gdList td {
+        padding-top: 2px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .gdList .row:hover {
+        background-color: #F0F0F0;
+    }
+
+    .gdList .nav {
+        border-bottom: solid 1px #CFCFCF;
+        padding-top: 4px;
+        padding-bottom: 3px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .gdList .ord {
+        width: 30px;
+        padding-left: 10px;
+        text-align: right;
+        border-right: solid 1px #CFCFCF;
+        border-bottom: solid 1px #CFCFCF;
+        padding-top: 4px;
+        padding-bottom: 3px;
+    }
+
+    .gdList .nav:hover {
+        border-bottom: solid 1px transparent;
+        background-color: #DCDCDC;
+    }
+
+        .gdList .nav:hover a:hover {
+            color: red;
+        }
+
+    .gdList .cell {
+        border-bottom: solid 1px #CFCFCF;
+    }
+
+    .gdList .section {
+        margin-top: 5px;
+        padding-top: 5px;
+        padding-left: 8px;
+        padding-bottom: 3px;
+        width: 200px;
+        border-bottom: 1px solid red;
+        white-space: nowrap;
+        text-wrap: none;
+        background-color: #F0F0F0;
+        margin-bottom: 5px;
+    }
+
+.noWrap {
+    white-space: nowrap;
+    text-wrap: none;
+}
+
+
+.gdReport {
+    border-spacing: 0px;
+    border-left: solid 1px #9F9F9F;
+    border-top: solid 1px #9F9F9F;
+    border-bottom: none;
+    border-right: none;
+}
+
+    .gdReport .row:hover {
+        background-color: silver;
+    }
+
+    .gdReport th {
+        padding-top: 7px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+        border-right: solid 1px #9F9F9F;
+        border-bottom: solid 1px #9F9F9F;
+        border-top: none;
+        border-left: none;
+        text-align: left;
+    }
+
+    .gdReport td {
+        padding: 5px;
+        border-top: none;
+        border-left: none;
+        border-right: solid 1px #9F9F9F;
+        border-bottom: solid 1px #9F9F9F;
+    }
+
+        .gdReport td a:hover {
+            color: red;
+        }
+
+    .gdReport .number {
+        padding-left: 10px;
+        text-align: right;
+    }
+
+        .gdReport .number input {
+            padding-right: 5px;
+            text-align: right;
+        }
+
+.bar {
+    background-image: url(../images/sc_bg8.gif);
+    padding: 6px;
+    font-weight: bold;
+}
+
+.title {
+    border-bottom: solid 1px red;
+    padding-top: 2px;
+    padding-bottom: 6px;
+    padding-left: 25px;
+    color: gray;
+    background-image: url(../images/icons/small/arrow_right_16.png);
+    background-repeat: no-repeat;
+    background-position: 2px 1px;
+}
+
+.footer {
+    border-top: 1px dashed red;
+}
+
+    .footer td {
+        padding: 3px;
+    }
+
+.form {
+    border-spacing: 0px;
+}
+
+    .form table, .form tbody {
+        border-spacing: 0px;
+    }
+
+    .form th {
+        text-align: left;
+        padding-top: 5px;
+        border-bottom: solid 1px #F0F0F0;
+    }
+
+    .form .name {
+        background-color: #F0F0F0;
+        text-align: right;
+        white-space: nowrap;
+        text-wrap: none;
+        color: Gray;
+        padding: 3px 5px 2px 12px;
+        border-bottom: solid 1px #F0F0F0;
+        vertical-align: middle;
+    }
+
+    .form .val {
+        padding: 5px 5px 3px 5px;
+        background-color: white;
+        border-bottom: solid 1px #F0F0F0;
+        margin-bottom: 1px;
+        vertical-align: top;
+    }
+
+    .form .cl {
+        padding: 0px 1px 0px 1px;
+        background-color: #F0F0F0;
+        border-bottom: solid 1px transparent;
+        vertical-align: bottom;
+    }
+
+        .form .cl * {
+            border-spacing: 1px;
+        }
+
+.filterTb {
+    padding: 10px;
+    background-color: White;
+}
+
+    .filterTb .name {
+        padding-left: 10px;
+        text-align: right;
+    }
+
+    .filterTb .val {
+        padding-left: 3px;
+        padding-right: 3px;
+        padding-top: 2px;
+        padding-bottom: 1px;
+        border-bottom: dashed 1px #e2e5e6;
+    }
+
+    .filterTb .cl {
+        padding-left: 3px;
+        padding-right: 3px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        border-bottom: dashed 1px #e2e5e6;
+        border-spacing: 5px;
+    }
+
+    .filterTb td {
+        white-space: nowrap;
+    }
+
+.tips {
+    background: #FFFFCC;
+    border-top: 1px solid #E8E3AA;
+    border-bottom: 1px solid #E8E3AA;
+}
+
+.alert {
+    background: #F9E5E6;
+    border-top: 1px solid #E8AAAD;
+    border-bottom: 1px solid #E8AAAD;
+}
+
+.info {
+    background: #E5ECF9;
+    border-top: 1px solid #AAC6E8;
+    border-bottom: 1px solid #AAC6E8;
+}
+
+.success {
+    background: #E9F9E5;
+    border-top: 1px solid #B4E8AA;
+    border-bottom: 1px solid #B4E8AA;
+}
+
+.error {
+    background: #FFFBB3;
+    color: red;
+    border: 1px dashed red;
+}
+
+.modalBg {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+.popupWin {
+    background-color: White;
+    border: 1px dashed red;
+    padding: 2px;
+}
+
+    .popupWin .doc {
+        overflow: auto;
+        margin: 10px;
+    }
+
+.modalBackground {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+/* 用在 GridView 没有数据的时候（EmptyDataTemplate） */
+.emptyData {
+    padding: 20px;
+    background-color: #F0F0F0;
+}
+
+/* 用在 DevExpress 的 Menu 当 ShowAsToolbar 时 */
+.dxTb {
+}
+
+    .dxTb .item {
+        background-position: 3px 2px !important;
+    }
+
+        .dxTb .item span {
+            margin-left: 18px;
+        }
+
+    .dxTb .itemHover {
+        background-position: 3px 3px !important;
+    }
+
+/* 对 asp.net treeview 的控制 */
+.aspTree {
+    font-size: 11.5px;
+}
+
+    .aspTree a:hover {
+        background-color: silver;
+    }
+
+    .aspTree td {
+        line-height: 8px;
+    }
+
+.aspSelTree {
+}
+
+    .aspSelTree * {
+        border: none;
+        border-width: 0px;
+        border-spacing: 0px;
+    }
+
+    .aspSelTree table {
+        margin-bottom: 0px;
+        border-spacing: 0px;
+        border: none;
+        height: 0px;
+    }
+
+.tab {
+    border-bottom: solid 1px white;
+}
+
+.pgTB {
+    border-spacing: 0px;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+    .pgTB table {
+        border-spacing: 0px;
+        border: 0px;
+    }
+
+    .pgTB td {
+        border-spacing: 0px;
+        margin: 0px;
+        padding-right: 1px;
+    }
+
+    .pgTB .text {
+        white-space: nowrap;
+        text-wrap: none;
+        padding-left: 5px;
+        padding-top: 2px;
+        padding-bottom: 1px;
+        padding-right: 5px;
+        border: dashed 1px;
+    }
+
+.actionTB .btn {
+    padding-right: 3px;
+}
+
+.subHead {
+    border-top: solid 1px #9F9F9F;
+    background-color: #F0F0F0;
+    white-space: nowrap;
+    text-wrap: none;
+    color: Gray;
+    padding: 3px;
+}
+
+/* 文档展示 */
+.dmPage {
+    padding: 15px;
+    font-size: 13px;
+}
+
+    .dmPage .head {
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 10px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .dmPage .content {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: dotted 1px #F0F0F0;
+        padding: 5px;
+    }
+
+.avatar {
+    background-color: #F0F0F0;
+    border-spacing: 0px;
+}
+
+    .avatar td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .avatar .image * {
+        padding-top: 2px;
+        vertical-align: bottom;
+    }
+
+    .avatar .unit {
+        padding-bottom: 3px;
+    }
+
+
+.aBtn {
+    padding: 2px;
+    border: dotted 1px black;
+    background-color: #F0F0F0;
+}
+
+    .aBtn:hover {
+        background-color: silver;
+    }
+
+.emFrame {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.dsTitle {
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+    .dsTitle h1 {
+        font-size: 15px;
+        padding-right: 10px;
+        border-bottom: 1px solid;
+        padding-bottom: 2px;
+        margin: 0px;
+    }
+
+.dsFooter {
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+}
+
+.ds {
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+}
+
+.dsWrap {
+    vertical-align: top;
+    padding-top: 12px;
+    padding-right: 5px;
+}
+
+.dsTb {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+    .dsTb th {
+        padding: 5px;
+        border-top: solid 3px white;
+        border-bottom: solid 1px black;
+        /* border-bottom: dashed 1px #A0A0A0; */
+        white-space: nowrap;
+        text-wrap: none;
+        background-color: #E0E0E0;
+        text-align: left;
+    }
+
+        .dsTb th .text {
+            /* font-size: 14px; */
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-bottom: 2px;
+        }
+
+    .dsTb td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-left: solid 1px #9F9F9F;
+        border-bottom: solid 1px #9F9F9F;
+        white-space: nowrap;
+        text-wrap: none;
+    }
+
+    .dsTb .row:hover {
+        background-color: #F9E5E6;
+    }
+
+    .dsTb .name {
+        text-align: left;
+        white-space: nowrap;
+        text-wrap: none;
+        padding: 4px 5px 4px 5px;
+        vertical-align: middle;
+        font-family: 微软雅黑;
+    }
+
+        .dsTb .name a {
+        }
+
+    .dsTb .val {
+        padding: 4px 10px 0px 10px;
+        background-color: white;
+        margin-bottom: 1px;
+        vertical-align: top;
+    }
+
+    .dsTb .num {
+        padding: 4px 10px 0px 10px;
+        margin-bottom: 1px;
+        vertical-align: top;
+        text-align: right;
+    }
+
+    .dsTb .icon {
+        padding-left: 5px;
+        padding-top: 3px;
+        background-color: white;
+        margin-bottom: 1px;
+        vertical-align: central;
+        width: 20px;
+    }
+
+    .dsTb .ph {
+        background-color: white;
+        /* border-bottom: solid 1px #F0F0F0; */
+        width: 10px;
+    }
+
+    .dsTb .hf {
+    }
+
+    .dsTb .hd {
+        font-weight:bold;
+        padding-left:5px;
+        padding-top:6px;
+    }
+
+    .dsTb .lnk {
+        background: url( ../images/_doc_16_link.gif) no-repeat 1px 5px !important;
+        border-bottom: solid 1px #A0A0A0;
+        background-color: #F0F0F0;
+        padding-left: 23px;
+        width: 5%;
+    }
+
+    .dsTb .drop {
+        border: dashed 1px #A0A0A0;
+        padding: 5px;
+    }
+
+.dsP {
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-bottom: dotted 1px #A0A0A0;
+    background-color: #E5ECF9;
+}
+
+    .dsP:hover {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        background-color: transparent;
+        border-bottom: dotted 1px red;
+    }
+
+.dsN:hover {
+    color:black;
+    cursor:default;
+}
+
+.dsTool {
+    padding:0px;
+}
+
+    .dsTool td, .dsTool table {
+        border: none;
+        border-spacing:0px;
+        padding: 0px;
+    }

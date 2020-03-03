@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="eTaxi.Web.ExtMasterPage" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="T" runat="server" />
+</head>
+<body>
+    <form runat="server" id="theForm" />
+    <ext:ResourceManager ID="theManager" runat="server"
+        IDMode="Client"
+        ShowWarningOnAjaxFailure="false" 
+        ScriptMode="Release" />
+   <ext:Viewport runat="server" ID="vp" Layout="BorderLayout">
+        <Content>
+            <ext:Container runat="server" Region="North" Cls="frameTop" Layout="VBoxLayout" IDMode="Ignore">
+                <LayoutConfig>
+                    <ext:VBoxLayoutConfig Align="Stretch" />
+                </LayoutConfig>
+                <Content>
+                    <asp:ContentPlaceHolder ID="N" runat="server" />
+                </Content>
+            </ext:Container>
+            <asp:ContentPlaceHolder ID="C" runat="server" />
+            <asp:ContentPlaceHolder ID="S" runat="server" />
+        </Content>
+        <Listeners>
+            <Resize Handler="if(ISEx.resize)ISEx.resize(adjWidth,adjHeight);" />
+        </Listeners>
+    </ext:Viewport>
+    <asp:ContentPlaceHolder runat="server" ID="B" />
+</body>
+</html>
+<script runat="server">
+
+    public override HtmlForm Form { get { return theForm; } }
+    public override ResourceManager ExtManager { get { return theManager; } }
+    
+</script>

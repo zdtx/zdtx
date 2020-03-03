@@ -1,0 +1,107 @@
+/* body, td, p, .x-body, x-body * .x-btn, span, .x-btn button, .x-tab-strip span .x-tab-strip-text, .x-window-mc, .x-form-item, .x-form-field, .x-toolbar div */ /* .x-body, .x-menu-item-text, .x-panel-header-default, .x-panel-header-text-default, .x-btn-default-small .x-btn-inner, x-btn-default-toolbar-small .x-btn-inner,
+.x-panel-header-default
+{
+     font-size:12px;
+}
+*/
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+a, a:hover
+{
+    text-decoration: none;
+}
+
+.frameTop
+{
+    background: #DFE8F6 url(images/top_bg.png) repeat-x bottom;
+    margin: 0px;
+}
+
+.mainHeader
+{
+    background: url(images/header_bg.gif) repeat-x left bottom;
+}
+
+.frameTop
+{
+    background-image: url(images/top_d.gif);
+    background-position:top;
+    background-repeat:repeat-x;
+}
+
+.header a
+{
+    color:white;
+    text-decoration:none;
+}
+
+.topLeft
+{
+    background-image: url(images/logo.gif);
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+
+    .topLeft *
+    {
+    }
+
+    .topLeft a:hover
+    {
+    }
+
+.topRight
+{
+    background-image: url(images/top_right.gif);
+    background-position:right top;
+    background-repeat:no-repeat;
+    text-align:center;
+}
+
+    .topRight *
+    {
+    }
+
+    .topRight a:hover
+    {
+    }
+
+.tbGroup td
+{
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.topTB
+{
+    border-top: 1px solid white;
+    border-bottom: 1px solid #8DB2E3;
+}
+
+    .topTB *
+    {
+        font-size:13px;
+    }
+
+.tbText
+{
+    font-size:13px;
+}
+
+.tbSep
+{
+	width:2px;
+	height:30px;
+	background-image: url(images/Top_lie.gif);
+}
+
+.menuGroup
+{
+    font-weight:bold;
+    padding-top:3px;
+}

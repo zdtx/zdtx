@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="eTaxi.Web.MasterPageEx" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server" id="theHead">
+    <title></title>
+    <link href="../content/default.css" rel="stylesheet" type="text/css" />
+    <link href="../content/icons.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="H" runat="server" />
+</head>
+<body>
+    <form runat="server" id="theForm">
+        <dx:ASPxLoadingPanel runat="server" ID="l" Modal="true">
+            <ClientSideEvents Init="function(s,e){ISEx.loadingPanel.control=s;ISEx.loadingPanel.defaultText='加载中，请稍候 .. ';}" />
+        </dx:ASPxLoadingPanel>
+        <asp:ContentPlaceHolder ID="C" runat="server" />
+        <script type="text/javascript">
+            Sys.Application.add_load(function () {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (s, e) {
+                    if (e.get_error() != undefined) {
+                        var msg = e.get_error().message.replace("Sys.WebForms.PageRequestManagerServerErrorException: ", "");
+                        if (ISEx.lastErrorMessage !== msg) {
+                            ISEx.lastErrorMessage = msg;
+                            alert(msg);
+                        }
+                        ISEx.loadingPanel.hide();
+                        e.set_errorHandled(true);
+                    } else {
+                        ISEx.lastErrorMessage = "";
+                    }
+                });
+            });
+        </script>
+    </form>
+</body>
+</html>
+<script runat="server">
+
+    public override HtmlForm Form { get { return theForm; } }
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        if (!IsPostBack)
+        {
+            l.ClientInstanceName = l.ClientID;
+        }
+        
+        ScriptManager.RegisterStartupScript(
+            Page, GetType(), ClientID, "ISEx.loadingPanel.hide();", true);
+    }
+
+    public override void SetLoadingText(string text) { l.Text = text; }
+    public override void ResetLoadingText() { l.Text = "加载中，请稍候 .. "; }
+    
+</script>

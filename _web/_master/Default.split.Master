@@ -1,0 +1,229 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="eTaxi.Web.MasterPageEx" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server" id="theHead">
+    <title></title>
+    <link href="../content/default.css" rel="stylesheet" type="text/css" />
+    <link href="../content/icons.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="H" runat="server" />
+</head>
+<body>
+    <form runat="server" id="theForm">
+        <dx:ASPxLoadingPanel runat="server" ID="l" Modal="true" Text="加载中，请稍候 .. ">
+            <ClientSideEvents Init="function(s,e){ISEx.loadingPanel.control=s;ISEx.loadingPanel.defaultText='加载中，请稍候 .. ';}" />
+        </dx:ASPxLoadingPanel>
+        <asp:UpdatePanel runat="server" ID="u">
+            <ContentTemplate>
+                <asp:PlaceHolder ID="___x" runat="server" />
+                <dx:ASPxSplitter runat="server" ID="v" FullscreenMode="true" Orientation="Vertical" SeparatorVisible="true">
+                    <ClientSideEvents PaneResized="function(s,e){ISEx.splitter.onResize(s,e);}" />
+                    <Panes>
+                        <dx:SplitterPane Name="N">
+                            <Separator Visible="false"></Separator>
+                            <PaneStyle>
+                                <Paddings Padding="0" />
+                                <Border BorderStyle="None" />
+                            </PaneStyle>
+                            <ContentCollection>
+                                <dx:SplitterContentControl runat="server" ID="cN">
+                                    <asp:ContentPlaceHolder ID="N" runat="server" />
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+                        <dx:SplitterPane Name="C">
+                            <Separator Visible="false"></Separator>
+                            <Panes>
+                                <dx:SplitterPane ScrollBars="Auto" Name="CW">
+                                    <PaneStyle CssClass="toolbar">
+                                        <Paddings Padding="0" />
+                                        <BorderLeft BorderStyle="None" />
+                                        <BorderTop BorderStyle="None" />
+                                        <BorderBottom BorderStyle="None" />
+                                        <BorderRight BorderStyle="None" />
+                                    </PaneStyle>
+                                    <ContentCollection>
+                                        <dx:SplitterContentControl runat="server" ID="cW">
+                                            <asp:ContentPlaceHolder ID="W" runat="server" />
+                                        </dx:SplitterContentControl>
+                                    </ContentCollection>
+                                </dx:SplitterPane>
+                                <dx:SplitterPane Name="CC">
+                                    <Separator Visible="True">
+                                        <SeparatorStyle Border-BorderStyle="None" />
+                                    </Separator>
+                                    <PaneStyle>
+                                        <Paddings Padding="0" />
+                                        <Border BorderStyle="None" />
+                                    </PaneStyle>
+                                    <Panes>
+                                        <dx:SplitterPane Name="CT">
+                                            <PaneStyle>
+                                                <Paddings Padding="0" />
+                                                <Border BorderStyle="None" />
+                                            </PaneStyle>
+                                            <ContentCollection>
+                                                <dx:SplitterContentControl runat="server" ID="cT">
+                                                    <asp:ContentPlaceHolder ID="T" runat="server" />
+                                                </dx:SplitterContentControl>
+                                            </ContentCollection>
+                                        </dx:SplitterPane>
+                                        <dx:SplitterPane ScrollBars="Auto" Name="CX">
+                                            <Separator Visible="false"></Separator>
+                                            <PaneStyle>
+                                                <Paddings Padding="0" />
+                                                <Border BorderStyle="None" />
+                                            </PaneStyle>
+                                            <ContentCollection>
+                                                <dx:SplitterContentControl runat="server" ID="cCC">
+                                                    <asp:ContentPlaceHolder ID="C" runat="server" />
+                                                </dx:SplitterContentControl>
+                                            </ContentCollection>
+                                        </dx:SplitterPane>
+                                    </Panes>
+                                </dx:SplitterPane>
+                                <dx:SplitterPane ScrollBars="Auto" Name="CE">
+                                    <Separator Visible="True">
+                                        <SeparatorStyle Border-BorderStyle="None" />
+                                    </Separator>
+                                    <PaneStyle CssClass="toolbar">
+                                        <Paddings Padding="0" />
+                                        <BorderLeft BorderStyle="Dashed" />
+                                        <BorderTop BorderStyle="None" />
+                                        <BorderBottom BorderStyle="None" />
+                                        <BorderRight BorderStyle="Dashed" />
+                                    </PaneStyle>
+                                    <ContentCollection>
+                                        <dx:SplitterContentControl runat="server" ID="cE">
+                                            <asp:ContentPlaceHolder ID="E" runat="server" />
+                                        </dx:SplitterContentControl>
+                                    </ContentCollection>
+                                </dx:SplitterPane>
+                            </Panes>
+                        </dx:SplitterPane>
+                        <dx:SplitterPane AllowResize="False" AutoHeight="true" Name="S" Size="10">
+                            <PaneStyle>
+                                <Paddings Padding="0" />
+                                <Border BorderStyle="None" />
+                            </PaneStyle>
+                            <Separator Visible="false"></Separator>
+                            <ContentCollection>
+                                <dx:SplitterContentControl ID="cS" runat="server">
+                                    <asp:ContentPlaceHolder ID="S" runat="server" />
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+                    </Panes>
+                </dx:ASPxSplitter>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <script type="text/javascript">
+            Sys.Application.add_load(function () {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (s, e) {
+                    if (e.get_error() != undefined) {
+                        var msg = e.get_error().message.replace("Sys.WebForms.PageRequestManagerServerErrorException: ", "");
+                        if (ISEx.lastErrorMessage !== msg) {
+                            ISEx.lastErrorMessage = msg;
+                            alert(msg);
+                        }
+                        ISEx.loadingPanel.hide();
+                        e.set_errorHandled(true);
+                    } else {
+                        ISEx.lastErrorMessage = "";
+                    }
+                });
+            });
+        </script>
+    </form>
+</body>
+</html>
+<script runat="server">
+
+    public override HtmlForm Form { get { return theForm; } }
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        
+        if (!IsPostBack)
+        {
+            l.ClientInstanceName = l.ClientID;
+        }
+        else
+        {
+            v.ClientSideEvents.Init = null;
+        }
+        
+        ScriptManager.RegisterStartupScript(
+            Page, GetType(), ClientID, "ISEx.loadingPanel.hide();", true);
+    }
+
+    protected override void _ConfigZone()
+    {
+        Action<SplitterPane, Config> _config = (pane, config) =>
+        {
+            pane.Visible = config.Visible;
+            pane.Size = config.Size;
+            pane.MaxSize = config.MaxSize;
+            pane.MinSize = config.MinSize;
+            pane.AutoHeight = config.AutoHeight;
+            pane.AutoWidth = config.AutoWidth;
+            pane.AllowResize = config.AllowResize;
+            if (!
+                string.IsNullOrEmpty(config.CssClass))
+                pane.PaneStyle.CssClass = config.CssClass;
+            if (config.ScrollBars.HasValue)
+                pane.ScrollBars = config.ScrollBars.Value;
+        };
+
+        foreach (var kv in _Setter.Configs)
+        {
+            switch (kv.Key)
+            {
+                case Zone.East:
+                    _config(v.Panes["C"].Panes["CE"], kv.Value);
+                    break;
+                case Zone.North:
+                    _config(v.Panes["N"], kv.Value);
+                    break;
+                case Zone.South:
+                    _config(v.Panes["S"], kv.Value);
+                    break;
+                case Zone.West:
+                    _config(v.Panes["C"].Panes["CW"], kv.Value);
+                    if (kv.Value.BorderStyle != BorderStyle.NotSet)
+                        v.Panes["C"].Panes["CW"].PaneStyle.BorderRight.BorderStyle = kv.Value.BorderStyle;
+                    break;
+                case Zone.Center:
+                    _config(v.Panes["C"].Panes["CC"].Panes["CX"], kv.Value);
+                    break;
+                case Zone.CenterTop:
+                    _config(v.Panes["C"].Panes["CC"].Panes["CT"], kv.Value);
+                    break;
+            }
+        }
+    }
+
+    public override void RemoveScriptRegistration()
+    {
+        ScriptManager.RegisterStartupScript(
+            Page, GetType(), ClientID, string.Empty, true);
+        l.ClientSideEvents.Init =
+            "function(s,e){ISEx.loadingPanel.control=s;ISEx.loadingPanel.defaultText='加载中，请稍候 .. ';ISEx.loadingPanel.show();}";
+    }
+    
+    public override void SetLoadingText(string text) { l.Text = text; }
+    public override void ResetLoadingText() { l.Text = "加载中，请稍候 .. "; }
+
+    public override bool _PACK_0001()
+    {
+        Form.FindControl("___b_pack_0001").If<System.Web.UI.WebControls.Button>(btn =>
+        {
+            string js = Page.ClientScript.GetPostBackEventReference(btn, string.Empty) + ";";
+            v.ClientSideEvents.Init =
+                string.Format("function(s,e){{{0}}}", js);
+                // string.Format("function(s,e){{{0}}}", js + "ISEx.loadingPanel.showNow();");
+            RemoveScriptRegistration();
+        });
+        return true;
+    }
+    
+</script>

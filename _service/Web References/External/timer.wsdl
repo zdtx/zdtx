@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Elapse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="secret" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ElapseResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ElapseSoapIn">
+    <wsdl:part name="parameters" element="tns:Elapse" />
+  </wsdl:message>
+  <wsdl:message name="ElapseSoapOut">
+    <wsdl:part name="parameters" element="tns:ElapseResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TimerSoap">
+    <wsdl:operation name="Elapse">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用于时序发起</wsdl:documentation>
+      <wsdl:input message="tns:ElapseSoapIn" />
+      <wsdl:output message="tns:ElapseSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TimerSoap" type="tns:TimerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Elapse">
+      <soap:operation soapAction="http://tempuri.org/Elapse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimerSoap12" type="tns:TimerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Elapse">
+      <soap12:operation soapAction="http://tempuri.org/Elapse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Timer">
+    <wsdl:port name="TimerSoap" binding="tns:TimerSoap">
+      <soap:address location="http://localhost:1937/service/timer.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TimerSoap12" binding="tns:TimerSoap12">
+      <soap12:address location="http://localhost:1937/service/timer.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

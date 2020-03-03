@@ -1,0 +1,35 @@
+.x-btn-default-small .x-btn-inner
+{
+    font-size:12px;
+}
+
+.x-btn-default-toolbar-small .x-btn-inner
+{
+    font-size:12px;
+}
+
+.x-toolbar-text
+{
+    font-size:12px;
+}
+
+.x-menu-item 
+{
+    font-size:12px;
+}
+
+.x-panel-header-text-container
+{
+    font-size:12px;
+}
+
+.x-menu-item-text
+{
+    font-size:12px;
+}
+
+.x-tree-node-text
+{
+    font-size:12px;
+    line-height:15px;
+}

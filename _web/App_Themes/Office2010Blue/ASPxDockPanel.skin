@@ -1,0 +1,11 @@
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Data" Assembly="DevExpress.Data.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Web" Assembly="DevExpress.Web.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+
+<dx:ASPxDockPanel runat="server" EnableHotTrack="False">
+    <Images SpriteCssFilePath="{0}/sprite.css">
+    </Images>
+    <Styles CssFilePath="{0}/styles.css" CssPostfix="Office2010Blue">
+	    <LoadingPanel ImageSpacing="5"/>
+    </Styles>
+</dx:ASPxDockPanel>
+

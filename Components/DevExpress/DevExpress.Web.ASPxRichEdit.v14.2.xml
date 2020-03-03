@@ -1,0 +1,833 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevExpress.Web.ASPxRichEdit.v14.2</name>
+    </assembly>
+    <members>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection">
+
+            <summary>
+                <para>A collection of Ribbon tabs related to the <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/>.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection.#ctor(DevExpress.Web.Internal.IWebControlObject)">
+            <summary>
+                <para>Initializes a new instance of the RichEditRibbonTabCollection class with the specified owner.
+</para>
+            </summary>
+            <param name="owner">
+		An object that implements the <b>IWebControlObject</b> interface.
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection.Add(System.String)">
+            <summary>
+                <para>Adds a new tab with the specified text to the collection.
+</para>
+            </summary>
+            <param name="text">
+		A <see cref="T:System.String"/> value that specifies the created tab's display text. Initializes the tab's <see cref="P:DevExpress.Web.RibbonTab.Text"/> property.
+
+            </param>
+            <returns>An <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.RibbonTab">RibbonTab</a> object that is the newly created tab.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection.CreateDefaultRibbonTabs">
+            <summary>
+                <para>Creates default ribbon tabs within the RichEditRibbonTabCollection collection.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection.RichEdit">
+            <summary>
+                <para>Gets the <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/> object that owns the collection.
+</para>
+            </summary>
+            <value>An <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.ASPxRichEdit">ASPxRichEdit</a> object that owns the collection.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditRulerImages">
+
+            <summary>
+                <para>Contains settings for the Ruler images.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.#ctor(DevExpress.Web.Internal.ISkinOwner)">
+            <summary>
+                <para>Initializes a new instance of the RichEditRulerImages class with the specified owner.
+</para>
+            </summary>
+            <param name="skinOwner">
+		An object that implements the <see cref="T:DevExpress.Web.Internal.ISkinOwner"/> interface.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.FirstLineIdentDragHandle">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <value> 
+</value>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.FirstLineIdentDragHandleImageName">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.LeftIdentDragHandle">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <value> 
+</value>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.LeftIdentDragHandleImageName">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.RightIdentDragHandle">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <value> 
+</value>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRulerImages.RightIdentDragHandleImageName">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditImages">
+
+            <summary>
+                <para>Contains settings that define images displayed within the <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/>.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditImages.#ctor(DevExpress.Web.Internal.ISkinOwner)">
+            <summary>
+                <para>Initializes a new instance of the RichEditImages class with the specified owner.
+</para>
+            </summary>
+            <param name="owner">
+		An object that implements the <see cref="T:DevExpress.Web.Internal.ISkinOwner"/> interface.
+
+            </param>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.Copy">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.Cut">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.Font">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.IndentDecrease">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.IndentIncrease">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.RichEditImages.LoadingPanelOnStatusBar">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <value> 
+</value>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.Paragraph">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.Paste">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditImages.SelectAll">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditImages.ToString">
+            <summary>
+                <para> 
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditClientSideEvents">
+
+            <summary>
+                <para>Contains a list of the client-side events available for the ASPxRichEdit.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.RichEditClientSideEvents.#ctor">
+            <summary>
+                <para>Initializes a new instance of the RichEditClientSideEvents class. For internal use only.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.ASPxRichEditSettings">
+
+            <summary>
+                <para>Contains the main settings of the <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/> control.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEditSettings.#ctor(DevExpress.Web.ASPxRichEdit.ASPxRichEdit)">
+            <summary>
+                <para>Initializes a new instance of the ASPxRichEditSettings class with the specified owner.
+</para>
+            </summary>
+            <param name="owner">
+		An  <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/> object that represents the object's owner.
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEditSettings.Assign(DevExpress.Web.PropertiesBase)">
+            <summary>
+                <para>Copies the settings from the specified <see cref="T:DevExpress.Web.PropertiesBase"/> object to the current object.
+</para>
+            </summary>
+            <param name="source">
+		A <see cref="T:DevExpress.Web.PropertiesBase"/> object whose settings are assigned to the current object.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEditSettings.Unit">
+            <summary>
+                <para>Gets or sets a unit of measure used in the ASPxRichEdit. 
+
+</para>
+            </summary>
+            <value>One of the <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditUnit">RichEditUnit</a> enumeration values.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditUnit">
+
+            <summary>
+                <para>Lists measurement units used in the document.
+</para>
+            </summary>
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditUnit.Centimeter">
+            <summary>
+                <para>Specifies centimeters as the measurement unit. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditUnit.Inch">
+            <summary>
+                <para>Specifies inches as the measurement unit. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit">
+
+            <summary>
+                <para>A rich text editor control.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.#ctor">
+            <summary>
+                <para>Initializes a new instance of the ASPxRichEdit class. 
+</para>
+            </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ActiveTabIndex">
+            <summary>
+                <para>Gets or sets the index of the active ribbon tab within the ASPxRichEdit control.
+</para>
+            </summary>
+            <value>An integer value specifying the index of the active ribbon tab.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.AssociatedRibbonID">
+            <summary>
+                <para>Specifies the ID of an <see cref="T:DevExpress.Web.ASPxRibbon"/> control, used as an external toolbar.
+</para>
+            </summary>
+            <value>A string value specifying the ribbon ID.
+</value>
+
+
+        </member>
+        <member name="E:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Callback">
+            <summary>
+                <para>Fires when a round trip to the server has been initiated either manually (by a call to the client <see cref="M:DevExpress.Web.ASPxRichEdit.Scripts.ASPxClientRichEdit.PerformCallback"/> method) or automatically by the ASPxRichEdit (an internal service callback).
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ClientInstanceName">
+            <summary>
+                <para>Gets or sets the ASPxRichEdit's client programmatic identifier.
+</para>
+            </summary>
+            <value>A string value that specifies the ASPxRichEdit's client identifier.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ClientSideEvents">
+            <summary>
+                <para>Gets an object that lists the client-side events specific to the ASPxRichEdit.
+</para>
+            </summary>
+            <value>A <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditClientSideEvents">RichEditClientSideEvents</a> object which allows assigning handlers to the client-side events available to the ASPxRichEdit.
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Close">
+            <summary>
+                <para>Closes the document currently loaded into ASPxRichEdit.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ConfirmOnLosingChanges">
+            <summary>
+                <para>Gets or sets the text of the confirmation message that is displayed when any unsaved data changes are going to be lost.
+</para>
+            </summary>
+            <value>A string specifying the confirmation message text.
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.CreateDefaultRibbonTabs(System.Boolean)">
+            <summary>
+                <para>Creates a collection of default ribbon tabs, specifying what to do with tabs that already exist within the <see cref="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RibbonTabs"/> collection.
+</para>
+            </summary>
+            <param name="clearExistingTabs">
+		<b>true</b> to delete existing tabs; <b>false</b> to add the default tabs to the collection.
+
+            </param>
+
+
+        </member>
+        <member name="E:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.DocumentCallback">
+            <summary>
+                <para>Fires when a round trip to the server has been initiated by the loaded document.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.EnableClientSideAPI">
+            <summary>
+                <para>Gets or sets a value that specifies whether the ASPxRichEdit can be manipulated on the client side in code.
+</para>
+            </summary>
+            <value><b>true</b>, if the control's client object model is fully available; <b>false</b>, if no programmatic interface is available for the ASPxRichEdit on the client side.
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ExportToPdf(System.IO.Stream,DevExpress.XtraPrinting.PdfExportOptions)">
+            <summary>
+                <para>Exports the current document to the specified stream in PDF format using the specified options. 
+</para>
+            </summary>
+            <param name="stream">
+		A <see cref="T:System.IO.Stream"/> object, to which the document is exported. 
+
+            </param>
+            <param name="pdfExportOptions">
+		A <see cref="T:DevExpress.XtraPrinting.PdfExportOptions"/> object which specifies the export options to be applied when the control's document is exported. 
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ExportToPdf(System.IO.Stream)">
+            <summary>
+                <para>Exports the current document to a stream in PDF format. 
+</para>
+            </summary>
+            <param name="stream">
+		A <see cref="T:System.IO.Stream"/> object, to which the document is exported. 
+
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.GetWorkDirectory">
+            <summary>
+                <para>Returns the path to the working directory.
+</para>
+            </summary>
+            <returns>A string representing the working directory path.
+</returns>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Images">
+            <summary>
+                <para>Provides access to the settings that define images displayed within the ASPxRichEdit.
+</para>
+            </summary>
+            <value>An <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditImages">RichEditImages</a> object that contains image settings.
+ 
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ImagesRuler">
+            <summary>
+                <para>Provides access to the settings that define images displayed within the Ruler. 
+ 
+</para>
+            </summary>
+            <value>A <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditRulerImages">RichEditRulerImages</a> object that contains image settings. 
+ 
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.IsInternalServiceCallback">
+            <summary>
+                <para>Gets a value indicating whether an internal service callback is being currently processed. 
+</para>
+            </summary>
+            <returns><b>true</b>, if the processed callback is an internal service callback of the ASPxRichEdit; otherwise, <b>false</b>.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Open(System.String)">
+            <summary>
+                <para>Opens a document by the specified path. 
+</para>
+            </summary>
+            <param name="path">
+		A string representing the path to the document to be opened. 
+
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RaiseDocumentSelectorFileUploading(DevExpress.Web.FileManagerFileUploadEventArgs)">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <param name="args">
+		 
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RaiseDocumentSelectorFolderCreating(DevExpress.Web.FileManagerFolderCreateEventArgs)">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <param name="args">
+		 
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RaiseDocumentSelectorItemDeleting(DevExpress.Web.FileManagerItemDeleteEventArgs)">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <param name="args">
+		 
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RaiseDocumentSelectorItemMoving(DevExpress.Web.FileManagerItemMoveEventArgs)">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <param name="args">
+		 
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RaiseDocumentSelectorItemRenaming(DevExpress.Web.FileManagerItemRenameEventArgs)">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <param name="args">
+		 
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RibbonMode">
+            <summary>
+                <para>Specifies the type of the ASPxRichEdit toolbar.
+</para>
+            </summary>
+            <value>One of the <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditRibbonMode">RichEditRibbonMode</a> enumeration values.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.RibbonTabs">
+            <summary>
+                <para>Provides access to the collection of ribbon tabs.
+</para>
+            </summary>
+            <value>A <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.RichEditRibbonTabCollection">RichEditRibbonTabCollection</a> object that is the collection of the ribbon's tabs. 
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Save(System.String,DevExpress.XtraRichEdit.DocumentFormat)">
+            <summary>
+                <para>Saves the document to a file, specifying the document format.
+</para>
+            </summary>
+            <param name="fileName">
+		A <see cref="T:System.String"/> value, which specifies the path to the file to which to save the document.
+
+
+            </param>
+            <param name="documentFormat">
+		A <see cref="T:DevExpress.XtraRichEdit.DocumentFormat"/> enumeration value that specifies the document format.
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Save(System.String)">
+            <summary>
+                <para>Saves the document to a file.
+</para>
+            </summary>
+            <param name="fileName">
+		A <see cref="T:System.String"/> value, which specifies the path to the file to which to save the document.
+
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Save(System.IO.Stream,DevExpress.XtraRichEdit.DocumentFormat)">
+            <summary>
+                <para>Saves the document to a stream, specifying the document format.
+</para>
+            </summary>
+            <param name="stream">
+		A <see cref="T:System.IO.Stream"/>-supported object to which the document is written.
+
+
+            </param>
+            <param name="documentFormat">
+		A <see cref="T:DevExpress.XtraRichEdit.DocumentFormat"/> enumeration value that specifies the document format.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Settings">
+            <summary>
+                <para>Provides access to the ASPxRichEdit's main settings.
+</para>
+            </summary>
+            <value>An <a href="ms-xhelp:///?Id=T%3aDevExpress.Web.ASPxRichEdit.ASPxRichEditSettings">ASPxRichEditSettings</a> object that contains the control's options.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.SettingsDocumentSelector">
+            <summary>
+                <para>Provides access to settings that are related to the FileManager used in some built-in File Dialogs.
+
+</para>
+            </summary>
+            <value>An RichEditDocumentSelectorSettings object that contains the Document Selector dialog's settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ShowConfirmOnLosingChanges">
+            <summary>
+                <para>Gets or sets a value that specifies whether a confirmation alert should be displayed when any unsaved changes are going to be lost due to an end-user action.
+</para>
+            </summary>
+            <value><b>true</b> to display the confirmation alert; otherwise, <b>false</b>.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.ShowStatusBar">
+            <summary>
+                <para>Gets or sets a value that specifies whether the ASPxRichEdit's status bar is displayed.
+</para>
+            </summary>
+            <value><b>true</b>, if the status bar is displayed; otherwise, <b>false</b>.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.Styles">
+            <summary>
+                <para>Provides access to the style settings that control the appearance of the ASPxRichEdit elements.
+</para>
+            </summary>
+            <value>A RichEditStyles object that provides style settings for view elements.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesButton">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of button elements used by the ASPxRichEdit control (within built-in dialogs, for instance). 
+</para>
+            </summary>
+            <value>A RichEditButtonStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesEditors">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of editor elements used by the ASPxRichEdit control (for instance, within built-in dialogs). 
+</para>
+            </summary>
+            <value>A RichEditEditorsStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesFileManager">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of File Manager elements used by the ASPxRichEdit control (for instance, within the built-in file dialogs). 
+</para>
+            </summary>
+            <value>A RichEditFileManagerStyles object that provides style settings. 
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesPopupMenu">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of the ASPxRichEdit's context menus. 
+</para>
+            </summary>
+            <value>A RichEditMenuStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesRibbon">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of the ASPxRichEdit's ribbon toolbar elements. 
+</para>
+            </summary>
+            <value>A RichEditRibbonStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesRuler">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of the ASPxRichEdit's horizontal ruler. 
+</para>
+            </summary>
+            <value>A RichEditRulerStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.StylesStatusBar">
+            <summary>
+                <para>Provides access to the style settings that define the appearance of the ASPxRichEdit's status bar. 
+</para>
+            </summary>
+            <value>A RichEditStatusBarStyles object that contains style settings.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Web.ASPxRichEdit.ASPxRichEdit.WorkDirectory">
+            <summary>
+                <para>Gets or sets the working directory path.
+</para>
+            </summary>
+            <value>A string specifying the working directory path.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Web.ASPxRichEdit.RichEditRibbonMode">
+
+            <summary>
+                <para>Lists values that specify the type of the ribbon navigation element used by the <see cref="T:DevExpress.Web.ASPxRichEdit.ASPxRichEdit"/> control.
+</para>
+            </summary>
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRibbonMode.ExternalRibbon">
+            <summary>
+                <para>An external ribbon is used by the Rich Text Editor as a toolbar. 
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRibbonMode.None">
+            <summary>
+                <para>The Rich Text Editor has no toolbars. 
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Web.ASPxRichEdit.RichEditRibbonMode.Ribbon">
+            <summary>
+                <para>The toolbar for the Rich Text Editor is rendered as a built-in ribbon.
+</para>
+            </summary>
+
+
+        </member>
+    </members>
+</doc>

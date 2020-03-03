@@ -1,0 +1,1 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="GridWrapperForList.ascx.cs" Inherits="eTaxi.Web.Controls.GridWrapperForList" %>

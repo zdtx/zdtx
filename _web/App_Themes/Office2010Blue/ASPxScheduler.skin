@@ -1,0 +1,17 @@
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Data" Assembly="DevExpress.Data.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Web.ASPxScheduler" Assembly="DevExpress.Web.ASPxScheduler.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<%@ Register Assembly="DevExpress.XtraScheduler.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraScheduler" TagPrefix="temp" %>
+<dx:ASPxScheduler runat="server">
+	<Styles CssFilePath="{0}/styles.css" CssPostfix="Office2010Blue" 
+		SelectionColor="#d5e8ff">
+		<ResourceNavigator ButtonSpacing="0px" />
+		<ViewNavigator ButtonSpacing="3px" />
+		<PopupForm>
+            <Content Paddings-PaddingBottom="10px" />
+        </PopupForm>
+        <LoadingPanel ImageSpacing="5" />
+	</Styles>
+	<Images SpriteCssFilePath="{0}/sprite.css">
+	</Images>
+</dx:ASPxScheduler>
+

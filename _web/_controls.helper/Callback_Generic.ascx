@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Callback_Generic.ascx.cs" Inherits="eTaxi.Web.Controls.Callback_Generic" %>
+<asp:Button runat="server" ID="b" style="display:none;" OnClientClick="return false;" />
