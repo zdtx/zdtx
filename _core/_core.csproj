@@ -40,10 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExpressionSerialization">
-      <HintPath>..\..\ERP.Code\_source\ISStorm\ExpressionSerialization.dll</HintPath>
+      <HintPath>..\Components\ExpressionSerialization.dll</HintPath>
     </Reference>
     <Reference Include="LinqKit">
-      <HintPath>..\..\_source\Core\ISStorm\LinqKit.dll</HintPath>
+      <HintPath>..\Components\LinqKit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
       <HintPath>..\Components\Microsoft\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -64,7 +64,7 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="zxing">
-      <HintPath>..\..\ERP.Code\_source\ISStorm\ZXing\zxing.dll</HintPath>
+      <HintPath>..\Components\ZXing\zxing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
