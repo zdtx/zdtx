@@ -315,6 +315,7 @@
     <Content Include="System\Department.aspx" />
     <Content Include="Domain\Driver\Create.aspx" />
     <Content Include="System\Module.aspx" />
+    <Content Include="System\Package.aspx" />
     <Content Include="System\Person.aspx" />
     <Content Include="System\OnlineUser.aspx" />
     <Content Include="System\Rank.aspx" />
@@ -1643,6 +1644,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_controls.helper\Selection\Person\" />
+    <Folder Include="_controls.sys\Package\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\_core\_core.csproj">

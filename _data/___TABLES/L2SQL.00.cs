@@ -9,6 +9,69 @@ using System.Data.Linq.Mapping;
 namespace eTaxi.L2SQL
 {
     [Serializable]
+    [Table(Name = "____column")]
+    public partial class TB_____column : TBObject<TB_____column>
+    {
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> CharMaxLength { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> CharOctLength { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(32)")]
+        public string CharsetName { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(32)")]
+        public string CharsetSchema { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(32)")]
+        public string CollationCatalog { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> DateTimePrecision { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false, IsPrimaryKey = true)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool Nullable { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> NumericPrecision { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> NumericPrecisionRadix { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> NumericScale { get; set; }
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int Ordinal { get; set; }
+        [ColumnAttribute(DbType = "uniqueidentifier", CanBeNull = false, IsPrimaryKey = true)]
+        public Guid TableId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(64)", CanBeNull = false)]
+        public string Type { get; set; }
+    }
+    [Serializable]
+    [Table(Name = "____property")]
+    public partial class TB_____property : TBObject<TB_____property>
+    {
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false, IsPrimaryKey = true)]
+        public string Field { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false, IsPrimaryKey = true)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "uniqueidentifier", CanBeNull = false, IsPrimaryKey = true)]
+        public Guid TableId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(max)")]
+        public string Value { get; set; }
+    }
+    [Serializable]
+    [Table(Name = "____table")]
+    public partial class TB_____table : TBObject<TB_____table>
+    {
+        [ColumnAttribute(DbType = "nvarchar(64)", CanBeNull = false)]
+        public string Catalog { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)")]
+        public string KeyInfo { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
+        public string Scheme { get; set; }
+        [ColumnAttribute(DbType = "uniqueidentifier", CanBeNull = false, IsPrimaryKey = true)]
+        public Guid TableId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
+        public string Type { get; set; }
+    }
+    [Serializable]
     [Table(Name = "aspnet_Applications")]
     public partial class TB_aspnet_Applications : TBObject<TB_aspnet_Applications>
     {
@@ -228,8 +291,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Company { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -287,6 +356,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime InsuranceEnd { get; set; }
+        /// <summary>
+        /// 保单号
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)")]
         public string InsuranceTransCode { get; set; }
         /// <summary>
@@ -309,8 +381,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)")]
         public string Model { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -376,8 +454,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(64)", CanBeNull = false)]
         public string Coordinator { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -395,8 +479,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -415,7 +505,7 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
         /// <summary>
-        /// 责任类型
+        /// 责任类型（-1：无责 1：次责 2：主责）
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int RespLevel { get; set; }
@@ -429,6 +519,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(64)")]
         public string ServiceCom { get; set; }
+        /// <summary>
+        /// 处理状态（未启用）
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Status { get; set; }
         /// <summary>
@@ -444,6 +537,9 @@ namespace eTaxi.L2SQL
     [Table(Name = "car_balance")]
     public partial class TB_car_balance : TBObject<TB_car_balance>
     {
+        /// <summary>
+        /// 金额
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Amount { get; set; }
         /// <summary>
@@ -451,8 +547,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -465,19 +567,34 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsIncome { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
+        /// <summary>
+        /// 已支付
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Paid { get; set; }
         /// <summary>
-        /// 费用名目及是由
+        /// 参考1
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string Ref1 { get; set; }
+        /// <summary>
+        /// 参考2
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string Ref2 { get; set; }
+        /// <summary>
+        /// 参考3
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string Ref3 { get; set; }
         /// <summary>
@@ -500,6 +617,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime Time { get; set; }
+        /// <summary>
+        /// 费用名目、标题
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Title { get; set; }
     }
@@ -530,8 +650,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)")]
         public string Coordinator { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -544,6 +670,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string DriverId { get; set; }
+        /// <summary>
+        /// 罚款金额
+        /// </summary>
         [ColumnAttribute(DbType = "money")]
         public Nullable<decimal> Fine { get; set; }
         /// <summary>
@@ -551,8 +680,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -580,6 +715,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Source { get; set; }
+        /// <summary>
+        /// 处理状态（未启用）
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Status { get; set; }
         /// <summary>
@@ -588,7 +726,7 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime Time { get; set; }
         /// <summary>
-        /// 投诉类型
+        /// 投诉类型（0：96169 1：电话 2：网络 -1：其他）
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
@@ -605,8 +743,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -619,12 +763,24 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 开关标记（0：营运证 1：行驶证）
+        /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsDrivingLicense { get; set; }
+        /// <summary>
+        /// 证照号
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)", CanBeNull = false)]
         public string License { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
     }
@@ -640,8 +796,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -659,10 +821,19 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime InsuranceEnd { get; set; }
+        /// <summary>
+        /// 保单号
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)")]
         public string InsuranceTransCode { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -677,7 +848,7 @@ namespace eTaxi.L2SQL
         public string Remark { get; set; }
     }
     /// <summary>
-    /// 车辆 - 日志
+    /// 车辆 - 好人好事（日志）
     /// </summary>
     [Serializable]
     [Table(Name = "car_log")]
@@ -688,8 +859,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -697,6 +874,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(256)", CanBeNull = false)]
         public string Description { get; set; }
+        /// <summary>
+        /// 司机
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string DriverId { get; set; }
         /// <summary>
@@ -721,14 +901,14 @@ namespace eTaxi.L2SQL
         public int Type { get; set; }
     }
     /// <summary>
-    /// 车辆 - 承租合同 - 费用
+    /// 车辆 - 月结单
     /// </summary>
     [Serializable]
     [Table(Name = "car_payment")]
     public partial class TB_car_payment : TBObject<TB_car_payment>
     {
         /// <summary>
-        /// 总额
+        /// 应缴总额
         /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Amount { get; set; }
@@ -742,8 +922,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int CountDays { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -751,6 +937,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Days { get; set; }
+        /// <summary>
+        /// 司机
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string DriverId { get; set; }
         /// <summary>
@@ -763,8 +952,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -778,7 +973,7 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Name { get; set; }
         /// <summary>
-        /// 已付
+        /// 已付总额
         /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Paid { get; set; }
@@ -800,8 +995,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -809,10 +1010,19 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string DriverId { get; set; }
+        /// <summary>
+        /// 额外费用1（当前用于社保收费）
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra1 { get; set; }
+        /// <summary>
+        /// 额外费用2
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra2 { get; set; }
+        /// <summary>
+        /// 额外费用3
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra3 { get; set; }
         /// <summary>
@@ -820,12 +1030,24 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsProbation { get; set; }
+        /// <summary>
+        /// 生成月结单时间
+        /// </summary>
         [ColumnAttribute(DbType = "smalldatetime")]
         public Nullable<DateTime> LastPaymentGenTime { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
+        /// <summary>
+        /// 排序
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Ordinal { get; set; }
         /// <summary>
@@ -839,16 +1061,19 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
         /// <summary>
-        /// 管理费（按月）
+        /// 租金或管理费（按月）
         /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Rental { get; set; }
         /// <summary>
-        /// 签订时间
+        /// 上车时间
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime StartTime { get; set; }
     }
+    /// <summary>
+    /// 车辆 - 承租历史信息
+    /// </summary>
     [Serializable]
     [Table(Name = "car_rental_history")]
     public partial class TB_car_rental_history : TBObject<TB_car_rental_history>
@@ -858,8 +1083,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -868,20 +1099,38 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string DriverId { get; set; }
         /// <summary>
-        /// 结束时间
+        /// 下车时间
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime EndTime { get; set; }
+        /// <summary>
+        /// 额外费用1（当前用于社保）
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra1 { get; set; }
+        /// <summary>
+        /// 额外费用2
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra2 { get; set; }
+        /// <summary>
+        /// 额外费用3
+        /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Extra3 { get; set; }
+        /// <summary>
+        /// （系统唯一码）
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -890,10 +1139,13 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
         /// <summary>
-        /// 管理费
+        /// 租金或管理费
         /// </summary>
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Rental { get; set; }
+        /// <summary>
+        /// 上车时间
+        /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime StartTime { get; set; }
     }
@@ -919,8 +1171,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int ConfirmedDays { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -943,8 +1201,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsActive { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -973,6 +1237,9 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime Time { get; set; }
     }
+    /// <summary>
+    /// 车辆 - 更换历史（车架、发动机等）
+    /// </summary>
     [Serializable]
     [Table(Name = "car_replace")]
     public partial class TB_car_replace : TBObject<TB_car_replace>
@@ -987,8 +1254,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)", CanBeNull = false)]
         public string CarriageNum { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -996,6 +1269,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)")]
         public string EngineNum { get; set; }
+        /// <summary>
+        /// （系统唯一码）
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
         /// <summary>
@@ -1008,8 +1284,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)")]
         public string Model { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1030,8 +1312,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1059,8 +1347,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1084,10 +1378,13 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(256)")]
         public string Result { get; set; }
         /// <summary>
-        /// 违章类型
+        /// 严重程度（0：一般 1：严重）
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int SeverityLevel { get; set; }
+        /// <summary>
+        /// 处理状态（未启用）
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Status { get; set; }
         /// <summary>
@@ -1095,6 +1392,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime Time { get; set; }
+        /// <summary>
+        /// 违章类型（0：闯红灯 1：压线 2：逆行 3：违停 4：超速 -1：其他）
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
     }
@@ -1105,8 +1405,14 @@ namespace eTaxi.L2SQL
     [Table(Name = "department")]
     public partial class TB_department : TBObject<TB_department>
     {
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1119,8 +1425,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1181,8 +1493,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(64)")]
         public string ContactPerson { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1230,8 +1548,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(3)", CanBeNull = false)]
         public string LastName { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1261,7 +1585,7 @@ namespace eTaxi.L2SQL
         public string Tel2 { get; set; }
     }
     /// <summary>
-    /// 司机 - 资格证信誉考核记录
+    /// 司机 - 资格证信誉考核记录（未启用）
     /// </summary>
     [Serializable]
     [Table(Name = "driver_certificate")]
@@ -1317,7 +1641,7 @@ namespace eTaxi.L2SQL
         public int Type { get; set; }
     }
     /// <summary>
-    /// 司机 - 日志
+    /// 司机 - 日志（未启用）
     /// </summary>
     [Serializable]
     [Table(Name = "driver_log")]
@@ -1363,6 +1687,50 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
     }
+    [Serializable]
+    [Table(Name = "package")]
+    public partial class TB_package : TBObject<TB_package>
+    {
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> AdminFee { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(16)")]
+        public string Code { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
+        public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
+        public DateTime CreateTime { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> Deposit { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
+        public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
+        public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
+        [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
+        public DateTime ModifyTime { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int OwnershipPercentage { get; set; }
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(512)")]
+        public string Remark { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> Rent { get; set; }
+    }
     /// <summary>
     /// 人员
     /// </summary>
@@ -1380,8 +1748,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
         public string Code { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1389,6 +1763,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime")]
         public Nullable<DateTime> DayOfBirth { get; set; }
+        /// <summary>
+        /// 删除标记（0：正常 1：已删除）
+        /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool Deleted { get; set; }
         /// <summary>
@@ -1416,8 +1793,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false)]
         public string LastName { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1425,6 +1808,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(8)", CanBeNull = false)]
         public string Name { get; set; }
+        /// <summary>
+        /// 密码（明文）
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(16)")]
         public string Password { get; set; }
         /// <summary>
@@ -1432,10 +1818,19 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string PositionId { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
+        /// <summary>
+        /// 唯一ID用于 membershipProvider
+        /// </summary>
         [ColumnAttribute(DbType = "uniqueidentifier", CanBeNull = false)]
         public Guid UniqueId { get; set; }
+        /// <summary>
+        /// 用户名
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(256)")]
         public string UserName { get; set; }
     }
@@ -1446,10 +1841,19 @@ namespace eTaxi.L2SQL
     [Table(Name = "position")]
     public partial class TB_position : TBObject<TB_position>
     {
+        /// <summary>
+        /// 分支
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)")]
         public string Branch { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1462,8 +1866,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1484,8 +1894,14 @@ namespace eTaxi.L2SQL
     [Table(Name = "rank")]
     public partial class TB_rank : TBObject<TB_rank>
     {
+        /// <summary>
+        /// 创建人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1498,8 +1914,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1508,7 +1930,7 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Name { get; set; }
         /// <summary>
-        /// 值（越小、则越高级）
+        /// 值（越大则越高级）
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Value { get; set; }
@@ -1525,6 +1947,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string ActorId { get; set; }
+        /// <summary>
+        /// 加入时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1532,6 +1957,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsForbidden { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1539,6 +1967,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "uniqueidentifier", CanBeNull = false, IsPrimaryKey = true)]
         public Guid ModuleId { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
     }
@@ -1675,6 +2106,9 @@ namespace eTaxi.L2SQL
     [Table(Name = "sys_module")]
     public partial class TB_sys_module : TBObject<TB_sys_module>
     {
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -1697,6 +2131,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsPage { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
@@ -1704,6 +2141,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(64)", CanBeNull = false)]
         public string Name { get; set; }
+        /// <summary>
+        /// 排序
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Ordinal { get; set; }
         /// <summary>
@@ -1711,8 +2151,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(256)", CanBeNull = false)]
         public string Path { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
+        /// <summary>
+        /// 子分类
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(32)")]
         public string SubFolder { get; set; }
     }
@@ -1743,8 +2189,14 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int")]
         public Nullable<int> Limit { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         [ColumnAttribute(DbType = "datetime")]
         public Nullable<DateTime> ModifyTime { get; set; }
         /// <summary>
