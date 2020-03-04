@@ -25,12 +25,12 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="单个登记">
+                        <dx:Tab Text="承租关系修改">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="其他操作">
+<%--                        <dx:Tab Text="其他操作">
                             <TabImage Url="~/images/_doc_16_position.gif" />
-                        </dx:Tab>
+                        </dx:Tab>--%>
                     </Tabs>
                 </dx:ASPxTabControl>
             </td>
@@ -54,14 +54,14 @@
         Master.RegisterScriptManager(new ScriptManager());
         Master.ConfigZone(s => s
             .North(true, c => { c.MaxSize = c.Size = 30; c.AutoHeight = false; })
-            .West(true, c => c.MinSize = c.Size = 200)
+            .West(true, c => c.MinSize = c.Size = 250)
             .Center(true)
             );
     }
 
     protected override void _SetInitialStates()
     {
-        tc.Switch(new BaseControl[] { c1, c1 }, (index, c) =>
+        tc.Switch(new BaseControl[] { c1 }, (index, c) =>
         {
             c.Execute();
 

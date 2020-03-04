@@ -27,10 +27,10 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="单个登记">
+                        <dx:Tab Text="保险 - 单个录入">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量导入">
+                        <dx:Tab Text="批量录入">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
                         </dx:Tab>
                     </Tabs>
@@ -57,7 +57,7 @@
         Master.RegisterScriptManager(new ScriptManager());
         Master.ConfigZone(s => s
             .North(true, c => { c.MaxSize = c.Size = 30; c.AutoHeight = false; })
-            .West(true, c => c.MinSize = c.Size = 200)
+            .West(true, c => c.MinSize = c.Size = 250)
             .Center(true)
             );
     }

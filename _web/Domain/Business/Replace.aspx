@@ -26,10 +26,10 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="单个登记">
+                        <dx:Tab Text="车辆信息 - 单个变更">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量登记">
+                        <dx:Tab Text="批量变更">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
                         </dx:Tab>
                     </Tabs>
@@ -42,7 +42,7 @@
     <uc1:Replace runat="server" id="c1" />
     <uc1:Replace_Batch runat="server" ID="c2" />
 </asp:Content>
-<script runat="server"> // 保险信息维护
+<script runat="server"> // 车辆变更
 
     private string _ObjectId
     {
@@ -56,7 +56,7 @@
         Master.RegisterScriptManager(new ScriptManager());
         Master.ConfigZone(s => s
             .North(true, c => { c.MaxSize = c.Size = 30; c.AutoHeight = false; })
-            .West(true, c => c.MinSize = c.Size = 200)
+            .West(true, c => c.MinSize = c.Size = 250)
             .Center(true)
             );
     }

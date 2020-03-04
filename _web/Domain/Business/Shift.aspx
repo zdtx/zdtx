@@ -56,7 +56,7 @@
         Master.RegisterScriptManager(new ScriptManager());
         Master.ConfigZone(s => s
             .North(true, c => { c.MaxSize = c.Size = 30; c.AutoHeight = false; })
-            .West(true, c => c.MinSize = c.Size = 200)
+            .West(true, c => c.MinSize = c.Size = 250)
             .Center(true)
             );
     }
