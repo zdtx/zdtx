@@ -85,6 +85,11 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Edit = "position/edit.ascx";
     }
 
+    public class Package
+    {
+        public const string Edit = "package/edit.ascx";
+    }
+
     public class Rank
     {
         public const string Edit = "rank/edit.ascx";

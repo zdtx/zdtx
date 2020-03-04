@@ -1117,6 +1117,7 @@
     <Content Include="_controls.helper\Selection\Driver\Item.ascx" />
     <Content Include="_controls.helper\Selection\Car\Item.ascx" />
     <Content Include="_controls.sys\ACL\Edit.ascx" />
+    <Content Include="_controls.sys\Package\Edit.ascx" />
     <Content Include="_controls.sys\Upload_Photo.ascx" />
     <Content Include="_controls.helper\ActionToolbar.ascx" />
     <Content Include="_controls.helper\Callback.ascx" />
@@ -1644,7 +1645,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_controls.helper\Selection\Person\" />
-    <Folder Include="_controls.sys\Package\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\_core\_core.csproj">

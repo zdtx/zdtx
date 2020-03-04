@@ -21,17 +21,81 @@
             </td>
         </tr>
         <tr>
-            <td class="name">命名
+            <td class="name">编号
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_Code" Width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">名称
             </td>
             <td class="cl">
                 <dx:ASPxTextBox runat="server" ID="tb_Name" Width="200" />
             </td>
         </tr>
         <tr>
-            <td class="name">行政级别
+            <td class="name">车辆产权归属
             </td>
             <td class="cl">
-                <dx:ASPxComboBox runat="server" ID="cb_RankId" Width="200" />
+                <dx:ASPxComboBox runat="server" ID="cbOwnershipPercentage" Width="200">
+                    <Items>
+                        <dx:ListEditItem Text="租赁" Value="0" />
+                        <dx:ListEditItem Text="已买断" Value="100" />
+                    </Items>
+                </dx:ASPxComboBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">车辆型号
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_Model" Width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">押金金额（参考价）
+            </td>
+            <td class="cl">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Deposit" Width="200"
+                    NullText="请输入押金金额"
+                    DisplayFormatString="{0:N} 元" MaxValue="1000000" MinValue="0">
+                    <SpinButtons ShowIncrementButtons="false" />
+                    <HelpTextSettings Position="Bottom" />
+                </dx:ASPxSpinEdit>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">租金金额（参考价）
+            </td>
+            <td class="cl">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Rent" Width="200"
+                    NullText="请输入月度租金金额"
+                    DisplayFormatString="{0:N} 元" MaxValue="1000000" MinValue="0">
+                    <SpinButtons ShowIncrementButtons="false" />
+                    <HelpTextSettings Position="Bottom" />
+                </dx:ASPxSpinEdit>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">保险费用
+            </td>
+            <td class="cl">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Premium" Width="200"
+                    NullText="请输入年度保险缴费金额"
+                    DisplayFormatString="{0:N} 元" MaxValue="1000000" MinValue="0">
+                    <SpinButtons ShowIncrementButtons="false" />
+                    <HelpTextSettings Position="Bottom" />
+                </dx:ASPxSpinEdit>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">司机人数
+            </td>
+            <td class="cl">
+                <dx:ASPxSpinEdit runat="server" ID="sp_DriverCount" Width="200" NumberType="Integer">
+                    <SpinButtons ShowIncrementButtons="false" />
+                </dx:ASPxSpinEdit>
             </td>
         </tr>
         <tr>
@@ -45,20 +109,13 @@
 </asp:Panel>
 <script runat="server">
 
-    public override string ModuleId { get { return Position.Edit; } }
+    public override string ModuleId { get { return Package.Edit; } }
     private bool _IsCreating { get { return _ViewStateEx.Get<bool>(DataStates.IsCreating, false); } }
     private string _ObjectId { get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); } }
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;
         fh.Validate(tb_Name).IsRequired();
-        fh.Validate(cb_RankId).IsRequired();
-        cb_RankId.FromList(Global.Cache.Ranks, (d, i) =>
-            {
-                i.Text = string.Format("{0} [{1}]", d.Name, d.Value);
-                i.Value = d.Id;
-                return true;
-            });
     }
 
     protected override void _Execute()
@@ -66,7 +123,7 @@
         tb_Name.Focus();
         if (_IsCreating)
         {
-            p.Controls.PresentedBy(new TB_position(), (d, n, c) =>
+            p.Controls.PresentedBy(new TB_package(), (d, n, c) =>
             {
             }, recursive: false);
             l_Id.Text = "（保存后系统自动生成）";
@@ -76,10 +133,14 @@
         // 修改
         var context = _DTContext<CommonContext>(true);
         var id = _ViewStateEx.Get<string>(DataStates.ObjectId, exceptionIfInvalid: true);
-        context.Single<TB_position>(r => r.Id == id,
-            position => p.Controls.PresentedBy(position, (d, n, c) =>
+        context.Single<TB_package>(r => r.Id == id,
+            package =>
             {
-            }, recursive: false));
+                p.Controls.PresentedBy(package, (d, n, c) =>
+                {
+                }, recursive: false);
+                cbOwnershipPercentage.SelectedIndex = package.OwnershipPercentage == 0 ? 0 : 1;
+            });
     }
 
     protected override void _Do(string section, string subSection = null)
@@ -93,16 +154,15 @@
         var context = _DTService.Context;
         var newId = string.Empty;
         context
-            .NewSequence<TB_position>(_SessionEx, (seq, id) =>
-                {
-                    newId = id;
-                })
-            .Create<TB_position>(_SessionEx, position =>
-                {
-                    _Util.FillObject(p.Controls, position, recursive: false);
-                    position.Id = newId;
-                    _RoleProvider.CreateRole(newId);
-                })
+            .NewSequence<TB_package>(_SessionEx, (seq, id) =>
+            {
+                newId = id;
+            })
+            .Create<TB_package>(_SessionEx, package =>
+            {
+                _Util.FillObject(p.Controls, package, recursive: false);
+                package.Id = newId;
+            })
             .SubmitChanges();
     }
 
@@ -110,10 +170,20 @@
     {
         var context = _DTService.Context;
         context
-            .Update<TB_position>(_SessionEx, r => r.Id == _ObjectId,
-                position => _Util.FillObject(p.Controls, position, recursive: false))
+            .Update<TB_package>(_SessionEx, r => r.Id == _ObjectId,
+                package =>
+                {
+                    _Util.FillObject(p.Controls, package, recursive: false);
+                    cbOwnershipPercentage.Value.ToStringEx().ToIntOrNull().IfNN(o =>
+                    {
+                        switch (o)
+                        {
+                            case 0: package.OwnershipPercentage = 0; break;
+                            case 1: package.OwnershipPercentage = 100; break;
+                        }
+                    });
+                })
             .SubmitChanges();
-        Global.Cache.SetDirty(CachingTypes.Position);
     }
-    
+
 </script>

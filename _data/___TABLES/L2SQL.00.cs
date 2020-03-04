@@ -1691,8 +1691,14 @@ namespace eTaxi.L2SQL
     [Table(Name = "package")]
     public partial class TB_package : TBObject<TB_package>
     {
+        /// <summary>
+        /// 管理费用
+        /// </summary>
         [ColumnAttribute(DbType = "money")]
         public Nullable<decimal> AdminFee { get; set; }
+        /// <summary>
+        /// 套餐编码
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(16)")]
         public string Code { get; set; }
         /// <summary>
@@ -1705,10 +1711,28 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 押金金额（指导）
+        /// </summary>
         [ColumnAttribute(DbType = "money")]
         public Nullable<decimal> Deposit { get; set; }
+        /// <summary>
+        /// 司机人数
+        /// </summary>
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> DriverCount { get; set; }
+        /// <summary>
+        /// 删除标记
+        /// </summary>
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool Enabled { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        /// <summary>
+        /// 车型
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(32)")]
+        public string Model { get; set; }
         /// <summary>
         /// 修改人
         /// </summary>
@@ -1719,15 +1743,29 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
+        /// <summary>
+        /// 套餐名称
+        /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Name { get; set; }
+        /// <summary>
+        /// 归属百分比（0 为租，100 为司机全属）
+        /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int OwnershipPercentage { get; set; }
+        /// <summary>
+        /// 保险
+        /// </summary>
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> Premium { get; set; }
         /// <summary>
         /// 摘要
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
+        /// <summary>
+        /// 租金（指导）
+        /// </summary>
         [ColumnAttribute(DbType = "money")]
         public Nullable<decimal> Rent { get; set; }
     }

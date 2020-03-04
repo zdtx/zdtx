@@ -4,10 +4,9 @@
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
 <%@ Register Src="~/_controls.helper/Loaders/Popup_DX.ascx" TagPrefix="uc1" TagName="Popup_DX" %>
+<%@ Register Src="~/_controls.helper/DXGridWrapper.ascx" TagPrefix="uc1" TagName="DXGridWrapper" %>
 <%@ Register Src="~/_controls.helper/PagingToolbar.ascx" TagPrefix="uc1" TagName="PagingToolbar" %>
-<%@ Register Src="~/_controls.helper/GridWrapperForList.ascx" TagPrefix="uc1" TagName="GridWrapperForList" %>
 <%@ Register Src="~/_controls.helper/Callback.ascx" TagPrefix="uc1" TagName="Callback" %>
-<%@ Register Src="~/_controls.helper/PopupField_DX.ascx" TagPrefix="uc1" TagName="PopupField_DX" %>
 
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../content/scripts/__page.js"></script>
@@ -52,17 +51,31 @@
     </asp:Panel>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:GridWrapperForList runat="server" ID="gw" />
-    <asp:GridView runat="server" ID="gv" Width="100%">
-        <selectedrowstyle cssclass="gridRow-selected" />
-        <headerstyle cssclass="gridHeader" />
-        <emptydatatemplate>
-            <div class="emptyData">
-                （无数据，请添加套餐 或者 重置筛选条件）
-            </div>
-        </emptydatatemplate>
-    </asp:GridView>
-    <div class="darkBar" style="margin-top:1px;">
+    <uc1:DXGridWrapper runat="server" ID="gw" />
+    <dx:ASPxGridView ID="gv" runat="server" KeyFieldName="Id" Width="100%">
+        <Border BorderStyle="None" />
+        <SettingsBehavior ColumnResizeMode="NextColumn" EnableRowHotTrack="true" />
+        <Columns>
+            <dx:GridViewDataColumn FieldName="Id" Visible="false" />
+            <dx:GridViewDataColumn FieldName="Code" Caption="套餐代码" Width="120" VisibleIndex="3" />
+            <dx:GridViewDataColumn FieldName="Name" Caption="名称" Width="120" VisibleIndex="4" />
+            <dx:GridViewDataColumn FieldName="Deposit" Caption="押金（参考）" Width="80" VisibleIndex="5" />
+            <dx:GridViewDataColumn FieldName="Rent" Caption="租金（参考）" Width="80" VisibleIndex="6" />
+            <dx:GridViewDataColumn FieldName="AdminFee" Caption="管理费" Width="80" VisibleIndex="7" />
+            <dx:GridViewDataColumn FieldName="Premium" Caption="保险" Width="80" VisibleIndex="8" />
+            <dx:GridViewDataColumn FieldName="OwnershipPercentage" Caption="模式" Width="80" VisibleIndex="9" />
+            <dx:GridViewDataColumn FieldName="ModifiedById" Caption="修改人" Width="100" VisibleIndex="10">
+                <HeaderStyle HorizontalAlign="Center" />
+                <CellStyle HorizontalAlign="Center" />
+            </dx:GridViewDataColumn>
+            <dx:GridViewDataColumn FieldName="ModifyTime" Caption="修改日期" Width="130" VisibleIndex="11">
+                <HeaderStyle HorizontalAlign="Center" />
+                <CellStyle HorizontalAlign="Center" />
+            </dx:GridViewDataColumn>
+            <dx:GridViewDataColumn FieldName="Remark" Caption="说明" VisibleIndex="12" />
+        </Columns>
+    </dx:ASPxGridView>
+    <div class="darkBar">
         <uc1:PagingToolbar runat="server" ID="pg" />
     </div>
 </asp:Content>
@@ -96,7 +109,7 @@ case'delete':ISEx.loadingPanel.show();break;
                 switch (e.Item.Name)
                 {
                     case "create":
-                        pop.Begin<BaseControl>("~/_controls.sys/person/edit.ascx",
+                        pop.Begin<BaseControl>("~/_controls.sys/package/edit.ascx",
                             null, c =>
                             {
                                 c.ViewStateEx.Set<bool>(true, DataStates.IsCreating);
@@ -106,14 +119,14 @@ case'delete':ISEx.loadingPanel.show();break;
                                 c
                                     .Width(450)
                                     .Height(500)
-                                    .Title("新人员")
+                                    .Title("新套餐")
                                     .Button(BaseControl.EventTypes.Save, b => b.CausesValidation = true)
                                 ;
                             });
                         break;
                     case "delete":
 
-                        if (!gw.Selection.Any(kv => kv.Value))
+                        if (gv.Selection.Count == 0)
                         {
                             _JS.Alert("请先选择待删除的条目");
                             return;
@@ -123,145 +136,86 @@ case'delete':ISEx.loadingPanel.show();break;
                         {
                             _JS.Write(string.Format("if(confirm('{0}')){{ISEx.loadingPanel.show();{1}}}", "确定删除选中的条目吗？", postBack));
                         });
-
                         break;
                 }
             };
 
-        gw.Initialize(gv, c => c
-            .TemplateField("Id", "Id", new TemplateItem.Label(), f => f.Visible = false)
-            .TemplateField("Code", "工号", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("Name", "姓名", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("Gender", "性别", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 50;
-            })
-            .TemplateField("Department", "部门归属", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 150;
-            })
-            .TemplateField("Position", "岗位", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 150;
-            })
-            .TemplateField("UserName", "登录帐号", new TemplateItem.Label(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("lu", "管理", new TemplateItem.LinkButton(l =>
-            {
-                l.CssClass = "aBtn";
-                l.Text = "登录帐号";
-                l.ToolTip = "添加、修改 或 删除人员登录信息";
-                l.CommandName = "user";
-                l.OnClientClick = "ISEx.loadingPanel.show();";
-            }), f =>
-            {
-                f.ItemStyle.Width = 50;
-                f.ItemStyle.Wrap = false;
-            })
-            .TemplateField("lp", "管理", new TemplateItem.LinkButton(l =>
-            {
-                l.CssClass = "aBtn";
-                l.Text = "人员信息";
-                l.ToolTip = "修改人员基本信息";
-                l.CommandName = "person";
-                l.OnClientClick = "ISEx.loadingPanel.show();";
-            }), f =>
-            {
-                f.ItemStyle.Width = 50;
-                f.ItemStyle.Wrap = false;
-            })
-            .TemplateField("", "备注", new TemplateItem.Label())
-
-                , showFooter: false, mode: GridWrapper.SelectionMode.Multiple
-            );
-
-        gv.RowCommand += (s, e) =>
+        gw.Initialize(gv, d =>
         {
-            if (e.CommandName != "user" && e.CommandName != "person") return;
-            var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
-            var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
-            v.Get<Label>("Id", l => v.Get<Label>("Name", n =>
+            d
+                .ShowRowNumber()
+                .ShowCheckAll()
+            ;
+        });
+
+        gv.BeforeColumnSortingGrouping += (s, e) => { Execute(); };
+        gv.CustomColumnDisplayText += (s, e) =>
+        {
+            switch (e.Column.FieldName)
             {
-                switch (e.CommandName)
-                {
-                    case "user":
-                        pop.Begin<BaseControl>("~/_controls.sys/user/edit.ascx",
-                            null, c =>
-                            {
-                                c.ViewStateEx.Set(l.Text, DataStates.ObjectId);
-                                c.Execute();
-                            }, c =>
-                            {
-                                c
-                                    .Width(450)
-                                    .Height(300)
-                                    .Title("登录 - " + n.Text)
-                                    .Button(BaseControl.EventTypes.Save, b => b.CausesValidation = true)
-                                ;
-                            });
-                        break;
-                    case "person":
-                        pop.Begin<BaseControl>("~/_controls.sys/person/edit.ascx",
-                            null, c =>
-                            {
-                                c.ViewStateEx.Set(l.Text, DataStates.ObjectId);
-                                c.Execute();
-                            }, c =>
-                            {
-                                c
-                                    .Width(450)
-                                    .Height(500)
-                                    .Title("编辑 - " + n.Text)
-                                    .Button(BaseControl.EventTypes.Save, b => b.CausesValidation = true)
-                                ;
-                            });
-                        break;
-                }
-            }));
+                case "Deposit":
+                case "Rent":
+                case "AdminFee":
+                case "Premium":
+                    _Util.Convert<decimal>(e.Value, d => e.DisplayText = d.ToStringOrEmpty(comma: true, emptyValue: "-"));
+                    break;
+                case "OwnershipPercentage":
+                    _Util.Convert<int>(e.Value, d => e.DisplayText = d == 0 ? "租赁" : "已买断");
+                    break;
+                case "ModifiedById":
+                    e.DisplayText = Global.Cache.GetPersonById(e.Value.ToStringEx()).Name;
+                    break;
+                case "ModifyTime":
+                    _Util.Convert<DateTime>(e.Value, d => e.DisplayText = d.ToISDateWithTime(false));
+                    break;
+            }
+        };
+        gv.HtmlRowPrepared += (s, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data)
+            {
+                //if (!(bool)
+                //    e.GetValue("Enabled")) e.Row.Font.Strikeout = true;
+            }
         };
 
         pg.SetDefaultPageSizeIndex(0);
         pg.Reload += (s, e) => Execute();
 
+        gw.RowDblClick += (s, e) =>
+        {
+            if (gv.Selection.Count != 1) return;
+            var objectId = gv.GetSelectedFieldValues("Id")[0].ToStringEx();
+            var name = gv.GetSelectedFieldValues("Name")[0].ToStringEx();
+            pop.Begin<BaseControl>("~/_controls.sys/package/edit.ascx",
+                null, c =>
+                {
+                    c.ViewStateEx.Set(objectId, DataStates.ObjectId);
+                    c.Execute();
+                }, c =>
+                {
+                    c
+                        .Width(450)
+                        .Height(500)
+                        .Title("编辑 - " + name)
+                        .Button(BaseControl.EventTypes.Save)
+                    ;
+                });
+        };
+
+        bSearch.Click += (s, e) => Execute();
+        bExport.Click += (s, e) => Execute(VisualSections.Export);
+
         pop.EventSinked += (c, eType, parm) =>
         {
-            if (c.ModuleId == Person.Edit)
+            if (c.ModuleId == Package.Edit)
             {
                 switch (eType)
                 {
                     case BaseControl.EventTypes.Save:
                         if (c.Do(Actions.Save, true))
                         {
-                            _JS.Alert("保存成功。");
-                            pop.Close();
-                            Execute();
-                        }
-                        break;
-                }
-            }
-
-            if (c.ModuleId == eTaxi.Definitions.Ascx.User.Edit)
-            {
-                switch (eType)
-                {
-                    case BaseControl.EventTypes.Save:
-                        if (c.Do(Actions.Save, true))
-                        {
-                            _JS.Alert("保存成功。");
+                            // _JS.Alert("保存成功。");
                             pop.Close();
                             Execute();
                         }
@@ -269,9 +223,6 @@ case'delete':ISEx.loadingPanel.show();break;
                 }
             }
         };
-
-        bSearch.Click += (s, e) => Execute();
-        bExport.Click += (s, e) => Execute(VisualSections.Export);
 
         cb.Resumed += (caller, parameter) =>
         {
@@ -292,65 +243,54 @@ case'delete':ISEx.loadingPanel.show();break;
     {
         hi
             .Back("返回桌面", "../portal/desktop.aspx")
-            .Title("基础数据", "人员管理");
+            .Title("基础数据", "经营模式（套餐）管理");
 
         _Execute(VisualSections.List);
     }
     protected override void _Execute(string section)
     {
         var context = _DTContext<CommonContext>(true);
-        var exp = PredicateBuilder.True<TB_person>();
-        exp = exp.And(p => !p.Deleted);
+        var exp = PredicateBuilder.True<TB_package>();
+        exp = exp.And(p => p.Enabled);
         exp = exp.Append(tb_Name.Text.Trim(), v => exp.And(e => e.Name.Contains(v)));
-        exp = exp.Append(pf_DepartmentId.Value, v => exp.And(e => e.DepartmentId == v));
-        exp = exp.Append(pf_PositionId.Value, v => exp.And(e => e.PositionId == v));
 
         var q =
-            from p in context.Persons.Where(exp)
-            from u in context.Users.Where(u => u.UserId == p.UniqueId).DefaultIfEmpty()
+            from p in context.Packages.Where(exp)
             select new
             {
                 p.Id,
                 p.Code,
                 p.Name,
-                p.Gender,
-                p.PositionId,
-                p.DepartmentId,
-                p.UniqueId,
+                p.OwnershipPercentage,
+                p.Deposit,
+                p.Rent,
+                p.Premium,
+                p.AdminFee,
+                p.DriverCount,
                 p.ModifiedById,
                 p.ModifyTime,
-                p.Remark,
-                UserName = u == null ? null : u.LoweredUserName,
-                Created = u != null
+                p.Remark
             };
 
         // 独立导出数据
         if (section == VisualSections.Export)
         {
-            _ExportToExcel("PN", q.Select(o => new
+            _ExportToExcel("PG", q.Select(o => new
             {
                 o.Id,
                 o.Code,
                 o.Name,
-                o.Gender,
-                o.PositionId,
-                o.DepartmentId,
                 o.ModifiedById,
                 o.ModifyTime,
-                o.UserName,
                 o.Remark
 
             }).ToList(), new string[]
             {
                 "唯一码",
-                "工号",
-                "姓名",
-                "性别",
-                "岗位",
-                "部门归属",
+                "套餐编号",
+                "名称",
                 "修改人",
                 "修改时间",
-                "用户名",
                 "备注"
 
             }, d => new
@@ -358,12 +298,8 @@ case'delete':ISEx.loadingPanel.show();break;
                 d.Id,
                 d.Code,
                 d.Name,
-                Gender = d.Gender.HasValue ? d.Gender.Value ? "男" : "女" : "（未知）",
-                PositionName = Global.Cache.GetPosition(dd => dd.Id == d.PositionId).Name,
-                DepartmentName = Global.Cache.GetDepartment(dd => dd.Id == d.DepartmentId).Name,
                 Modifier = Global.Cache.GetPerson(p => p.Id == d.ModifiedById).Name,
                 ModifyTime = d.ModifyTime.ToISDateWithTime(),
-                UserName = string.IsNullOrEmpty(d.UserName) ? "（无）" : d.UserName,
                 d.Remark
 
             }, pop);
@@ -371,29 +307,11 @@ case'delete':ISEx.loadingPanel.show();break;
             return;
         }
 
-        gw.Execute(q.Skip(pg.Skip).Take(pg.Size ?? 100).ToList(), b => b
-            .Do<Label>("Id", (l, d) => l.Text = d.Id)
-            .Do<Label>("Name", (l, d) => l.Text = d.Name)
-            .Do<Label>("Code", (l, d) => l.Text = d.Code)
-            .Do<Label>("Gender", (l, d) =>
-            {
-                l.Text = d.Gender.HasValue ? d.Gender.Value ? "男" : "女" : "（未知）";
-            })
-            .Do<Label>("Department", (l, d) => l.Text = Global.Cache.GetDepartment(dd => dd.Id == d.DepartmentId).Name)
-            .Do<Label>("Position", (l, d) => l.Text = Global.Cache.GetPosition(p => p.Id == d.PositionId).Name)
-            .Do<Label>("UserName", (l, d) =>
-            {
-                l.Text = d.UserName;
-                if (string.IsNullOrEmpty(d.UserName))
-                {
-                    l.Text = "（未创建用户）";
-                    l.ForeColor = System.Drawing.Color.Red;
-                }
-            })
-            .Do<LinkButton>("lu", (l, d, r) => l.CommandArgument = r.RowIndex.ToString())
-            .Do<LinkButton>("lp", (l, d, r) => l.CommandArgument = r.RowIndex.ToString())
-            .Do<Label>("Remark", (l, d) => l.Text = d.Remark)
-            );
+        q = gv.ApplySorts(q);
+
+        gv.DataSource = q.Skip(pg.Skip).Take(pg.Size ?? 100).ToList();
+        gv.DataBind();
+        gv.Selection.UnselectAll();
 
         pg.Total = q.Count();
         pg.Execute();
@@ -402,20 +320,14 @@ case'delete':ISEx.loadingPanel.show();break;
     protected override void _Do(string section, string subSection = null)
     {
         if (section != Actions.Delete) return;
-        var ids = gw.GetSelected<Label, string>("Id", l => l.Text);
+        var ids = gv.GetSelectedFieldValues("Id");
         var context = _DTService.Context;
-        var persons = context.Persons.Where(p => ids.Contains(p.Id)).ToList();
+        var packages = context.Packages.Where(p => ids.Contains(p.Id)).ToList();
         ids.ForEach(id =>
         {
-            var personId = id.ToString();
-            persons.SingleOrDefault(p => p.Id == personId).IfNN(p =>
-            {
-                Membership.GetUser(p.UniqueId)
-                    .IfNN(u => _MembershipProvider.DeleteUser(u.UserName, true));
-            });
-            _DTService.DeletePerson(personId);
+            var packageId = id.ToString();
+            _DTService.DeletePackage(packageId);
         });
-        Global.Cache.SetDirty(CachingTypes.Person);
     }
 
 </script>

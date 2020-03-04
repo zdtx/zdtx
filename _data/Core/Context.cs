@@ -220,6 +220,14 @@ namespace eTaxi.L2SQL
         }
 
         /// <summary>
+        /// 经营模式（套餐）
+        /// </summary>
+        public Table<TB_package> Packages
+        {
+            get { return this.GetTable<TB_package>(); }
+        }
+
+        /// <summary>
         /// 应用集合（来自 aspnet 框架）
         /// </summary>
         public Table<TB_aspnet_Applications> AS_Applications

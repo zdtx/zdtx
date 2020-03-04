@@ -60,6 +60,7 @@
     <Compile Include="Core\Service.Driver.cs" />
     <Compile Include="Core\Service.Person.cs" />
     <Compile Include="Core\Service.Department.cs" />
+    <Compile Include="Core\Service.Package.cs" />
     <Compile Include="Core\Service.Position.cs" />
     <Compile Include="Core\Service.Rank.cs" />
     <Compile Include="Definitions.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Exception.cs" />
     <Compile Include="_Plugger.cs" />
     <Compile Include="___TABLES.EX\Car.cs" />
+    <Compile Include="___TABLES.EX\Package.cs" />
     <Compile Include="___TABLES.EX\System.cs" />
     <Compile Include="Definitions.eTaxi.cs" />
     <Compile Include="___TABLES.EX\Driver.cs" />
