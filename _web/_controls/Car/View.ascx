@@ -72,6 +72,27 @@
         <tr>
             <th colspan="2">
                 <div class="title" style="margin-top: 15px;">
+                    合同信息
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td class="name">编号
+            </td>
+            <td class="val">
+                <asp:Literal runat="server" ID="Literal1" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">签署人
+            </td>
+            <td class="val">
+                <asp:Literal runat="server" ID="Literal2" />
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <div class="title" style="margin-top: 15px;">
                     管理信息
                 </div>
             </th>

@@ -13,6 +13,7 @@
 <%@ Register Src="~/_controls/Car/View_Replace.ascx" TagPrefix="uc1" TagName="View_Replace" %>
 <%@ Register Src="~/_controls/Car/View_Shift.ascx" TagPrefix="uc1" TagName="View_Shift" %>
 <%@ Register Src="~/_controls/Car/View_Violation.ascx" TagPrefix="uc1" TagName="View_Violation" %>
+<%@ Register Src="~/_controls/Car/View_Contract.ascx" TagPrefix="uc1" TagName="View_Contract" %>
 
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
@@ -39,6 +40,7 @@
                         <dx:Tab Text="综合">
                             <TabImage Url="~/images/_doc_16.gif" />
                         </dx:Tab>
+                        <dx:Tab Text="合同" />
                         <dx:Tab Text="车架变更历史" />
                         <dx:Tab Text="司机变更历史" />
                         <dx:Tab Text="代班历史" />
@@ -77,6 +79,7 @@
     </div>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
+    <uc1:View_Contract runat="server" id="cX" />
     <uc1:View_Accident runat="server" id="cA" />
     <uc1:View_Balance runat="server" id="cB" />
     <uc1:View_Complain runat="server" id="cC" />
@@ -117,7 +120,7 @@
         _Util
             .GetRequestParameter<string>("id", id => _ObjectId = id)
             ;
-        tc.Switch(new BaseControl[] { cI, cE, cR, cH, cP, cB, cS, cU, cA, cV, cC, cL }, (index, c) =>
+        tc.Switch(new BaseControl[] { cX, cI, cE, cR, cH, cP, cB, cS, cU, cA, cV, cC, cL }, (index, c) =>
         {
             c
                 .Import(_ObjectId, DataStates.ObjectId)
