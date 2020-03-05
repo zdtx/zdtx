@@ -280,7 +280,7 @@
                 pop.Close();
                 return true;
             }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
-        pf_PackageId.Initialize<eTaxi.Web.Controls.Selection.Department.TreeItem>(pop,
+        pf_PackageId.Initialize<eTaxi.Web.Controls.Selection.Package.Item>(pop,
             "~/_controls.helper/selection/package/item.ascx", (cc, b, h, isFirst) =>
             {
                 pop.Title = "选择车辆的经营模式（套餐）";

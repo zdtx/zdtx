@@ -4,8 +4,8 @@
 <dx:ASPxGridView ID="gv" runat="server" KeyFieldName="Id" Width="100%">
     <Columns>
         <dx:GridViewDataTextColumn FieldName="Id" Visible="false" />
-        <dx:GridViewDataTextColumn Caption="编号" FieldName="Name" VisibleIndex="3" Width="150" />
-        <dx:GridViewDataTextColumn Caption="名称" FieldName="RankName" VisibleIndex="4" Width="150">
+        <dx:GridViewDataTextColumn Caption="编号" FieldName="Code" VisibleIndex="3" Width="150" />
+        <dx:GridViewDataTextColumn Caption="名称" FieldName="Name" VisibleIndex="4" Width="150">
             <HeaderStyle HorizontalAlign="Center" />
         </dx:GridViewDataTextColumn>
         <dx:GridViewDataTextColumn Caption="说明" FieldName="Remark" VisibleIndex="5">
@@ -40,7 +40,7 @@
             if (gv.Selection.Count == 0) return result;
             string[] Ids = Exp<object>.Transform(
                 gv.GetSelectedFieldValues("Id"), o => o.ToString()).ToArray();
-            result.AddRange(Global.Cache.Positions.Where(p => Ids.Contains(p.Id)).ToList());
+            result.AddRange(Global.Cache.Packages.Where(p => Ids.Contains(p.Id)).ToList());
             return result;
         }
     }
@@ -49,7 +49,7 @@
     {
         var exp = PredicateBuilder.True<TB_package>();
         var q =
-            from p in Global.Cache.Positions.Where(exp.Compile())
+            from p in Global.Cache.Packages.Where(exp.Compile())
             select p;
         var rawData = q.ToList();
 
@@ -57,10 +57,9 @@
         var data = Exp<TB_package>.Transform(rawData, d => new
         {
             d.Id,
+            d.Code,
             d.Name,
-            d.RankId,
-            RankName = Global.Cache.GetRank(r => r.Id == d.RankId).Name,
-            d.Description
+            d.Remark
         });
 
         gv.DataSource = data;

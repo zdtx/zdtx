@@ -250,6 +250,21 @@
                 f.HeaderStyle.Width = 50;
                 f.ItemStyle.Width = 50;
             })
+            .TemplateField("PackageId", "经营模式（套餐）", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 100;
+                e.FromList(Global.Cache.Packages, (d, i) =>
+                {
+                    i.Text = d.Name;
+                    i.Value = d.Id;
+                    return true;
+                });
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 50;
+                f.ItemStyle.Width = 50;
+            })
             .TemplateField("HandOverTime", "交接班时间", new TemplateItem.DXTimeEdit(e =>
             {
                 e.Width = 80;
@@ -383,7 +398,7 @@
             context.Cars.SingleOrDefault(c => c.Id == id).IfNN(c => _List.Add(c));
         });
 
-            // 排序
+        // 排序
         _List = _List.OrderBy(d => d.PlateNumber).ToList();
     }
 
