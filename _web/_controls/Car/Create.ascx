@@ -80,6 +80,13 @@
             </th>
         </tr>
         <tr>
+            <td class="name">经营模式（套餐）
+            </td>
+            <td class="cl">
+                <uc1:PopupField_DX runat="server" ID="pf_PackageId" Width="200" />
+            </td>
+        </tr>
+        <tr>
             <td class="name">管理费
             </td>
             <td class="cl">
@@ -253,6 +260,7 @@
         fh.Validate(de_DrvLicenseRenewTime).IsRequired();
         fh.Validate(tb_DrvLicense).IsRequired();
         fh.Validate(pf_DepartmentId).IsRequired();
+        fh.Validate(pf_PackageId).IsRequired();
         fh.Validate(de_InsuranceEnd).IsRequired();
         fh.Validate(tb_CarriageNum).IsRequired();
         fh.Validate(tb_InsuranceCom).IsRequired();
@@ -272,6 +280,21 @@
                 pop.Close();
                 return true;
             }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
+        pf_PackageId.Initialize<eTaxi.Web.Controls.Selection.Department.TreeItem>(pop,
+            "~/_controls.helper/selection/package/item.ascx", (cc, b, h, isFirst) =>
+            {
+                pop.Title = "选择车辆的经营模式（套餐）";
+                pop.Width = 500;
+                pop.Height = 400;
+                if (isFirst) cc.Execute();
+            }, (c, b, h) =>
+            {
+                b.Text = c.Selection[0].Name;
+                h.Value = c.Selection[0].Id;
+                pop.Close();
+                return true;
+            }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
+
     }
 
     protected override void _Execute()

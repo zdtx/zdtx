@@ -137,9 +137,12 @@ namespace eTaxi.Definitions.Module
         [DefinitionItemSettings("日常事务")]
         public const string Business = "domain.business";
         [DefinitionItemOrdinal(4)]
+        [DefinitionItemSettings("结算管理")]
+        public const string Finance = "domain.finance";
+        [DefinitionItemOrdinal(5)]
         [DefinitionItemSettings("查询及报表管理")]
         public const string Query = "domain.query";
-        [DefinitionItemOrdinal(5)]
+        [DefinitionItemOrdinal(6)]
         [DefinitionItemSettings("流程管理")]
         public const string Workflow = "domain.workflow";
         [DefinitionItemSettings("司机信息")]

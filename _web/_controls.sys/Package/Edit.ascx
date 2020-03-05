@@ -164,6 +164,7 @@
                 package.Id = newId;
             })
             .SubmitChanges();
+        Global.Cache.SetDirty(CachingTypes.Package);
     }
 
     private void _Do_Update()
@@ -184,6 +185,7 @@
                     });
                 })
             .SubmitChanges();
+        Global.Cache.SetDirty(CachingTypes.Package);
     }
 
 </script>

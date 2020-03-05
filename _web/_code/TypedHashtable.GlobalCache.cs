@@ -55,6 +55,7 @@ namespace eTaxi
             _Dirties.Add(D.CachingTypes.Person, true);
             _Dirties.Add(D.CachingTypes.Module, true);
             _Dirties.Add(D.CachingTypes.Position, true);
+            _Dirties.Add(D.CachingTypes.Package, true);
             _Dirties.Add(D.CachingTypes.Rank, true);
             _Dirties.Add(D.CachingTypes.Portlet, true);
             //_Dirties.Add(D.CachingTypes.Role, true);
@@ -129,6 +130,30 @@ namespace eTaxi
                     if (Dirty != null) Dirty(D.CachingTypes.Position);
                     return base.Get<List<TB_position>>(
                         D.CachingTypes.Position.ToString(), () => new List<TB_position>());
+                }
+            }
+        }
+
+        private object _Locker_Package = new object();
+        /// <summary>
+        /// 经营模式（套餐）缓存
+        /// </summary>
+        public List<TB_package> Packages
+        {
+            get
+            {
+                if (!
+                    _Dirties[D.CachingTypes.Package])
+                    return base.Get<List<TB_package>>(
+                        D.CachingTypes.Package.ToString(), () => new List<TB_package>());
+                lock (_Locker_Package)
+                {
+                    if (!
+                        _Dirties[D.CachingTypes.Package])
+                        return base.Get<List<TB_package>>(D.CachingTypes.Package.ToString());
+                    if (Dirty != null) Dirty(D.CachingTypes.Package);
+                    return base.Get<List<TB_package>>(
+                        D.CachingTypes.Package.ToString(), () => new List<TB_package>());
                 }
             }
         }
@@ -225,6 +250,7 @@ namespace eTaxi
 
         public TB_rank GetRank(Func<TB_rank, bool> get) { return Ranks.SingleOrDefault(get) ?? new TB_rank(); }
         public TB_position GetPosition(Func<TB_position, bool> get) { return Positions.SingleOrDefault(get) ?? new TB_position(); }
+        public TB_package GetPackage(Func<TB_package, bool> get) { return Packages.SingleOrDefault(get) ?? new TB_package(); }
         public TB_department GetDepartment(Func<TB_department, bool> get) { return Departments.SingleOrDefault(get) ?? new TB_department(); }
         public TB_person GetPerson(Func<TB_person, bool> get)
         {

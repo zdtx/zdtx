@@ -104,6 +104,7 @@
                     _RoleProvider.CreateRole(newId);
                 })
             .SubmitChanges();
+        Global.Cache.SetDirty(CachingTypes.Position);
     }
 
     private void _Do_Update()

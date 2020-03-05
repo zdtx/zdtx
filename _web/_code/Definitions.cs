@@ -48,6 +48,10 @@ namespace eTaxi.Definitions
         /// </summary>
         Position,
         /// <summary>
+        /// 套餐
+        /// </summary>
+        Package,
+        /// <summary>
         /// 行政级别
         /// </summary>
         Rank,

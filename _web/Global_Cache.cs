@@ -96,6 +96,23 @@ namespace eTaxi.Web
                         }), D.CachingTypes.Position.ToString());
                         Cache.ResetDirty(D.CachingTypes.Position);
                         break;
+                    case D.CachingTypes.Package:
+                        var qPackage =
+                            from d in context.Packages
+                            select new
+                            {
+                                d.Id,
+                                d.Name,
+                                d.Remark
+                            };
+                        Cache.Resolve<List<TB_package>>(Exp<TB_package>.Transform(qPackage.ToList(), i =>
+                        {
+                            var item = new TB_package();
+                            i.FlushTo(item);
+                            return item;
+                        }), D.CachingTypes.Package.ToString());
+                        Cache.ResetDirty(D.CachingTypes.Package);
+                        break;
                     case D.CachingTypes.Person:
                         var qPerson =
                             from p in context.Persons

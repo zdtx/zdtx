@@ -328,6 +328,7 @@ case'delete':ISEx.loadingPanel.show();break;
             var packageId = id.ToString();
             _DTService.DeletePackage(packageId);
         });
+        Global.Cache.SetDirty(CachingTypes.Package);
     }
 
 </script>

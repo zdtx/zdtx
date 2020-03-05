@@ -286,7 +286,7 @@
     </script>
 </asp:Content>
 <script runat="server">
-    
+
     protected bool _ParentCheck = true;
     public override void Decorate(eTaxi.Web.ExtPageDecorator decorator)
     {
@@ -326,6 +326,7 @@
         { Folder.Driver, Icon.UserSuitBlack },
         { Folder.Business, Icon.PastePlain },
         { Folder.Query, Icon.Magnifier },
+        { Folder.Finance, Icon.MoneyYen },
         { Folder.Workflow, Icon.ArrowSwitch }
     };
 
@@ -334,7 +335,7 @@
         { SubFolder.Car, Icon.Folder },
         { SubFolder.Driver, Icon.Folder}
     };
-    
+
     [DirectMethod(ShowMask = true, Msg = "正在加载菜单，请稍候..")]
     public string LoadMenu()
     {
@@ -357,7 +358,7 @@
                 where !a.IsForbidden
                 select m).ToList();
         }
-        
+
         definitions.ForEach(d =>
         {
             if (!folders.Any(f => f.StartsWith(d.Value.ToString()))) return;
@@ -394,11 +395,11 @@
                 {
                     var subRoot = new Node() { Icon = Icon.Folder, Cls = "menuGroup" };
                     subHelper.GetItem(i => i.Value == f).IfNN(i =>
-                        {
-                            subRoot.Text = i.Caption;
-                            subRoot.Icon = _SubFolderIcons[i.Value];
-                        });
-                    
+                    {
+                        subRoot.Text = i.Caption;
+                        subRoot.Icon = _SubFolderIcons[i.Value];
+                    });
+
                     var subItems = items.Where(i => i.SubFolder == f).ToList();
                     subItems.ForEach(s =>
                     {
@@ -429,5 +430,5 @@
             .GetRequestParameter<bool>("ck", ck => _ParentCheck = ck, true, false);
         base._Execute();
     }
-    
+
 </script>

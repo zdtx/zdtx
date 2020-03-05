@@ -284,6 +284,7 @@
     <Content Include="Content\themes\Office2010Silver\images\startmenu_bg.gif" />
     <Content Include="Content\themes\Office2010Silver\images\top_bg.gif" />
     <Content Include="Default.aspx" />
+    <Content Include="Domain\Business\Contract.aspx" />
     <Content Include="Domain\Business\Shift.aspx" />
     <Content Include="Domain\Business\Inspection.aspx" />
     <Content Include="Domain\Business\Rental.aspx" />
@@ -294,15 +295,21 @@
     <Content Include="Domain\Business\Event.aspx" />
     <Content Include="Domain\Business\Replace.aspx" />
     <Content Include="Domain\Business\Payment.aspx" />
+    <Content Include="Domain\Car\Service.aspx" />
     <Content Include="Domain\Car\Update_Rental_Batch.aspx" />
     <Content Include="Domain\Car\Update_1.aspx" />
     <Content Include="Domain\Car\Create.aspx" />
     <Content Include="Domain\Car\List.aspx" />
     <Content Include="Domain\Car\View.aspx" />
+    <Content Include="Domain\Driver\Complain.aspx" />
+    <Content Include="Domain\Driver\Contract.aspx" />
+    <Content Include="Domain\Driver\Event.aspx" />
     <Content Include="Domain\Driver\List.aspx" />
     <Content Include="Domain\Driver\Update_1.aspx" />
     <Content Include="Domain\Driver\Update_Photo_Batch.aspx" />
     <Content Include="Domain\Driver\View.aspx" />
+    <Content Include="Domain\Finance\Account.aspx" />
+    <Content Include="Domain\Finance\Ledger.aspx" />
     <Content Include="Domain\Query\Car_Log.aspx" />
     <Content Include="Domain\Query\Car_Accident.aspx" />
     <Content Include="Domain\Query\Car_Complain.aspx" />
@@ -1116,6 +1123,7 @@
     <Content Include="_controls.helper\Selection\Driver\Items.ascx" />
     <Content Include="_controls.helper\Selection\Driver\Item.ascx" />
     <Content Include="_controls.helper\Selection\Car\Item.ascx" />
+    <Content Include="_controls.helper\Selection\Package\Item.ascx" />
     <Content Include="_controls.sys\ACL\Edit.ascx" />
     <Content Include="_controls.sys\Package\Edit.ascx" />
     <Content Include="_controls.sys\Upload_Photo.ascx" />
@@ -1584,6 +1592,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="_controls.helper\Selection\Driver\Item.ascx.designer.cs">
+      <DependentUpon>Item.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="_controls.helper\Selection\Package\Item.ascx.cs">
+      <DependentUpon>Item.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_controls.helper\Selection\Package\Item.ascx.designer.cs">
       <DependentUpon>Item.ascx</DependentUpon>
     </Compile>
     <Compile Include="_controls.helper\Selection\Position\Item.ascx.cs">
