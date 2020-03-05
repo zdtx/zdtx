@@ -1173,6 +1173,8 @@
     <Content Include="_controls\Business\Complain_Batch.ascx" />
     <Content Include="_controls\Car\Create.ascx" />
     <Content Include="_controls.sys\Department\Edit.ascx" />
+    <Content Include="_controls\Car\View_Service.ascx" />
+    <Content Include="_controls\Car\View_Contract.ascx" />
     <Content Include="_controls\Car\View_Violation.ascx" />
     <Content Include="_controls\Car\View_Shift.ascx" />
     <Content Include="_controls\Car\View_Rental.ascx" />

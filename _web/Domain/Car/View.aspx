@@ -14,6 +14,7 @@
 <%@ Register Src="~/_controls/Car/View_Shift.ascx" TagPrefix="uc1" TagName="View_Shift" %>
 <%@ Register Src="~/_controls/Car/View_Violation.ascx" TagPrefix="uc1" TagName="View_Violation" %>
 <%@ Register Src="~/_controls/Car/View_Contract.ascx" TagPrefix="uc1" TagName="View_Contract" %>
+<%@ Register Src="~/_controls/Car/View_Service.ascx" TagPrefix="uc1" TagName="View_Service" %>
 
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
@@ -41,6 +42,7 @@
                             <TabImage Url="~/images/_doc_16.gif" />
                         </dx:Tab>
                         <dx:Tab Text="合同" />
+                        <dx:Tab Text="保养历史" />
                         <dx:Tab Text="车架变更历史" />
                         <dx:Tab Text="司机变更历史" />
                         <dx:Tab Text="代班历史" />
@@ -79,20 +81,21 @@
     </div>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:View_Contract runat="server" id="cX" />
-    <uc1:View_Accident runat="server" id="cA" />
-    <uc1:View_Balance runat="server" id="cB" />
-    <uc1:View_Complain runat="server" id="cC" />
-    <uc1:View_Inspection runat="server" id="cS" />
-    <uc1:View_Insurance runat="server" id="cU" />
-    <uc1:View_Log runat="server" id="cL" />
-    <uc1:View_Payment runat="server" id="cP" />
-    <uc1:View_Rental runat="server" id="cR" />
-    <uc1:View_Replace runat="server" id="cE" />
-    <uc1:View_Shift runat="server" id="cH" />
-    <uc1:View_Violation runat="server" id="cV" />
+    <uc1:View_Contract runat="server" id="cContract" />
+    <uc1:View_Service runat="server" id="cService" />
+    <uc1:View_Accident runat="server" id="cAccident" />
+    <uc1:View_Balance runat="server" id="cBalance" />
+    <uc1:View_Complain runat="server" id="cComplain" />
+    <uc1:View_Inspection runat="server" id="cInspection" />
+    <uc1:View_Insurance runat="server" id="cInsurance" />
+    <uc1:View_Log runat="server" id="cLog" />
+    <uc1:View_Payment runat="server" id="cPayment" />
+    <uc1:View_Rental runat="server" id="cRental" />
+    <uc1:View_Replace runat="server" id="cReplace" />
+    <uc1:View_Shift runat="server" id="cShift" />
+    <uc1:View_Violation runat="server" id="cViolation" />
     <div style="padding:10px;">
-        <uc1:View runat="server" id="cI" />
+        <uc1:View runat="server" id="cView" />
     </div>
 </asp:Content>
 <script runat="server">
@@ -117,10 +120,41 @@
 
     protected override void _SetInitialStates()
     {
+        //<dx:Tab Text="合同" />
+        //<dx:Tab Text="保养历史" />
+        //<dx:Tab Text="车架变更历史" />
+        //<dx:Tab Text="司机变更历史" />
+        //<dx:Tab Text="代班历史" />
+        //<dx:Tab Text="租金/管理费" />
+        //<dx:Tab Text="其他费用情况" />
+        //<dx:Tab Text="年审、行审情况" />
+        //<dx:Tab Text="保险缴纳情况" />
+        //<dx:Tab Text="事故历史" />
+        //<dx:Tab Text="违章历史" />
+        //<dx:Tab Text="投诉历史" />
+        //<dx:Tab Text="好人好事记录" />
+
         _Util
             .GetRequestParameter<string>("id", id => _ObjectId = id)
             ;
-        tc.Switch(new BaseControl[] { cX, cI, cE, cR, cH, cP, cB, cS, cU, cA, cV, cC, cL }, (index, c) =>
+        tc.Switch(new BaseControl[]
+        {
+            cView,
+            cContract,
+            cService,
+            cReplace,
+            cRental,
+            cShift,
+            cPayment,
+            cBalance,
+            cInspection,
+            cInsurance,
+            cAccident,
+            cViolation,
+            cComplain,
+            cLog
+
+        }, (index, c) =>
         {
             c
                 .Import(_ObjectId, DataStates.ObjectId)
@@ -150,7 +184,7 @@
             throw DTException.NotFound<TB_car>(_ObjectId);
         });
 
-        cI
+        cView
             .Import(_ObjectId, DataStates.ObjectId)
             .Execute();
     }

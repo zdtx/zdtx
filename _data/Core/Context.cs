@@ -92,6 +92,22 @@ namespace eTaxi.L2SQL
         }
 
         /// <summary>
+        /// 车辆保养记录
+        /// </summary>
+        public Table<TB_car_service> CarServices
+        {
+            get { return this.GetTable<TB_car_service>(); }
+        }
+
+        /// <summary>
+        /// 车辆合同记录
+        /// </summary>
+        public Table<TB_car_contract> CarContracts
+        {
+            get { return this.GetTable<TB_car_contract>(); }
+        }
+
+        /// <summary>
         /// 车辆承租计费记录
         /// </summary>
         public Table<TB_car_payment> CarPayments

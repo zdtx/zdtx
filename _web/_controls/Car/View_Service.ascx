@@ -11,7 +11,7 @@
     <HeaderStyle CssClass="gridHeader" />
     <EmptyDataTemplate>
         <div class="emptyData">
-            （无合同签订记录）
+            （无保养记录）
         </div>
     </EmptyDataTemplate>
 </asp:GridView>
@@ -47,22 +47,19 @@
         gv.Visible = !string.IsNullOrEmpty(_ObjectId);
         var context = _DTContext<CommonContext>(true);
         var data = (
-            from o in context.CarContracts
-            join d in context.Drivers on o.DriverId equals d.Id
+            from o in context.CarServices
             where o.CarId == _ObjectId
-            orderby o.CommenceDate descending
+            // orderby o. descending
             select new
             {
                 o.Id,
                 o.CreateTime,
                 o.CreatedById,
-                DriverName = d.Name,
                 o.Remark,
             }).ToList();
         gw.Execute(data, b => b
             .Do<Label>("CreateTime", (l, d, r) => l.Text = d.CreateTime.ToISDateWithTime())
             .Do<Label>("CreatedById", (l, d, r) => l.Text = Global.Cache.GetPersonById(d.CreatedById).Name)
-            .Do<Label>("DriverName", (l, d, r) => l.Text = d.DriverName)
             .Do<Label>("Remark", (l, d, r) => l.Text = d.Remark)
             );
     }
