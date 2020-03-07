@@ -2,8 +2,8 @@
 <%@ MasterType TypeName="eTaxi.Web.MasterPageEx" %>
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
-<%@ Register Src="~/_controls/Business/Accident.ascx" TagPrefix="uc1" TagName="Accident" %>
-<%@ Register Src="~/_controls/Business/Accident_Batch.ascx" TagPrefix="uc1" TagName="Accident_Batch" %>
+<%@ Register Src="~/_controls/Business/Service.ascx" TagPrefix="uc1" TagName="Service" %>
+<%@ Register Src="~/_controls/Business/Service_Batch.ascx" TagPrefix="uc1" TagName="Service_Batch" %>
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
     <script type="text/javascript">
@@ -26,10 +26,10 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="事故登记 - 单个录入">
+                        <dx:Tab Text="保养记录 - 单个添加">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量录入">
+                        <dx:Tab Text="批量设置">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
                         </dx:Tab>
                     </Tabs>
@@ -39,10 +39,10 @@
     </table>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:Accident runat="server" id="c1" />
-    <uc1:Accident_Batch runat="server" id="c2" />
+    <uc1:Service runat="server" id="c1" />
+    <uc1:Service_Batch runat="server" id="c2" />
 </asp:Content>
-<script runat="server"> // 事故管理
+<script runat="server"> // 车辆保养
 
     private string _ObjectId
     {
@@ -77,7 +77,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("业务处理", "事故登记");
+            .Title("车辆管理", "车辆保养");
         c1.Execute();
     }
 

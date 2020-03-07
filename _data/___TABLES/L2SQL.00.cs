@@ -1395,8 +1395,14 @@ namespace eTaxi.L2SQL
         /// <summary>
         /// 维修内容
         /// </summary>
-        [ColumnAttribute(DbType = "nvarchar(128)")]
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string ServiceContent { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> ServiceCost { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)")]
+        public string ServiceProvider { get; set; }
+        [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
+        public DateTime ServiceTime { get; set; }
     }
     /// <summary>
     /// 车辆 - 交通违章记录

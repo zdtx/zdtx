@@ -23,6 +23,8 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Payment = "business/payment.ascx";
         public const string Payment_Batch = "business/payment_batch.ascx";
         public const string Inspection_Batch = "business/inspection_batch.ascx";
+        public const string Service = "business/service.ascx";
+        public const string Service_Batch = "business/service_batch.ascx";
     }
 
     public class Car
@@ -52,7 +54,7 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Violation_Edit = "car/violation_edit.ascx";
         public const string Replace_Update = "car/replace_update.ascx";
         public const string Payment_Update = "car/payment_update.ascx";
-        
+        public const string Service_Edit = "car/service_edit.ascx";
     }
 
     public class Department
