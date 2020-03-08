@@ -2,8 +2,7 @@
 <%@ MasterType TypeName="eTaxi.Web.MasterPageEx" %>
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
-<%@ Register Src="~/_controls/Business/Accident.ascx" TagPrefix="uc1" TagName="Accident" %>
-<%@ Register Src="~/_controls/Business/Accident_Batch.ascx" TagPrefix="uc1" TagName="Accident_Batch" %>
+<%@ Register Src="~/_controls/Business/Contract.ascx" TagPrefix="uc1" TagName="Contract" %>
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
     <script type="text/javascript">
@@ -26,12 +25,12 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="事故登记 - 单个录入">
+                        <dx:Tab Text="合同管理 - 单个录入">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量录入">
+<%--                        <dx:Tab Text="批量录入">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
-                        </dx:Tab>
+                        </dx:Tab>--%>
                     </Tabs>
                 </dx:ASPxTabControl>
             </td>
@@ -39,8 +38,7 @@
     </table>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:Accident runat="server" id="c1" />
-    <uc1:Accident_Batch runat="server" id="c2" />
+    <uc1:Contract runat="server" id="c1" />
 </asp:Content>
 <script runat="server"> // 事故管理
 
@@ -63,7 +61,7 @@
 
     protected override void _SetInitialStates()
     {
-        tc.Switch(new BaseControl[] { c1, c2 }, (index, c) =>
+        tc.Switch(new BaseControl[] { c1 }, (index, c) =>
         {
             c.Execute();
 
@@ -77,7 +75,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("业务处理", "事故登记");
+            .Title("司机管理", "合同管理");
         c1.Execute();
     }
 

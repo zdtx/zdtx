@@ -75,7 +75,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("业务处理", "公益事件登记");
+            .Title("司机管理", "好人好事登记");
         c1.Execute();
     }
 

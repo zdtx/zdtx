@@ -55,6 +55,7 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Replace_Update = "car/replace_update.ascx";
         public const string Payment_Update = "car/payment_update.ascx";
         public const string Service_Edit = "car/service_edit.ascx";
+        public const string Contract_Edit = "car/contract_edit.ascx";
     }
 
     public class Department

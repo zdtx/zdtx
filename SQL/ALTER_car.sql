@@ -14,6 +14,7 @@ add
 -- 绑定合同
 alter table car
 add
-	ContractId nvarchar(10) null			-- 当前捆绑的合同Id
+	ContractId nvarchar(10) null,			-- 当前捆绑的合同Id
+	ConstructDueTime smalldatetime null		-- 当前合同到期时间
 
 

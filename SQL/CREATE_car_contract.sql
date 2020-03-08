@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[car_contract]    Script Date: 2020/3/5 23:07:53 ******/
+/****** Object:  Table [dbo].[car_contract]    Script Date: 2020/3/8 13:18:18 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[car_contract](
 	[Id] [nvarchar](10) NOT NULL,
 	[DriverId] [nvarchar](128) NOT NULL,
 	[Type] [int] NOT NULL,
+	[Code] [nvarchar](64) NULL,
 	[CommenceDate] [smalldatetime] NOT NULL,
 	[EndDate] [smalldatetime] NULL,
 	[Remark] [nvarchar](512) NULL,
@@ -29,6 +30,9 @@ CREATE TABLE [dbo].[car_contract](
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'Type'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'Code'
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同执行时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'CommenceDate'

@@ -472,6 +472,10 @@ namespace eTaxi.Definitions
         Shift = 2
     }
 
-
+    public enum ContractType
+    {
+        [DefinitionItemSettings("标准合同")]
+        Standard = 0
+    }
 
 }

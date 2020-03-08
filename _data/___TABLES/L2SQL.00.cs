@@ -291,6 +291,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Company { get; set; }
+        [ColumnAttribute(DbType = "smalldatetime")]
+        public Nullable<DateTime> ConstructDueTime { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)")]
         public string ContractId { get; set; }
         /// <summary>
@@ -751,6 +753,11 @@ namespace eTaxi.L2SQL
     {
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(64)")]
+        public string Code { get; set; }
         /// <summary>
         /// 合同执行时间
         /// </summary>
