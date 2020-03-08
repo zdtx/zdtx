@@ -29,9 +29,9 @@
                         <dx:Tab Text="保养记录 - 单个添加">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量设置">
+                        <%--<dx:Tab Text="批量设置">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
-                        </dx:Tab>
+                        </dx:Tab>--%>
                     </Tabs>
                 </dx:ASPxTabControl>
             </td>
@@ -40,7 +40,7 @@
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
     <uc1:Service runat="server" id="c1" />
-    <uc1:Service_Batch runat="server" id="c2" />
+    <%--<uc1:Service_Batch runat="server" id="c2" />--%>
 </asp:Content>
 <script runat="server"> // 车辆保养
 
@@ -63,7 +63,7 @@
 
     protected override void _SetInitialStates()
     {
-        tc.Switch(new BaseControl[] { c1, c2 }, (index, c) =>
+        tc.Switch(new BaseControl[] { c1 }, (index, c) =>
         {
             c.Execute();
 

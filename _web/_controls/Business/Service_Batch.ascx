@@ -207,7 +207,16 @@
             }), f =>
             {
             })
-            .TemplateField("InsuranceEnd", "维修到期日", new TemplateItem.DXDateEdit(e =>
+            .TemplateField("ServiceContent", "保养内容", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 120;
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 120;
+                f.ItemStyle.Width = 120;
+            })
+            .TemplateField("ServiceTime", "保养完成时间", new TemplateItem.DXDateEdit(e =>
             {
                 e.Width = 150;
                 e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
@@ -217,6 +226,53 @@
                 f.HeaderStyle.Width = 150;
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 150;
+            })
+            .TemplateField("ServiceProvider", "服务公司", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 120;
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 120;
+                f.ItemStyle.Width = 120;
+            })
+            .TemplateField("ServiceCost", "保养费用", new TemplateItem.DXSpinEdit(e =>
+            {
+                e.Width = 80;
+                e.HorizontalAlign = HorizontalAlign.Right;
+                e.SpinButtons.ShowIncrementButtons = false;
+                e.DisplayFormatString = "{0:N0} 元";
+            }), f =>
+            {
+                f.HeaderStyle.Width = 80;
+                f.ItemStyle.Width = 80;
+            })
+            .TemplateField("ServiceNextContent", "下次保养内容", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 120;
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 120;
+                f.ItemStyle.Width = 120;
+            })
+            .TemplateField("ServiceNextTime", "保养到期时间", new TemplateItem.DXDateEdit(e =>
+            {
+                e.Width = 150;
+                e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
+            }), f =>
+            {
+                f.HeaderStyle.Width = 150;
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 150;
+            })
+            .TemplateField("Remark", "描述", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 200;
+            }), f =>
+            {
+                f.HeaderStyle.Width = 200;
+                f.ItemStyle.Width = 200;
             })
         );
 
@@ -285,20 +341,7 @@
         {
             cars.SingleOrDefault(o => o.Id == d.Id).IfNN(o =>
             {
-                var changed =
-                    o.InsuranceCom != d.InsuranceCom ||
-                    o.InsuranceTransCode != d.InsuranceTransCode ||
-                    o.InsuranceEnd != d.InsuranceEnd ||
-                    o.Premium != d.Premium;
-                if (changed) context.Create<TB_car_service>(_SessionEx, service =>
-                {
-                    service.CarId = o.Id;
-                    service.Id = context.NewSequence<TB_car_service>(_SessionEx);
-                });
-                o.InsuranceCom = d.InsuranceCom;
-                o.InsuranceTransCode = d.InsuranceTransCode;
-                o.InsuranceEnd = d.InsuranceEnd;
-                o.Premium = d.Premium;
+
             });
         });
         context.SubmitChanges();
@@ -347,12 +390,12 @@
 
     protected void _Do_Collect()
     {
-        gw.Syn(_List, col => col
-            .Do<ASPxTextBox>("InsuranceCom", (d, c) => d.InsuranceCom = c.Text)
-            .Do<ASPxTextBox>("InsuranceTransCode", (d, c) => d.InsuranceTransCode = c.Text)
-            .Do<ASPxDateEdit>("InsuranceEnd", (d, c) => d.InsuranceEnd = c.Date)
-            .Do<ASPxSpinEdit>("Premium", (d, c) => d.Premium = c.Number)
-        );
+        //gw.Syn(_List, col => col
+        //    .Do<ASPxTextBox>("InsuranceCom", (d, c) => d.InsuranceCom = c.Text)
+        //    .Do<ASPxTextBox>("InsuranceTransCode", (d, c) => d.InsuranceTransCode = c.Text)
+        //    .Do<ASPxDateEdit>("InsuranceEnd", (d, c) => d.InsuranceEnd = c.Date)
+        //    .Do<ASPxSpinEdit>("Premium", (d, c) => d.Premium = c.Number)
+        //);
     }
 
 </script>

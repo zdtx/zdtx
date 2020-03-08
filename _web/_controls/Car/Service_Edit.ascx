@@ -11,7 +11,7 @@
     <table class="form">
         <tr>
             <th colspan="2">
-                <div class="title">
+                <div class="title" style="margin-top:10px;">
                     车辆保养记录
                 </div>
             </th>
@@ -43,14 +43,14 @@
             </td>
         </tr>
         <tr>
-            <td class="name">维修内容
+            <td class="name">保养内容
             </td>
             <td class="cl">
-                <dx:ASPxTextBox runat="server" ID="tb_ServiceContent" Width="200" HelpText="例如：保养服务" />
+                <dx:ASPxTextBox runat="server" ID="tb_ServiceContent" Width="200" HelpText="例如：常规保养" />
             </td>
         </tr>
         <tr>
-            <td class="name">维修服务时间
+            <td class="name">保养完成时间
             </td>
             <td class="cl">
                 <dx:ASPxDateEdit runat="server" ID="de_ServiceTime" Width="200" 
@@ -79,6 +79,33 @@
                     <SpinButtons ShowIncrementButtons="false" />
                     <HelpTextSettings Position="Bottom" />
                 </dx:ASPxSpinEdit>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <div class="title" style="margin-top:10px;">
+                    下次保养设置
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td class="name">保养内容
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_NextServiceContent" Width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">保养到期时间
+            </td>
+            <td class="cl">
+                <dx:ASPxDateEdit runat="server" ID="de_NextServiceTime" Width="200" 
+                    DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">
+                    <CalendarProperties TodayButtonText="今天" ClearButtonText="清空">
+                        <FastNavProperties OkButtonText="选定" CancelButtonText="清空" />
+                    </CalendarProperties>
+                    <TimeSectionProperties Visible="false"></TimeSectionProperties>
+                </dx:ASPxDateEdit>
             </td>
         </tr>
         <tr>
@@ -112,6 +139,9 @@
 
             p.Controls.Reset();
 
+            tb_NextServiceContent.Text = car.ServiceNextContent;
+            de_NextServiceTime.Value = car.ServiceNextTime;
+
         }, () =>
         {
             throw DTException.NotFound<TB_car>(_ObjectId);
@@ -144,6 +174,7 @@
             .SubmitChanges();
 
         // 更新车辆信息
+
         if (!
             car.ServiceTime.HasValue ||
             service.ServiceTime > car.ServiceTime.Value)
@@ -151,6 +182,19 @@
             car.ServiceId = service.Id;
             car.ServiceContent = service.ServiceContent;
             car.ServiceTime = service.ServiceTime;
+
+            car.ServiceNextContent = tb_NextServiceContent.Text;
+
+            if (!
+                string.IsNullOrEmpty(de_NextServiceTime.Value.ToStringEx()))
+            {
+                var nextTime = de_NextServiceTime.Date;
+                if (nextTime <= DateTime.Now || nextTime <= service.ServiceTime)
+                {
+                    throw new Exception("设置错误：下次保养时间需大于今天，且大于本次已服务时间。");
+                }
+                car.ServiceNextTime = nextTime;
+            }
         }
 
         context.SubmitChanges();
