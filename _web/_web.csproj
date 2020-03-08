@@ -1157,6 +1157,7 @@
     <Content Include="_controls\Business\Service.ascx" />
     <Content Include="_controls\Business\File_Batch.ascx" />
     <Content Include="_controls\Business\Shift_Batch.ascx" />
+    <Content Include="_controls\Car\Contract_Upload.ascx" />
     <Content Include="_controls\Car\Contract_Edit.ascx" />
     <Content Include="_controls\Car\Service_Edit.ascx" />
     <Content Include="_controls\Car\Accident_Update.ascx" />

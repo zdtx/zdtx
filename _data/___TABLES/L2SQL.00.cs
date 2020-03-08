@@ -751,6 +751,16 @@ namespace eTaxi.L2SQL
     [Table(Name = "car_contract")]
     public partial class TB_car_contract : TBObject<TB_car_contract>
     {
+        /// <summary>
+        /// 附件（二进制）Id （用于查找 temp file 目录中的文件）
+        /// </summary>
+        [ColumnAttribute(DbType = "uniqueidentifier")]
+        public Nullable<Guid> Blob { get; set; }
+        /// <summary>
+        /// 合同原始文件名
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(256)")]
+        public string BlobOrginalName { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
         /// <summary>

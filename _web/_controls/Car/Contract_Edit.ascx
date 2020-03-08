@@ -43,6 +43,13 @@
             </td>
         </tr>
         <tr>
+            <td class="name">司机（合同承租方）
+            </td>
+            <td class="cl">
+                <uc1:PopupField_DX runat="server" ID="pf_DriverId" Width="200" />
+            </td>
+        </tr>
+        <tr>
             <td class="name">合同类型
             </td>
             <td class="cl">
@@ -74,13 +81,24 @@
             <td class="name">合同到期
             </td>
             <td class="cl">
-                <dx:ASPxDateEdit runat="server" ID="de_NextServiceTime" Width="200" 
+                <dx:ASPxDateEdit runat="server" ID="de_EndDate" Width="200" 
                     DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">
                     <CalendarProperties TodayButtonText="今天" ClearButtonText="清空">
                         <FastNavProperties OkButtonText="选定" CancelButtonText="清空" />
                     </CalendarProperties>
                     <TimeSectionProperties Visible="false"></TimeSectionProperties>
                 </dx:ASPxDateEdit>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">
+            </td>
+            <td class="cl" style="padding:5px;">
+                <asp:LinkButton runat="server"
+                    Text="上传合同附件" ID="bUpload" CssClass="aBtn" CausesValidation="false" />
+                <br />
+                <asp:Literal runat="server" ID="l_BlobOriginalName" />
+                <asp:Literal runat="server" ID="l_Blob" Visible="false" />
             </td>
         </tr>
         <tr>
@@ -100,7 +118,64 @@
     {
         fh.CurrentGroup = ClientID;
         fh.Validate(de_CommenceDate).IsRequired();
+        fh.Validate(pf_DriverId).IsRequired();
         cb_ContractType.FromEnum<ContractType>(valueAsInteger: true);
+
+        pf_DriverId.Initialize<eTaxi.Web.Controls.Selection.Driver.Item>(pop,
+            "~/_controls.helper/selection/driver/item.ascx", (cc, b, h, isFirst) =>
+            {
+                pop.Title = "选择司机";
+                pop.Width = 650;
+                pop.Height = 500;
+                if (isFirst) cc.Execute();
+            }, (c, b, h) =>
+            {
+                b.Text = c.Selection[0].Name;
+                h.Value = c.Selection[0].Id;
+                pop.Close();
+                return true;
+            }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
+
+        bUpload.Click += (s, e) =>
+        {
+            pop.Begin<eTaxi.Web.BaseControl>("~/_controls/car/contract_upload.ascx",
+                null, c =>
+                {
+                    c.Execute();
+                }, c =>
+                {
+                    c
+                        .Width(420)
+                        .Height(250)
+                        .Title("合同附件上传")
+                        .Button(BaseControl.EventTypes.OK, b =>
+                        {
+                            b.CausesValidation = false;
+                            b.Text = "开始上传";
+                            b.JSHandle = string.Format(
+                                "if({0}.GetFileInputCount()>0){{ISEx.loadingPanel.show('上传中，请稍候..');{0}.Upload();}}else{{alert('请先点击 [浏览] 选定待上传的文件');e.processOnServer=false;}}",
+                                pop.HostingControl.ClientID);
+                        })
+                    ;
+                });
+        };
+
+        pop.EventSinked += (c, eType, parm) =>
+        {
+            if (c.ModuleId == Car.Contract_Upload)
+            {
+                if (eType != EventTypes.OK) return;
+                if (c.Do(Actions.Save, false))
+                {
+                    var objectId = c.ViewStateEx.Get<string>(DataStates.ObjectId);
+                    var filename = c.ViewStateEx.Get<string>(DataStates.Detail);
+                    l_Blob.Text = objectId;
+                    l_BlobOriginalName.Text = filename;
+                    pop.Close();
+                }
+            }
+        };
+
     }
 
     protected override void _Execute()
@@ -111,6 +186,8 @@
             l_Id.Text = car.Id;
             l_Company.Text = car.Company;
             l_PlateNumber.Text = car.PlateNumber;
+            l_Blob.Text = null;
+            l_BlobOriginalName.Text = null;
             p.Controls.Reset();
 
         }, () =>
@@ -133,7 +210,19 @@
             .Create<TB_car_contract>(_SessionEx, o =>
             {
                 o.CarId = _ObjectId;
+                o.DriverId = pf_DriverId.Value;
                 o.Id = newId;
+                o.Code = tb_Code.Text;
+                o.Type = cb_ContractType.Value.ToStringEx().ToIntOrDefault(0);
+                o.CommenceDate = de_CommenceDate.Date;
+                
+                if (!
+                    string.IsNullOrEmpty(de_EndDate.Value.ToStringEx()))
+                    o.EndDate = de_EndDate.Date;
+
+                // 附件信息
+                o.Blob = l_Blob.Text.ToGuidOrNull();
+                o.BlobOrginalName = l_BlobOriginalName.Text;
 
                 contract = o;
             })
@@ -150,6 +239,20 @@
         }
 
         context.SubmitChanges();
+
+        // 继续处理附件文件
+
+        if (string.IsNullOrEmpty(l_Blob.Text)) return;
+
+        var blobId = new Guid(l_Blob.Text);
+        var extension = System.IO.Path.GetExtension(l_BlobOriginalName.Text);
+
+        // 将 temp 目录 文件放入 同名 id
+        var file = Util.GetPhysicalPath(
+            string.Format("{0}/file/{1}{2}", Parameters.Tempbase, blobId.ToISFormatted(), extension));
+        var newFile = Util.GetPhysicalPath(
+            string.Format("{0}/{1}{2}", Parameters.Filebase, contract.Id, extension));
+        System.IO.File.Copy(file, newFile, true);
 
     }
 
