@@ -308,6 +308,7 @@
     <Content Include="Domain\Driver\Update_1.aspx" />
     <Content Include="Domain\Driver\Update_Photo_Batch.aspx" />
     <Content Include="Domain\Driver\View.aspx" />
+    <Content Include="Domain\Finance\Charge.aspx" />
     <Content Include="Domain\Finance\Account.aspx" />
     <Content Include="Domain\Finance\Ledger.aspx" />
     <Content Include="Domain\Query\Car_Log.aspx" />
@@ -1223,6 +1224,8 @@
     <Content Include="_controls\Driver\View_Log.ascx" />
     <Content Include="_controls\Driver\View_Payment.ascx" />
     <Content Include="_controls\Driver\View_Violation.ascx" />
+    <Content Include="_controls\Finance\Charge_Edit.ascx" />
+    <Content Include="_controls\Finance\Charge_Batch.ascx" />
     <Content Include="_master\Web.config" />
     <Content Include="_controls\Web.config" />
     <Content Include="_master\Blank.Master" />

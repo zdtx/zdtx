@@ -80,6 +80,12 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Update_Batch_2 = "driver/update_batch_2.ascx";
     }
 
+    public class Finance
+    {
+        public const string Charge_Edit = "finance/charge_edit.ascx";
+        public const string Charge_Batch = "finance/charge_batch.ascx";
+    }
+
     public class Person
     {
         public const string Edit = "person/edit.ascx";

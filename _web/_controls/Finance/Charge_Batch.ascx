@@ -14,12 +14,10 @@
     <div class="inner" style="padding: 10px;">
         <table style="border-spacing: 0px;">
             <tr>
-                <td style="padding-right: 10px;">请填入司机姓名（然后回车）：
+                <td style="padding-right: 10px;">选择套餐：
                 </td>
                 <td>
                     <dx:ASPxTextBox runat="server" ID="tbInput" Width="100" />
-                </td>
-                <td style="padding-left: 10px;">或者：
                 </td>
                 <td>
                     <dx:ASPxButton runat="server" Text="在列表中选择司机" ID="bSelect">
@@ -45,36 +43,21 @@
         <RowStyle Height="20" />
         <EmptyDataTemplate>
             <div class="emptyData">
-                （请先选择司机）
+                （无结算项目，请添加）
             </div>
         </EmptyDataTemplate>
     </asp:GridView>
 </div>
 <script runat="server">
 
-    private List<TB_driver> _List
+    private List<TB_charge> _List
     {
-        get { return _ViewStateEx.Get<List<TB_driver>>(DataStates.List, new List<TB_driver>()); }
-        set { _ViewStateEx.Set<List<TB_driver>>(value, DataStates.List); }
+        get { return _ViewStateEx.Get<List<TB_charge>>(DataStates.List, new List<TB_charge>()); }
+        set { _ViewStateEx.Set<List<TB_charge>>(value, DataStates.List); }
     }
-
-    private string _CarId
-    {
-        set { _ViewStateEx.Set<string>(value, "carId"); }
-        get { return _ViewStateEx.Get<string>("carId", null); }
-    }
-
-    private string _DriverId
-    {
-        set { _ViewStateEx.Set<string>(value, "driverId"); }
-        get { return _ViewStateEx.Get<string>("driverId", null); }
-    }
-
-    const string CMD_ChangeRental = "ChangeRental";
-
 
     private string _ObjectId { get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); } }
-    public override string ModuleId { get { return Driver.Update_Batch_1; } }
+    public override string ModuleId { get { return Finance.Charge_Batch; } }
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;
@@ -196,81 +179,126 @@
             }), f =>
             {
             })
-            .TemplateField("Name", "姓名", new TemplateItem.Literal(e =>
+            .TemplateField("Name", "姓名", new TemplateItem.DXTextBox(e =>
             {
-            }), f =>
-            {
-            })
-            .TemplateField("CHNId", "身份证号", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("Month", "当前月份", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("OpeningBalance", "上期结余", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("InvoiceAmount", "本期应缴", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("PaidAmount", "本期实缴", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("ClosingBalance", "本期结余", new TemplateItem.Literal(e =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("lb1", " - ", new TemplateItem.LinkButton(l =>
-            {
-                l.CssClass = "aBtn";
-                l.CommandName = CMD_ChangeRental;
-                l.Text = "改押金";
-                l.OnClientClick = "ISEx.loadingPanel.show();";
+                e.Width = 60;
+                fh.Validate(e).IsRequired();
 
             }), f =>
             {
-                f.ItemStyle.Width = 50;
-                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
+                f.HeaderStyle.Width = 60;
+                f.ItemStyle.Width = 60;
             })
-            .TemplateField("Remark", "备注", new TemplateItem.Literal(e =>
+            .TemplateField("LastName", "姓", new TemplateItem.DXTextBox(e =>
             {
+                e.Width = 30;
+                fh.Validate(e).IsRequired();
+
             }), f =>
             {
+                f.HeaderStyle.Width = 30;
+                f.ItemStyle.Width = 30;
+            })
+            .TemplateField("FirstName", "名", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 40;
+                fh.Validate(e).IsRequired();
+
+            }), f =>
+            {
+                f.HeaderStyle.Width = 40;
+                f.ItemStyle.Width = 40;
+            })
+            .TemplateField("Gender", "性别", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 50;
+                e.FromEnum<Gender>(valueAsInteger: true);
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 50;
+                f.ItemStyle.Width = 50;
+            })
+            .TemplateField("CHNId", "身份证号", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 150;
+            }), f =>
+            {
+                f.HeaderStyle.Width = 150;
+                f.ItemStyle.Width = 150;
+            })
+            .TemplateField("DayOfBirth", "出生日期", new TemplateItem.DXDateEdit(e =>
+            {
+                e.Width = 100;
+                e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
+            }), f =>
+            {
+                f.HeaderStyle.Width = 50;
+                f.ItemStyle.Width = 50;
+            })
+            .TemplateField("Education", "文化程度", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 80;
+                e.FromEnum<Education>(valueAsInteger: true);
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 80;
+                f.ItemStyle.Width = 80;
+            })
+            .TemplateField("SocialCat", "政治面貌", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 80;
+                e.FromEnum<SocialCat>(valueAsInteger: true);
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 80;
+                f.ItemStyle.Width = 80;
+            })
+            .TemplateField("Tel1", "联系电话", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 100;
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 100;
+                f.ItemStyle.Width = 100;
+            })
+            .TemplateField("Address", "常住地址", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 200;
+            }), f =>
+            {
+                f.HeaderStyle.Width = 200;
+                f.ItemStyle.Width = 200;
+            })
+            .TemplateField("HKAddress", "户口地址", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 200;
+            }), f =>
+            {
+                f.HeaderStyle.Width = 200;
+                f.ItemStyle.Width = 200;
+            })
+            .TemplateField("CareerStart", "从业时间", new TemplateItem.DXDateEdit(e =>
+            {
+                e.Width = 100;
+                e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
+            }), f =>
+            {
+                f.HeaderStyle.Width = 100;
+                f.ItemStyle.Width = 100;
+            })
+            .TemplateField("CertNumber", "从业资格证", new TemplateItem.DXTextBox(e =>
+            {
+                e.Width = 150;
+            }), f =>
+            {
+                f.HeaderStyle.Width = 150;
+                f.ItemStyle.Width = 150;
             })
         );
-
-        gv.RowCommand += (s, e) =>
-        {
-            if (e.CommandName != CMD_ChangeRental) return;
-            var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
-            var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
-            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL =>
-            {
-                _CarId = carL.Text;
-                _DriverId = driverL.Text;
-
-                switch (e.CommandName)
-                {
-                    case CMD_ChangeRental:
-                        Execute(e.CommandName);
-                        break;
-                }
-
-            }));
-        };
-
     }
 
     protected override void _Execute()
@@ -286,39 +314,47 @@
         {
             gw.Execute(_List, b => b
                 .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
-                .Do<Literal>("Name", (c, d) => c.Text = d.Name)
-                .Do<Literal>("CHNId", (c, d) => c.Text = d.CHNId)
+                .Do<ASPxTextBox>("Name", (c, d) => c.Text = d.Name)
             );
 
             at.Visible = _List.Count > 0;
             return;
-        }
-
-        if (section == CMD_ChangeRental)
-        {
-            pop.Begin<eTaxi.Web.Controls.Selection.Driver.Item>(
-                "~/_controls.helper/selection/driver/items.ascx", null, c =>
-                {
-                    c.Execute();
-                }, c =>
-                {
-                    c
-                        .Width(650)
-                        .Height(500)
-                        .Title("先选择司机")
-                        .Button(BaseControl.EventTypes.OK, b => b.CausesValidation = true)
-                    ;
-                });
         }
     }
 
     protected override void _Do(string section, string subSection = null)
     {
         if (section == Actions.Select) _Do_Select();
+        if (section == Actions.Save) _Do_Save();
+    }
+
+    private void _Do_Save()
+    {
+        if (_List.Count == 0) return;
+        _Do_Collect();
+
+        var context = _DTService.Context;
+        _List.ForEach(d =>
+        {
+            context.Update<TB_driver>(_SessionEx, c => c.Id == d.Id, driver =>
+            {
+                driver.Name = d.Name;
+                driver.Remark = d.Remark;
+            });
+        });
+        context.SubmitChanges();
     }
 
     private void _Do_Select()
     {
+        _Do_Collect();
+    }
+
+    private void _Do_Collect()
+    {
+        gw.Syn(_List, col => col
+            .Do<ASPxTextBox>("Name", (d, c) => d.Name = c.Value.ToStringEx())
+        );
     }
 
 </script>

@@ -106,7 +106,13 @@ namespace eTaxi.Web
                     string.IsNullOrEmpty(id)) templateItem.Id = id;
                 var c = new TemplateField()
                 {
-                    HeaderTemplate = new TemplateItem.Label(l => { l.Text = headerText; }) { Id = id + "_Header" },
+                    HeaderTemplate = new TemplateItem.Label(l =>
+                    {
+                        l.Text = string.Format("&nbsp;{0}&nbsp;", headerText);
+                    })
+                    {
+                        Id = id + "_Header"
+                    },
                     ItemTemplate = templateItem
                 };
 

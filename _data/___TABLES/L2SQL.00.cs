@@ -1062,6 +1062,32 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
     }
+    [Serializable]
+    [Table(Name = "car_payment_item")]
+    public partial class TB_car_payment_item : TBObject<TB_car_payment_item>
+    {
+        [ColumnAttribute(DbType = "money", CanBeNull = false)]
+        public decimal Amount { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
+        public string CarId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(5)")]
+        public string ChargeId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
+        public string DriverId { get; set; }
+        /// <summary>
+        /// 条目 Id，可能来自预设收费条目，也可能是临时添加
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string ItemId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
+        public string PaymentId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)")]
+        public string Remark { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> SpecifiedMonth { get; set; }
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int Type { get; set; }
+    }
     /// <summary>
     /// 车辆 - 承租记录
     /// </summary>
@@ -1518,6 +1544,76 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
+    }
+    [Serializable]
+    [Table(Name = "charge")]
+    public partial class TB_charge : TBObject<TB_charge>
+    {
+        [ColumnAttribute(DbType = "money", CanBeNull = false)]
+        public decimal Amount { get; set; }
+        /// <summary>
+        /// 预设收费项编码
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
+        public string Code { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string Id { get; set; }
+        /// <summary>
+        /// 收费项名称
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(256)")]
+        public string Remark { get; set; }
+        /// <summary>
+        /// 指定收费项目发生的月份
+        /// </summary>
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> SpecifiedMonth { get; set; }
+        /// <summary>
+        /// 收取模式：0 - 按月，1 - 按年，2 - 按实际天数，9 - 临时
+        /// </summary>
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int Type { get; set; }
+    }
+    [Serializable]
+    [Table(Name = "charge_package")]
+    public partial class TB_charge_package : TBObject<TB_charge_package>
+    {
+        [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string ChargeId { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
+        public string CreatedById { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 对套餐是否可用
+        /// </summary>
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool Enabled { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
+        public string ModifiedById { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
+        [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
+        public DateTime ModifyTime { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string PackageId { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [ColumnAttribute(DbType = "nvarchar(512)")]
+        public string Remark { get; set; }
     }
     /// <summary>
     /// 部门

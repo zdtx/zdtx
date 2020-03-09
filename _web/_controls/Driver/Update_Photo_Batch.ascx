@@ -394,8 +394,7 @@
     {
         _DriverIds.ForEach(id =>
         {
-            if (_List.Any(l => l.Id == id))
-                return;
+            if (_List.Any(l => l.Id == id)) return;
             var context = _DTContext<CommonContext>(true);
             context.Drivers.SingleOrDefault(d => d.Id == id).IfNN(d => _List.Add(d));
         });
