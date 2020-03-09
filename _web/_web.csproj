@@ -1214,6 +1214,7 @@
     <Content Include="_controls\Driver\Update_Photo_Batch.ascx" />
     <Content Include="_controls\Driver\Update_Batch_1.ascx" />
     <Content Include="_controls\Driver\View.ascx" />
+    <Content Include="_controls\Driver\View_Contract.ascx" />
     <Content Include="_controls\Driver\View_Accident.ascx" />
     <Content Include="_controls\Driver\View_Complain.ascx" />
     <Content Include="_controls\Driver\View_Guarantor.ascx" />

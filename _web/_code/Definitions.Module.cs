@@ -74,6 +74,7 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string View_Log = "driver/view_payment.ascx";
         public const string View_Payment = "driver/view_payment.ascx";
         public const string View_Violation = "driver/view_violation.ascx";
+        public const string View_Contract = "driver/view_contract.ascx";
         public const string Edit_Photo = "driver/edit_photo.ascx";
         public const string Update_Batch_1 = "driver/update_batch_1.ascx";
         public const string Update_Batch_2 = "driver/update_batch_2.ascx";

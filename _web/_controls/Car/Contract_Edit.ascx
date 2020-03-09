@@ -138,6 +138,7 @@
 
         bUpload.Click += (s, e) =>
         {
+            pop.PACK_0001();
             pop.Begin<eTaxi.Web.BaseControl>("~/_controls/car/contract_upload.ascx",
                 null, c =>
                 {

@@ -8,6 +8,7 @@
 <%@ Register Src="~/_controls/Driver/View_Complain.ascx" TagPrefix="uc1" TagName="View_Complain" %>
 <%@ Register Src="~/_controls/Driver/View_Log.ascx" TagPrefix="uc1" TagName="View_Log" %>
 <%@ Register Src="~/_controls/Driver/View_Violation.ascx" TagPrefix="uc1" TagName="View_Violation" %>
+<%@ Register Src="~/_controls/Driver/View_Contract.ascx" TagPrefix="uc1" TagName="View_Contract" %>
 
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
@@ -39,6 +40,7 @@
                         <dx:Tab Text="综合">
                             <TabImage Url="~/images/_doc_16.gif" />
                         </dx:Tab>
+                        <dx:Tab Text="合同情况" />
                         <dx:Tab Text="缴费情况" />
                         <dx:Tab Text="违章情况" />
                         <dx:Tab Text="事故情况" />
@@ -75,6 +77,7 @@
     </div>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
+    <uc1:View_Contract runat="server" id="cT" />
     <uc1:View_Violation runat="server" id="cV" />
     <uc1:View_Accident runat="server" id="cA" />
     <uc1:View_Complain runat="server" id="cC" />
@@ -112,7 +115,7 @@
             .GetRequestParameter<string>("id", id => _ObjectId = id)
             ;
 
-        tc.Switch(new BaseControl[] { cI, cP, cV, cA, cC, cL }, (index, c) =>
+        tc.Switch(new BaseControl[] { cI, cT, cP, cV, cA, cC, cL }, (index, c) =>
         {
             c.ViewStateEx.Set(_ObjectId, DataStates.ObjectId);
             c.Execute();

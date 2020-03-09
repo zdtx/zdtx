@@ -47,6 +47,7 @@
 
         bUp.Click += (s, e) =>
         {
+            pop.PACK_0001();
             pop.Begin<eTaxi.Web.BaseControl>("~/_controls.sys/upload_photo.ascx",
                 null, c =>
                 {
