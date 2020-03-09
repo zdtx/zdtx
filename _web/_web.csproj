@@ -318,6 +318,7 @@
     <Content Include="Images\customer.png" />
     <Content Include="Images\CZJF-logo.png" />
     <Content Include="Images\CZJF.jpg" />
+    <Content Include="Redirect.aspx" />
     <Content Include="Service\Timer.asmx" />
     <Content Include="System\Department.aspx" />
     <Content Include="Domain\Driver\Create.aspx" />
@@ -1211,6 +1212,7 @@
     <Content Include="_controls.sys\Position\Edit.ascx" />
     <Content Include="_controls.sys\Rank\Edit.ascx" />
     <Content Include="_controls.sys\User\Edit.ascx" />
+    <Content Include="_controls\Driver\Account_Batch.ascx" />
     <Content Include="_controls\Driver\Update_Photo_Batch.ascx" />
     <Content Include="_controls\Driver\Update_Batch_1.ascx" />
     <Content Include="_controls\Driver\View.ascx" />

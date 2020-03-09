@@ -136,6 +136,12 @@
     border-bottom: solid 1px #CFCFCF;
 }
 
+.gridItem-template-c {
+    padding: 0px 0px 0px 0px;
+    border-left: solid 1px #CFCFCF;
+    border-bottom: solid 1px #CFCFCF;
+}
+
 .gridItem-template-n {
     padding: 4px 5px 2px 5px;
     border-left: none;

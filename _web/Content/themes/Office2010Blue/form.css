@@ -71,10 +71,10 @@
     border-spacing: 1px;
 }
 
-    .grid td {
+    /*.grid td {
         padding-right: 3px;
         padding-left: 3px;
-    }
+    }*/
 
     .grid th {
         background-color: #EDF3FB;
@@ -135,6 +135,12 @@
 
 .gridItem-template {
     padding: 4px 5px 2px 5px;
+    border-left: solid 1px #CFDDEE;
+    border-bottom: solid 1px #CFDDEE;
+}
+
+.gridItem-template-c {
+    padding: 0px 0px 0px 0px;
     border-left: solid 1px #CFDDEE;
     border-bottom: solid 1px #CFDDEE;
 }

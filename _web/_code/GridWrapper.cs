@@ -113,6 +113,22 @@ namespace eTaxi.Web
                 c.HeaderStyle.CssClass = "gridHeader";
                 c.ItemStyle.CssClass = "gridItem-template";
 
+                if (templateItem is TemplateItem.DropDownField ||
+                    templateItem is TemplateItem.DropDownList ||
+                    templateItem is TemplateItem.DXButton ||
+                    templateItem is TemplateItem.DXComboBox ||
+                    templateItem is TemplateItem.DXDateEdit ||
+                    templateItem is TemplateItem.DXSpinEdit ||
+                    templateItem is TemplateItem.DXTextBox ||
+                    templateItem is TemplateItem.DXTimeEdit ||
+                    templateItem is TemplateItem.PopupField ||
+                    templateItem is TemplateItem.TextBox ||
+                    templateItem is TemplateItem.LinkButton
+                )
+                {
+                    c.ItemStyle.CssClass = "gridItem-template-c";
+                }
+
                 if (fieldSet != null) fieldSet(c);
                 switch (footer)
                 {
