@@ -190,9 +190,6 @@
             })
             .TemplateField("Name", "姓名", new TemplateItem.DXTextBox(e =>
             {
-                e.Paddings.PaddingLeft = 0;
-                e.Paddings.PaddingRight = 0;
-
                 e.Width = 60;
                 fh.Validate(e).IsRequired();
 

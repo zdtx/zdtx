@@ -97,7 +97,7 @@
 }
 
     .gridHeader th {
-        padding: 2px 5px 2px 5px;
+        padding: 0px;
         font-weight: normal;
         border-color: #8BA0BC;
         border-top: solid 1px white;
@@ -140,8 +140,9 @@
 }
 
 .gridItem-template-c {
-    padding: 0px 0px 0px 0px;
-    border-left: solid 1px #CFDDEE;
+    padding: 1px 0px 0px 1px;
+    margin: 0px;
+    border-left: none;
     border-bottom: solid 1px #CFDDEE;
 }
 
