@@ -82,7 +82,7 @@ namespace eTaxi.Definitions.Ascx // 控件
 
     public class Finance
     {
-        public const string Charge_Edit = "finance/charge_edit.ascx";
+        public const string Charge_Create = "finance/charge_create.ascx";
         public const string Charge_Batch = "finance/charge_batch.ascx";
     }
 

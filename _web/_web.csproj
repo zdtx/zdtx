@@ -1224,7 +1224,7 @@
     <Content Include="_controls\Driver\View_Log.ascx" />
     <Content Include="_controls\Driver\View_Payment.ascx" />
     <Content Include="_controls\Driver\View_Violation.ascx" />
-    <Content Include="_controls\Finance\Charge_Edit.ascx" />
+    <Content Include="_controls\Finance\Charge_Create.ascx" />
     <Content Include="_controls\Finance\Charge_Batch.ascx" />
     <Content Include="_master\Web.config" />
     <Content Include="_controls\Web.config" />

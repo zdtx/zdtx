@@ -458,7 +458,7 @@
             .Do<ASPxTextBox>("ContactPerson", (d, c) => d.ContactPerson = c.Value.ToStringEx())
             .Do<ASPxTextBox>("Contact", (d, c) => d.Contact = c.Value.ToStringEx())
             .Do<ASPxTextBox>("Coordinator", (d, c) => d.Coordinator = c.Value.ToStringEx())
-            .Do<ASPxSpinEdit>("Fine", (d, c) => d.Fine = c.Value.ToStringEx().ToIntOrNull())
+            .Do<ASPxSpinEdit>("Fine", (d, c) => d.Fine = c.Value.ToStringEx().ToDecimalOrNull())
         );
     }    
 

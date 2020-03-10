@@ -413,7 +413,7 @@
             .Do<ASPxTextBox>("Description", (d, c) => d.Description = c.Value.ToStringEx())
             .Do<ASPxTextBox>("Coordinator", (d, c) => d.Coordinator = c.Value.ToStringEx())
             .Do<ASPxTextBox>("ServiceCom", (d, c) => d.ServiceCom = c.Value.ToStringEx())
-            .Do<ASPxSpinEdit>("Claim", (d, c) => d.Claim = c.Value.ToStringEx().ToIntOrNull())
+            .Do<ASPxSpinEdit>("Claim", (d, c) => d.Claim = c.Value.ToStringEx().ToDecimalOrNull())
         );
     }    
 

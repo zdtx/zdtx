@@ -18,7 +18,7 @@
 <asp:Content runat="server" ID="W" ContentPlaceHolderID="W">
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-<%--    <uc1:Charge_Batch runat="server" id="c" />--%>
+    <uc1:Charge_Batch runat="server" id="c" />
 </asp:Content>
 <script runat="server">
     
@@ -37,7 +37,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("结算管理", "计算设置");
+            .Title("结算管理", "结算设置");
         c.Execute();
     }
 

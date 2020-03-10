@@ -1556,6 +1556,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
         public string Code { get; set; }
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool Enabled { get; set; }
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
         /// <summary>

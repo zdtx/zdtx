@@ -478,4 +478,47 @@ namespace eTaxi.Definitions
         Standard = 0
     }
 
+    public enum ChargeType
+    {
+        [DefinitionItemSettings("按月")]
+        Monthly = 0,
+        [DefinitionItemSettings("按年")]
+        Yearly = 1,
+        [DefinitionItemSettings("按实际天数")]
+        DayCount = 2,
+        [DefinitionItemSettings("临时")]
+        Addhoc = 9
+    }
+
+    public enum MonthType
+    {
+        [DefinitionItemSettings("(未指定)")]
+        NotSpecified = 0,
+        [DefinitionItemSettings("1月")]
+        Jan = 1,
+        [DefinitionItemSettings("2月")]
+        Feb = 2,
+        [DefinitionItemSettings("3月")]
+        Mar = 3,
+        [DefinitionItemSettings("4月")]
+        Apr = 4,
+        [DefinitionItemSettings("5月")]
+        May = 5,
+        [DefinitionItemSettings("6月")]
+        Jun = 6,
+        [DefinitionItemSettings("7月")]
+        Jul = 7,
+        [DefinitionItemSettings("8月")]
+        Aug = 8,
+        [DefinitionItemSettings("9月")]
+        Sep = 9,
+        [DefinitionItemSettings("10")]
+        Oct = 10,
+        [DefinitionItemSettings("11")]
+        Nov = 11,
+        [DefinitionItemSettings("12月")]
+        Dec = 12,
+    }
+
+
 }
