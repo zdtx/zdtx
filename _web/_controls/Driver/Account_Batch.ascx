@@ -6,7 +6,6 @@
 <%@ Register Src="~/_controls.helper/GridWrapperForDetail.ascx" TagPrefix="uc1" TagName="GridWrapperForDetail" %>
 <%@ Register Src="~/_controls.helper/FormHelper.ascx" TagPrefix="uc1" TagName="FormHelper" %>
 <%@ Register Src="~/_controls.helper/Callback_Generic.ascx" TagPrefix="uc1" TagName="Callback_Generic" %>
-<%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
 <uc1:Popup_DX runat="server" ID="pop" />
 <uc1:FormHelper runat="server" ID="fh" />
 <uc1:Callback_Generic runat="server" ID="cb" />
@@ -38,7 +37,21 @@
     </div>
 </div>
 <div style="padding: 10px;">
-    <uc1:ActionToolbar runat="server" ID="at" Visible="false" />
+    <div class="actionTB" style="padding-top:2px;">
+        <table>
+            <tr>
+                <td>
+                    <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" />
+                </td>
+                <td>
+                    <dx:ASPxButton runat="server" ID="bSubmit" Text="生成月结单（不会重复生成）">
+                        <Paddings Padding="0" />
+                        <Image Url="~/images/_doc_16_position.gif" />
+                    </dx:ASPxButton>
+                </td>
+            </tr>
+        </table>
+    </div>
     <uc1:GridWrapperForDetail runat="server" ID="gw" />
     <asp:GridView runat="server" ID="gv">
         <HeaderStyle CssClass="gridHeader" />
@@ -52,29 +65,15 @@
 </div>
 <script runat="server">
 
-    private List<TB_driver> _List
+    private string[] _DriverIds
     {
-        get { return _ViewStateEx.Get<List<TB_driver>>(DataStates.List, new List<TB_driver>()); }
-        set { _ViewStateEx.Set<List<TB_driver>>(value, DataStates.List); }
-    }
-
-    private string _CarId
-    {
-        set { _ViewStateEx.Set<string>(value, "carId"); }
-        get { return _ViewStateEx.Get<string>("carId", null); }
-    }
-
-    private string _DriverId
-    {
-        set { _ViewStateEx.Set<string>(value, "driverId"); }
-        get { return _ViewStateEx.Get<string>("driverId", null); }
+        get { return _ViewStateEx.Get<string[]>(DataStates.Selected, new string[] { }); }
+        set { _ViewStateEx.Set<string[]>(value, DataStates.Selected); }
     }
 
     const string CMD_ChangeRental = "ChangeRental";
 
-
-    private string _ObjectId { get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); } }
-    public override string ModuleId { get { return Driver.Update_Batch_1; } }
+    public override string ModuleId { get { return Driver.Account_Batch; } }
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;
@@ -112,40 +111,9 @@
             }
         });
 
-        at
-            .Initialize(cc => cc
-                .Button(BaseControl.EventTypes.Save, b => { b.Visible = true; })
-                .Button(BaseControl.EventTypes.Cancel, b =>
-                {
-                    b.CausesValidation = false;
-                    b.Text = "移除选定的司机（不作修改）";
-                    b.Visible = true;
-                    b.ConfirmText = "确定移除吗？";
-                }), fh.CurrentGroup)
-            .EventSinked += (s, eType, param) =>
-            {
-                switch (eType)
-                {
-                    case BaseControl.EventTypes.Cancel:
-                        var selection = gw.GetSelected();
-                        if (!selection
-                            .Any(kv => kv.Value)) { Alert("请选择待移除的条目。"); return; }
-                        gw.GetSelected(_List, d => d).ForEach(item => _List.Remove(item));
-                        Execute(VisualSections.List);
-                        break;
-                    case BaseControl.EventTypes.Save:
-                        if (Do(Actions.Save, true))
-                        {
-                            Alert("保存成功");
-                            Execute();
-                        }
-                        break;
-                }
-            };
-
         bReset.Click += (s, e) =>
         {
-            _List.Clear();
+            _DriverIds = new string[] { };
             Execute(VisualSections.List);
             tbInput.Focus();
         };
@@ -197,6 +165,11 @@
             {
             })
             .TemplateField("Name", "姓名", new TemplateItem.Literal(e =>
+            {
+            }), f =>
+            {
+            })
+            .TemplateField("PlateNumber", "车牌号码", new TemplateItem.Literal(e =>
             {
             }), f =>
             {
@@ -258,9 +231,6 @@
             var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
             v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL =>
             {
-                _CarId = carL.Text;
-                _DriverId = driverL.Text;
-
                 switch (e.CommandName)
                 {
                     case CMD_ChangeRental:
@@ -271,12 +241,30 @@
             }));
         };
 
+        // 月份
+        var monthIds = new List<string>();
+        var todate = DateTime.Now.Date;
+
+        for (var i = 0; i< 10; i++)
+        {
+            if (i == 0)
+            {
+                monthIds.AddRange(todate.ToMonthIds());
+                continue;
+            }
+
+            monthIds.AddRange(todate.AddYears(i).ToMonthIds());
+            monthIds.AddRange(todate.AddYears(-1 * i).ToMonthIds());
+        }
+
+        cbMonthIndex.FromList(monthIds, (dd, i) => { i.Text = dd; i.Value = dd; return true; });
+
     }
 
     protected override void _Execute()
     {
         tbInput.Focus();
-        _List.Clear();
+        cbMonthIndex.Value = DateTime.Now.ToMonthId();
         _Execute(VisualSections.List);
     }
 
@@ -284,13 +272,46 @@
     {
         if (section == VisualSections.List)
         {
-            gw.Execute(_List, b => b
-                .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
-                .Do<Literal>("Name", (c, d) => c.Text = d.Name)
-                .Do<Literal>("CHNId", (c, d) => c.Text = d.CHNId)
-            );
+            // 根据 DriverIds 取得相关数据
 
-            at.Visible = _List.Count > 0;
+            var context = _DTService.Context;
+            var todate = DateTime.Now.SpecificDayDate();
+            var monthIndex = cbMonthIndex.Value.ToStringEx();
+
+            if (!string.IsNullOrEmpty(monthIndex))
+            {
+                todate = string.Format("{0}-{1}-1", monthIndex.Substring(0, 4), monthIndex.Substring(4, 2)).ToDateTime();
+            }
+
+            // 获取已生成 payment
+
+            var payments = (
+                from p in context.CarPayments
+                join d in context.Drivers on p.DriverId equals d.Id
+                join c in context.Cars on p.CarId equals c.Id
+                select new
+                {
+                    p.Id
+
+                }).ToList();
+
+            payments.Add(new
+            {
+
+            });
+
+
+
+
+
+
+
+            //gw.Execute(_List, b => b
+            //    .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
+            //    .Do<Literal>("Name", (c, d) => c.Text = d.Name)
+            //    .Do<Literal>("CHNId", (c, d) => c.Text = d.CHNId)
+            //);
+
             return;
         }
 
@@ -313,11 +334,6 @@
     }
 
     protected override void _Do(string section, string subSection = null)
-    {
-        if (section == Actions.Select) _Do_Select();
-    }
-
-    private void _Do_Select()
     {
     }
 

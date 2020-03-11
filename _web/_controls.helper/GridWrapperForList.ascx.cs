@@ -161,7 +161,7 @@ namespace eTaxi.Web.Controls
             {
                 var c = new TemplateField()
                 {
-                    HeaderTemplate = new TemplateItem.Label(l => l.Text = "nbsp;#nbsp;") { Id = "__lb_Header" },
+                    HeaderTemplate = new TemplateItem.Label(l => l.Text = " # ") { Id = "__lb_Header" },
                     ItemTemplate = new TemplateItem.Label() { Id = "__lb" }
                 };
                 c.HeaderStyle.HorizontalAlign = HorizontalAlign.Right;

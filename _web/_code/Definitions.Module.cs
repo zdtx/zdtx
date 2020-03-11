@@ -78,6 +78,7 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Edit_Photo = "driver/edit_photo.ascx";
         public const string Update_Batch_1 = "driver/update_batch_1.ascx";
         public const string Update_Batch_2 = "driver/update_batch_2.ascx";
+        public const string Account_Batch = "driver/account_batch.ascx";
     }
 
     public class Finance
