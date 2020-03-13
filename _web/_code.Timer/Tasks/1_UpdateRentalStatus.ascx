@@ -2,7 +2,7 @@
 <script runat="server">
 
     /// <summary>
-    /// 同步精矿采购合同
+    /// 生成月结单
     /// </summary>
 
     public override bool Enabled { get { return true; } }

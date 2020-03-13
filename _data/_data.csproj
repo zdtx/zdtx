@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Service.Payment.cs" />
     <Compile Include="Core\Service.Car.cs" />
     <Compile Include="Core\Service.cs" />
     <Compile Include="Core\Context.Extend.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Core\Context.cs" />
     <Compile Include="Exception.cs" />
     <Compile Include="_Plugger.cs" />
+    <Compile Include="___TABLES.EX\Charge.cs" />
+    <Compile Include="___TABLES.EX\RentalHeader.cs" />
     <Compile Include="___TABLES.EX\Car.cs" />
     <Compile Include="___TABLES.EX\Package.cs" />
     <Compile Include="___TABLES.EX\System.cs" />

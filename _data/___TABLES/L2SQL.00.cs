@@ -996,6 +996,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> ClosingBalance { get; set; }
         /// <summary>
         /// 实际驾驶天数
         /// </summary>
@@ -1051,6 +1053,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Name { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> OpeningBalance { get; set; }
         /// <summary>
         /// 已付总额
         /// </summary>
@@ -1070,17 +1074,20 @@ namespace eTaxi.L2SQL
         public decimal Amount { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string CarId { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(5)")]
-        public string ChargeId { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
-        public string DriverId { get; set; }
         /// <summary>
         /// 条目 Id，可能来自预设收费条目，也可能是临时添加
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
-        public string ItemId { get; set; }
+        public string ChargeId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(16)", CanBeNull = false)]
+        public string Code { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
+        public string DriverId { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string PaymentId { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)")]
+        public string Name { get; set; }
+
         [ColumnAttribute(DbType = "nvarchar(128)")]
         public string Remark { get; set; }
         [ColumnAttribute(DbType = "int")]

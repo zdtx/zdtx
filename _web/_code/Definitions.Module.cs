@@ -54,6 +54,7 @@ namespace eTaxi.Definitions.Ascx // 控件
         public const string Violation_Edit = "car/violation_edit.ascx";
         public const string Replace_Update = "car/replace_update.ascx";
         public const string Payment_Update = "car/payment_update.ascx";
+        public const string Payment_Item_List = "car/payment_item_list.ascx";
         public const string Service_Edit = "car/service_edit.ascx";
         public const string Contract_Edit = "car/contract_edit.ascx";
         public const string Contract_Upload = "car/contract_upload.ascx";

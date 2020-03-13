@@ -116,6 +116,14 @@ namespace eTaxi.L2SQL
         }
 
         /// <summary>
+        /// 车辆承租计费记录
+        /// </summary>
+        public Table<TB_car_payment_item> CarPaymentItems
+        {
+            get { return this.GetTable<TB_car_payment_item>(); }
+        }
+
+        /// <summary>
         /// 车辆代班记录
         /// </summary>
         public Table<TB_car_rental_shift> CarRentalShifts

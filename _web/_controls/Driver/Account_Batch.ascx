@@ -65,13 +65,26 @@
 </div>
 <script runat="server">
 
+    private List<RentalHeader> _List
+    {
+        get { return _ViewStateEx.Get<List<RentalHeader>>(DataStates.List, new List<RentalHeader>()); }
+        set { _ViewStateEx.Set<List<RentalHeader>>(value, DataStates.List); }
+    }
+
     private string[] _DriverIds
     {
         get { return _ViewStateEx.Get<string[]>(DataStates.Selected, new string[] { }); }
         set { _ViewStateEx.Set<string[]>(value, DataStates.Selected); }
     }
 
-    const string CMD_ChangeRental = "ChangeRental";
+    const string CMD_Detail = "Detail";
+    const string CMD_Update = "Update";
+
+    private string _ObjectId
+    {
+        get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); }
+        set { _ViewStateEx.Set<string>(value, DataStates.ObjectId); }
+    }
 
     public override string ModuleId { get { return Driver.Account_Batch; } }
     protected override void _SetInitialStates()
@@ -135,6 +148,17 @@
                 });
         };
 
+        bSubmit.Click += (s, e) =>
+        {
+            var selection = gw.GetSelected();
+            if (!selection
+                .Any(kv => kv.Value)) { Alert("请选择待生成账户。"); return; }
+            if (Do(Actions.Submit, true))
+            {
+                Execute(VisualSections.List);
+            }
+        };
+
         pop.EventSinked += (c, eType, parm) =>
         {
             c.If<eTaxi.Web.Controls.Selection.Driver.Item>(cc =>
@@ -159,7 +183,9 @@
         };
 
         gw.Initialize(gv, c => c
-            .TemplateField("Id", "（内码）", new TemplateItem.Literal(l =>
+            .TemplateField("CarId", "CarId", new TemplateItem.Literal(), f => f.Visible = false)
+            .TemplateField("PaymentId", "PaymentId", new TemplateItem.Literal(), f => f.Visible = false)
+            .TemplateField("DriverId", "（内码）", new TemplateItem.Literal(l =>
             {
             }), f =>
             {
@@ -184,31 +210,43 @@
             }), f =>
             {
             })
-            .TemplateField("OpeningBalance", "上期结余", new TemplateItem.Literal(e =>
+            .TemplateField("OpeningBalance", "上期结余", new TemplateItem.Label(e =>
             {
             }), f =>
             {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 80;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
             })
-            .TemplateField("InvoiceAmount", "本期应缴", new TemplateItem.Literal(e =>
+            .TemplateField("InvoiceAmount", "本期应缴", new TemplateItem.Label(e =>
             {
             }), f =>
             {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 60;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
             })
-            .TemplateField("PaidAmount", "本期实缴", new TemplateItem.Literal(e =>
+            .TemplateField("PaidAmount", "本期实缴", new TemplateItem.Label(e =>
             {
             }), f =>
             {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 60;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
             })
-            .TemplateField("ClosingBalance", "本期结余", new TemplateItem.Literal(e =>
+            .TemplateField("ClosingBalance", "本期结余", new TemplateItem.Label(e =>
             {
             }), f =>
             {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 80;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
             })
             .TemplateField("lb1", " - ", new TemplateItem.LinkButton(l =>
             {
                 l.CssClass = "aBtn";
-                l.CommandName = CMD_ChangeRental;
-                l.Text = "改押金";
+                l.CommandName = CMD_Detail;
+                l.Text = "应缴明细";
                 l.OnClientClick = "ISEx.loadingPanel.show();";
 
             }), f =>
@@ -217,7 +255,20 @@
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                 f.ItemStyle.Wrap = false;
             })
-            .TemplateField("Remark", "备注", new TemplateItem.Literal(e =>
+            .TemplateField("lb2", " - ", new TemplateItem.LinkButton(l =>
+            {
+                l.CssClass = "aBtn";
+                l.CommandName = CMD_Update;
+                l.Text = "登记实缴";
+                l.OnClientClick = "ISEx.loadingPanel.show();";
+
+            }), f =>
+            {
+                f.ItemStyle.Width = 50;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                f.ItemStyle.Wrap = false;
+            })
+            .TemplateField("Remark", "备注", new TemplateItem.Label(e =>
             {
             }), f =>
             {
@@ -226,19 +277,39 @@
 
         gv.RowCommand += (s, e) =>
         {
-            if (e.CommandName != CMD_ChangeRental) return;
+            if (e.CommandName != CMD_Detail) return;
             var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
             var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
-            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL =>
+            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL => v.Get<Literal>("PaymentId", paymentL =>  
             {
                 switch (e.CommandName)
                 {
-                    case CMD_ChangeRental:
-                        Execute(e.CommandName);
+                    case CMD_Detail:
+
+                        pop.Begin<BaseControl>("~/_controls/car/payment_item_list.ascx", null, c =>
+                        {
+                            c.ViewStateEx.Set(carL.Text, "carId");
+                            c.ViewStateEx.Set(driverL.Text, "driverId");
+                            c.ViewStateEx.Set(paymentL.Text, "paymentId");
+                            c.Execute();
+
+                        }, c =>
+                        {
+                            c
+                                .Width(650)
+                                .Height(500)
+                                .Title("结算明细")
+                                .Button(BaseControl.EventTypes.OK, b => b.CausesValidation = true)
+                            ;
+                        });
+
+                        break;
+                    case CMD_Update:
+
                         break;
                 }
 
-            }));
+            })));
         };
 
         // 月份
@@ -265,6 +336,7 @@
     {
         tbInput.Focus();
         cbMonthIndex.Value = DateTime.Now.ToMonthId();
+        _List.Clear();
         _Execute(VisualSections.List);
     }
 
@@ -283,39 +355,106 @@
                 todate = string.Format("{0}-{1}-1", monthIndex.Substring(0, 4), monthIndex.Substring(4, 2)).ToDateTime();
             }
 
+            _ObjectId = todate.ToMonthId();
+
             // 获取已生成 payment
 
-            var payments = (
-                from p in context.CarPayments
-                join d in context.Drivers on p.DriverId equals d.Id
-                join c in context.Cars on p.CarId equals c.Id
-                select new
-                {
-                    p.Id
+            var payments = context.CarPayments
+                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                .ToList();
 
-                }).ToList();
+            var rentals = context.CarRentals
+                .Where(r => _DriverIds.Contains(r.DriverId))
+                .ToList();
 
-            payments.Add(new
+            var headers = new List<RentalHeader>();
+
+            headers.AddRange(payments.Select(p => new RentalHeader()
             {
+                DriverId = p.DriverId,
+                CarId = p.CarId
+            }));
 
-            });
+            headers.AddRange(rentals
+                .Where(r => !headers.Any(h=> h.CarId == r.CarId && h.DriverId == r.DriverId))
+                .Select(r => new RentalHeader()
+                {
+                    DriverId = r.DriverId,
+                    CarId = r.CarId
+                }));
 
+            _List = headers.Distinct().ToList();
 
+            var carIds = headers.Select(h => h.CarId).Distinct().ToArray();
+            var drivers = context.Drivers.Where(d => _DriverIds.Contains(d.Id)).ToList();
+            var cars = context.Cars.Where(c => carIds.Contains(c.Id)).ToList();
 
+            gw.Execute(_List, b => b
+                .Do<Literal>("PaymentId", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(p => c.Text = p.Id))
+                .Do<Literal>("CarId", (c, d) =>
+                {
+                    c.Text = d.CarId;
+                })
+                .Do<Literal>("DriverId", (c, d) =>
+                {
+                    c.Text = d.DriverId;
+                })
+                .Do<Literal>("Name", (c, d) => drivers.FirstOrDefault(dd => dd.Id == d.DriverId).IfNN(dd =>
+                {
+                    c.Text = dd.Name;
+                }))
+                .Do<Literal>("CHNId", (c, d) => drivers.FirstOrDefault(dd => dd.Id == d.DriverId).IfNN(dd =>
+                {
+                    c.Text = dd.CHNId;
+                }))
+                .Do<Literal>("PlateNumber", (c, d) => cars.FirstOrDefault(cc => cc.Id == d.CarId).IfNN(cc =>
+                {
+                    c.Text = cc.PlateNumber;
+                }))
+                .Do<Literal>("Month", (c, d) =>
+                {
+                    c.Text = monthIndex;
+                })
+                .Do<Label>("OpeningBalance", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp => c.Text = pp.OpeningBalance.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                .Do<Label>("InvoiceAmount", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp => c.Text = pp.Amount.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                .Do<Label>("PaidAmount", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp => c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                .Do<Label>("ClosingBalance", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp =>
+                    {
+                        c.Text = pp.ClosingBalance.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                    }, () => c.Text = " - "))
+                .Do<LinkButton>("lb1", (l, d, r) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp => { l.CommandArgument = r.RowIndex.ToString(); }, () => l.Visible = false))
+                .Do<LinkButton>("lb2", (l, d, r) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp => { l.CommandArgument = r.RowIndex.ToString(); }, () => l.Visible = false))
+                .Do<Label>("Remark", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp =>
+                    {
+                        c.ForeColor = System.Drawing.Color.Empty;
+                        c.Text = pp.Remark.ToStringEx(valueWhenNullOrEmpty: " - ");
 
-
-
-
-            //gw.Execute(_List, b => b
-            //    .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
-            //    .Do<Literal>("Name", (c, d) => c.Text = d.Name)
-            //    .Do<Literal>("CHNId", (c, d) => c.Text = d.CHNId)
-            //);
-
+                    }, () =>
+                    {
+                        c.ForeColor = System.Drawing.Color.Red;
+                        c.Text = " (未生成) ";
+                    }))
+            );
             return;
         }
 
-        if (section == CMD_ChangeRental)
+        if (section == CMD_Detail)
         {
             pop.Begin<eTaxi.Web.Controls.Selection.Driver.Item>(
                 "~/_controls.helper/selection/driver/items.ascx", null, c =>
@@ -335,6 +474,28 @@
 
     protected override void _Do(string section, string subSection = null)
     {
+        switch (section)
+        {
+            case Actions.Submit:
+                _Do_Submit();
+                break;
+        }
+    }
+
+    private void _Do_Submit()
+    {
+        gw.GetSelected(_List, d => d).ForEach(item =>
+        {
+            _TransCall(() =>
+            {
+                _DTService.GenerateInvoice(item, _ObjectId);
+
+            }, ex =>
+            {
+                throw ex;
+
+            }, true);
+        });
     }
 
 </script>
