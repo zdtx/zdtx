@@ -92,6 +92,10 @@
     height: 25px;
 }
 
+.gridFooter td{
+    padding-right:5px;
+}
+
 .gridHeader {
     background-color: #EDF3FB;
 }

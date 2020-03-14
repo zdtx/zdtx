@@ -111,13 +111,13 @@
             })
             .TemplateField("Code", "编号", new TemplateItem.DXTextBox(e =>
             {
-                e.Width = 100;
+                e.Width = 80;
                 fh.Validate(e).IsRequired();
 
             }), f =>
             {
-                f.HeaderStyle.Width = 100;
-                f.ItemStyle.Width = 100;
+                f.HeaderStyle.Width = 80;
+                f.ItemStyle.Width = 80;
             })
             .TemplateField("Name", "名称", new TemplateItem.DXTextBox(e =>
             {
@@ -138,6 +138,17 @@
             {
                 f.HeaderStyle.Width = 100;
                 f.ItemStyle.Width = 100;
+            })
+            .TemplateField("IsNegative", "类型", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 60;
+                e.Items.Add("收", 0);
+                e.Items.Add("付", 1);
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 60;
+                f.ItemStyle.Width = 60;
             })
             .TemplateField("Amount", "金额", new TemplateItem.DXSpinEdit(e =>
             {
@@ -187,6 +198,7 @@
                 .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
                 .Do<ASPxTextBox>("Code", (c, d) => c.Text = d.Code)
                 .Do<ASPxTextBox>("Name", (c, d) => c.Text = d.Name)
+                .Do<ASPxComboBox>("IsNegative", (c, d) => c.Value = d.IsNegative ? "1" : "0")
                 .Do<ASPxComboBox>("Type", (c, d) => c.Value = d.Type.ToStringEx())
                 .Do<ASPxComboBox>("SpecifiedMonth", (c, d) => c.Value = d.SpecifiedMonth.ToStringEx())
                 .Do<ASPxSpinEdit>("Amount", (c, d) => { c.Number = d.Amount.ToCHNRounded(); })

@@ -1083,11 +1083,14 @@ namespace eTaxi.L2SQL
         public string Code { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string DriverId { get; set; }
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool IsNegative { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
+        public string Name { get; set; }
+        [ColumnAttribute(DbType = "money", CanBeNull = false)]
+        public decimal Paid { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
         public string PaymentId { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(128)")]
-        public string Name { get; set; }
-
         [ColumnAttribute(DbType = "nvarchar(128)")]
         public string Remark { get; set; }
         [ColumnAttribute(DbType = "int")]
@@ -1567,6 +1570,8 @@ namespace eTaxi.L2SQL
         public bool Enabled { get; set; }
         [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false, IsPrimaryKey = true)]
         public string Id { get; set; }
+        [ColumnAttribute(DbType = "bit", CanBeNull = false)]
+        public bool IsNegative { get; set; }
         /// <summary>
         /// 收费项名称
         /// </summary>

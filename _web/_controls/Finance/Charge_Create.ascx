@@ -45,6 +45,18 @@
             </td>
         </tr>
         <tr>
+            <td class="name">类型
+            </td>
+            <td class="cl">
+                <dx:ASPxComboBox runat="server" ID="cb_IsNegative" Width="200">
+                    <Items>
+                        <dx:ListEditItem Text="收" Value="0" />
+                        <dx:ListEditItem Text="付" Value="1" />
+                    </Items>
+                </dx:ASPxComboBox>
+            </td>
+        </tr>
+        <tr>
             <td class="name">金额
             </td>
             <td class="cl">
@@ -99,6 +111,7 @@
     {
         p.Controls.PresentedBy(new TB_charge(), (d, n, c) =>
         {
+            cb_IsNegative.Value = d.IsNegative ? "0" : "1";
 
         }, recursive: false);
         l_Id.Text = "（保存后系统自动生成）";
@@ -129,6 +142,7 @@
                 _Util.FillObject(p.Controls, charge, recursive: false);
                 charge.Id = newId;
                 if (charge.Type != (int)ChargeType.Yearly) charge.SpecifiedMonth = 0;
+                charge.IsNegative = _Util.Convert<bool>(cb_IsNegative.Value, false);
             })
             .SubmitChanges();
     }
