@@ -395,6 +395,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(256)")]
+        public string ModuleNo { get; set; }
         [ColumnAttribute(DbType = "nvarchar(6)")]
         public string PackageId { get; set; }
         /// <summary>

@@ -908,24 +908,41 @@ namespace eTaxi
         }
 
         public static string ToStringOrEmpty(this decimal data,
-            bool hideDecimal = false, bool comma = false, string emptyValue = null)
+            bool hideDecimal = false, bool comma = false, string emptyValue = null, bool alwaysDisplaySign = false)
         {
             if (data == 0) return string.IsNullOrEmpty(emptyValue) ? string.Empty : emptyValue;
+            var sign = data == 0 ? string.Empty : data > 0 ? "+" : "";
             if (comma)
             {
-                if (hideDecimal) return data.ToString("N0");
-                return data.ToString("N");
+                if (alwaysDisplaySign)
+                {
+                    if (hideDecimal) return sign + data.ToString("N0");
+                    return sign + data.ToString("N");
+                }
+                else
+                {
+                    if (hideDecimal) return data.ToString("N0");
+                    return data.ToString("N");
+                }
             }
             else
             {
-                if (hideDecimal) return data.ToString("F0");
-                return data.ToString("F");
+                if (alwaysDisplaySign)
+                {
+                    if (hideDecimal) return sign + data.ToString("N0");
+                    return sign + data.ToString("N");
+                }
+                else
+                {
+                    if (hideDecimal) return data.ToString("F0");
+                    return data.ToString("F");
+                }
             }
         }
         public static string ToStringOrEmpty(this Nullable<decimal> data,
-            bool hideDecimal = false, bool comma = false, string emptyValue = null)
+            bool hideDecimal = false, bool comma = false, string emptyValue = null, bool alwaysDisplaySign = false)
         {
-            if (data.HasValue) return ToStringOrEmpty(data.Value, hideDecimal, comma, emptyValue);
+            if (data.HasValue) return ToStringOrEmpty(data.Value, hideDecimal, comma, emptyValue, alwaysDisplaySign);
             return string.Empty;
         }
 

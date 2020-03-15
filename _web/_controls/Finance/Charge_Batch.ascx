@@ -230,6 +230,7 @@
                 charge.Type = d.Type;
                 charge.Amount = d.Amount;
                 charge.SpecifiedMonth = d.SpecifiedMonth;
+                charge.IsNegative = d.IsNegative;
                 charge.Remark = d.Remark;
             });
         });
@@ -242,6 +243,7 @@
             .Do<ASPxTextBox>("Code", (d, c) => d.Code = c.Value.ToStringEx())
             .Do<ASPxTextBox>("Name", (d, c) => d.Name = c.Value.ToStringEx())
             .Do<ASPxComboBox>("Type", (d, c) => d.Type = c.Value.ToStringEx().ToIntOrDefault(0))
+            .Do<ASPxComboBox>("IsNegative", (d, c) => d.IsNegative = c.Value.ToStringEx("0") == "0" ? false : true)
             .Do<ASPxSpinEdit>("Amount", (d, c) => d.Amount = c.Number)
             .Do<ASPxComboBox>("SpecifiedMonth", (d, c) => d.SpecifiedMonth = c.Value.ToStringEx().ToIntOrDefault(0))
             .Do<ASPxTextBox>("Remark", (d, c) => d.Remark = c.Value.ToStringEx())

@@ -17,4 +17,7 @@ add
 	ContractId nvarchar(10) null,			-- 当前捆绑的合同Id
 	ConstructDueTime smalldatetime null		-- 当前合同到期时间
 
-
+-- 设备编号
+alter table car
+add
+	ModuleNo nvarchar(256) null				-- 设备编号

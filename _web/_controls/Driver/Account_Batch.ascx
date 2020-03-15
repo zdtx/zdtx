@@ -77,8 +77,7 @@
         set { _ViewStateEx.Set<string[]>(value, DataStates.Selected); }
     }
 
-    const string CMD_Detail = "Detail";
-    const string CMD_Update = "Update";
+    const string CMD_Detail = "ItemsDetail";
 
     private string _ObjectId
     {
@@ -113,6 +112,7 @@
                 }
                 if (drivers.Count == 1)
                 {
+                    _DriverIds = new string[] { drivers[0].Id };
                     if (Do(Actions.Select, false)) Execute(VisualSections.List);
                     tbInput.Text = string.Empty;
                     tbInput.Focus();
@@ -180,6 +180,18 @@
                         break;
                 }
             });
+
+            if (c.ModuleId == Car.Payment_Items_Update)
+            {
+                if (eType != EventTypes.Save) return;
+                if (c.Do(Actions.Save, true))
+                {
+                    // _JS.Alert("保存成功。");
+                    pop.Close();
+                    Execute(VisualSections.List);
+                }
+            }
+
         };
 
         gw.Initialize(gv, c => c
@@ -255,19 +267,6 @@
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                 f.ItemStyle.Wrap = false;
             })
-            .TemplateField("lb2", " - ", new TemplateItem.LinkButton(l =>
-            {
-                l.CssClass = "aBtn";
-                l.CommandName = CMD_Update;
-                l.Text = "登记实缴";
-                l.OnClientClick = "ISEx.loadingPanel.show();";
-
-            }), f =>
-            {
-                f.ItemStyle.Width = 50;
-                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
-            })
             .TemplateField("Remark", "备注", new TemplateItem.Label(e =>
             {
             }), f =>
@@ -278,15 +277,17 @@
         gv.RowCommand += (s, e) =>
         {
             if (e.CommandName != CMD_Detail) return;
+
             var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
             var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
-            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL => v.Get<Literal>("PaymentId", paymentL =>  
+            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL => v.Get<Literal>("PaymentId", paymentL =>
             {
                 switch (e.CommandName)
                 {
                     case CMD_Detail:
 
-                        pop.Begin<BaseControl>("~/_controls/car/payment_item_list.ascx", null, c =>
+                        pop.PACK_0001();
+                        pop.Begin<BaseControl>("~/_controls/car/payment_items_update.ascx", null, c =>
                         {
                             c.ViewStateEx.Set(carL.Text, "carId");
                             c.ViewStateEx.Set(driverL.Text, "driverId");
@@ -296,15 +297,12 @@
                         }, c =>
                         {
                             c
-                                .Width(650)
+                                .Width(700)
                                 .Height(500)
                                 .Title("结算明细")
-                                .Button(BaseControl.EventTypes.OK, b => b.CausesValidation = true)
+                                .Button(BaseControl.EventTypes.Save, b => b.CausesValidation = true)
                             ;
                         });
-
-                        break;
-                    case CMD_Update:
 
                         break;
                 }
@@ -419,18 +417,36 @@
                 })
                 .Do<Label>("OpeningBalance", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                    .IfNN(pp => c.Text = pp.OpeningBalance.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                    .IfNN(pp =>
+                    {
+                        c.Text = pp.OpeningBalance.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                        c.ColorizeNumber(pp.OpeningBalance, dd => dd < 0, dd => dd == 0);
+
+                    }, () => c.Text = " - "))
                 .Do<Label>("InvoiceAmount", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                    .IfNN(pp => c.Text = pp.Amount.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                    .IfNN(pp =>
+                    {
+                        var converted = -1 * pp.Amount;
+                        c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                        c.ColorizeNumber(converted, dd => dd < 0, dd => dd == 0);
+
+                    }, () => c.Text = " - "))
                 .Do<Label>("PaidAmount", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                    .IfNN(pp => c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - "), () => c.Text = " - "))
+                    .IfNN(pp =>
+                    {
+                        c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                        c.ColorizeNumber(pp.OpeningBalance, dd => dd < 0, dd => dd == 0);
+
+                    }, () => c.Text = " - "))
                 .Do<Label>("ClosingBalance", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
                     {
-                        c.Text = pp.ClosingBalance.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                        c.Text = pp.ClosingBalance.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                        c.ColorizeNumber(pp.ClosingBalance, dd => dd < 0, dd => dd == 0);
+
                     }, () => c.Text = " - "))
                 .Do<LinkButton>("lb1", (l, d, r) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
@@ -454,7 +470,7 @@
             return;
         }
 
-        if (section == CMD_Detail)
+        if (section == Actions.Select)
         {
             pop.Begin<eTaxi.Web.Controls.Selection.Driver.Item>(
                 "~/_controls.helper/selection/driver/items.ascx", null, c =>
@@ -476,10 +492,44 @@
     {
         switch (section)
         {
+            case Actions.Select:
+                _Do_Select();
+                break;
             case Actions.Submit:
                 _Do_Submit();
                 break;
         }
+    }
+
+    private void _Do_Select()
+    {
+        _DriverIds.ForEach(id =>
+        {
+            if (_List.Any(l => l.DriverId == id)) return;
+            var context = _DTContext<CommonContext>(true);
+            var newData = context.CarRentals.Where(r => r.DriverId == id).Select(r => new RentalHeader()
+            {
+                CarId = r.CarId,
+                DriverId = r.DriverId
+
+            }).ToList();
+
+            context.CarPayments.Where(p => p.DriverId == id).Select(p => new RentalHeader()
+            {
+                CarId = p.CarId,
+                DriverId = p.DriverId
+            }).ForEach(h =>
+            {
+                if (newData.Any(hh => hh.CarId == h.CarId && hh.DriverId == h.DriverId)) return;
+                newData.Add(new RentalHeader()
+                {
+                    CarId = h.CarId,
+                    DriverId = h.DriverId
+                });
+            });
+
+            _List.AddRange(newData);
+        });
     }
 
     private void _Do_Submit()

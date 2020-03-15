@@ -486,6 +486,8 @@ namespace eTaxi.Definitions
         Yearly = 1,
         [DefinitionItemSettings("按实际天数")]
         DayCount = 2,
+        [DefinitionItemSettings("有系统计算")]
+        Computed = 3,
         [DefinitionItemSettings("临时")]
         Addhoc = 9
     }

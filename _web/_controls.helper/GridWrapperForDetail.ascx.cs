@@ -124,12 +124,12 @@ namespace eTaxi.Web.Controls
                 {
                     HeaderTemplate = new TemplateItem.CheckBox(cc =>
                     {
-                        cc.Attributes["onclick"] = "ISEx.toggleCBs(this,'__cb')";
+                        cc.Attributes["onclick"] = string.Format("ISEx.toggleCBs(this,'__cb_{0}')", gv.ID);
                     })
                     {
                         Id = "__cb_Header"
                     },
-                    ItemTemplate = new TemplateItem.CheckBox() { Id = "__cb" }
+                    ItemTemplate = new TemplateItem.CheckBox() { Id = string.Format("__cb_{0}", gv.ID) }
                 };
 
                 c.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
