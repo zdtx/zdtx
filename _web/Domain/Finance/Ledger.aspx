@@ -2,8 +2,6 @@
 <%@ MasterType TypeName="eTaxi.Web.MasterPageEx" %>
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
-<%@ Register Src="~/_controls/Business/Accident.ascx" TagPrefix="uc1" TagName="Accident" %>
-<%@ Register Src="~/_controls/Business/Accident_Batch.ascx" TagPrefix="uc1" TagName="Accident_Batch" %>
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
     <script type="text/javascript">
@@ -26,11 +24,14 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="事故登记 - 单个录入">
+                        <dx:Tab Text="计划款项">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="批量录入">
-                            <TabImage Url="~/images/_doc_16_foldercollection.gif" />
+                        <dx:Tab Text="应收款项">
+                            <TabImage Url="~/images/_doc_16_formeddocument.gif" />
+                        </dx:Tab>
+                        <dx:Tab Text="租金结算">
+                            <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
                     </Tabs>
                 </dx:ASPxTabControl>
@@ -39,17 +40,15 @@
     </table>
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:Accident runat="server" id="c1" />
-    <uc1:Accident_Batch runat="server" id="c2" />
 </asp:Content>
-<script runat="server"> // 事故管理
+<script runat="server"> // 分类核算
 
     private string _ObjectId
     {
         get { return _ViewStateEx.Get<string>(DataStates.ObjectId, string.Empty); }
         set { _ViewStateEx.Set<string>(value, DataStates.ObjectId); }
     }
-    
+
     protected override bool _PACK_0001 { get { return true; } }
     protected override void _SetPreInitControls()
     {
@@ -63,22 +62,22 @@
 
     protected override void _SetInitialStates()
     {
-        tc.Switch(new BaseControl[] { c1, c2 }, (index, c) =>
-        {
-            c.Execute();
+        //tc.Switch(new BaseControl[] { c1, c2 }, (index, c) =>
+        //{
+        //    c.Execute();
 
-        }, (index, c) =>
-        {
-            c.ViewStateEx.Clear();
-        });
+        //}, (index, c) =>
+        //{
+        //    c.ViewStateEx.Clear();
+        //});
     }
 
     protected override void _Execute()
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("业务处理", "事故登记");
-        c1.Execute();
+            .Title("结算管理", "分类核算");
+        //c1.Execute();
     }
 
 </script>

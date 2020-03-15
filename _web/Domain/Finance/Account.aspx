@@ -37,7 +37,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("计算管理", "驾驶员账户查询");
+            .Title("结算管理", "驾驶员账户查询");
         c.Execute();
     }
 
