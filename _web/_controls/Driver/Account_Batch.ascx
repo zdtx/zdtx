@@ -41,7 +41,7 @@
         <table>
             <tr>
                 <td>
-                    <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" />
+                    <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" AutoPostBack="true" />
                 </td>
                 <td>
                     <dx:ASPxButton runat="server" ID="bSubmit" Text="生成月结单（不会重复生成）">
@@ -258,7 +258,7 @@
             {
                 l.CssClass = "aBtn";
                 l.CommandName = CMD_Detail;
-                l.Text = "应缴明细";
+                l.Text = "修改明细";
                 l.OnClientClick = "ISEx.loadingPanel.show();";
 
             }), f =>
@@ -327,6 +327,7 @@
         }
 
         cbMonthIndex.FromList(monthIds, (dd, i) => { i.Text = dd; i.Value = dd; return true; });
+        cbMonthIndex.SelectedIndexChanged += (s, e) => _Execute(VisualSections.List);
 
     }
 
@@ -420,7 +421,7 @@
                     .IfNN(pp =>
                     {
                         c.Text = pp.OpeningBalance.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(pp.OpeningBalance, dd => dd < 0, dd => dd == 0);
+                        c.ColorizeNumber(pp.OpeningBalance, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("InvoiceAmount", (c, d) => payments
@@ -429,7 +430,7 @@
                     {
                         var converted = -1 * pp.Amount;
                         c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(converted, dd => dd < 0, dd => dd == 0);
+                        c.ColorizeNumber(converted, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("PaidAmount", (c, d) => payments
@@ -437,7 +438,7 @@
                     .IfNN(pp =>
                     {
                         c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(pp.OpeningBalance, dd => dd < 0, dd => dd == 0);
+                        c.ColorizeNumber(pp.Paid, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("ClosingBalance", (c, d) => payments
@@ -445,13 +446,10 @@
                     .IfNN(pp =>
                     {
                         c.Text = pp.ClosingBalance.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(pp.ClosingBalance, dd => dd < 0, dd => dd == 0);
+                        c.ColorizeNumber(pp.ClosingBalance, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<LinkButton>("lb1", (l, d, r) => payments
-                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                    .IfNN(pp => { l.CommandArgument = r.RowIndex.ToString(); }, () => l.Visible = false))
-                .Do<LinkButton>("lb2", (l, d, r) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp => { l.CommandArgument = r.RowIndex.ToString(); }, () => l.Visible = false))
                 .Do<Label>("Remark", (c, d) => payments

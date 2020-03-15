@@ -83,7 +83,7 @@
 
             }, GridWrapper.FooterType.Label)
 
-            .TemplateField("Paid", "已付", new TemplateItem.DXSpinEdit(f =>
+            .TemplateField("Paid", "已付（绝对金额）", new TemplateItem.DXSpinEdit(f =>
             {
                 f.MinValue = 0;
                 f.Width = 100;
@@ -161,7 +161,7 @@
             {
                 var converted = -1 * (d.IsNegative ? -1 * d.Amount : d.Amount);
                 c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                c.ColorizeNumber(converted, s => s < 0, s => s == 0);
+                c.ColorizeNumber(converted, s => s > 0, s => s == 0);
             })
             .Do<ASPxSpinEdit>("Paid", (c, d) => { c.Number = d.Paid.ToCHNRounded(); })
             .Do<ASPxTextBox>("Remark", (c, d) => { c.Text = d.Remark; })
@@ -175,7 +175,7 @@
             {
                 var sum = -1 * _List.Sum(i => i.IsNegative ? -1 * i.Amount : i.Amount);
                 c.Text = sum.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                c.ColorizeNumber(sum, s => s < 0, s => s == 0);
+                c.ColorizeNumber(sum, s => s > 0, s => s == 0);
             })
 
         );

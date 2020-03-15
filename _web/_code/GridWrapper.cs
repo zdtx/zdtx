@@ -190,9 +190,12 @@ namespace eTaxi.Web
         {
             private T _Object = default(T);
             public T Object { get { return _Object; } }
+            private GridView _Grid = null;
+            public GridView Grid { get { return _Grid; } }
+
             private GridViewRow _Row = null;
             public GridViewRow Row { get { return _Row; } }
-            public RowBinder(GridViewRow row, T obj) { _Row = row; _Object = obj; }
+            public RowBinder(GridView gv, GridViewRow row, T obj) { _Grid = gv; _Row = row; _Object = obj; }
 
             /// <summary>
             /// 处理嵌套在 GridView 的第一列选择框

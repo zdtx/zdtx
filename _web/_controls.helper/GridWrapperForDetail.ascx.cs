@@ -28,7 +28,7 @@ namespace eTaxi.Web.Controls
             Dictionary<int, bool> result = new Dictionary<int, bool>();
             for (int i = 0; i < _Grid.Rows.Count; i++)
             {
-                var cb = _Grid.Rows[i].FindControl("__cb") as CheckBox;
+                var cb = _Grid.Rows[i].FindControl(string.Format("__cb_{0}", Grid.ID)) as CheckBox;
                 result.Add(_Grid.Rows[i].RowIndex, cb.Enabled && cb.Checked);
             }
             return result;
@@ -151,7 +151,7 @@ namespace eTaxi.Web.Controls
                     if (checkBox)
                     {
                         e.Row
-                            .FindControl("__cb")
+                            .FindControl(string.Format("__cb_{0}", Grid.ID))
                             .If<CheckBox>(cc => cc.Attributes["onclick"] = string.Format(
                                 "{0}.selection[{1}]=this.checked;ISEx.toggleCB(this);", 
                                 ClientID, e.Row.RowIndex.ToString()));
@@ -183,7 +183,7 @@ namespace eTaxi.Web.Controls
             _Grid.RowDataBound += (s, e) =>
             {
                 if (e.Row.RowType != DataControlRowType.DataRow) return;
-                RowBinder<T> binder = new RowBinder<T>(e.Row, (T)e.Row.DataItem);
+                RowBinder<T> binder = new RowBinder<T>(Grid, e.Row, (T)e.Row.DataItem);
                 if (bind != null) bind(binder);
             };
             _Grid.DataSource = data;
