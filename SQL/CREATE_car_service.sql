@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[car_service]    Script Date: 2020/3/5 23:08:10 ******/
+/****** Object:  Table [dbo].[car_service]    Script Date: 2020/3/15 21:49:50 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,10 @@ GO
 CREATE TABLE [dbo].[car_service](
 	[CarId] [nvarchar](10) NOT NULL,
 	[Id] [nvarchar](10) NOT NULL,
-	[ServiceContent] [nvarchar](128) NULL,
+	[ServiceContent] [nvarchar](128) NOT NULL,
+	[ServiceTime] [smalldatetime] NOT NULL,
+	[ServiceProvider] [nvarchar](128) NULL,
+	[ServiceCost] [money] NULL,
 	[Remark] [nvarchar](512) NULL,
 	[CreatedById] [nvarchar](10) NOT NULL,
 	[CreateTime] [datetime] NOT NULL,

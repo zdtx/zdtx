@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[car_contract]    Script Date: 2020/3/8 13:18:18 ******/
+/****** Object:  Table [dbo].[car_contract]    Script Date: 2020/3/15 21:49:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,6 +16,8 @@ CREATE TABLE [dbo].[car_contract](
 	[Code] [nvarchar](64) NULL,
 	[CommenceDate] [smalldatetime] NOT NULL,
 	[EndDate] [smalldatetime] NULL,
+	[Blob] [uniqueidentifier] NULL,
+	[BlobOrginalName] [nvarchar](256) NULL,
 	[Remark] [nvarchar](512) NULL,
 	[CreatedById] [nvarchar](10) NOT NULL,
 	[CreateTime] [datetime] NOT NULL,
@@ -39,6 +41,12 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同执行�
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同到期时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'EndDate'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'附件（二进制）Id （用于查找 temp file 目录中的文件）' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'Blob'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'合同原始文件名' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'BlobOrginalName'
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建人' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'car_contract', @level2type=N'COLUMN',@level2name=N'CreatedById'

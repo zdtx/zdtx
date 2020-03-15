@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[charge_package]    Script Date: 2020/3/9 19:13:55 ******/
+/****** Object:  Table [dbo].[charge_package]    Script Date: 2020/3/15 21:47:24 ******/
 SET ANSI_NULLS ON
 GO
 

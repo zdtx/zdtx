@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[charge]    Script Date: 2020/3/9 19:13:46 ******/
+/****** Object:  Table [dbo].[charge]    Script Date: 2020/3/15 21:47:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,9 +12,11 @@ CREATE TABLE [dbo].[charge](
 	[Id] [nvarchar](6) NOT NULL,
 	[Code] [nvarchar](16) NOT NULL,
 	[Name] [nvarchar](128) NOT NULL,
+	[IsNegative] [bit] NOT NULL,
 	[Type] [int] NOT NULL,
 	[Amount] [money] NOT NULL,
 	[SpecifiedMonth] [int] NULL,
+	[Enabled] [bit] NOT NULL,
 	[Remark] [nvarchar](256) NULL,
  CONSTRAINT [PK_car_charge] PRIMARY KEY CLUSTERED 
 (
