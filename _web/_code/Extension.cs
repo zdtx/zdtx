@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace eTaxi
 {
@@ -197,6 +199,21 @@ namespace eTaxi
             if (data < (long)1024 * 1024 * 1024 * 1024) return data.ToFileSize(FileSize.MB).ToStringOrEmpty(true) + " G";
             return "很大";
         }
+
+        public static string ToMd5(this string data)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                var dataBytes = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(data));
+                var sb = new StringBuilder();
+                for (int i = 0; i < dataBytes.Length; i++)
+                {
+                    sb.Append(dataBytes[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
+
 
     }
 

@@ -39,7 +39,7 @@ namespace eTaxi.Web
         void JS(string snippet);
         void JS<T>(T caller, string snippet) where T : Control;
         string GetSitePrefix();
-        string PostExternal<TObj>(TObj obj, string actionUrl);
+        string PostExternal<TObj>(TObj obj, string actionUrl, bool isAsync = false);
     }
 
 }

@@ -12,7 +12,7 @@
         <tr>
             <th colspan="2">
                 <div class="title">
-                    基本信息 <asp:LinkButton runat="server" Text="TTT" CssClass="aBtn" ID="lbTest" Visible="false" />
+                    基本信息 <asp:LinkButton runat="server" Text="TTT" CssClass="aBtn" ID="lbTest" Visible="true" />
                 </div>
             </th>
         </tr>
@@ -242,106 +242,106 @@
 </asp:Panel>
 <script runat="server">
 
-        public override string ModuleId { get { return Car.Create; } }
-        protected override void _SetInitialStates()
-        {
-            fh.CurrentGroup = ClientID;
-            fh.Validate(tb_PlateNumber).IsRequired();
-            fh.Validate(tb_Manufacturer).IsRequired();
-            fh.Validate(tb_Model).IsRequired();
-            fh.Validate(cb_Type).IsRequired();
-            fh.Validate(tb_Source).IsRequired();
-            fh.Validate(tb_EngineNum).IsRequired();
-            fh.Validate(tb_Company).IsRequired();
-            fh.Validate(sp_Rental).IsRequired();
-            fh.Validate(tb_Fleet).IsRequired();
-            fh.Validate(de_LicenseRenewTime).IsRequired();
-            fh.Validate(tb_License).IsRequired();
-            fh.Validate(de_DrvLicenseRenewTime).IsRequired();
-            fh.Validate(tb_DrvLicense).IsRequired();
-            fh.Validate(pf_DepartmentId).IsRequired();
-            fh.Validate(pf_PackageId).IsRequired();
-            fh.Validate(de_InsuranceEnd).IsRequired();
-            fh.Validate(tb_CarriageNum).IsRequired();
-            fh.Validate(tb_InsuranceCom).IsRequired();
-            fh.Validate(tb_SecSerialNum).IsRequired();
-            cb_Type.FromEnum<CarType>(valueAsInteger: true);
-            pf_DepartmentId.Initialize<eTaxi.Web.Controls.Selection.Department.TreeItem>(pop,
-                "~/_controls.helper/selection/department/treeitem.ascx", (cc, b, h, isFirst) =>
-                {
-                    pop.Title = "选择车辆的营运部门";
-                    pop.Width = 500;
-                    pop.Height = 400;
-                    if (isFirst) cc.Execute();
-                }, (c, b, h) =>
-                {
-                    b.Text = c.Selection[0].Name;
-                    h.Value = c.Selection[0].Id;
-                    pop.Close();
-                    return true;
-                }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
-            pf_PackageId.Initialize<eTaxi.Web.Controls.Selection.Package.Item>(pop,
-                "~/_controls.helper/selection/package/item.ascx", (cc, b, h, isFirst) =>
-                {
-                    pop.Title = "选择车辆的经营模式（套餐）";
-                    pop.Width = 500;
-                    pop.Height = 400;
-                    if (isFirst) cc.Execute();
-                }, (c, b, h) =>
-                {
-                    b.Text = c.Selection[0].Name;
-                    h.Value = c.Selection[0].Id;
-                    pop.Close();
-                    return true;
-                }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
-
-            lbTest.Click += (s, e) =>
+    public override string ModuleId { get { return Car.Create; } }
+    protected override void _SetInitialStates()
+    {
+        fh.CurrentGroup = ClientID;
+        fh.Validate(tb_PlateNumber).IsRequired();
+        fh.Validate(tb_Manufacturer).IsRequired();
+        fh.Validate(tb_Model).IsRequired();
+        fh.Validate(cb_Type).IsRequired();
+        fh.Validate(tb_Source).IsRequired();
+        fh.Validate(tb_EngineNum).IsRequired();
+        fh.Validate(tb_Company).IsRequired();
+        fh.Validate(sp_Rental).IsRequired();
+        fh.Validate(tb_Fleet).IsRequired();
+        fh.Validate(de_LicenseRenewTime).IsRequired();
+        fh.Validate(tb_License).IsRequired();
+        fh.Validate(de_DrvLicenseRenewTime).IsRequired();
+        fh.Validate(tb_DrvLicense).IsRequired();
+        fh.Validate(pf_DepartmentId).IsRequired();
+        fh.Validate(pf_PackageId).IsRequired();
+        fh.Validate(de_InsuranceEnd).IsRequired();
+        fh.Validate(tb_CarriageNum).IsRequired();
+        fh.Validate(tb_InsuranceCom).IsRequired();
+        fh.Validate(tb_SecSerialNum).IsRequired();
+        cb_Type.FromEnum<CarType>(valueAsInteger: true);
+        pf_DepartmentId.Initialize<eTaxi.Web.Controls.Selection.Department.TreeItem>(pop,
+            "~/_controls.helper/selection/department/treeitem.ascx", (cc, b, h, isFirst) =>
             {
-                var response = PostExternal(new
-                {
-                    brand = "Test",
-                    businessDistrict = "区域",
-                    buytime = "2013",
-                    color = "黑色",
-                    companyId = "",
-                    companyName = "",
-                    createBy = "",
-                    createTime = "",
-                    delFlag = 0,
-                    engineNo = "",
-                    id = "",
-                    isOnline = 0,
-                    issuingAgency = "",
-                    licenseNumber = "",
-                    moduleCtlPass = "",
-                    moduleHardVersion = "",
-                    moduleInstallPerson = "",
-                    moduleInstallPlace = "",
-                    moduleNo = "ABC123456",
-                    moduleProtocol = "",
-                    moduleRemark = "",
-                    moduleSim = "",
-                    moduleSoftVersion = "",
-                    moduleType = "",
-                    name = "",
-                    ownerName = "",
-                    ownerPhone = "",
-                    ownerSex = "",
-                    photoUrls = "",
-                    remark = "",
-                    status = 0,
-                    token = "8f01c3eb1d364b57a253c3bfd2b4b2c2",
-                    type = "",
-                    updateBy = "",
-                    updateTime = "",
-                    validityEnd = "",
-                    validityStart = "",
-                    vinCode = ""
+                pop.Title = "选择车辆的营运部门";
+                pop.Width = 500;
+                pop.Height = 400;
+                if (isFirst) cc.Execute();
+            }, (c, b, h) =>
+            {
+                b.Text = c.Selection[0].Name;
+                h.Value = c.Selection[0].Id;
+                pop.Close();
+                return true;
+            }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
+        pf_PackageId.Initialize<eTaxi.Web.Controls.Selection.Package.Item>(pop,
+            "~/_controls.helper/selection/package/item.ascx", (cc, b, h, isFirst) =>
+            {
+                pop.Title = "选择车辆的经营模式（套餐）";
+                pop.Width = 500;
+                pop.Height = 400;
+                if (isFirst) cc.Execute();
+            }, (c, b, h) =>
+            {
+                b.Text = c.Selection[0].Name;
+                h.Value = c.Selection[0].Id;
+                pop.Close();
+                return true;
+            }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
 
-                }, "car/save");
+        lbTest.Click += (s, e) =>
+        {
+            var secret = Host.Settings.Get<string>("apiSecret");
+            var response = PostExternal(new
+            {
+                brand = "Test",
+                businessDistrict = "区域",
+                buytime = "2013",
+                color = "黑色",
+                companyId = "",
+                companyName = "",
+                createBy = "",
+                createTime = "",
+                delFlag = 0,
+                engineNo = "",
+                id = "",
+                isOnline = 0,
+                issuingAgency = "",
+                licenseNumber = "",
+                moduleCtlPass = "",
+                moduleHardVersion = "",
+                moduleInstallPerson = "",
+                moduleInstallPlace = "",
+                moduleNo = "ABC123456",
+                moduleProtocol = "",
+                moduleRemark = "",
+                moduleSim = "",
+                moduleSoftVersion = "",
+                moduleType = "",
+                name = "",
+                ownerName = "",
+                ownerPhone = "",
+                ownerSex = "",
+                photoUrls = "",
+                remark = "",
+                status = 0,
+                token = secret.ToMd5(),
+                type = "",
+                updateBy = "",
+                updateTime = "",
+                validityEnd = "",
+                validityStart = "",
+                vinCode = ""
 
-                Alert(response);
+            }, "car/save");
 
+            Alert(response);
 
         };
 
@@ -371,6 +371,8 @@
     {
         var context = _DTService.Context;
         var newId = string.Empty;
+        TB_car newCar = null;
+
         context
             .NewSequence<TB_car>(_SessionEx, (seq, id) =>
             {
@@ -388,11 +390,56 @@
                     car.HandOverTime =
                         new DateTime(2000, 1,1).Add(((DateTime)te_HandOverTime.Value).TimeOfDay);
                 }
+
+                newCar = car;
+
             })
             .SubmitChanges();
+
+            var secret = Host.Settings.Get<string>("apiSecret");
+            var response = PostExternal(new
+            {
+                brand = newCar.Manufacturer,
+                businessDistrict = newCar.Fleet,
+                buytime = "", 
+                color = "",
+                companyId = "",
+                companyName = newCar.Company,
+                createBy = "",
+                createTime = "",
+                delFlag = 0,
+                engineNo = newCar.EngineNum,
+                id = "",
+                isOnline = 0,
+                issuingAgency = "",
+                licenseNumber = "",
+                moduleCtlPass = "",
+                moduleHardVersion = "",
+                moduleInstallPerson = "",
+                moduleInstallPlace = "",
+                moduleNo = "ABC123456",
+                moduleProtocol = "",
+                moduleRemark = "",
+                moduleSim = "",
+                moduleSoftVersion = "",
+                moduleType = "",
+                name = newCar.PlateNumber,
+                ownerName = "",
+                ownerPhone = "",
+                ownerSex = "",
+                photoUrls = "",
+                remark = "",
+                status = 0,
+                token = secret.ToMd5(),
+                type = "",
+                updateBy = "",
+                updateTime = "",
+                validityEnd = "",
+                validityStart = "",
+                vinCode = ""
+
+            }, "car/save");
+
     }
-
-
-
 
 </script>
