@@ -18,9 +18,9 @@
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
     <table class="login">
         <tr>
-            <td style="width:500px;">
+            <td style="width:400px;">
                 <div style="float:right;padding-right:20px;">
-                    <img alt="常州交服" src="images/czjf.jpg" />
+                    <%--<img src="images/czjf.jpg" />--%>
                 </div>
             </td>
             <td style="border-left:silver 1px solid;padding-left:20px;vertical-align:top;padding-top:200px;">

@@ -3,11 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="theHead" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>常州交服出租车有限公司 出租车管理系统（eTaxi）</title>
+    <title>出租车数据管理系统（eTaxi）</title>
 </head>
 <body>
     <div style="padding: 20px;">
-        欢迎使用 常州交服出租车有限公司 eTaxi 系统，系统正在打开，请稍候..
+        欢迎使用 出租车数据管理系统，系统正在打开，请稍候..
     </div>
 </body>
 </html>

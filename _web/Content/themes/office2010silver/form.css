@@ -49,82 +49,96 @@
 }
 
 .headerTB {
-    border-top: solid 1px #9F9F9F;
-    border-bottom: solid 1px #9F9F9F;
+    border-bottom: 1px solid #AEAEAE;
+    height: 28px;
 }
 
-    .headerTB .txt {
+    .headerTB .current {
         float: right;
-        margin-top: 5px;
         padding-left: 10px;
         padding-right: 10px;
-        padding-top: 3px;
+        padding-top: 7px;
         padding-bottom: 1px;
     }
 
-        .headerTB .txt td {
-            padding-left: 5px;
-        }
+    .headerTB td {
+        padding-left: 6px;
+    }
+
+    .headerTB .path {
+        float: left;
+        padding-top: 3px;
+    }
+
+    .headerTB .link {
+        background-color: #DBEEFF;
+    }
 
 .grid {
     border-spacing: 1px;
 }
 
-    .grid td {
+    /*.grid td {
         padding-right: 3px;
         padding-left: 3px;
-    }
+    }*/
 
     .grid th {
-        background-color: #DCDCDC;
+        background-color: #EDF3FB;
     }
 
 .gridRow:hover {
-    background-color: #DCDCDC;
+    background-color: #F7E6A2;
 }
 
 .gridRow-selected {
-    background-color: #F9E5E6;
+    background-color: #FBF4D7;
 }
 
 .gridFooter {
     height: 25px;
 }
 
+    .gridFooter td {
+        padding-right: 5px;
+    }
+
 .gridHeader {
-    background-color: #DCDCDC;
+    background-color: #EDF3FB;
 }
 
     .gridHeader th {
-        padding: 2px 5px 2px 5px;
+        padding: 0px;
         font-weight: normal;
-        border-color: #9F9F9F;
+        border-color: #AEAEAE;
         border-top: solid 1px white;
-        border-bottom: solid 1px #9F9F9F;
+        border-right: solid 1px #AEAEAE;
+        border-bottom: solid 1px #AEAEAE;
         white-space: nowrap;
         text-wrap: none;
+        height: 22px;
     }
 
 .gridItem-bound {
     padding: 4px 5px 2px 5px;
-    border-left: solid 1px #CFCFCF;
-    border-bottom: solid 1px #CFCFCF;
+    border-left: solid 1px #EAEAEA;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-bound-n {
     padding: 4px 5px 2px 5px;
     border-left: none;
-    border-bottom: solid 1px #CFCFCF;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-bound-n-b {
     padding: 4px 0px 2px 5px;
     border-left: none;
-    border-bottom: solid 1px #CFCFCF;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-hidden {
-    border-bottom: solid 1px #CFCFCF;
+    border-bottom: solid 1px #EAEAEA;
     width: 1px;
     padding: 0px;
     margin: 0px;
@@ -132,27 +146,28 @@
 
 .gridItem-template {
     padding: 4px 5px 2px 5px;
-    border-left: solid 1px #CFCFCF;
-    border-bottom: solid 1px #CFCFCF;
+    border-left: solid 1px #EAEAEA;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-template-c {
-    padding: 0px 0px 0px 0px;
-    border-left: solid 1px #CFCFCF;
-    border-bottom: solid 1px #CFCFCF;
+    padding: 1px 0px 0px 1px;
+    margin: 0px;
+    border-left: none;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-template-n {
     padding: 4px 5px 2px 5px;
     border-left: none;
-    border-bottom: solid 1px #CFCFCF;
+    border-bottom: solid 1px #EAEAEA;
 }
 
 .gridItem-number {
     padding-right: 5px;
     background: #F9E5E6;
-    border-bottom: 1px solid #E8AAAD;
-    border-right: 1px solid #E8AAAD;
+    border-bottom: 1px solid #EAEAEA;
+    border-right: 1px solid #EAEAEA;
 }
 
 /* 列表 grid 使用的 */
@@ -182,7 +197,7 @@
     }
 
     .gdList .row:hover {
-        background-color: #F0F0F0;
+        background-color: #EAEAEA;
     }
 
     .gdList .nav {
@@ -225,7 +240,7 @@
         border-bottom: 1px solid red;
         white-space: nowrap;
         text-wrap: none;
-        background-color: #F0F0F0;
+        background-color: #EAEAEA;
         margin-bottom: 5px;
     }
 
@@ -282,7 +297,7 @@
         }
 
 .bar {
-    background-image: url(../images/sc_bg8.gif);
+    background-image: url(../../../images/sc_bg8.gif);
     padding: 6px;
     font-weight: bold;
 }
@@ -293,7 +308,7 @@
     padding-bottom: 6px;
     padding-left: 25px;
     color: gray;
-    background-image: url(../images/icons/small/arrow_right_16.png);
+    background-image: url(../../../images/icons/small/arrow_right_16.png);
     background-repeat: no-repeat;
     background-position: 2px 1px;
 }
@@ -308,6 +323,7 @@
 
 .form {
     border-spacing: 0px;
+    font-size: 13px;
 }
 
     .form table, .form tbody {
@@ -317,31 +333,32 @@
     .form th {
         text-align: left;
         padding-top: 5px;
-        border-bottom: solid 1px #F0F0F0;
+        border-bottom: solid 1px #EAEAEA;
     }
 
     .form .name {
-        background-color: #F0F0F0;
+        background-color: #EAEAEA;
         text-align: right;
         white-space: nowrap;
         text-wrap: none;
         color: Gray;
         padding: 3px 5px 2px 12px;
-        border-bottom: solid 1px #F0F0F0;
+        border-bottom: solid 1px #EAEAEA;
         vertical-align: middle;
     }
 
     .form .val {
         padding: 5px 5px 3px 5px;
         background-color: white;
-        border-bottom: solid 1px #F0F0F0;
+        border-bottom: solid 1px #EAEAEA;
+        /*border-left: solid 1px #EAEAEA;*/
         margin-bottom: 1px;
         vertical-align: top;
     }
 
     .form .cl {
-        padding: 0px 1px 0px 1px;
-        background-color: #F0F0F0;
+        padding: 1px 1px 0px 1px;
+        /*background-color: #EAEAEA;*/
         border-bottom: solid 1px transparent;
         vertical-align: bottom;
     }
@@ -350,9 +367,18 @@
             border-spacing: 1px;
         }
 
+.filterTb-L {
+    padding: 7px;
+    background-color: #EAEAEA;
+    border-bottom: 1px solid #AEAEAE;
+    font-size: 13px;
+}
+
 .filterTb {
-    padding: 10px;
-    background-color: White;
+    padding: 5px;
+    background-color: #EAEAEA;
+    border-bottom: 1px solid #AEAEAE;
+    font-size: 13px;
 }
 
     .filterTb .name {
@@ -363,53 +389,25 @@
     .filterTb .val {
         padding-left: 3px;
         padding-right: 3px;
-        padding-top: 2px;
-        padding-bottom: 1px;
-        border-bottom: dashed 1px #e2e5e6;
+        border-bottom: 1px solid #AEAEAE;
     }
 
     .filterTb .cl {
-        padding-left: 3px;
-        padding-right: 3px;
-        padding-top: 1px;
-        padding-bottom: 1px;
-        border-bottom: dashed 1px #e2e5e6;
-        border-spacing: 5px;
+    }
+
+    .filterTb .inner {
+        background-color: #EAEAEA;
+        padding: 2px;
+    }
+
+    .filterTb .btn {
+        padding-left: 5px;
+        vertical-align: bottom;
     }
 
     .filterTb td {
         white-space: nowrap;
     }
-
-.tips {
-    background: #FFFFCC;
-    border-top: 1px solid #E8E3AA;
-    border-bottom: 1px solid #E8E3AA;
-}
-
-.alert {
-    background: #F9E5E6;
-    border-top: 1px solid #E8AAAD;
-    border-bottom: 1px solid #E8AAAD;
-}
-
-.info {
-    background: #E5ECF9;
-    border-top: 1px solid #AAC6E8;
-    border-bottom: 1px solid #AAC6E8;
-}
-
-.success {
-    background: #E9F9E5;
-    border-top: 1px solid #B4E8AA;
-    border-bottom: 1px solid #B4E8AA;
-}
-
-.error {
-    background: #FFFBB3;
-    color: red;
-    border: 1px dashed red;
-}
 
 .modalBg {
     background-color: Gray;
@@ -436,8 +434,11 @@
 
 /* 用在 GridView 没有数据的时候（EmptyDataTemplate） */
 .emptyData {
+    margin-top: 3px;
+    margin-bottom: 3px;
     padding: 20px;
-    background-color: #F0F0F0;
+    background-color: #EAEAEA;
+    border: dashed 1px #AEAEAE;
 }
 
 /* 用在 DevExpress 的 Menu 当 ShowAsToolbar 时 */
@@ -445,11 +446,11 @@
 }
 
     .dxTb .item {
-        background-position: 3px 2px !important;
+        background-position: 3px 3px !important;
     }
 
         .dxTb .item span {
-            margin-left: 18px;
+            margin-left: 12px;
         }
 
     .dxTb .itemHover {
@@ -514,16 +515,26 @@
         padding-top: 2px;
         padding-bottom: 1px;
         padding-right: 5px;
-        border: dashed 1px;
+        /*border: dashed 1px;*/
     }
 
-.actionTB .btn {
-    padding-right: 3px;
+.actionTB {
+    padding-bottom: 1px;
+    border-bottom: 1px dashed #AEAEAE;
+    background-color: #EAEAEA
 }
+
+    .actionTB table {
+        border-spacing: 0px;
+    }
+
+    .actionTB td {
+        padding-left: 1px;
+    }
 
 .subHead {
     border-top: solid 1px #9F9F9F;
-    background-color: #F0F0F0;
+    background-color: #EAEAEA;
     white-space: nowrap;
     text-wrap: none;
     color: Gray;
@@ -547,12 +558,12 @@
     .dmPage .content {
         margin-top: 5px;
         margin-bottom: 5px;
-        border: dotted 1px #F0F0F0;
+        border: dotted 1px #EAEAEA;
         padding: 5px;
     }
 
 .avatar {
-    background-color: #F0F0F0;
+    background-color: #EAEAEA;
     border-spacing: 0px;
 }
 
@@ -574,7 +585,7 @@
 .aBtn {
     padding: 2px;
     border: dotted 1px black;
-    background-color: #F0F0F0;
+    background-color: #EAEAEA;
 }
 
     .aBtn:hover {
@@ -609,9 +620,7 @@
 }
 
 .ds {
-    padding-left: 15px;
-    padding-right: 10px;
-    padding-bottom: 30px;
+    padding: 10px;
 }
 
 .dsWrap {
@@ -623,22 +632,22 @@
 .dsTb {
     width: 100%;
     border-spacing: 0px;
+    font-size: 13px;
 }
 
     .dsTb th {
         padding: 5px;
         border-top: solid 3px white;
-        border-bottom: solid 1px black;
-        /* border-bottom: dashed 1px #A0A0A0; */
+        border-bottom: solid 1px #AEAEAE;
         white-space: nowrap;
         text-wrap: none;
-        background-color: #E0E0E0;
+        background-color: #EAEAEA;
         text-align: left;
     }
 
         .dsTb th .text {
             /* font-size: 14px; */
-            padding-left: 5px;
+            padding-left: 0px;
             padding-right: 5px;
             padding-bottom: 2px;
         }
@@ -648,10 +657,10 @@
         padding-bottom: 3px;
         padding-left: 5px;
         padding-right: 5px;
-        border-left: solid 1px #9F9F9F;
-        border-bottom: solid 1px #9F9F9F;
+        border-bottom: dashed 1px #9F9F9F;
+        /*border-left: solid 1px #9F9F9F;
         white-space: nowrap;
-        text-wrap: none;
+        text-wrap: none;*/
     }
 
     .dsTb .row:hover {
@@ -695,7 +704,7 @@
 
     .dsTb .ph {
         background-color: white;
-        /* border-bottom: solid 1px #F0F0F0; */
+        /* border-bottom: solid 1px #EAEAEA; */
         width: 10px;
     }
 
@@ -703,15 +712,15 @@
     }
 
     .dsTb .hd {
-        font-weight:bold;
-        padding-left:5px;
-        padding-top:6px;
+        font-weight: bold;
+        padding-left: 5px;
+        padding-top: 6px;
     }
 
     .dsTb .lnk {
-        background: url( ../images/_doc_16_link.gif) no-repeat 1px 5px !important;
+        background: url( ../../../images/_doc_16_link.gif) no-repeat 1px 5px !important;
         border-bottom: solid 1px #A0A0A0;
-        background-color: #F0F0F0;
+        background-color: #EAEAEA;
         padding-left: 23px;
         width: 5%;
     }
@@ -737,16 +746,46 @@
     }
 
 .dsN:hover {
-    color:black;
-    cursor:default;
+    color: black;
+    cursor: default;
 }
 
 .dsTool {
-    padding:0px;
+    padding: 0px;
 }
 
     .dsTool td, .dsTool table {
         border: none;
-        border-spacing:0px;
+        border-spacing: 0px;
         padding: 0px;
     }
+
+.pane {
+    border: 1px solid #AEAEAE;
+    background-color: white;
+    font-size: 13px;
+}
+
+    .pane .header {
+        background-color: #EAEAEA;
+        border-bottom: 1px solid #AEAEAE;
+        padding: 5px;
+    }
+
+    .pane .cHeader {
+        background-color: #EAEAEA;
+        border-bottom: 1px solid #AEAEAE;
+        padding: 5px;
+    }
+
+    .pane .subHeader {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-left: 8px;
+        padding-bottom: 3px;
+        border-bottom: 1px dashed #F0F0F0;
+    }
+
+.leftPane {
+    border-right: solid #859EBF 1px;
+}

@@ -395,7 +395,7 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(256)")]
+        [ColumnAttribute(DbType = "nvarchar(128)")]
         public string ModuleNo { get; set; }
         [ColumnAttribute(DbType = "nvarchar(6)")]
         public string PackageId { get; set; }
@@ -449,6 +449,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(64)")]
+        public string ZId { get; set; }
     }
     /// <summary>
     /// 车辆 - 交通事故记录

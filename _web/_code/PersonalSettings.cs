@@ -83,7 +83,7 @@ namespace eTaxi
             get
             {
                 string theme = base.GetPropertyValue("UITheme").ToString();
-                if (string.IsNullOrEmpty(theme)) return D.Themes.Office2010Blue;
+                if (string.IsNullOrEmpty(theme)) return D.Themes.Office2010Silver;
                 return theme;
             }
 

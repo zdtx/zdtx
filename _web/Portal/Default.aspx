@@ -25,16 +25,16 @@
             </ext:TaskManager>
         </Bin>
         <Content>
-            <ext:Container runat="server" Cls="topLeft" PaddingSpec="5 5 5 5" Width="40">
+            <ext:Container runat="server" Cls="topLeft" PaddingSpec="0 0 0 0" Width="0">
                 <Content>
-                    <img src="../images/czjf-logo.png" alt="常州交服" height="38" />
+                    <img src="../images/zdlogo.png" alt="中电城市出租车" height="50" width="280" />
                 </Content>
             </ext:Container>
             <ext:Container runat="server" Cls="topRight" PaddingSpec="24 0 0 100" Flex="1">
                 <Items>
                     <ext:Toolbar runat="server" Flat="true">
                         <Items>
-                            <ext:ToolbarTextItem runat="server" Text="常州交服出租车有限公司" 
+                            <ext:ToolbarTextItem runat="server" Text="" 
                                 StyleSpec="font-size:20px;font-family:YouYuan;" PaddingSpec="0 0 5 0" />
                             <ext:ToolbarFill runat="server" />
                             <ext:Button runat="server" Text="桌面" Icon="HouseConnect" Padding="3" />
