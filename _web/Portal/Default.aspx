@@ -27,7 +27,7 @@
         <Content>
             <ext:Container runat="server" Cls="topLeft" PaddingSpec="0 0 0 0" Width="0">
                 <Content>
-                    <img src="../images/zdlogo.png" alt="中电城市出租车" height="50" width="280" />
+                    <img src="../images/zdlogo.png" alt="中电城市出租车" height="50" />
                 </Content>
             </ext:Container>
             <ext:Container runat="server" Cls="topRight" PaddingSpec="24 0 0 100" Flex="1">

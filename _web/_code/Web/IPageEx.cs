@@ -10,6 +10,8 @@ using System.Web.Security;
 using System.Web.Profile;
 
 using eTaxi.L2SQL;
+using System.Net.Http;
+
 namespace eTaxi.Web
 {
     /// <summary>
@@ -37,6 +39,7 @@ namespace eTaxi.Web
         void JS(string snippet);
         void JS<T>(T caller, string snippet) where T : Control;
         string GetSitePrefix();
+        string PostExternal<TObj>(TObj obj, string actionUrl);
     }
 
 }
