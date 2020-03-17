@@ -46,6 +46,7 @@
     protected override void _SetInitialStates()
     {
         at.Initialize(c, cc => cc
+            .Button(BaseControl.EventTypes.Submit, b => { b.Visible = true; b.Text = "保存再新建"; })    
             .Button(BaseControl.EventTypes.Save, b => { b.Visible = true; })
             .Button(BaseControl.EventTypes.Cancel, b => { b.Visible = true; b.ConfirmText = "确定返回吗？"; })
             );
@@ -64,6 +65,15 @@
                         _JS.Alert("保存完成", postScript: "window.location.replace('list.aspx');");
                     }
                     break;
+                case BaseControl.EventTypes.Submit:
+                    if (c.Do(Actions.Save, true))
+                    {
+                        cp.Import<string>(c, DataStates.ObjectId);
+                        if (!cp.Do(Actions.Save, false)) return;
+                        _JS.Alert("保存完成", postScript: "window.location.replace('create.aspx');");
+                    }
+                    break;
+
             }
         };
     }
