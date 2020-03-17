@@ -33,7 +33,7 @@
                 <td>
                     <asp:Literal runat="server" ID="InsuranceTransCode" />
                 </td>
-                <td class="num">到期：<asp:Label runat="server" ID="InsuranceEnd" ForeColor="Green" />
+                <td class="noWrap">到期：<asp:Label runat="server" ID="InsuranceEnd" ForeColor="Green" />
                 </td>
                 <td class="num">
                     <asp:Label runat="server" ID="Days" />

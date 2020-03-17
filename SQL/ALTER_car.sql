@@ -20,4 +20,8 @@ add
 -- 设备编号
 alter table car
 add
-	ModuleNo nvarchar(256) null				-- 设备编号
+	ModuleNo nvarchar(256) null,				-- 设备编号
+	ZId nvarchar(64) null						-- 车辆档案 ID
+
+
+

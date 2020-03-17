@@ -395,7 +395,7 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(128)")]
+        [ColumnAttribute(DbType = "nvarchar(64)")]
         public string ModuleNo { get; set; }
         [ColumnAttribute(DbType = "nvarchar(6)")]
         public string PackageId { get; set; }
@@ -1818,6 +1818,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(16)")]
         public string Tel2 { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(64)")]
+        public string ZId { get; set; }
     }
     /// <summary>
     /// 司机 - 资格证信誉考核记录（未启用）

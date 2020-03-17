@@ -12,7 +12,7 @@
         <tr>
             <th colspan="2">
                 <div class="title">
-                    基本信息 <asp:LinkButton runat="server" Text="TTT" CssClass="aBtn" ID="lbTest" Visible="true" />
+                    基本信息
                 </div>
             </th>
         </tr>
@@ -21,6 +21,13 @@
             </td>
             <td class="val">
                 <asp:Literal runat="server" ID="l_Id" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">设备编号
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_ModuleNo" MaxLength="12" NullText="请输入设备编号" Width="200" />
             </td>
         </tr>
         <tr>
@@ -246,6 +253,7 @@
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;
+        fh.Validate(tb_ModuleNo).IsRequired();
         fh.Validate(tb_PlateNumber).IsRequired();
         fh.Validate(tb_Manufacturer).IsRequired();
         fh.Validate(tb_Model).IsRequired();
@@ -265,6 +273,7 @@
         fh.Validate(tb_CarriageNum).IsRequired();
         fh.Validate(tb_InsuranceCom).IsRequired();
         fh.Validate(tb_SecSerialNum).IsRequired();
+
         cb_Type.FromEnum<CarType>(valueAsInteger: true);
         pf_DepartmentId.Initialize<eTaxi.Web.Controls.Selection.Department.TreeItem>(pop,
             "~/_controls.helper/selection/department/treeitem.ascx", (cc, b, h, isFirst) =>
@@ -295,56 +304,6 @@
                 return true;
             }, null, c => c.Button(BaseControl.EventTypes.OK, s => s.CausesValidation = false));
 
-        lbTest.Click += (s, e) =>
-        {
-            var secret = Host.Settings.Get<string>("apiSecret");
-            var response = PostExternal(new
-            {
-                brand = "Test",
-                businessDistrict = "区域",
-                buytime = "2013",
-                color = "黑色",
-                companyId = "",
-                companyName = "",
-                createBy = "",
-                createTime = "",
-                delFlag = 0,
-                engineNo = "",
-                id = "",
-                isOnline = 0,
-                issuingAgency = "",
-                licenseNumber = "",
-                moduleCtlPass = "",
-                moduleHardVersion = "",
-                moduleInstallPerson = "",
-                moduleInstallPlace = "",
-                moduleNo = "ABC123456",
-                moduleProtocol = "",
-                moduleRemark = "",
-                moduleSim = "",
-                moduleSoftVersion = "",
-                moduleType = "",
-                name = "",
-                ownerName = "",
-                ownerPhone = "",
-                ownerSex = "",
-                photoUrls = "",
-                remark = "",
-                status = 0,
-                token = secret.ToMd5(),
-                type = "",
-                updateBy = "",
-                updateTime = "",
-                validityEnd = "",
-                validityStart = "",
-                vinCode = ""
-
-            }, "car/save");
-
-            Alert(response);
-
-        };
-
     }
 
     protected override void _Execute()
@@ -371,7 +330,12 @@
     {
         var context = _DTService.Context;
         var newId = string.Empty;
-        TB_car newCar = null;
+
+        if (tb_ModuleNo.Text.ToStringEx().Trim().Length != 12)
+        {
+            Alert("设备编号必须12位");
+            return;
+        }
 
         context
             .NewSequence<TB_car>(_SessionEx, (seq, id) =>
@@ -382,63 +346,75 @@
             {
                 _Util.FillObject(p.Controls, car, recursive: false);
                 car.Id = newId;
-                car.DepartmentId = "0001";
 
                 // 处理交接班时间（补齐年月日）
                 if (!string.IsNullOrEmpty(te_HandOverTime.Value.ToStringEx()))
                 {
                     car.HandOverTime =
-                        new DateTime(2000, 1,1).Add(((DateTime)te_HandOverTime.Value).TimeOfDay);
+                        new DateTime(2000, 1, 1).Add(((DateTime)te_HandOverTime.Value).TimeOfDay);
                 }
 
-                newCar = car;
+                var secret = Host.Settings.Get<string>("apiSecret");
+                var response = PostExternal(new
+                {
+                    brand = car.Manufacturer,
+                    businessDistrict = car.Fleet,
+                    buytime = "",
+                    color = "",
+                    companyId = "",
+                    companyName = pf_DepartmentId.Text,
+                    createBy = "",
+                    createTime = "",
+                    delFlag = 0,
+                    engineNo = car.EngineNum,
+                    isOnline = 0,
+                    issuingAgency = "",
+                    licenseNumber = "",
+                    moduleCtlPass = "",
+                    moduleHardVersion = "",
+                    moduleInstallPerson = "",
+                    moduleInstallPlace = "",
+                    moduleNo = car.ModuleNo,
+                    moduleProtocol = "",
+                    moduleRemark = "",
+                    moduleSim = "",
+                    moduleSoftVersion = "",
+                    moduleType = "",
+                    name = car.PlateNumber,
+                    ownerName = "",
+                    ownerPhone = "",
+                    ownerSex = "",
+                    photoUrls = "",
+                    remark = "",
+                    status = 0,
+                    token = secret.ToMd5(),
+                    type = "",
+                    updateBy = "",
+                    updateTime = "",
+                    validityEnd = "",
+                    validityStart = "",
+                    vinCode = ""
+
+                }, "car/save");
+
+                try
+                {
+                    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
+                    if (string.IsNullOrEmpty(x.result.id))
+                    {
+                        throw new Exception(response);
+                    }
+
+                    car.ZId = x.result.id;
+                }
+                catch
+                {
+                    throw new Exception("填报不成功：" + response);
+                }
 
             })
+
             .SubmitChanges();
-
-            var secret = Host.Settings.Get<string>("apiSecret");
-            var response = PostExternal(new
-            {
-                brand = newCar.Manufacturer,
-                businessDistrict = newCar.Fleet,
-                buytime = "", 
-                color = "",
-                companyId = "",
-                companyName = newCar.Company,
-                createBy = "",
-                createTime = "",
-                delFlag = 0,
-                engineNo = newCar.EngineNum,
-                id = "",
-                isOnline = 0,
-                issuingAgency = "",
-                licenseNumber = "",
-                moduleCtlPass = "",
-                moduleHardVersion = "",
-                moduleInstallPerson = "",
-                moduleInstallPlace = "",
-                moduleNo = "ABC123456",
-                moduleProtocol = "",
-                moduleRemark = "",
-                moduleSim = "",
-                moduleSoftVersion = "",
-                moduleType = "",
-                name = newCar.PlateNumber,
-                ownerName = "",
-                ownerPhone = "",
-                ownerSex = "",
-                photoUrls = "",
-                remark = "",
-                status = 0,
-                token = secret.ToMd5(),
-                type = "",
-                updateBy = "",
-                updateTime = "",
-                validityEnd = "",
-                validityStart = "",
-                vinCode = ""
-
-            }, "car/save");
 
     }
 

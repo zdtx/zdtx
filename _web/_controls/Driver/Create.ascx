@@ -264,6 +264,11 @@
         {
             l_DayOfBirth.Text = "（请先正确填写身份证号）";
             l_Gender.Text = "（请先正确填写身份证号）";
+            if (string.IsNullOrEmpty(tb_CHNId.Value.ToStringEx()))
+            {
+                Alert("身份证号未填报");
+                return;
+            }
             var id = tb_CHNId.Value.ToStringEx().Replace("-", string.Empty);
             if (string.IsNullOrEmpty(id))
             {
@@ -351,6 +356,11 @@
     {
         var context = _DTService.Context;
         var newId = string.Empty;
+        var car = context.Cars.FirstOrDefault(c => c.Id == pf_CarId.Value);
+        if (car == null || string.IsNullOrEmpty(car.ZId))
+            throw new Exception("找不到车辆档案，请检查：" + pf_CarId.Value);
+        var department = Global.Cache.GetDepartment(d => d.Id == car.DepartmentId);
+
         context
             .NewSequence<TB_driver>(_SessionEx, (seq, id) =>
             {
@@ -369,34 +379,79 @@
                     }
 
                 }, recursive: false);
+
                 driver.Id = newId;
                 driver.DayOfBirth = new DateTime(
                     driver.CHNId.Substring(6, 4).ToIntOrDefault(),
                     driver.CHNId.Substring(10, 2).ToIntOrDefault(),
                     driver.CHNId.Substring(12, 2).ToIntOrDefault());
                 driver.Gender = driver.CHNId.Substring(16, 1).ToIntOrDefault() % 2 > 0;
+
+                var secret = Host.Settings.Get<string>("apiSecret");
+                var response = PostExternal(new
+                {
+                    carId = car.ZId,
+                    carName = car.PlateNumber,
+                    certficateUnit = "",
+                    companyId = "",
+                    companyName = department.Name,
+                    createBy = "",
+                    createTime = "",
+                    delFlag = 0,
+                    driverIdcard = driver.CHNId,
+                    driverName = driver.Name,
+                    driverPhone = driver.Tel1,
+
+                    operationNo = "",
+                    operationRealNo = driver.CertNumber,
+                    photoUrls = "",
+                    remark = "",
+                    starLevel = "",
+                    supervisesTel = "",
+                    token = secret.ToMd5(),
+                    updateBy = "",
+                    updateTime = ""
+
+                }, "driver/save");
+
+                try
+                {
+                    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
+                    if (string.IsNullOrEmpty(x.result.id))
+                    {
+                        throw new Exception(response);
+                    }
+
+                    driver.ZId = x.result.id;
+                }
+                catch
+                {
+                    throw new Exception("填报不成功：" + response);
+                }
+
             })
+
             .SubmitChanges();
 
         // 加入车辆捆绑关系
         var newRentalId = context.NewSequence<TB_car_rental>(_SessionEx);
-        var car = context.Cars.SingleOrDefault(c => c.Id == pf_CarId.Value);
         var rentals = context.CarRentals.Where(r => r.CarId == pf_CarId.Value).ToList();
 
         context
             .Create<TB_car_rental>(_SessionEx, r =>
-                {
-                    r.CarId = pf_CarId.Value;
-                    r.DriverId = newId;
-                    r.Ordinal = rentals.Count;
-                    r.StartTime = de_StartTime.Date;
-                    r.Rental = (car.Rental / 2).ToCHNRounded();
-                    r.Extra1 = sp_Extra1.Number;
-                    r.IsProbation = ck_IsProbation.Checked;
-                    if (!
-                        string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
-                        r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
-                })
+            {
+                r.CarId = pf_CarId.Value;
+                r.DriverId = newId;
+                r.Ordinal = rentals.Count;
+                r.StartTime = de_StartTime.Date;
+                r.Rental = (car.Rental / 2).ToCHNRounded();
+                r.Extra1 = sp_Extra1.Number;
+                r.IsProbation = ck_IsProbation.Checked;
+                if (!
+                    string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
+                    r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
+            })
+
             .SubmitChanges();
 
         // 更新控件的 id 归属
