@@ -142,27 +142,21 @@
             _JS.Write(string.Format("{0}.Start();", t.ClientID));
         };
 
-        //lb1.Click += (s, e) =>
-        //{
-        //    _Context.UpdateNotes
-        //        .OrderByDescending(n => n.CreateDate)
-        //        .FirstOrDefault().IfNN(n =>
-        //        {
-        //            pp.Begin<ISoft.Web.Controls.Message>("~/controls/message.ascx", null, cc =>
-        //            {
-        //                cc.Title = n.Title;
-        //                cc.MessageText = n.Context;
-        //                cc.Remark = n.Remark;
-        //            }, cc => cc
-        //                .Width(400)
-        //                .Height(300)
-        //                .Title("系统公告")
-        //                .Button(BaseControl.EventTypes.Cancel, b => b.Text = "关闭")
-        //            );
-        //        });
-        //};
+        lb1.Click += (s, e) =>
+        {
+            var context = _DTService.Context;
+            var response = PostExternal(new
+            {
+
+
+
+            }, "", false);
+
+            _JS.Alert(response);
+
+        };
     }
-    
+
     protected override void _FirstGet()
     {
         base._FirstGet();
@@ -201,5 +195,5 @@
         t.ClientSideEvents.Tick = null;
         return base._HandleException(callerType, exFilter, step, msgSend);
     }
-        
+
 </script>
