@@ -32,6 +32,7 @@ delete driver_certificate
 delete driver_log
 delete package
 delete person
+delete position
 delete [rank]
 delete sys_acl
 delete sys_batch
@@ -39,6 +40,15 @@ delete sys_batch_item
 
 update sys_sequence set [count] = 0 
 
+insert into position
+(Id, Branch, RankId, [Name], [Description], CreatedById, CreateTime, ModifiedById, ModifyTime)
+values
+('PS0000', NULL, 'RK0000', '（未分配岗位）', NULL, '', '2016-04-07 22:06:48.833', '', '2016-04-07 22:06:48.833')
+
+insert into [rank]
+(Id, [Name], [Value], [Description], CreatedById, CreateTime, ModifiedById, ModifyTime)
+values
+('RK0000', '（未分配级别）', 0, NULL, '', '2020-03-19 19:35:51.520', '', '2020-03-19 19:35:51.520')
 
 --INSERT INTO [dbo].[aspnet_SchemaVersions]
 --           ([Feature]

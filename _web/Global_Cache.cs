@@ -125,7 +125,9 @@ namespace eTaxi.Web
                                 p.Gender,
                                 p.DayOfBirth,
                                 p.DepartmentId,
-                                p.PositionId
+                                p.PositionId,
+                                p.UserName,
+                                p.Password
                             };
                         Cache.Resolve<List<TB_person>>(Exp<TB_person>.Transform(qPerson.ToList(), i =>
                         {

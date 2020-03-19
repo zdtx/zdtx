@@ -144,15 +144,8 @@
 
         lb1.Click += (s, e) =>
         {
-            var context = _DTService.Context;
-            var response = PostExternal(new
-            {
-
-
-
-            }, "", false);
-
-            _JS.Alert(response);
+            //var context = _DTService.Context;
+            //_JS.Alert(response);
 
         };
     }
