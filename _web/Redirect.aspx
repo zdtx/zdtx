@@ -149,10 +149,15 @@
             GetExternal(string.Format("company/getList?token={0}", token), rsp =>
             {
                 dynamic x = JsonConvert.DeserializeObject<ExpandoObject>(rsp);
-                dynamic[] companies = x.result;
-                if (companies.Length == 0) return;
+                List<object> companies = x.result;
+                if (companies.Count == 0) return;
 
-                string[] names = companies.Select(c => (string)c.companyName).ToArray();
+                List<string> names = new List<string>();
+                foreach (dynamic c in companies)
+                {
+                    names.Add(c.companyName);
+                }
+
                 List<string> newNames = new List<string>();
                 names.ForEach(n =>
                 {
