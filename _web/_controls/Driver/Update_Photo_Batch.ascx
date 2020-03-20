@@ -225,6 +225,8 @@
             })
             .TemplateField("Photo", "照片", new TemplateItem.Image(e =>
             {
+                e.Height = 50;
+
             }), f =>
             {
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;

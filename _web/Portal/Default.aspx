@@ -268,6 +268,7 @@
                     fn: function (buttonId, text, opt) {
                         if (buttonId == "ok") {
                             window.location.replace('../login.aspx?off=true');
+                            window.close();
                         }
                     },
                     icon: Ext.MessageBox.QUESTION
