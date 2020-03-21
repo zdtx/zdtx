@@ -51,15 +51,6 @@ namespace eTaxi.Web.Portal
         protected global::Ext.Net.Toolbar topTB;
 
         /// <summary>
-        /// bHome 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Ext.Net.Button bHome;
-
-        /// <summary>
         /// bWC 控件。
         /// </summary>
         /// <remarks>
@@ -67,42 +58,6 @@ namespace eTaxi.Web.Portal
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::Ext.Net.ToolbarTextItem bWC;
-
-        /// <summary>
-        /// winHome 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Ext.Net.Window winHome;
-
-        /// <summary>
-        /// pMenu 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Ext.Net.Panel pMenu;
-
-        /// <summary>
-        /// tpItems 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Ext.Net.TreePanel tpItems;
-
-        /// <summary>
-        /// dsT 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Ext.Net.TreeStore dsT;
 
         /// <summary>
         /// bUsers 控件。
@@ -130,6 +85,15 @@ namespace eTaxi.Web.Portal
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::Ext.Net.Button bHit;
+
+        /// <summary>
+        /// nav 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxNavBar nav;
 
         /// <summary>
         /// cMain 控件。

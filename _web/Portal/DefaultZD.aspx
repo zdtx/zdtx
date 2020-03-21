@@ -27,7 +27,7 @@
         <Content>
             <ext:Container runat="server" Cls="topLeft" PaddingSpec="0 0 0 0" Width="0">
                 <Content>
-                    <img src="../images/zdlogo.png" alt="中电城市出租车" height="50" />
+                    <img src="../images/zdlogo.png" alt="中电城市出租车" height="50" width="220" />
                 </Content>
             </ext:Container>
             <ext:Container runat="server" Cls="topRight" PaddingSpec="24 0 0 100" Flex="1">
@@ -70,12 +70,6 @@
             <ext:Parameter Name="margin" Value="0 2 0 2" />
         </Defaults>
         <Items>
-            <ext:Button runat="server" ID="bHome" IconCls="icon-home-medium"
-                Text="&nbsp;&nbsp;<b>主菜单</b>" EnableToggle="true">
-                <Listeners>
-                    <Toggle Handler="ISEx.toggleMenu(pressed);" />
-                </Listeners>
-            </ext:Button>
             <ext:ToolbarSeparator runat="server" />
             <ext:ToolbarFill runat="server" />
             <ext:ToolbarSeparator runat="server" />
@@ -87,53 +81,6 @@
                 </Listeners>
             </ext:Button>
         </Items>
-        <Bin>
-            <ext:Window runat="server" ID="winHome" AutoShow="false" Width="550" ButtonAlign="Left"
-                Header="false" Border="false" CloseAction="Hide" Layout="BorderLayout">
-                <Items>
-                    <ext:Panel runat="server" ID="pMenu" Header="false"
-                        Layout="AccordionLayout" Width="250" Region="West">
-                        <LayoutConfig>
-                            <ext:AccordionLayoutConfig Animate="false" />
-                        </LayoutConfig>
-                    </ext:Panel>
-                    <ext:TreePanel runat="server" ID="tpItems" RootVisible="false" Region="Center" BodyPaddingSummary="10 10 10 5"
-                        MarginSpec="0 0 0 3" Title="功能列表" EmptyText="请选择菜单项" Lines="false" AnimCollapse="false" Animate="false">
-                        <Store>
-                            <ext:TreeStore runat="server" ID="dsT" AutoLoad="false">
-                                <Model>
-                                    <ext:Model runat="server">
-                                        <Fields>
-                                            <ext:ModelField Name="value" />
-                                        </Fields>
-                                    </ext:Model>
-                                </Model>
-                            </ext:TreeStore>
-                        </Store>
-                        <Root>
-                            <ext:Node Text="[root]">
-                                <Children>
-                                    <ext:Node Text="车辆管理" Icon="Car"></ext:Node>
-                                </Children>
-                            </ext:Node>
-                        </Root>
-                        <SelectionModel>
-                            <ext:TreeSelectionModel runat="server" />
-                        </SelectionModel>
-                        <Listeners>
-                            <ItemClick Handler="ISEx.navigate(record.get('value'));" />
-                        </Listeners>
-                    </ext:TreePanel>
-                </Items>
-                <Buttons>
-                    <ext:Button runat="server" Text="关闭菜单" Icon="ApplicationSideContract" Width="200" Padding="5">
-                        <Listeners>
-                            <Click Handler="#{bHome}.toggle();" />
-                        </Listeners>
-                    </ext:Button>
-                </Buttons>
-            </ext:Window>
-        </Bin>
     </ext:Toolbar>
 </asp:Content>
 <asp:Content ID="S" ContentPlaceHolderID="S" runat="server">
@@ -162,10 +109,36 @@
     </ext:Toolbar>
 </asp:Content>
 <asp:Content ID="C" ContentPlaceHolderID="C" runat="server">
-    <ext:Container runat="server" ID="cMain" Region="Center" Layout="FitLayout">
-        <Loader runat="server" Mode="Frame" AutoLoad="false">
-            <LoadMask ShowMask="true" Msg="正在打开，请稍候.." />
-        </Loader>
+    <ext:Container runat="server" Layout="BorderLayout" Region="Center">
+        <Items>
+            <ext:Container runat="server" Region="West" Width="220" Cls="zd">
+                <Content>
+                    <dx:ASPxNavBar runat="server" ID="nav" EnableAnimation="true" AutoCollapse="true" 
+                        Font-Size="10" BackColor="#515A6E" ForeColor="#C3C5CB" Border-BorderStyle="None" Width="220">
+                        <GroupHeaderStyle BackColor="#515A6E">
+                            <Paddings PaddingTop="15" PaddingBottom="10" PaddingLeft="30" />
+                            <Border BorderStyle="Solid" BorderColor="#515A6E" />
+                            <BackgroundImage ImageUrl="~/images/gif.gif" />
+                        </GroupHeaderStyle>
+                        <GroupContentStyle BackColor="#363E4F">
+                            <Paddings PaddingBottom="15" PaddingLeft="40" PaddingTop="15" />
+                        </GroupContentStyle>
+                        <ItemStyle>
+                            <Paddings PaddingTop="5" />
+                            <HoverStyle BackColor="#363E4F" ForeColor="White" Border-BorderColor="#363E4F" />
+                            <BackgroundImage ImageUrl="~/images/gif.gif" />
+                        </ItemStyle>
+                        <ClientSideEvents
+                            ItemClick="function(s,e){ISEx.navigate('../' + e.item.name);}" />
+                    </dx:ASPxNavBar>
+                </Content>
+            </ext:Container>
+            <ext:Container runat="server" ID="cMain" Region="Center" Layout="FitLayout">
+                <Loader runat="server" Mode="Frame" AutoLoad="false">
+                    <LoadMask ShowMask="true" Msg="正在打开，请稍候.." />
+                </Loader>
+            </ext:Container>
+        </Items>
     </ext:Container>
 </asp:Content>
 <asp:Content runat="server" ID="B" ContentPlaceHolderID="B">
@@ -192,66 +165,17 @@
             his: [],
             hisCount: 50,
             hisCur: -1,
-            load: function () {
-                var x = ISEx;
-                App.direct.LoadMenu({
-                    success: function (result) {
-                        try {
-                            x.loaded = true;
-                            x.os.winHome.showBy(x.os.bHome, "tl-bl?", [0, 6]);
-                            x.menuData = X.decode(result);
-                            x.os.dsT.setRootNode(X.decode(x.menuData[0][1]));
-                            x.os.tpItems.expandAll();
-                        } catch (e) { }
-                    }
-                });
-            },
             resize: function (w, h) {
                 var x = ISEx;
-            },
-            toggleMenu: function (pressed) {
-                var x = ISEx;
-                if (!pressed) {
-                    x.os.winHome.hide();
-                    return;
-                }
-                if (x.loaded) {
-                    x.os.winHome.showBy(x.os.bHome, "tl-bl?", [0, 6]);
-                } else {
-                    x.load();
-                }
             },
             toggleTop: function (pressed) {
                 var x = ISEx;
                 var c = ISEx.os.cBanner;
                 if (pressed) c.hide(); else c.show();
-                if (x.os.bHome.pressed) x.os.bHome.toggle();
-                x.os.winHome.setHeight(x.os.cMain.getHeight() - 5);
-            },
-            selectMenu: function (itemId) {
-                var x = ISEx;
-                if (x.menuData) {
-                    for (var i = 0; i < x.menuData.length; i++) {
-                        if (x.menuData[i][0] === itemId) {
-                            x.os.dsT.setRootNode(X.decode(x.menuData[i][1]));
-                            x.os.tpItems.expandAll();
-                            break;
-                        }
-                    }
-                }
             },
             navigate: function (url, clean) {
                 var x = ISEx;
                 if (url === "") return;
-                if (clean) {
-                    if (!clean) {
-                        x.os.bHome.toggle();
-                    } else {
-                        if (x.os.bHome.pressed) x.os.bHome.toggle();
-                    }
-                } else {
-                    if (x.os.bHome.pressed) x.os.bHome.toggle();
-                }
                 x.os.cMain.load({ url: url });
             },
             back: function () {
@@ -278,7 +202,6 @@
 
         var __begin = function () {
             var x = ISEx;
-            x.os.winHome.setHeight(x.os.cMain.getHeight() - 5);
             x.os.txtTime.setText(Ext.Date.format(new Date(), 'Y年m月d日 H:i'));
             x.navigate("desktop.aspx", true);
             <%= _ParentCheck ? "x.checkParent();": string.Empty %>
@@ -292,7 +215,7 @@
     public override void Decorate(eTaxi.Web.ExtPageDecorator decorator)
     {
         decorator
-            .Register(new Control[] { cMain, winHome, bHome, cBanner, dsT, tpItems, txtTime })
+            .Register(new Control[] { cMain, cBanner, txtTime })
             .EnableStartup("__begin")
             .Configure(rm =>
             {
@@ -311,6 +234,17 @@
             });
     }
 
+    protected Dictionary<string, string> _FolderIcons = new Dictionary<string, string>()
+    {
+        { Folder.System, "~/images/icons/small/wrench.png" },
+        { Folder.Car, "~/images/icons/small/car.png" },
+        { Folder.Driver, "~/images/icons/small/user_suit.png" },
+        { Folder.Business, "~/images/icons/small/tick.png" },
+        { Folder.Query, "~/images/icons/small/magnifier.png" },
+        { Folder.Finance, "~/images/icons/small/money_dollar.png" },
+        { Folder.Workflow, "~/images/icons/small/" }
+    };
+
     protected override void _BindData()
     {
         base._BindData();
@@ -318,28 +252,9 @@
         bUsers.Text = string.Format("在线用户：{0}", Global.Sessions.Count().ToString());
         string btmText = string.Format("当前用户：{0}", _SessionEx.UserName);
         bBtm.Text = btmText;
-    }
 
-    protected Dictionary<string, Icon> _FolderIcons = new Dictionary<string, Icon>()
-    {
-        { Folder.System, Icon.Database },
-        { Folder.Car, Icon.Car },
-        { Folder.Driver, Icon.UserSuitBlack },
-        { Folder.Business, Icon.PastePlain },
-        { Folder.Query, Icon.Magnifier },
-        { Folder.Finance, Icon.MoneyYen },
-        { Folder.Workflow, Icon.ArrowSwitch }
-    };
+        // Menu
 
-    protected Dictionary<string, Icon> _SubFolderIcons = new Dictionary<string, Icon>()
-    {
-        { SubFolder.Car, Icon.Folder },
-        { SubFolder.Driver, Icon.Folder}
-    };
-
-    [DirectMethod(ShowMask = true, Msg = "正在加载菜单，请稍候..")]
-    public string LoadMenu()
-    {
         var context = _DTContext<CommonContext>(true);
         var acls = context.ACLs.Where(a => a.ActorId == _SessionEx.Id).ToList();
         var modules = Global.Cache.Modules.Where(m => m.IsPage).ToList();
@@ -363,67 +278,92 @@
         definitions.ForEach(d =>
         {
             if (!folders.Any(f => f.StartsWith(d.Value.ToString()))) return;
-            var item = new Ext.Net.MenuItem(d.Caption);
-            item.Icon = _FolderIcons[d.Value];
-            item.Listeners.Click.Handler =
-                string.Format("ISEx.selectMenu('{0}');", d.Value);
 
-            var root = new Node();
-            Node node = null;
+            var group = new NavBarGroup()
+            {
+                Text = d.Caption
+            };
+
+            group.HeaderImage.Url = _FolderIcons[d.Value];
+            nav.Groups.Add(group);
+
             var items = (
                 from mm in modules
                 where mm.Folder.StartsWith(d.Value.ToString())
                 orderby mm.Ordinal, mm.Name
                 select mm).ToList();
 
-            var subFolders = items.Select(i => i.SubFolder).Distinct().ToList();
-            if (subFolders.Count <= 1)
-            {
-                items.ForEach(s =>
-                {
-                    node = new Node() { Text = s.Name, Leaf = true, Icon = Icon.BulletGreen };
-                    node.CustomAttributes.Add(new ConfigItem()
-                    {
-                        Name = "value",
-                        Value = string.IsNullOrEmpty(s.Path) ? string.Empty : "../" + s.Path
-                    });
-                    root.Children.Add(node);
-                });
-            }
-            else
-            {
-                subFolders.ForEach(f =>
-                {
-                    var subRoot = new Node() { Icon = Icon.Folder, Cls = "menuGroup" };
-                    subHelper.GetItem(i => i.Value == f).IfNN(i =>
-                    {
-                        subRoot.Text = i.Caption;
-                        subRoot.Icon = _SubFolderIcons[i.Value];
-                    });
 
-                    var subItems = items.Where(i => i.SubFolder == f).ToList();
-                    subItems.ForEach(s =>
-                    {
-                        node = new Node() { Text = s.Name, Leaf = true, Icon = Icon.BulletGreen };
-                        node.CustomAttributes.Add(new ConfigItem()
-                        {
-                            Name = "value",
-                            Value = string.IsNullOrEmpty(s.Path) ? string.Empty : "../" + s.Path
-                        });
-                        subRoot.Children.Add(node);
-                    });
-                    root.Children.Add(subRoot);
-                });
-            }
+            items.ForEach(i =>
+            {
+                var menuItem = new NavBarItem()
+                {
+                    Text = i.Name,
+                    Name = i.Path,
+                };
 
-            if(root.Children.Count > 0) mp.Menu.Items.Add(item);
-            results.Add(new string[] { d.Value, JSON.Serialize(root) });
+                menuItem.Image.Url = "~/images/icons/bullet/bullet_white.png";
+                group.Items.Add(menuItem);
+
+            });
+
+
+
+            //    var subFolders = items.Select(i => i.SubFolder).Distinct().ToList();
+            //    if (subFolders.Count <= 1)
+            //    {
+            //        items.ForEach(s =>
+            //        {
+            //            node = new Node() { Text = s.Name, Leaf = true, Icon = Icon.BulletGreen };
+            //            node.CustomAttributes.Add(new ConfigItem()
+            //            {
+            //                Name = "value",
+            //                Value = string.IsNullOrEmpty(s.Path) ? string.Empty : "../" + s.Path
+            //            });
+            //            root.Children.Add(node);
+            //        });
+            //    }
+            //    else
+            //    {
+            //        subFolders.ForEach(f =>
+            //        {
+            //            var subRoot = new Node() { Icon = Icon.Folder, Cls = "menuGroup" };
+            //            subHelper.GetItem(i => i.Value == f).IfNN(i =>
+            //            {
+            //                subRoot.Text = i.Caption;
+            //                subRoot.Icon = _SubFolderIcons[i.Value];
+            //            });
+
+            //            var subItems = items.Where(i => i.SubFolder == f).ToList();
+            //            subItems.ForEach(s =>
+            //            {
+            //                node = new Node() { Text = s.Name, Leaf = true, Icon = Icon.BulletGreen };
+            //                node.CustomAttributes.Add(new ConfigItem()
+            //                {
+            //                    Name = "value",
+            //                    Value = string.IsNullOrEmpty(s.Path) ? string.Empty : "../" + s.Path
+            //                });
+            //                subRoot.Children.Add(node);
+            //            });
+            //            root.Children.Add(subRoot);
+            //        });
+            //    }
+
+            //    if(root.Children.Count > 0) mp.Menu.Items.Add(item);
+            //    results.Add(new string[] { d.Value, JSON.Serialize(root) });
+            //});
+
+            //if (mp.Menu.Items.Count > 0) mp.Menu.ActiveIndex = 0;
+            //mp.AddTo(pMenu);
+            //return JSON.Serialize(results);
+
+
+
+
         });
 
-        if (mp.Menu.Items.Count > 0) mp.Menu.ActiveIndex = 0;
-        mp.AddTo(pMenu);
-        return JSON.Serialize(results);
     }
+
 
     protected override void _Execute()
     {

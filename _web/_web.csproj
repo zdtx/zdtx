@@ -323,6 +323,13 @@
     <Content Include="Images\CZJF-logo.png" />
     <Content Include="Images\CZJF.jpg" />
     <Content Include="Images\gif.gif" />
+    <Content Include="Images\icons\small\car.png" />
+    <Content Include="Images\icons\small\database.png" />
+    <Content Include="Images\icons\small\magnifier.png" />
+    <Content Include="Images\icons\small\money_dollar.png" />
+    <Content Include="Images\icons\small\tick.png" />
+    <Content Include="Images\icons\small\user_suit.png" />
+    <Content Include="Images\icons\small\wrench.png" />
     <Content Include="Images\ZDLogo.png" />
     <Content Include="Portal\DefaultZD.aspx" />
     <Content Include="Redirect.aspx" />
