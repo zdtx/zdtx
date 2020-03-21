@@ -65,23 +65,28 @@
             </ext:Container>
         </Content>
     </ext:Container>
-    <ext:Toolbar runat="server" ID="topTB" BaseCls="topTB" Height="30" IDMode="Inherit" EnableOverflow="true">
-        <Defaults>
-            <ext:Parameter Name="margin" Value="0 2 0 2" />
-        </Defaults>
+    <ext:Container runat="server" Layout="HBoxLayout">
         <Items>
-            <ext:ToolbarSeparator runat="server" />
-            <ext:ToolbarFill runat="server" />
-            <ext:ToolbarSeparator runat="server" />
-            <ext:ToolbarTextItem runat="server" ID="bWC" Text="欢迎您" MarginSpec="0 5 0 5" />
-            <ext:ToolbarSeparator runat="server" />
-            <ext:Button runat="server" Icon="ApplicationGet" EnableToggle="true" ToolTip="打开/收起面板">
-                <Listeners>
-                    <Toggle Handler="ISEx.toggleTop(pressed);" />
-                </Listeners>
-            </ext:Button>
+            <ext:Container runat="server" Width="220" BaseCls="zd" Height="30" />
+            <ext:Toolbar runat="server" ID="topTB" BaseCls="topTB" Height="30" IDMode="Inherit" EnableOverflow="true" Flex="1">
+                <Defaults>
+                    <ext:Parameter Name="margin" Value="0 2 0 2" />
+                </Defaults>
+                <Items>
+                    <ext:ToolbarSeparator runat="server" />
+                    <ext:ToolbarFill runat="server" />
+                    <ext:ToolbarSeparator runat="server" />
+                    <ext:ToolbarTextItem runat="server" ID="bWC" Text="欢迎您" MarginSpec="0 5 0 5" />
+                    <ext:ToolbarSeparator runat="server" />
+                    <ext:Button runat="server" Icon="ApplicationGet" EnableToggle="true" ToolTip="打开/收起面板">
+                        <Listeners>
+                            <Toggle Handler="ISEx.toggleTop(pressed);" />
+                        </Listeners>
+                    </ext:Button>
+                </Items>
+            </ext:Toolbar>
         </Items>
-    </ext:Toolbar>
+    </ext:Container>
 </asp:Content>
 <asp:Content ID="S" ContentPlaceHolderID="S" runat="server">
     <ext:Toolbar runat="server" BorderSpec="1 0 0 0" Region="South" PaddingSpec="2 1 1 1">
