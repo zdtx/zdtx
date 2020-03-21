@@ -322,7 +322,9 @@
     <Content Include="Images\customer.png" />
     <Content Include="Images\CZJF-logo.png" />
     <Content Include="Images\CZJF.jpg" />
+    <Content Include="Images\gif.gif" />
     <Content Include="Images\ZDLogo.png" />
+    <Content Include="Portal\DefaultEx.aspx" />
     <Content Include="Redirect.aspx" />
     <Content Include="Service\Timer.asmx" />
     <Content Include="System\Department.aspx" />
