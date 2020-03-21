@@ -324,7 +324,7 @@
     <Content Include="Images\CZJF.jpg" />
     <Content Include="Images\gif.gif" />
     <Content Include="Images\ZDLogo.png" />
-    <Content Include="Portal\DefaultEx.aspx" />
+    <Content Include="Portal\DefaultZD.aspx" />
     <Content Include="Redirect.aspx" />
     <Content Include="Service\Timer.asmx" />
     <Content Include="System\Department.aspx" />
@@ -1420,6 +1420,13 @@
     <Compile Include="Global_Cache.cs" />
     <Compile Include="Global_Session.cs" />
     <Compile Include="Global_Unity.cs" />
+    <Compile Include="Portal\DefaultZD.aspx.cs">
+      <DependentUpon>DefaultZD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Portal\DefaultZD.aspx.designer.cs">
+      <DependentUpon>DefaultZD.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Portal\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
