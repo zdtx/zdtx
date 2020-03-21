@@ -21,7 +21,7 @@
 
         if (_Logined)
         {
-            Response.Redirect("~/portal");
+            Response.Redirect("~/portal/defaultzd.aspx");
         }
         else
         {
