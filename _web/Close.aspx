@@ -7,7 +7,6 @@
         ISEx.extend({
             bypassFrame: function () {
                 if (window === window.parent) {
-                    alert("abc");
                     window.close();
                     return;
                 }

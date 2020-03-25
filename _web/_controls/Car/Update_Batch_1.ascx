@@ -203,14 +203,27 @@
             {
             }), f =>
             {
+                f.HeaderStyle.Width = 80;
+                f.ItemStyle.Width = 80;
             })
             .TemplateField("Source", "获得方式", new TemplateItem.DXTextBox(e =>
             {
-                e.Width = 200;
+                e.Width = 100;
             }), f =>
             {
-                f.HeaderStyle.Width = 200;
-                f.ItemStyle.Width = 200;
+                f.HeaderStyle.Width = 100;
+                f.ItemStyle.Width = 100;
+            })
+            .TemplateField("Rental", "租金/管理费", new TemplateItem.DXSpinEdit(e =>
+            {
+                e.Width = 100;
+                e.HorizontalAlign = HorizontalAlign.Right;
+                e.SpinButtons.ShowIncrementButtons = false;
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 100;
+                f.ItemStyle.Width = 100;
             })
             .TemplateField("FormerPlateNum", "原车牌号", new TemplateItem.DXTextBox(e =>
             {
@@ -333,6 +346,8 @@
                 .Do<Literal>("PlateNumber", (c, d) => { c.Text = d.PlateNumber; })
                 .Do<Literal>("Source", (c, d) => { c.Text = d.Source; })
                 .Do<ASPxTextBox>("FormerPlateNum", (c, d) => c.Text = d.FormerPlateNum)
+                .Do<ASPxSpinEdit>("Rental", (c, d) => { c.Number = d.Rental.ToCHNRounded(); })
+                .Do<ASPxComboBox>("PackageId", (c, d) => c.Value = d.PackageId)
                 .Do<ASPxTextBox>("Manufacturer", (c, d) => c.Text = d.Manufacturer)
                 .Do<ASPxTextBox>("Model", (c, d) => c.Text = d.Model)
                 .Do<ASPxComboBox>("Type", (c, d) => c.Value = d.Type.ToStringEx())
@@ -382,6 +397,8 @@
                 car.HandOverTime = d.HandOverTime;
                 car.HandOverPlace = d.HandOverPlace;
                 car.Fleet = d.Fleet;
+                car.Rental = d.Rental;
+                car.PackageId = d.PackageId;
                 car.Remark = d.Remark;
             });
         });
@@ -431,6 +448,7 @@
             .Do<ASPxTextBox>("Model", (d, c) => d.Model = c.Value.ToStringEx())
             .Do<ASPxComboBox>("Type", (d, c) => d.Type = c.Value.ToStringEx().ToIntOrDefault(-1))
             .Do<ASPxTextBox>("Source", (d, c) => d.Source = c.Value.ToStringEx())
+            .Do<ASPxSpinEdit>("Rental", (d, c) => d.Rental = c.Number)
             .Do<ASPxTimeEdit>("HandOverTime", (d, c) =>
             {
                 d.HandOverTime = null;

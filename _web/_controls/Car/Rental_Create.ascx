@@ -21,9 +21,6 @@
             </td>
             <td class="val">
                 <asp:Literal runat="server" ID="l_Rental" />
-                <div class="tips" style="padding: 5px; margin-top: 1px;">
-                    为整车管理费的一半
-                </div>
             </td>
         </tr>
         <tr>
@@ -50,15 +47,18 @@
         <tr>
             <td class="name">新管理费
             </td>
-            <td class="val">
-                <asp:Literal runat="server" ID="l_NewRental" />
+            <td class="cl">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Rental" Number="0" Width="200" DisplayFormatString="{0:N} 元">
+                    <SpinButtons ShowIncrementButtons="false" />
+                    <HelpTextSettings Position="Bottom" />
+                </dx:ASPxSpinEdit>
             </td>
         </tr>
         <tr>
             <td class="name">社保金
             </td>
             <td class="cl">
-                <dx:ASPxSpinEdit runat="server" ID="sp_Extra1" Width="200" DisplayFormatString="{0:N} 元">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Extra1" Number="0" Width="200" DisplayFormatString="{0:N} 元">
                     <SpinButtons ShowIncrementButtons="false" />
                     <HelpTextSettings Position="Bottom" />
                 </dx:ASPxSpinEdit>
@@ -123,6 +123,8 @@
         fh.Validate(pf_DriverId).IsRequired();
         fh.Validate(de_ProbationExpiryDate).IsRequired();
         fh.Validate(sp_Extra1).IsRequired();
+        fh.Validate(sp_Rental).IsRequired();
+
         pf_DriverId.Initialize<eTaxi.Web.Controls.Selection.Driver.Item>(pop,
             "~/_controls.helper/selection/driver/item.ascx", (cc, b, h, isFirst) =>
             {
@@ -151,15 +153,19 @@
         var context = _DTContext<CommonContext>(true);
         var car = context.Cars.SingleOrDefault(c => c.Id == _CarId);
         if (car == null) throw DTException.NotFound<TB_car>(_CarId);
-        
-        l_NewRental.Text = (car.Rental / 2).ToCHNRounded().ToStringOrEmpty(comma:true);
+
+        var rentals = context.CarRentals.Where(r => r.CarId == _CarId).ToList();
+        var newRental = (car.Rental / (rentals.Count + 1)).ToCHNRounded();
         de_StartTime.Date = _CurrentTime.Date;
-        
+
+        p.Controls.Reset();
+
         if (_IsCreating)
         {
             lCurrent.Text = "（空缺）";
-            l_Rental.Text = l_NewRental.Text;
-            l_Extra1.Text = string.Empty;
+            l_Rental.Text = string.Format("建议金额 => {0}", newRental.ToStringOrEmpty(comma:true));
+            l_Extra1.Text = " - ";
+            sp_Rental.Number = newRental;
         }
         else
         {
@@ -182,25 +188,26 @@
                 };
 
             q.SingleOrDefault().IfNN(rental =>
+            {
+                l_Rental.Text = rental.Rental.ToStringOrEmpty(comma: true);
+                sp_Rental.Number = rental.Rental;
+                lCurrent.Text = string.Format("{0} [身份证：{1}]", rental.Name, rental.CHNId);
+                if (rental.IsProbation)
                 {
-                    l_Rental.Text = rental.Rental.ToStringOrEmpty(comma: true);
-                    lCurrent.Text = string.Format("{0} [身份证：{1}]", rental.Name, rental.CHNId);
-                    if (rental.IsProbation)
-                    {
-                        lCurrent.Text += "<br />- 试用中";
-                        if (rental.ProbationExpiryDate.HasValue)
-                            lCurrent.Text += "<br />- 试用期至：" + rental.ProbationExpiryDate.Value.ToISDate();
-                    }
-                    
-                }, () =>
-                {
-                    throw DTException.NotFound<TB_car_rental>(string.Empty, s => s
-                        .Record("CarId", _CarId)
-                        .Record("DriverId", _DriverId));
-                });
+                    lCurrent.Text += "<br />- 试用中";
+                    if (rental.ProbationExpiryDate.HasValue)
+                        lCurrent.Text += "<br />- 试用期至：" + rental.ProbationExpiryDate.Value.ToISDate();
+                }
+
+            }, () =>
+            {
+                throw DTException.NotFound<TB_car_rental>(string.Empty, s => s
+                    .Record("CarId", _CarId)
+                    .Record("DriverId", _DriverId));
+            });
         }
 
-        p.Controls.Reset();
+        
     }
 
     protected override void _Do(string section, string subSection = null)
@@ -229,23 +236,23 @@
             de_ProbationExpiryDate.Focus();
             throw new Exception("请填入试用到期日");
         }
-        
+
         // 添加关系
         var newId = context.NewSequence<TB_car_rental>(_SessionEx);
         context
             .Create<TB_car_rental>(_SessionEx, r =>
-                {
-                    r.CarId = _CarId;
-                    r.DriverId = driverId;
-                    r.Ordinal = rentals.Count;
-                    r.StartTime = startDate;
-                    r.Rental = (car.Rental / 2).ToCHNRounded();
-                    r.Extra1 = sp_Extra1.Number;
-                    r.IsProbation = ck_IsProbation.Checked;
-                    if (!
-                        string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
-                        r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
-                })
+            {
+                r.CarId = _CarId;
+                r.DriverId = driverId;
+                r.Ordinal = rentals.Count;
+                r.StartTime = startDate;
+                r.Rental = sp_Rental.Number;
+                r.Extra1 = sp_Extra1.Number;
+                r.IsProbation = ck_IsProbation.Checked;
+                if (!
+                    string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
+                    r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
+            })
             .SubmitChanges();
     }
 
@@ -285,55 +292,55 @@
         {
             context
                 .Create<TB_car_rental_history>(_SessionEx, h =>
-                    {
-                        h.CarId = _CarId;
-                        h.DriverId = _DriverId;
-                        h.Id = newHistoryId;
-                        h.Rental = rental.Rental;
-                        h.Extra1 = rental.Extra1;
-                        h.Extra2 = rental.Extra2;
-                        h.Extra3 = rental.Extra3;
-                        h.StartTime = rental.StartTime;
-                        h.EndTime = endDate;
-                    })
+                {
+                    h.CarId = _CarId;
+                    h.DriverId = _DriverId;
+                    h.Id = newHistoryId;
+                    h.Rental = rental.Rental;
+                    h.Extra1 = rental.Extra1;
+                    h.Extra2 = rental.Extra2;
+                    h.Extra3 = rental.Extra3;
+                    h.StartTime = rental.StartTime;
+                    h.EndTime = endDate;
+                })
                 .DeleteAll<TB_car_payment>(p =>
                     p.CarId == _CarId && p.DriverId == _DriverId && p.Due >= endDate)
                 .Create<TB_car_payment>(_SessionEx, p =>
-                    {
-                        p.CarId = _CarId;
-                        p.DriverId = _DriverId;
-                        p.Id = newPaymentId;
-                        p.MonthInfo = endDate.ToMonthId();
-                        p.Name = string.Format("{0} - 换班结算", p.MonthInfo);
-                        p.Days = DateTime.DaysInMonth(endDate.Year, endDate.Month);
-                        p.CountDays = endDate.Day;
+                {
+                    p.CarId = _CarId;
+                    p.DriverId = _DriverId;
+                    p.Id = newPaymentId;
+                    p.MonthInfo = endDate.ToMonthId();
+                    p.Name = string.Format("{0} - 换班结算", p.MonthInfo);
+                    p.Days = DateTime.DaysInMonth(endDate.Year, endDate.Month);
+                    p.CountDays = endDate.Day;
 
-                        var totalDays = (int)endDate.Subtract(rental.StartTime).TotalDays;
-                        if (totalDays < endDate.Day) p.CountDays = totalDays;
+                    var totalDays = (int)endDate.Subtract(rental.StartTime).TotalDays;
+                    if (totalDays < endDate.Day) p.CountDays = totalDays;
 
-                        p.Due = endDate;
-                        p.Amount =
-                            (rental.Rental * p.CountDays / p.Days + rental.Extra1 + rental.Extra2 + rental.Extra3).ToCHNRounded();
-                        p.Paid = p.Amount;
-                    });
+                    p.Due = endDate;
+                    p.Amount =
+                        (rental.Rental * p.CountDays / p.Days + rental.Extra1 + rental.Extra2 + rental.Extra3).ToCHNRounded();
+                    p.Paid = p.Amount;
+                });
         }
-        
+
         context
             .DeleteAll<TB_car_rental>(rr => rr.CarId == _CarId && rr.DriverId == _DriverId)
             .Create<TB_car_rental>(_SessionEx, r =>
-                {
-                    r.CarId = _CarId;
-                    r.DriverId = driverId;
-                    r.Ordinal = rental.Ordinal;
-                    r.StartTime = startDate;
-                    r.Rental = (car.Rental / 2).ToCHNRounded();
-                    r.Extra1 = sp_Extra1.Number;
-                    r.IsProbation = ck_IsProbation.Checked;
-                    if (!
-                        string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
-                        r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
-                })
-            .SubmitChanges();       
-    }    
+            {
+                r.CarId = _CarId;
+                r.DriverId = driverId;
+                r.Ordinal = rental.Ordinal;
+                r.StartTime = startDate;
+                r.Rental = sp_Rental.Number;
+                r.Extra1 = sp_Extra1.Number;
+                r.IsProbation = ck_IsProbation.Checked;
+                if (!
+                    string.IsNullOrEmpty(de_ProbationExpiryDate.Value.ToStringEx()))
+                    r.ProbationExpiryDate = de_ProbationExpiryDate.Date;
+            })
+            .SubmitChanges();
+    }
 
 </script>

@@ -191,7 +191,7 @@
             <td class="name">社保金
             </td>
             <td class="cl">
-                <dx:ASPxSpinEdit runat="server" ID="sp_Extra1" Width="200" DisplayFormatString="{0:N} 元">
+                <dx:ASPxSpinEdit runat="server" ID="sp_Extra1" Number="0" Width="200" DisplayFormatString="{0:N} 元">
                     <SpinButtons ShowIncrementButtons="false" />
                     <HelpTextSettings Position="Bottom" />
                 </dx:ASPxSpinEdit>
@@ -436,7 +436,6 @@
         // 加入车辆捆绑关系
         var newRentalId = context.NewSequence<TB_car_rental>(_SessionEx);
         var rentals = context.CarRentals.Where(r => r.CarId == pf_CarId.Value).ToList();
-
         context
             .Create<TB_car_rental>(_SessionEx, r =>
             {
@@ -444,7 +443,7 @@
                 r.DriverId = newId;
                 r.Ordinal = rentals.Count;
                 r.StartTime = de_StartTime.Date;
-                r.Rental = (car.Rental / 2).ToCHNRounded();
+                r.Rental = (car.Rental / (rentals.Count + 1)).ToCHNRounded();
                 r.Extra1 = sp_Extra1.Number;
                 r.IsProbation = ck_IsProbation.Checked;
                 if (!
