@@ -332,6 +332,7 @@
     <Content Include="Images\icons\small\wrench.png" />
     <Content Include="Images\ZDLogo.png" />
     <Content Include="Portal\DefaultZD.aspx" />
+    <Content Include="Close.aspx" />
     <Content Include="Redirect.aspx" />
     <Content Include="Service\Timer.asmx" />
     <Content Include="System\Department.aspx" />
