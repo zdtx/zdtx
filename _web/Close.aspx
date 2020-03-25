@@ -6,9 +6,16 @@
 
         ISEx.extend({
             bypassFrame: function () {
-                if (window === window.parent) return;
-                if (window.parent.__begin) { // 判别是 ext 页面罩着
+                if (window === window.parent) {
+                    alert("abc");
+                    window.close();
+                    return;
+                }
+                if (window.parent.__begin) {
                     window.parent.location.replace("../close.aspx");
+                }
+                else {
+                    window.close();
                 }
             }
         });
