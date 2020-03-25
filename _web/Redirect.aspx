@@ -136,6 +136,19 @@
                 return;
             }
 
+            // 3. 如果用户的部门改变，则改变
+            if (person.DepartmentId != departmentId)
+            {
+                _DTService.Context
+                    .Update<TB_person>(_SessionEx, p=>p.Id == person.Id, p =>
+                        {
+                            p.DepartmentId = departmentId;
+                        })
+                    .SubmitChanges();
+
+                Global.Cache.SetDirty(CachingTypes.Person);
+            }
+
             _Auth.Login(person.UserName, person.Password, u =>
             {
                 _SessionEx.UniqueId = (Guid)u.ProviderUserKey;
