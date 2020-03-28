@@ -139,6 +139,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\DevExpress\DevExpress.XtraScheduler.v14.2.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>..\Components\ExcelReader\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>..\Components\ExcelReader\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="ExpressionSerialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\ExpressionSerialization.dll</HintPath>
@@ -298,6 +304,7 @@
     <Content Include="Domain\Business\Event.aspx" />
     <Content Include="Domain\Business\Replace.aspx" />
     <Content Include="Domain\Business\Payment.aspx" />
+    <Content Include="Domain\Car\Import.aspx" />
     <Content Include="Domain\Car\Service.aspx" />
     <Content Include="Domain\Car\Update_Rental_Batch.aspx" />
     <Content Include="Domain\Car\Update_1.aspx" />
@@ -1173,8 +1180,10 @@
     <Content Include="_controls\Business\Service.ascx" />
     <Content Include="_controls\Business\File_Batch.ascx" />
     <Content Include="_controls\Business\Shift_Batch.ascx" />
+    <Content Include="_controls\Car\Import_Upload.ascx" />
     <Content Include="_controls\Car\Contract_Upload.ascx" />
     <Content Include="_controls\Car\Contract_Edit.ascx" />
+    <Content Include="_controls\Car\Import.ascx" />
     <Content Include="_controls\Car\Payment_Items_Update.ascx" />
     <Content Include="_controls\Car\Service_Edit.ascx" />
     <Content Include="_controls\Car\Accident_Update.ascx" />

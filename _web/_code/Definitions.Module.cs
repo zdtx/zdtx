@@ -29,6 +29,7 @@ namespace eTaxi.Definitions.Ascx // 控件
 
     public class Car
     {
+        public const string Import = "car/import.ascx";
         public const string Create = "car/create.ascx";
         public const string View = "car/view.ascx";
         public const string View_Accident = "car/view_accident.ascx";
