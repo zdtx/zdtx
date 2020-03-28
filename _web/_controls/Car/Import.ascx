@@ -265,66 +265,65 @@
                     });
 
                     car.DepartmentId = departmentId;
-                    if (string.IsNullOrEmpty(departmentName)) car.Company = string.Empty;
+                    if (string.IsNullOrEmpty(car.Company)) car.Company = departmentName;
 
-                    //var secret = Host.Settings.Get<string>("apiSecret");
-                    //var response = PostExternal(new
-                    //{
-                    //    brand = car.Manufacturer,
-                    //    businessDistrict = car.Fleet,
-                    //    buytime = "",
-                    //    color = "",
-                    //    companyId = "",
-                    //    companyName = department.Name,
-                    //    createBy = "",
-                    //    createTime = "",
-                    //    delFlag = 0,
-                    //    engineNo = car.EngineNum,
-                    //    isOnline = 0,
-                    //    issuingAgency = "",
-                    //    licenseNumber = "",
-                    //    moduleCtlPass = "",
-                    //    moduleHardVersion = "",
-                    //    moduleInstallPerson = "",
-                    //    moduleInstallPlace = "",
-                    //    moduleNo = car.ModuleNo,
-                    //    moduleProtocol = "",
-                    //    moduleRemark = "",
-                    //    moduleSim = "",
-                    //    moduleSoftVersion = "",
-                    //    moduleType = "",
-                    //    name = car.PlateNumber,
-                    //    ownerName = "",
-                    //    ownerPhone = "",
-                    //    ownerSex = "",
-                    //    photoUrls = "",
-                    //    remark = "",
-                    //    status = 0,
-                    //    token = secret.ToMd5(),
-                    //    type = "",
-                    //    updateBy = "",
-                    //    updateTime = "",
-                    //    validityEnd = "",
-                    //    validityStart = "",
-                    //    vinCode = ""
+                    var secret = Host.Settings.Get<string>("apiSecret");
+                    var response = PostExternal(new
+                    {
+                        brand = car.Manufacturer,
+                        businessDistrict = car.Fleet,
+                        buytime = "",
+                        color = "",
+                        companyId = "",
+                        companyName = department.Name,
+                        createBy = "",
+                        createTime = "",
+                        delFlag = 0,
+                        engineNo = car.EngineNum,
+                        isOnline = 0,
+                        issuingAgency = "",
+                        licenseNumber = "",
+                        moduleCtlPass = "",
+                        moduleHardVersion = "",
+                        moduleInstallPerson = "",
+                        moduleInstallPlace = "",
+                        moduleNo = car.ModuleNo,
+                        moduleProtocol = "",
+                        moduleRemark = "",
+                        moduleSim = "",
+                        moduleSoftVersion = "",
+                        moduleType = "",
+                        name = car.PlateNumber,
+                        ownerName = "",
+                        ownerPhone = "",
+                        ownerSex = "",
+                        photoUrls = "",
+                        remark = "",
+                        status = 0,
+                        token = secret.ToMd5(),
+                        type = "",
+                        updateBy = "",
+                        updateTime = "",
+                        validityEnd = "",
+                        validityStart = "",
+                        vinCode = ""
 
-                    //}, "car/save");
+                    }, "car/save");
 
-                    //try
-                    //{
-                    //    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
-                    //    if (string.IsNullOrEmpty(x.result.id))
-                    //    {
-                    //        throw new Exception(response);
-                    //    }
+                    try
+                    {
+                        dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
+                        if (string.IsNullOrEmpty(x.result.id))
+                        {
+                            throw new Exception(response);
+                        }
 
-                    //    car.ZId = x.result.id;
-                    //}
-                    //catch
-                    //{
-                    //    throw new Exception("填报不成功：" + response);
-                    //}
-
+                        car.ZId = x.result.id;
+                    }
+                    catch
+                    {
+                        throw new Exception("填报不成功：" + response);
+                    }
                 })
 
                 .SubmitChanges();
@@ -364,12 +363,14 @@
                     {
                         switch (f)
                         {
-                            case "Name": return v.ToStringEx(string.Format("{0}{1}", lastName, firstName));
-                            case "Gender": return GetGender(v);
                             case "DayOfBirth": return GetDateTime(v);
+                            case "CareerStart": return GetDateTime(v);
+
+                            case "Name": return v.ToStringEx(string.Format("{0}{1}", lastName, firstName));
+                            case "Guarantor": return v.ToStringEx(string.Empty);
+                            case "Gender": return GetGender(v);
                             case "Education": return GetEducation(v);
                             case "SocialCat": return GetSocialCat(v);
-                            case "Guarantor": return v.ToStringEx(string.Empty);
                             default:
                                 return v.ToStringEx();
                         }
@@ -377,49 +378,47 @@
 
                     driver.Name = string.Format("{0}{1}", lastName, firstName);
 
+                    var secret = Host.Settings.Get<string>("apiSecret");
+                    var response = PostExternal(new
+                    {
+                        carId = car.ZId,
+                        carName = car.PlateNumber,
+                        certficateUnit = "",
+                        companyId = "",
+                        companyName = department.Name,
+                        createBy = "",
+                        createTime = "",
+                        delFlag = 0,
+                        driverIdcard = driver.CHNId,
+                        driverName = driver.Name,
+                        driverPhone = driver.Tel1,
 
-                    //var secret = Host.Settings.Get<string>("apiSecret");
-                    //var response = PostExternal(new
-                    //{
-                    //    carId = car.ZId,
-                    //    carName = car.PlateNumber,
-                    //    certficateUnit = "",
-                    //    companyId = "",
-                    //    companyName = department.Name,
-                    //    createBy = "",
-                    //    createTime = "",
-                    //    delFlag = 0,
-                    //    driverIdcard = driver.CHNId,
-                    //    driverName = driver.Name,
-                    //    driverPhone = driver.Tel1,
+                        operationNo = "",
+                        operationRealNo = driver.CertNumber,
+                        photoUrls = "",
+                        remark = "",
+                        starLevel = "",
+                        supervisesTel = "",
+                        token = secret.ToMd5(),
+                        updateBy = "",
+                        updateTime = ""
 
-                    //    operationNo = "",
-                    //    operationRealNo = driver.CertNumber,
-                    //    photoUrls = "",
-                    //    remark = "",
-                    //    starLevel = "",
-                    //    supervisesTel = "",
-                    //    token = secret.ToMd5(),
-                    //    updateBy = "",
-                    //    updateTime = ""
+                    }, "driver/save");
 
-                    //}, "driver/save");
+                    try
+                    {
+                        dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
+                        if (string.IsNullOrEmpty(x.result.id))
+                        {
+                            throw new Exception(response);
+                        }
 
-                    //try
-                    //{
-                    //    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
-                    //    if (string.IsNullOrEmpty(x.result.id))
-                    //    {
-                    //        throw new Exception(response);
-                    //    }
-
-                    //    driver.ZId = x.result.id;
-                    //}
-                    //catch
-                    //{
-                    //    throw new Exception("填报不成功：" + response);
-                    //}
-
+                        driver.ZId = x.result.id;
+                    }
+                    catch
+                    {
+                        throw new Exception("填报不成功：" + response);
+                    }
                 })
 
                 .SubmitChanges();
@@ -441,9 +440,7 @@
                     {
                         switch (f)
                         {
-                            case "DayOfBirth": return GetDateTime(v);
                             case "StartTime": return GetDateTime(v, DateTime.Now.Date);
-                            case "CareerStart": return GetDateTime(v);
 
                             case "Rental": return GetDecimal(v, 0);
                             case "Extra1": return GetDecimal(v, 0);
