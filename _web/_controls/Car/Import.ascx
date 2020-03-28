@@ -135,8 +135,8 @@
         {
             var dt = _SessionEx.Get<DataTable>();
             var fields = dt.Rows[1].ItemArray;
-            var count = dt.Rows.Count - 2;
-            for (var i = 2; i < dt.Rows.Count; i++)
+            var count = dt.Rows.Count - 3;
+            for (var i = 3; i < dt.Rows.Count; i++)
             {
                 var plateNumber = dt.Rows[i][0].ToString();
                 _SessionEx.ExtraThread.Add(plateNumber, _Do_Save);
@@ -175,8 +175,8 @@
     private void _Do_Save(int index)
     {
         var dt = _SessionEx.Get<DataTable>();
-        var fields = dt.Rows[].ItemArray;
-        var values = dt.Rows[index + 2].ItemArray;
+        var fields = dt.Rows[1].ItemArray;
+        var values = dt.Rows[index + 3].ItemArray;
 
         var plateNumber = values[IndexOf("PlateNumber")].ToStringEx();
         var chnId = values[IndexOf("CHNId")].ToStringEx();
@@ -441,7 +441,10 @@
                     {
                         switch (f)
                         {
+                            case "DayOfBirth": return GetDateTime(v);
                             case "StartTime": return GetDateTime(v, DateTime.Now.Date);
+                            case "CareerStart": return GetDateTime(v);
+
                             case "Rental": return GetDecimal(v, 0);
                             case "Extra1": return GetDecimal(v, 0);
                             case "Extra2": return GetDecimal(v, 0);
