@@ -123,14 +123,6 @@
                 _SessionEx.ExtraThread.Name) pr.Show(_SessionEx.ExtraThread.Name);
         };
 
-        Action<int> processItem = index =>
-        {
-            // 保存数据
-            if (Do(Actions.Save, true))
-            {
-            }
-        };
-
         bSubmit.Click += (s, e) =>
         {
             var dt = _SessionEx.Get<DataTable>();
@@ -275,7 +267,7 @@
                         buytime = "",
                         color = "",
                         companyId = "",
-                        companyName = department.Name,
+                        companyName = car.Company,
                         createBy = "",
                         createTime = "",
                         delFlag = 0,
@@ -385,7 +377,7 @@
                         carName = car.PlateNumber,
                         certficateUnit = "",
                         companyId = "",
-                        companyName = department.Name,
+                        companyName = car.Company,
                         createBy = "",
                         createTime = "",
                         delFlag = 0,
@@ -451,8 +443,13 @@
                         }
                     });
 
-                    rental.IsProbation = false;
                     rental.Rental = car.Rental;
+                    rental.IsProbation = false;
+
+                    if (rental.Rental == 0)
+                    {
+                        rental.Rental = GetDecimal(values[IndexOf("Rental", true)], 0) ?? 0;
+                    }
 
                 })
 
@@ -507,6 +504,30 @@
     {
         if (value == null) return defaultValue;
         DateTime dt = DateTime.Now.Date;
+        var strValue = value.ToStringEx(string.Empty);
+        if (strValue.Length == 8)
+        {
+            int year = 0;
+            int month = 0;
+            int day = 0;
+            if (int.TryParse(strValue.Substring(0, 4), out year))
+            {
+                if (int.TryParse(strValue.Substring(4, 2), out month))
+                {
+                    if (int.TryParse(strValue.Substring(6, 2), out day))
+                    {
+                        try
+                        {
+                            return new DateTime(year, month, day);
+                        }
+                        catch
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+        }
         if (DateTime.TryParse(value.ToStringEx(), out dt))
         {
             return dt;
