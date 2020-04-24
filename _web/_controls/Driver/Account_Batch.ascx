@@ -78,6 +78,7 @@
     }
 
     const string CMD_Detail = "ItemsDetail";
+    const string CMD_Print = "ItemPrint";
 
     private string _ObjectId
     {
@@ -267,6 +268,19 @@
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                 f.ItemStyle.Wrap = false;
             })
+            .TemplateField("prnt", " - ", new TemplateItem.LinkButton(l =>
+            {
+                l.CssClass = "aBtn";
+                l.CommandName = CMD_Print;
+                l.Text = "打印";
+                l.OnClientClick = "ISEx.loadingPanel.show();";
+
+            }), f =>
+            {
+                f.ItemStyle.Width = 50;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                f.ItemStyle.Wrap = false;
+            })
             .TemplateField("Remark", "备注", new TemplateItem.Label(e =>
             {
             }), f =>
@@ -276,7 +290,7 @@
 
         gv.RowCommand += (s, e) =>
         {
-            if (e.CommandName != CMD_Detail) return;
+            if (!new string[] { CMD_Detail, CMD_Print }.Contains(e.CommandName)) return;
 
             var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
             var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
@@ -303,6 +317,30 @@
                                 .Button(BaseControl.EventTypes.Save, b => b.CausesValidation = true)
                             ;
                         });
+
+                        break;
+
+                    case CMD_Print:
+
+                        var d1 = new List<eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1>();
+                        d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
+                        {
+                            DriverId = "driver1",
+                            CHNId = "4401"
+                        }); 
+
+                        d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
+                        {
+                            DriverId = "driver2",
+                            CHNId = "4421"
+                        });
+
+                        ReportGen report = new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement();
+                        report.Replace(d1);
+
+                        var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
+                        JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
+                            _ResolvePath("/reports/view.aspx"), ticketId.ToISFormatted()));
 
                         break;
                 }

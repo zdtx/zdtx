@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Globalization;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.Security;
-using System.Web.Profile;
+﻿using eTaxi.L2SQL;
 
-using eTaxi.L2SQL;
-using System.Net.Http;
+using System;
+using System.Collections.Generic;
+using System.Web.Profile;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace eTaxi.Web
 {
@@ -40,6 +34,7 @@ namespace eTaxi.Web
         void JS<T>(T caller, string snippet) where T : Control;
         string GetSitePrefix();
         string PostExternal<TObj>(TObj obj, string actionUrl, Action<string> handle = null);
+        string ResolvePath(string path);
     }
 
 }
