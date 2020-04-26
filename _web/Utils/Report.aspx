@@ -1,23 +1,20 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Report.aspx.cs" Inherits="eTaxi.Web.Report" %>
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head runat="server">
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <meta http-equiv="x-ua-compatible" content="IE=10" />
-        <style type="text/css">
-            html, body {
-                overflow: auto;
-                height: 100%;
-            }
-        </style>
-    </head>
-    <body>
-        <form id="theForm" runat="server">
-            <asp:ScriptManager runat="server" ID="manager" />
-            <rsweb:ReportViewer runat="server" ID="rv" Width="100%" Height="100%" />
-        </form>
-    </body>
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager runat="server"></asp:ScriptManager>        
+        <rsweb:ReportViewer ID="rv" runat="server" ProcessingMode="Local" Width="100%">
+        </rsweb:ReportViewer>
+    </form>
+</body>
 </html>
 <script runat="server">
 

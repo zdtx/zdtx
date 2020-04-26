@@ -325,14 +325,14 @@
                         var d1 = new List<eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1>();
                         d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
                         {
-                            DriverId = "driver1",
-                            CHNId = "4401"
+                            Name = "管理费",
+                            Amount = "2500"
                         }); 
 
                         d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
                         {
-                            DriverId = "driver2",
-                            CHNId = "4421"
+                            Name = "保险费",
+                            Amount = "230"
                         });
 
                         ReportGen report = new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement();
@@ -340,7 +340,7 @@
 
                         var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
                         JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
-                            _ResolvePath("/reports/view.aspx"), ticketId.ToISFormatted()));
+                            _ResolvePath("/utils/report.aspx"), ticketId.ToISFormatted()));
 
                         break;
                 }

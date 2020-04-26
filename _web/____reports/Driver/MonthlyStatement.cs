@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace eTaxi.Web.Reports.Driver
+namespace eTaxi.Reports.Driver
 {
     /// <summary>
     /// 司机月结单
@@ -9,9 +9,6 @@ namespace eTaxi.Web.Reports.Driver
     {
         public class parameters
         {
-            public const string ReportDateInfo = "ReportDateInfo";
-            public const string SubmitTimeInfo = "SubmitTimeInfo";
-            public const string PersonInfo = "PersonInfo";
             public const string DaysCount = "DaysCount";
         }
 
@@ -30,8 +27,8 @@ namespace eTaxi.Web.Reports.Driver
         [Serializable]
         public class DC1
         {
-            public string DriverId { get; set; }
-            public string CHNId { get; set; }
+            public string Name { get; set; }
+            public string Amount { get; set; }
         }
     }
 }

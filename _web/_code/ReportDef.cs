@@ -59,11 +59,18 @@ namespace eTaxi
         {
             // 报表参数
             rv.LocalReport.ReportPath = rv.Page.Server.MapPath(ReportPath);
+
             // 数据源
             rv.LocalReport.DataSources.Clear();
             _ResolveDataSources(rv);
+
             // 参数
             _ResolveParameters(rv);
+
+            rv.ProcessingMode = ProcessingMode.Local;
+            rv.LocalReport.Refresh();
+
+
         }
 
     }
