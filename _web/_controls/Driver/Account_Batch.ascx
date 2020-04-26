@@ -278,7 +278,7 @@
 
             }), f =>
             {
-                f.ItemStyle.Width = 50;
+                f.ItemStyle.Width = 30;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                 f.ItemStyle.Wrap = false;
             })
@@ -323,14 +323,14 @@
 
                     case CMD_Print:
 
-                        var d1 = new List<RPT_MonthlyStatement.DC1>();
-                        d1.Add(new RPT_MonthlyStatement.DC1
+                        var d1 = new List<object>();
+                        d1.Add(new 
                         {
                             Name = "管理费",
                             Amount = "2500"
                         }); 
 
-                        d1.Add(new RPT_MonthlyStatement.DC1
+                        d1.Add(new 
                         {
                             Name = "保险费",
                             Amount = "230"

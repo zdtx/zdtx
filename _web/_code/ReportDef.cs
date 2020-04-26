@@ -14,22 +14,33 @@ namespace eTaxi
         /// 报表文件路径
         /// </summary>
         public abstract string ReportPath { get; }
+
         /// <summary>
         /// 对象缓存
         /// </summary>
         protected TypedHashtable _Lists = new TypedHashtable();
+
         public List<T> Object<T>() { return _Lists.Get<List<T>>(key: typeof(T).Name); }
-        public List<T> Replace<T>(List<T> list) { _Lists.Add(typeof(T).Name, list); return list; }
+
+        public List<T> Replace<T>(List<T> list)
+        {
+            var name = string.Format("DC{0}", _Lists.Count + 1);
+            _Lists.Add(name, list);
+            return list;
+        }
+
         /// <summary>
         /// 参数存储
         /// </summary>
         protected List<ReportParameter> _Parameters = new List<ReportParameter>();
+
         public ReportParameter CreateParameter<T>(string name, params T[] values)
         {
             ReportParameter param = new ReportParameter(name);
             for (int i = 0; i < values.Length; i++) param.Values.Add(values[i].ToStringEx());
             return param;
         }
+
         public void ReplaceParameters(params ReportParameter[] parameters)
         {
             _Parameters.Clear();
@@ -69,8 +80,6 @@ namespace eTaxi
 
             rv.ProcessingMode = ProcessingMode.Local;
             rv.LocalReport.Refresh();
-
-
         }
 
     }
