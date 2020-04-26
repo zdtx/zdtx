@@ -2,7 +2,7 @@
 
 namespace eTaxi
 {
-    public class ReportViewerMessagesHANS : IReportViewerMessages
+    public class ReportViewerMessagesHANS : IReportViewerMessages, IReportViewerMessages5
     {
         public string DocumentMapButtonToolTip => string.Empty;
 
@@ -85,5 +85,78 @@ namespace eTaxi
         public string InvalidPageNumber => string.Empty;
 
         public string ChangeCredentialsToolTip => string.Empty;
+
+        public string PrintText => "页面设置";
+
+        public string PrintButtonText => "打印";
+
+        public string CancelButtonText => "取消";
+
+        public string DoneButtonText => "完成";
+
+        public string PageSizeLabelText => string.Empty;
+
+        public string PageOrientationLabelText => string.Empty;
+
+        public string SettingText => string.Empty;
+
+        public string PortraitText => "纵向";
+
+        public string LandscapeText => "横向";
+
+        public string LoadingText => string.Empty;
+
+        public string FooterText => string.Empty;
+
+        public string DoneText => string.Empty;
+
+        public string DownloadText => string.Empty;
+
+        public string DownloadLinkText => string.Empty;
+
+        public string CaptionText => string.Empty;
+
+        public string ShowDocumentMapButtonTooltip => string.Empty;
+
+        public string HideDocumentMapButtonTooltip => string.Empty;
+
+        public string ShowParameterAreaButtonToolTip => string.Empty;
+
+        public string HideParameterAreaButtonToolTip => string.Empty;
+
+        public string CancelLinkText => string.Empty;
+
+        public string CalendarLoading => string.Empty;
+
+        public string ClientNoScript => string.Empty;
+
+        public string ParameterDropDownToolTip => string.Empty;
+
+        public string CredentialMissingUserNameError(string dataSourcePrompt)
+        {
+            return dataSourcePrompt;
+        }
+
+        public string GetLocalizedNameForRenderingExtension(string format)
+        {
+            if (format.ToUpper().StartsWith("EXCEL")) return "EXCEL";
+            if (format.ToUpper().StartsWith("WORD")) return "WORD";
+            return format;
+        }
+
+        public string ParameterMissingSelectionError(string parameterPrompt)
+        {
+            return parameterPrompt;
+        }
+
+        public string ParameterMissingValueError(string parameterPrompt)
+        {
+            return parameterPrompt;
+        }
+
+        public string TotalPages(int pageCount, PageCountMode pageCountMode)
+        {
+            return string.Empty;
+        }
     }
 }

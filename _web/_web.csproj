@@ -1490,13 +1490,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-    </Compile>
     <Compile Include="_code.Timer\Engine.cs" />
     <Compile Include="_code.Timer\ExecutionContainer.cs" />
     <Compile Include="_code.Timer\TaskBase.cs">

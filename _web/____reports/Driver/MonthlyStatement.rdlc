@@ -135,14 +135,14 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6mm</Height>
+        <Height>20mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>290mm</Width>
+      <Width>150mm</Width>
       <Page>
         <PageHeader>
           <Height>25mm</Height>
@@ -164,10 +164,10 @@
             </Border>
           </Style>
         </PageFooter>
-        <PageHeight>210mm</PageHeight>
-        <PageWidth>297mm</PageWidth>
-        <InteractiveHeight>210mm</InteractiveHeight>
-        <InteractiveWidth>297mm</InteractiveWidth>
+        <PageHeight>297mm</PageHeight>
+        <PageWidth>210mm</PageWidth>
+        <InteractiveHeight>297mm</InteractiveHeight>
+        <InteractiveWidth>210mm</InteractiveWidth>
         <LeftMargin>0mm</LeftMargin>
         <RightMargin>0mm</RightMargin>
         <TopMargin>0mm</TopMargin>
