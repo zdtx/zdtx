@@ -1160,7 +1160,6 @@
     <Content Include="Portal\Desktop.aspx" />
     <Content Include="System\ACL.aspx" />
     <Content Include="System\File\Cam.aspx" />
-    <Content Include="Utils\Report.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1464,7 +1463,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1492,13 +1490,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Utils\Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Utils\Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1751,6 +1742,7 @@
       <DependentUpon>Flashcam.ascx</DependentUpon>
     </Compile>
     <Compile Include="____legacy.db\L2SQL.00.cs" />
+    <Compile Include="____reports\ReportViewerMessages.cs" />
     <Compile Include="____reports\Driver\MonthlyStatement.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1767,7 +1759,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MonthlyStatement.rdlc" />
     <EmbeddedResource Include="Properties\licenses.licx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

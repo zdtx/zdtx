@@ -2,6 +2,7 @@
 <%@ Import Namespace="eTaxi.Definitions" %>
 <%@ Import Namespace="eTaxi.Definitions.Ascx" %>
 <%@ Import Namespace="eTaxi.Exceptions" %>
+<%@ Import Namespace="eTaxi.Reports.Driver" %>
 <%@ Register Src="~/_controls.helper/Loaders/Popup_DX.ascx" TagPrefix="uc1" TagName="Popup_DX" %>
 <%@ Register Src="~/_controls.helper/GridWrapperForDetail.ascx" TagPrefix="uc1" TagName="GridWrapperForDetail" %>
 <%@ Register Src="~/_controls.helper/FormHelper.ascx" TagPrefix="uc1" TagName="FormHelper" %>
@@ -322,25 +323,25 @@
 
                     case CMD_Print:
 
-                        var d1 = new List<eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1>();
-                        d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
+                        var d1 = new List<RPT_MonthlyStatement.DC1>();
+                        d1.Add(new RPT_MonthlyStatement.DC1
                         {
                             Name = "管理费",
                             Amount = "2500"
                         }); 
 
-                        d1.Add(new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement.DC1
+                        d1.Add(new RPT_MonthlyStatement.DC1
                         {
                             Name = "保险费",
                             Amount = "230"
                         });
 
-                        ReportGen report = new eTaxi.Web.Reports.Driver.RPT_MonthlyStatement();
+                        var report = new RPT_MonthlyStatement();
                         report.Replace(d1);
 
                         var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
                         JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
-                            _ResolvePath("/utils/report.aspx"), ticketId.ToISFormatted()));
+                            _ResolvePath("/report.aspx"), ticketId.ToISFormatted()));
 
                         break;
                 }
