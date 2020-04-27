@@ -210,7 +210,7 @@
                 f.HeaderStyle.Width = 50;
                 f.ItemStyle.Width = 50;
             })
-            .TemplateField("StartTime", "上车时间", new TemplateItem.DXDateEdit(e =>
+            .TemplateField("StartTime", "发车时间", new TemplateItem.DXDateEdit(e =>
             {
                 e.Width = 100;
                 e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";

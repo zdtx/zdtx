@@ -50,7 +50,7 @@
     <dx:ASPxGridView ID="gv" runat="server" KeyFieldName="Id" Width="100%">
         <Columns>
             <dx:GridViewDataColumn FieldName="Id" Visible="false" />
-            <dx:GridViewDataColumn FieldName="PlateNumber" Caption="车牌号" Width="70" VisibleIndex="3" />
+            <dx:GridViewDataColumn FieldName="PlateNumber" Caption="车牌号" Width="90" VisibleIndex="3" />
             <dx:GridViewDataColumn FieldName="Source" Caption="来源" Width="120" VisibleIndex="6" />
             <dx:GridViewDataColumn FieldName="Type" Caption="性质" Width="60" VisibleIndex="8" />
             <dx:GridViewDataColumn FieldName="ModifyTime" Caption="最后更新" Width="90" VisibleIndex="11">

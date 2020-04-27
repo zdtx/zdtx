@@ -72,7 +72,7 @@
             </td>
         </tr>
         <tr>
-            <td class="name">生效时间（默认今天）
+            <td class="name">发车时间（默认今天）
             </td>
             <td class="cl">
                 <dx:ASPxDateEdit runat="server" ID="de_StartTime" Width="200"

@@ -40,7 +40,7 @@
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 150;
             })
-            .TemplateField("StartTime", "生效时间", new TemplateItem.Label(), f =>
+            .TemplateField("StartTime", "发车时间", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 100;

@@ -186,6 +186,7 @@
                 {
                 }), f =>
                 {
+                    f.ItemStyle.Wrap = false;
                 })
             .TemplateField("DriverId", "当事司机", new TemplateItem.DXComboBox(e =>
                 {

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.IO;
 using System.Timers;
 
 namespace eTaxi.Service
@@ -63,7 +58,7 @@ namespace eTaxi.Service
 
             settings.DayInfo.SplitEx((data, index) => _slotProcess(data[index], days));
             settings.TimeInfo.SplitEx((data, index) => _slotProcess(data[index], times));
-            
+
             if (days.Count == 0) days.Add(new KeyValuePair<int, int>(0, 7));
             if (times.Count == 0) times.Add(new KeyValuePair<int, int>(0, 24));
 
@@ -86,7 +81,7 @@ namespace eTaxi.Service
                     // 比对不中时间发送时间，则退出
                     if (dayHit && timeHit) _Elapse(e.SignalTime, settings.Secret);
                 };
-        
+
             // 开始 Timer 服务
             _Timer.Start();
 
@@ -98,6 +93,8 @@ namespace eTaxi.Service
             {
                 var remoting = new External.Timer();
                 remoting.Elapse(secret);
+                _Log("Elapse", System.Diagnostics.EventLogEntryType.Information,
+                    string.Format("远程调用成功：{0}", currentTime));
                 _ExCount = 0;
             }
             catch (Exception ex)
