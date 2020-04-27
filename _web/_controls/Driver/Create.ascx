@@ -148,6 +148,13 @@
             </td>
         </tr>
         <tr>
+            <td class="name">司机卡号（工号）
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_EmployeeId" Width="200" />
+            </td>
+        </tr>
+        <tr>
             <td class="name">从业时间
             </td>
             <td class="cl">
@@ -164,6 +171,20 @@
             </td>
             <td class="cl">
                 <dx:ASPxTextBox runat="server" ID="tb_CertNumber" Width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">银行卡号
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_BankAccount" Width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">司管员姓名
+            </td>
+            <td class="cl">
+                <dx:ASPxTextBox runat="server" ID="tb_Manager" Width="200" />
             </td>
         </tr>
         <tr>
@@ -357,7 +378,7 @@
         var context = _DTService.Context;
         var newId = string.Empty;
         var car = context.Cars.FirstOrDefault(c => c.Id == pf_CarId.Value);
-        if (car == null || string.IsNullOrEmpty(car.ZId))
+        if (car == null ) //|| string.IsNullOrEmpty(car.ZId))
             throw new Exception("找不到车辆档案，请检查：" + pf_CarId.Value);
         var department = Global.Cache.GetDepartment(d => d.Id == car.DepartmentId);
 

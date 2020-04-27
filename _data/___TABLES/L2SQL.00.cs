@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 namespace eTaxi.L2SQL
@@ -1703,6 +1698,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(256)")]
         public string Address { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(128)")]
+        public string BankAccount { get; set; }
         /// <summary>
         /// 从业时间
         /// </summary>
@@ -1748,6 +1745,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Education { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(32)")]
+        public string EmployeeId { get; set; }
         /// <summary>
         /// 人员状态
         /// </summary>
@@ -1783,6 +1782,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(3)", CanBeNull = false)]
         public string LastName { get; set; }
+        [ColumnAttribute(DbType = "nvarchar(16)")]
+        public string Manager { get; set; }
         /// <summary>
         /// 修改人
         /// </summary>
