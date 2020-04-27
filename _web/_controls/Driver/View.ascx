@@ -128,6 +128,13 @@
         </tr>
         <uc1:View_Guarantor runat="server" ID="uG" />
         <tr>
+            <td class="name">司机卡号（工号）
+            </td>
+            <td class="val">
+                <asp:Literal runat="server" ID="l_EmployeeId" />
+            </td>
+        </tr>
+        <tr>
             <td class="name">从业时间
             </td>
             <td class="val">
@@ -139,6 +146,20 @@
             </td>
             <td class="val">
                 <asp:Literal runat="server" ID="l_CertNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">银行卡号
+            </td>
+            <td class="val">
+                <asp:Literal runat="server" ID="l_BankAccount" />
+            </td>
+        </tr>
+        <tr>
+            <td class="name">司管员姓名
+            </td>
+            <td class="val">
+                <asp:Literal runat="server" ID="l__Manager" />
             </td>
         </tr>
         <tr>

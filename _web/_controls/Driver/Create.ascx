@@ -409,46 +409,46 @@
                 driver.Gender = driver.CHNId.Substring(16, 1).ToIntOrDefault() % 2 > 0;
 
                 var secret = Host.Settings.Get<string>("apiSecret");
-                var response = PostExternal(new
-                {
-                    carId = car.ZId,
-                    carName = car.PlateNumber,
-                    certficateUnit = "",
-                    companyId = "",
-                    companyName = department.Name,
-                    createBy = "",
-                    createTime = "",
-                    delFlag = 0,
-                    driverIdcard = driver.CHNId,
-                    driverName = driver.Name,
-                    driverPhone = driver.Tel1,
+                //var response = PostExternal(new
+                //{
+                //    carId = car.ZId,
+                //    carName = car.PlateNumber,
+                //    certficateUnit = "",
+                //    companyId = "",
+                //    companyName = department.Name,
+                //    createBy = "",
+                //    createTime = "",
+                //    delFlag = 0,
+                //    driverIdcard = driver.CHNId,
+                //    driverName = driver.Name,
+                //    driverPhone = driver.Tel1,
 
-                    operationNo = "",
-                    operationRealNo = driver.CertNumber,
-                    photoUrls = "",
-                    remark = "",
-                    starLevel = "",
-                    supervisesTel = "",
-                    token = secret.ToMd5(),
-                    updateBy = "",
-                    updateTime = ""
+                //    operationNo = "",
+                //    operationRealNo = driver.CertNumber,
+                //    photoUrls = "",
+                //    remark = "",
+                //    starLevel = "",
+                //    supervisesTel = "",
+                //    token = secret.ToMd5(),
+                //    updateBy = "",
+                //    updateTime = ""
 
-                }, "driver/save");
+                //}, "driver/save");
 
-                try
-                {
-                    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
-                    if (string.IsNullOrEmpty(x.result.id))
-                    {
-                        throw new Exception(response);
-                    }
+                //try
+                //{
+                //    dynamic x = JsonConvert.DeserializeObject<System.Dynamic.ExpandoObject>(response);
+                //    if (string.IsNullOrEmpty(x.result.id))
+                //    {
+                //        throw new Exception(response);
+                //    }
 
-                    driver.ZId = x.result.id;
-                }
-                catch
-                {
-                    throw new Exception("填报不成功：" + response);
-                }
+                //    driver.ZId = x.result.id;
+                //}
+                //catch
+                //{
+                //    throw new Exception("填报不成功：" + response);
+                //}
 
             })
 
