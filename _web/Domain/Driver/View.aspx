@@ -42,7 +42,7 @@
                         </dx:Tab>
                         <dx:Tab Text="合同情况" />
                         <dx:Tab Text="缴费情况" />
-                        <dx:Tab Text="违章情况" />
+                        <dx:Tab Text="违章违纪情况" />
                         <dx:Tab Text="事故情况" />
                         <dx:Tab Text="被投诉情况" />
                         <dx:Tab Text="好人好事" />

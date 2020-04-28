@@ -11,7 +11,7 @@
     <HeaderStyle CssClass="gridHeader" />
     <EmptyDataTemplate>
         <div class="emptyData">
-            （无违章记录）
+            （无违章违纪记录）
         </div>
     </EmptyDataTemplate>
 </asp:GridView>

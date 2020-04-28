@@ -201,6 +201,7 @@
             {
             }), f =>
             {
+                f.ItemStyle.Wrap = false;
             })
             .TemplateField("Source", "获得方式", new TemplateItem.Literal(l =>
             {

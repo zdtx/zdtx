@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace eTaxi.Definitions
+﻿namespace eTaxi.Definitions
 {
     /// <summary>
     /// 性别
@@ -83,7 +78,7 @@ namespace eTaxi.Definitions
         /// 群众
         /// </summary>
         [DefinitionItemSettings("群众")]
-        QZ =  0,
+        QZ = 0,
         /// <summary>
         /// 党员
         /// </summary>
@@ -350,7 +345,8 @@ namespace eTaxi.Definitions
         [DefinitionItemSettings("accidentFaultLevel", true)]
         UD19 = 19,
         [DefinitionItemSettings("accidentFaultLevel", true)]
-        UD20 = 20    }
+        UD20 = 20
+    }
 
     /// <summary>
     /// 违章类型
@@ -360,32 +356,32 @@ namespace eTaxi.Definitions
         /// <summary>
         /// 闯红灯
         /// </summary>
-        [DefinitionItemSettings("闯红灯")]
+        [DefinitionItemSettings("违章-闯红灯")]
         CHD = 0,
         /// <summary>
         /// 压线
         /// </summary>
-        [DefinitionItemSettings("压线")]
+        [DefinitionItemSettings("违章-压线")]
         YX = 1,
         /// <summary>
         /// 逆行
         /// </summary>
-        [DefinitionItemSettings("逆行")]
+        [DefinitionItemSettings("违章-逆行")]
         NX = 2,
         /// <summary>
         /// 违章停车
         /// </summary>
-        [DefinitionItemSettings("违章停车")]
+        [DefinitionItemSettings("违章-违章停车")]
         WZTC = 3,
         /// <summary>
         /// 超速
         /// </summary>
-        [DefinitionItemSettings("超速")]
+        [DefinitionItemSettings("违章-超速")]
         CS = 4,
         /// <summary>
         /// 其他
         /// </summary>
-        [DefinitionItemSettings("其他")]
+        [DefinitionItemSettings("违章-其他")]
         QT = -1,
         [DefinitionItemSettings("violationType", true)]
         UD10 = 10,

@@ -187,6 +187,7 @@
                 {
                 }), f =>
                 {
+                    f.ItemStyle.Wrap = false;
                 })
             .TemplateField("DriverId", "当事司机", new TemplateItem.DXComboBox(e =>
                 {
@@ -198,20 +199,20 @@
                     f.HeaderStyle.Width = 80;
                     f.ItemStyle.Width = 80;
                 })
-            .TemplateField("Type", "违章类型", new TemplateItem.DXComboBox(e =>
+            .TemplateField("Type", "违章违纪类型", new TemplateItem.DXComboBox(e =>
                 {
-                    e.Width = 80;
+                    e.Width = 100;
                     e.FromEnum<ViolationType>(valueAsInteger: true);
                     fh.Validate(e).IsRequired();
 
                 }), f =>
                 {
-                    f.HeaderStyle.Width = 80;
-                    f.ItemStyle.Width = 80;
+                    f.HeaderStyle.Width = 100;
+                    f.ItemStyle.Width = 100;
                 })
-            .TemplateField("SeverityLevel", "违章性质", new TemplateItem.DXComboBox(e =>
+            .TemplateField("SeverityLevel", "性质", new TemplateItem.DXComboBox(e =>
                 {
-                    e.Width = 100;
+                    e.Width = 60;
                     e.FromEnum<SeverityLevel>(valueAsInteger: true);
                     fh.Validate(e).IsRequired();
 

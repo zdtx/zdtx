@@ -88,7 +88,7 @@
             </td>
             <td class="cl">
                 <dx:ASPxSpinEdit runat="server" ID="sp_Money" Width="200"
-                    NullText="请输入奖罚金额"
+                    NullText="请输入金额"
                     DisplayFormatString="{0:N} 元" MaxValue="1000000" MinValue="0">
                     <SpinButtons ShowIncrementButtons="false" />
                     <HelpTextSettings Position="Bottom" />

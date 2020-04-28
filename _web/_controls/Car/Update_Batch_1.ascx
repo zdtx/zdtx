@@ -205,6 +205,7 @@
             {
                 f.HeaderStyle.Width = 80;
                 f.ItemStyle.Width = 80;
+                f.ItemStyle.Wrap = false;
             })
             .TemplateField("Source", "获得方式", new TemplateItem.DXTextBox(e =>
             {

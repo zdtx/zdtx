@@ -7,7 +7,7 @@
         <tr>
             <td colspan="2" style="padding:0px;">
                 <div class="info" style="padding:5px;margin:1px">
-                    违章通报
+                    违章违纪通报
                     <asp:LinkButton runat="server" ID="lMore" Text="查看更多.." CssClass="aBtn" />
                 </div>
             </td>

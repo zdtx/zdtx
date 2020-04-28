@@ -12,7 +12,7 @@
         <tr>
             <th colspan="2">
                 <div class="title">
-                    违章登记
+                    违章违纪登记
                 </div>
             </th>
         </tr>
@@ -50,19 +50,19 @@
             </td>
         </tr>
         <tr>
-            <td class="name">违章类型
+            <td class="name">违章违纪类型
             </td>
             <td class="cl">
                 <dx:ASPxComboBox runat="server" ID="cb_Type" Width="200" 
-                    NullText="责任划分" />
+                    NullText="请选择违章违纪类型" />
             </td>
         </tr>
         <tr>
-            <td class="name">违章性质
+            <td class="name">违章违纪性质
             </td>
             <td class="cl">
                 <dx:ASPxComboBox runat="server" ID="cb_SeverityLevel" Width="200" 
-                    NullText="责任划分" />
+                    NullText="选择违章违纪性质" />
             </td>
         </tr>
         <tr>

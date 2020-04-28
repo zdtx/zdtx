@@ -206,6 +206,7 @@
             {
             }), f =>
             {
+                f.ItemStyle.Wrap = false;
             })
             .TemplateField("DriverName", "正班司机", new TemplateItem.Literal(), f =>
             {

@@ -51,7 +51,7 @@
                         <dx:Tab Text="年审、行审情况" />
                         <dx:Tab Text="保险缴纳情况" />
                         <dx:Tab Text="事故历史" />
-                        <dx:Tab Text="违章历史" />
+                        <dx:Tab Text="违章违纪历史" />
                         <dx:Tab Text="投诉历史" />
                         <dx:Tab Text="好人好事记录" />
                     </Tabs>

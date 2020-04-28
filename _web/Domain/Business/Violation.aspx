@@ -27,13 +27,13 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="违章登记 - 单个录入">
+                        <dx:Tab Text="违章违纪登记 - 单个录入">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
                         <dx:Tab Text="批量录入">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="文件导入">
+                        <dx:Tab Text="文件导入" Visible="false">
                             <TabImage Url="~/images/_doc_16_foldercollection.gif" />
                         </dx:Tab>
                     </Tabs>
@@ -82,7 +82,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("业务处理", "违章登记");
+            .Title("业务处理", "违章违纪登记");
         c1.Execute();
     }
 
