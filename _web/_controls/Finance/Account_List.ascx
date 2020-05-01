@@ -87,7 +87,7 @@
         set { _ViewStateEx.Set<string>(value, DataStates.ObjectId); }
     }
 
-    public override string ModuleId { get { return Driver.Account_Batch; } }
+    public override string ModuleId { get { return Finance.Account_List; } }
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;

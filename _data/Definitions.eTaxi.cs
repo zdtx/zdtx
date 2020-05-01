@@ -519,4 +519,19 @@
     }
 
 
+    public enum AccountingIndex
+    {
+        [DefinitionItemSettings("未定义")]
+        UnSpecified = 0,
+        [DefinitionItemSettings("租金")]
+        Rental = 1,
+        [DefinitionItemSettings("管理费")]
+        AdminFee = 2,
+        [DefinitionItemSettings("违章违纪")]
+        Violation = 3,
+        [DefinitionItemSettings("奖金")]
+        Log = 4
+    }
+
+
 }

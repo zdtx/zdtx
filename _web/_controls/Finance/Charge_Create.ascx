@@ -38,6 +38,13 @@
             </td>
         </tr>
         <tr>
+            <td class="name">会计科目
+            </td>
+            <td class="cl">
+                <dx:ASPxComboBox runat="server" ID="cb_AccountingIndex" Width="200" AutoPostBack="true" />
+            </td>
+        </tr>
+        <tr>
             <td class="name">收取模式
             </td>
             <td class="cl">
@@ -96,7 +103,8 @@
 
         cb_Type.FromEnum<ChargeType>(valueAsInteger: true);
         cb_SpecifiedMonth.FromEnum<MonthType>(valueAsInteger: true);
-
+        cb_AccountingIndex.FromEnum<AccountingIndex>(valueAsInteger: true);
+        
         cb_Type.SelectedIndexChanged += (s, e) =>
         {
             _Util.Convert<ChargeType>(cb_Type.Value, d =>

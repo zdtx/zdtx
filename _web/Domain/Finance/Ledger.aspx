@@ -24,13 +24,10 @@
                         <BorderRight BorderStyle="None" />
                     </ActiveTabStyle>
                     <Tabs>
-                        <dx:Tab Text="计划款项">
-                            <TabImage Url="~/images/_doc_16_formeddocument.gif" />
+                        <dx:Tab Text="修改">
+                            <TabImage Url="~/images/_op_flatb_edit.gif" />
                         </dx:Tab>
-                        <dx:Tab Text="应收款项">
-                            <TabImage Url="~/images/_doc_16_formeddocument.gif" />
-                        </dx:Tab>
-                        <dx:Tab Text="租金结算">
+                        <dx:Tab Text="报表打印">
                             <TabImage Url="~/images/_doc_16_formeddocument.gif" />
                         </dx:Tab>
                     </Tabs>

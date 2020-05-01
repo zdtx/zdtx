@@ -129,6 +129,16 @@
                 f.HeaderStyle.Width = 150;
                 f.ItemStyle.Width = 150;
             })
+            .TemplateField("AccountingIndex", "会计科目", new TemplateItem.DXComboBox(e =>
+            {
+                e.Width = 100;
+                e.FromEnum<AccountingIndex>(valueAsInteger: true);
+                fh.Validate(e).IsRequired();
+            }), f =>
+            {
+                f.HeaderStyle.Width = 100;
+                f.ItemStyle.Width = 100;
+            })
             .TemplateField("Type", "收取模式", new TemplateItem.DXComboBox(e =>
             {
                 e.Width = 100;
@@ -199,6 +209,7 @@
                 .Do<ASPxTextBox>("Code", (c, d) => c.Text = d.Code)
                 .Do<ASPxTextBox>("Name", (c, d) => c.Text = d.Name)
                 .Do<ASPxComboBox>("IsNegative", (c, d) => c.Value = d.IsNegative ? "1" : "0")
+                .Do<ASPxComboBox>("AccountingIndex", (c, d) => c.Value = d.AccountingIndex.ToStringEx())
                 .Do<ASPxComboBox>("Type", (c, d) => c.Value = d.Type.ToStringEx())
                 .Do<ASPxComboBox>("SpecifiedMonth", (c, d) => c.Value = d.SpecifiedMonth.ToStringEx())
                 .Do<ASPxSpinEdit>("Amount", (c, d) => { c.Number = d.Amount.ToCHNRounded(); })
@@ -231,6 +242,7 @@
                 charge.Amount = d.Amount;
                 charge.SpecifiedMonth = d.SpecifiedMonth;
                 charge.IsNegative = d.IsNegative;
+                charge.AccountingIndex = d.AccountingIndex;
                 charge.Remark = d.Remark;
             });
         });
@@ -243,6 +255,7 @@
             .Do<ASPxTextBox>("Code", (d, c) => d.Code = c.Value.ToStringEx())
             .Do<ASPxTextBox>("Name", (d, c) => d.Name = c.Value.ToStringEx())
             .Do<ASPxComboBox>("Type", (d, c) => d.Type = c.Value.ToStringEx().ToIntOrDefault(0))
+            .Do<ASPxComboBox>("AccountingIndex", (d, c) => d.AccountingIndex = c.Value.ToStringEx().ToIntOrDefault(0))
             .Do<ASPxComboBox>("IsNegative", (d, c) => d.IsNegative = c.Value.ToStringEx("0") == "0" ? false : true)
             .Do<ASPxSpinEdit>("Amount", (d, c) => d.Amount = c.Number)
             .Do<ASPxComboBox>("SpecifiedMonth", (d, c) => d.SpecifiedMonth = c.Value.ToStringEx().ToIntOrDefault(0))

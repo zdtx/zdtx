@@ -2,7 +2,7 @@
 <%@ MasterType TypeName="eTaxi.Web.MasterPageEx" %>
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
-<%@ Register Src="~/_controls/Driver/Account_Batch.ascx" TagPrefix="uc1" TagName="Account_Batch" %>
+<%@ Register Src="~/_controls/Finance/Account_List.ascx" TagPrefix="uc1" TagName="Account_List" %>
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
     <script type="text/javascript">
@@ -18,7 +18,7 @@
 <asp:Content runat="server" ID="W" ContentPlaceHolderID="W">
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
-    <uc1:Account_Batch runat="server" id="c" />
+    <uc1:Account_List runat="server" id="c" />
 </asp:Content>
 <script runat="server">
     

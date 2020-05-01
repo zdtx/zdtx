@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 namespace eTaxi.L2SQL
@@ -1558,6 +1563,8 @@ namespace eTaxi.L2SQL
     [Table(Name = "charge")]
     public partial class TB_charge : TBObject<TB_charge>
     {
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int AccountingIndex { get; set; }
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Amount { get; set; }
         /// <summary>

@@ -1,7 +1,7 @@
 USE [eTaxi]
 GO
 
-/****** Object:  Table [dbo].[charge]    Script Date: 2020/3/15 21:47:14 ******/
+/****** Object:  Table [dbo].[charge]    Script Date: 2020/5/1 15:38:57 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[charge](
 	[Id] [nvarchar](6) NOT NULL,
 	[Code] [nvarchar](16) NOT NULL,
 	[Name] [nvarchar](128) NOT NULL,
+	[AccountingIndex] [int] NOT NULL,
 	[IsNegative] [bit] NOT NULL,
 	[Type] [int] NOT NULL,
 	[Amount] [money] NOT NULL,
@@ -36,4 +37,5 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'指定收费项目发生的月份' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'charge', @level2type=N'COLUMN',@level2name=N'SpecifiedMonth'
 GO
+
 

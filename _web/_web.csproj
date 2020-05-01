@@ -1267,7 +1267,8 @@
     <Content Include="_controls.sys\Position\Edit.ascx" />
     <Content Include="_controls.sys\Rank\Edit.ascx" />
     <Content Include="_controls.sys\User\Edit.ascx" />
-    <Content Include="_controls\Driver\Account_Batch.ascx" />
+    <Content Include="_controls\Finance\Account_Update_Batch.ascx" />
+    <Content Include="_controls\Finance\Account_List.ascx" />
     <Content Include="_controls\Driver\Update_Photo_Batch.ascx" />
     <Content Include="_controls\Driver\Update_Batch_1.ascx" />
     <Content Include="_controls\Driver\View.ascx" />
