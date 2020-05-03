@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 namespace eTaxi.L2SQL
@@ -1032,6 +1027,8 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime Due { get; set; }
+        [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
+        public DateTime EndDate { get; set; }
         /// <summary>
         /// 系统唯一码
         /// </summary>
@@ -1069,11 +1066,15 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(512)")]
         public string Remark { get; set; }
+        [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
+        public DateTime StartDate { get; set; }
     }
     [Serializable]
     [Table(Name = "car_payment_item")]
     public partial class TB_car_payment_item : TBObject<TB_car_payment_item>
     {
+        [ColumnAttribute(DbType = "int", CanBeNull = false)]
+        public int AccountingIndex { get; set; }
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Amount { get; set; }
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]

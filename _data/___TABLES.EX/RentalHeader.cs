@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Text;
-
-using D = eTaxi.Definitions;
 namespace eTaxi.L2SQL
 {
     [Serializable]
@@ -12,6 +6,9 @@ namespace eTaxi.L2SQL
     {
         public string DriverId { get; set; }
         public string CarId { get; set; }
+        public decimal Rental { get; set; }
+
+        public bool Invoiced { get; set; }
     }
 }
 

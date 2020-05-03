@@ -252,12 +252,12 @@
                             {
                                 m.CarId = _ObjectId;
                                 m.Id = newBalanceId;
+                                m.Time = de_Time.Date;
                                 m.Ref1 = newId;
                                 m.Ref2 = driverId;
                                 m.Source = (int)CarBalanceSource.Complain;
                                 m.Title = tb_Name.Text;
                                 m.IsIncome = false;
-                                m.Time = de_Time.Date;
                                 m.Amount = Math.Abs(amount);
                                 m.Status = (int)IssueStatus.Pending;
                             });

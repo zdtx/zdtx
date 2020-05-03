@@ -202,12 +202,12 @@
                     {
                         o.CarId = _ObjectId;
                         o.Id = newBalanceId;
+                        o.Time = de_Time.Date;
                         o.Ref1 = newId;
                         o.Ref2 = driverId;
                         o.Source = (int)CarBalanceSource.Log;
                         o.Title = tb_Name.Text;
                         o.IsIncome = (amount > 0);
-                        o.Time = _CurrentTime;
                         o.Amount = Math.Abs(amount);
                         o.Paid = 0;
                         o.Status = (int)IssueStatus.Pending;

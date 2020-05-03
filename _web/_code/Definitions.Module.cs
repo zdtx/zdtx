@@ -78,6 +78,7 @@
 
     public class Finance
     {
+        public const string Account_Update_Batch = "finance/account_update_batch";
         public const string Account_List = "finance/account_list.ascx";
         public const string Charge_Create = "finance/charge_create.ascx";
         public const string Charge_Batch = "finance/charge_batch.ascx";

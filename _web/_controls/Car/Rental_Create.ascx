@@ -302,26 +302,6 @@
                     h.Extra3 = rental.Extra3;
                     h.StartTime = rental.StartTime;
                     h.EndTime = endDate;
-                })
-                .DeleteAll<TB_car_payment>(p =>
-                    p.CarId == _CarId && p.DriverId == _DriverId && p.Due >= endDate)
-                .Create<TB_car_payment>(_SessionEx, p =>
-                {
-                    p.CarId = _CarId;
-                    p.DriverId = _DriverId;
-                    p.Id = newPaymentId;
-                    p.MonthInfo = endDate.ToMonthId();
-                    p.Name = string.Format("{0} - 换班结算", p.MonthInfo);
-                    p.Days = DateTime.DaysInMonth(endDate.Year, endDate.Month);
-                    p.CountDays = endDate.Day;
-
-                    var totalDays = (int)endDate.Subtract(rental.StartTime).TotalDays;
-                    if (totalDays < endDate.Day) p.CountDays = totalDays;
-
-                    p.Due = endDate;
-                    p.Amount =
-                        (rental.Rental * p.CountDays / p.Days + rental.Extra1 + rental.Extra2 + rental.Extra3).ToCHNRounded();
-                    p.Paid = p.Amount;
                 });
         }
 

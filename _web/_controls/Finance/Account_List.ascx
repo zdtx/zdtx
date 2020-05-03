@@ -504,7 +504,7 @@
                         c.Text = " (未生成) ";
                     }))
             );
-            return;
+
         }
 
         if (section == Actions.Select)

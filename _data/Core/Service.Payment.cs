@@ -1,13 +1,9 @@
-﻿using System;
+﻿using eTaxi.Definitions;
+
+using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Data.Linq.Mapping;
-using System.Text;
 using System.Data;
-using System.Data.Linq;
-using Microsoft.Practices.Unity;
+using System.Linq;
 
 namespace eTaxi.L2SQL
 {
@@ -18,14 +14,19 @@ namespace eTaxi.L2SQL
         /// </summary>
         public void GenerateInvoice(RentalHeader header, string monthIndex)
         {
-            var year = monthIndex.Substring(0, 4);
+            var invoiceDayIndex = Host.Settings.Get<int>("MonthlyInvoiceDayIndex", 1);
             var payments = Context.CarPayments
                 .Where(p => p.CarId == header.CarId && p.DriverId == header.DriverId)
                 .ToList();
             var date = new DateTime(
                 monthIndex.Substring(0, 4).ToIntOrDefault(),
-                monthIndex.Substring(4, 2).ToIntOrDefault(), 1);
-            var dayCount = date.ToDates().Length;
+                monthIndex.Substring(4, 2).ToIntOrDefault(), invoiceDayIndex);
+
+            // 如果日子之前的，就算上个月，如果之后，则算下个月
+            var factor = invoiceDayIndex < 15 ? 1 : -1;
+            var startDate = factor > 0 ? date : date.AddMonths(-1);
+            var endDate = factor > 0 ? date.AddMonths(1) : date;
+            var dayCount = (int)endDate.Subtract(startDate).TotalDays;
 
             // 已生成月结，省略
             if (payments.FirstOrDefault(p => p.MonthInfo == monthIndex) != null) return;
@@ -48,7 +49,7 @@ namespace eTaxi.L2SQL
 
             charges.ForEach(c =>
             {
-                paymentItems.Add(new TB_car_payment_item()
+                var item = new TB_car_payment_item()
                 {
                     Amount = c.Amount,
                     CarId = header.CarId,
@@ -59,8 +60,28 @@ namespace eTaxi.L2SQL
                     SpecifiedMonth = c.SpecifiedMonth,
                     Type = c.Type,
                     IsNegative = c.IsNegative,
+                    AccountingIndex = c.AccountingIndex,
                     Name = c.Name
-                });
+                };
+
+                switch (c.AccountingIndex)
+                {
+                    case (int)AccountingIndex.Rental:
+                        paymentItems.Add(UpdateRentalItem(item, startDate, endDate));
+                        break;
+                    case (int)AccountingIndex.AdminFee:
+                        paymentItems.Add(UpdateAdminFeeItem(item, startDate, endDate));
+                        break;
+                    case (int)AccountingIndex.Violation:
+                        paymentItems.Add(UpdateViolationItem(item, startDate, endDate));
+                        break;
+                    case (int)AccountingIndex.Log:
+                        paymentItems.Add(UpdateLogItem(item, startDate, endDate));
+                        break;
+                    default:
+                        paymentItems.Add(item);
+                        break;
+                }
             });
 
             payment.Amount = paymentItems.Sum(p => p.IsNegative ? -1 * p.Amount : p.Amount);
@@ -71,6 +92,8 @@ namespace eTaxi.L2SQL
             payment.Due = DateTime.Now.Date.AddMonths(1);
             payment.Id = newId;
             payment.MonthInfo = monthIndex;
+            payment.StartDate = startDate;
+            payment.EndDate = endDate;
             payment.Name = monthIndex;
             payment.OpeningBalance = previousPayment == null ? 0 : previousPayment.ClosingBalance;
             payment.Paid = 0;
@@ -81,7 +104,59 @@ namespace eTaxi.L2SQL
             paymentItems.ForEach(item => Context.CarPaymentItems.InsertOnSubmit(item));
             Context.SubmitChanges();
         }
-    
+
+        /// <summary>
+        /// 租金
+        /// </summary>
+        public TB_car_payment_item UpdateRentalItem(TB_car_payment_item item, DateTime startDate, DateTime endDate)
+        {
+            var rental = Context.CarRentals
+                .SingleOrDefault(r => r.CarId == item.CarId && r.DriverId == item.DriverId);
+            if (rental == null) return item;
+            item.Amount = rental.Rental;
+            return item;
+        }
+
+        /// <summary>
+        /// 管理费
+        /// </summary>
+        public TB_car_payment_item UpdateAdminFeeItem(TB_car_payment_item item, DateTime startDate, DateTime endDate)
+        {
+            // 未实现
+            return item;
+        }
+
+        /// <summary>
+        /// 罚金
+        /// </summary>
+        public TB_car_payment_item UpdateViolationItem(TB_car_payment_item item, DateTime startDate, DateTime endDate)
+        {
+            var violations = Context.CarViolations
+                .Where(v =>
+                    v.CarId == item.CarId && v.DriverId == item.DriverId &&
+                    v.Time >= startDate && v.Time < endDate)
+                .ToList();
+
+            item.Amount = violations.Sum(v => v.Fine ?? 0);
+            return item;
+        }
+
+        /// <summary>
+        /// 奖金
+        /// </summary>
+        public TB_car_payment_item UpdateLogItem(TB_car_payment_item item, DateTime startDate, DateTime endDate)
+        {
+            var balances = Context.CarBalances
+                .Where(b =>
+                    b.CarId == item.CarId && b.Ref2 == item.DriverId &&
+                    b.Source == (int)CarBalanceSource.Log &&
+                    b.Time >= startDate && b.Time < endDate)
+                .ToList();
+
+            item.Amount = balances.Sum(l => l.Amount);
+            return item;
+        }
+
         /// <summary>
         /// 更新月结金额
         /// </summary>
@@ -101,6 +176,29 @@ namespace eTaxi.L2SQL
             var paymentItems = Context.CarPaymentItems
                 .Where(i => i.CarId == carId && i.DriverId == driverId && i.PaymentId == paymentId)
                 .ToList();
+
+            // 更新计算项
+            paymentItems.ForEach(item =>
+            {
+                switch (item.AccountingIndex)
+                {
+                    case (int)AccountingIndex.Rental:
+                        paymentItems.Add(UpdateRentalItem(item, payment.StartDate, payment.EndDate));
+                        break;
+                    case (int)AccountingIndex.AdminFee:
+                        paymentItems.Add(UpdateAdminFeeItem(item, payment.StartDate, payment.EndDate));
+                        break;
+                    case (int)AccountingIndex.Violation:
+                        paymentItems.Add(UpdateViolationItem(item, payment.StartDate, payment.EndDate));
+                        break;
+                    case (int)AccountingIndex.Log:
+                        paymentItems.Add(UpdateLogItem(item, payment.StartDate, payment.EndDate));
+                        break;
+                    default:
+                        paymentItems.Add(item);
+                        break;
+                }
+            });
 
             payment.Amount = paymentItems.Sum(i => i.IsNegative ? -1 * i.Amount : i.Amount);
             payment.Paid = paymentItems.Sum(i => i.IsNegative ? -1 * i.Paid : i.Paid);
@@ -124,6 +222,6 @@ namespace eTaxi.L2SQL
 
             Context.SubmitChanges();
         }
-    
+
     }
 }

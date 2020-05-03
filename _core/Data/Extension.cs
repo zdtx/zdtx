@@ -1,5 +1,10 @@
-﻿using System;
+﻿using ExpressionSerialization;
+
+using LinqKit;
+
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -7,11 +12,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using System.IO;
-using System.Drawing;
-
-using ExpressionSerialization;
-using LinqKit;
 
 namespace eTaxi
 {
@@ -19,7 +19,7 @@ namespace eTaxi
     {
         KB = 1, MB = 2, GB = 3, TB = 4 // , PB = 5, EB = 6, ZB = 7, YB = 8
     }
-    
+
     public static class BasicExtensions
     {
         #region Guid
@@ -50,7 +50,8 @@ namespace eTaxi
         /// 为某个值做针对定义类型的测试
         /// </summary>
         public static string ResolveDefinition<T>(this string value)
-            where T : struct { return ResolveDefinition<T>(value, string.Empty); }
+            where T : struct
+        { return ResolveDefinition<T>(value, string.Empty); }
         public static string ResolveDefinition<T>(this string value, string defaultValue = "")
             where T : struct
         {
@@ -224,7 +225,7 @@ namespace eTaxi
                         parts[0].ToIntOrDefault(exceptionHandle: exHandle), 1, 1);
                 case 2:
                     return new DateTime(
-                        parts[0].ToIntOrDefault(exceptionHandle: exHandle), 
+                        parts[0].ToIntOrDefault(exceptionHandle: exHandle),
                         parts[1].ToIntOrDefault(exceptionHandle: exHandle), 1);
                 case 3:
                     return new DateTime(
@@ -243,7 +244,7 @@ namespace eTaxi
         /// <param name="computeNext">每次分流（int：当前批次序号, int：剩余字符未处理数，返回：需实际扣减的字符数）</param>
         /// <param name="produceNext">每次获得字串产品（int：当前批次号，int：当前批次，string：给出的字符串，string：返回的字符串）</param>
         /// <returns></returns>
-        public static List<string> ToSections(this string data, 
+        public static List<string> ToSections(this string data,
             Func<int, int, int> computeNext, Func<int, int, string, string> produceNext = null)
         {
             if (data.Length == 0) return new List<string>();
@@ -396,7 +397,8 @@ namespace eTaxi
         /// <param name="data"></param>
         /// <returns></returns>
         public static DateTime SpecificDayDate(this DateTime data,
-            int ordinal = 1) { return new DateTime(data.Year, data.Month, ordinal); }
+            int ordinal = 1)
+        { return new DateTime(data.Year, data.Month, ordinal); }
 
         /// <summary>
         /// 获得本月最后一天的日期
@@ -439,12 +441,12 @@ namespace eTaxi
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static string[] ToMonthIds(this DateTime data)
+        public static string[] ToMonthIds(this DateTime data, int extraMonths = 0)
         {
             var ids = new List<string>();
             var start = new DateTime(data.Year, 1, 1);
             for (
-                int i = 0; i < data.Month; i++) 
+                int i = 0; i < data.Month + extraMonths; i++)
                 ids.Add(start.AddMonths(i).ToMonthId());
             return ids.ToArray();
         }
@@ -513,7 +515,7 @@ namespace eTaxi
             return x.ToString();
         }
 
-        public static T FromXml<T>(this T obj, string xml) 
+        public static T FromXml<T>(this T obj, string xml)
         {
             T targetObj = default(T);
             try
@@ -644,14 +646,15 @@ namespace eTaxi
 
         public static bool Equals<T>(
             this Nullable<int> data, T value, T nullValue)
-            where T : struct, IComparable, IConvertible, IFormattable 
+            where T : struct, IComparable, IConvertible, IFormattable
         {
             if (data.HasValue) return Equals<T>(data.Value, value);
             return (nullValue.Equals(value));
         }
 
         public static bool Equals<T>(this int data, T value)
-            where T : struct, IComparable, IConvertible, IFormattable { return data == Convert.ToInt32(value); }
+            where T : struct, IComparable, IConvertible, IFormattable
+        { return data == Convert.ToInt32(value); }
 
         public static int[] ToArray(this int data, int start = 0)
         {
@@ -673,7 +676,7 @@ namespace eTaxi
             return ToArray(data, start).ToList();
         }
 
-        public static string ToStringOrEmpty(this int data, 
+        public static string ToStringOrEmpty(this int data,
             bool comma = false, string emptyValue = null)
         {
             if (data == 0) return string.IsNullOrEmpty(emptyValue) ? string.Empty : emptyValue;
@@ -693,7 +696,7 @@ namespace eTaxi
             return string.Empty;
         }
 
-        public static string ToStringOrEmpty(this long data, 
+        public static string ToStringOrEmpty(this long data,
             bool comma = false, string emptyValue = null)
         {
             if (data == 0) return string.IsNullOrEmpty(emptyValue) ? string.Empty : emptyValue;
@@ -781,7 +784,7 @@ namespace eTaxi
         /// <param name="defaultValue"></param>
         /// <param name="exceptionIfNotParsed"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(this int data, T defaultValue = default(T), bool exceptionIfNotParsed = false) 
+        public static T ToEnum<T>(this int data, T defaultValue = default(T), bool exceptionIfNotParsed = false)
             where T : struct, IComparable, IConvertible, IFormattable
         {
             T result = defaultValue;
@@ -850,7 +853,7 @@ namespace eTaxi
             if (data.HasValue) return ToStringOrEmpty(data.Value, hideDecimal, comma, emptyValue);
             return string.Empty;
         }
-        public static double ToValueOrDefault(this Nullable<double> data, 
+        public static double ToValueOrDefault(this Nullable<double> data,
             double defaultValue = 0)
         {
             if (data.HasValue) return data.Value;
@@ -875,7 +878,8 @@ namespace eTaxi
         /// <param name="digits"></param>
         /// <returns></returns>
         public static double ToCHNRounded(this double data,
-            int digits = 2) { return Math.Round(data, digits, MidpointRounding.AwayFromZero); }
+            int digits = 2)
+        { return Math.Round(data, digits, MidpointRounding.AwayFromZero); }
         public static double ToCHNRounded(this Nullable<double> data,
             int digits = 2)
         {
@@ -887,7 +891,7 @@ namespace eTaxi
 
         #region Decimal
 
-        public static string ToStringOrEmpty(this decimal data, 
+        public static string ToStringOrEmpty(this decimal data,
             int decimalPlaces, bool comma = false, string emptyValue = null)
         {
             if (data == 0) return string.IsNullOrEmpty(emptyValue) ? string.Empty : emptyValue;
@@ -953,7 +957,8 @@ namespace eTaxi
         /// <param name="digits"></param>
         /// <returns></returns>
         public static decimal ToCHNRounded(this decimal data,
-            int digits = 2) { return Math.Round(data, digits, MidpointRounding.AwayFromZero); }
+            int digits = 2)
+        { return Math.Round(data, digits, MidpointRounding.AwayFromZero); }
         public static decimal ToCHNRounded(this Nullable<decimal> data,
             int digits = 2)
         {
@@ -978,7 +983,7 @@ namespace eTaxi
         /// 将一个列表数据扁平化
         /// </summary>
         public static string ToFlat<T>(this List<T> data,
-            string separator = ",", Func<T, string> handlePart = null, 
+            string separator = ",", Func<T, string> handlePart = null,
             bool handleEmpty = false, string emptyHolder = "", bool canBeNull = true)
         {
             if (data.Count == 0) return canBeNull ? null : string.Empty;

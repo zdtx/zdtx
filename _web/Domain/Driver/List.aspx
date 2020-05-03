@@ -106,7 +106,7 @@
             <dx:GridViewDataColumn FieldName="Gender" Caption="性别" Width="50" VisibleIndex="4" />
             <dx:GridViewDataColumn FieldName="DayOfBirth" Caption="出生年月" Width="90" VisibleIndex="5" />
             <dx:GridViewDataColumn FieldName="CHNId" Caption="身份证" Width="160" VisibleIndex="6" />
-            <dx:GridViewDataColumn FieldName="PlateNumber" Caption="车牌号码" Width="80" VisibleIndex="7" />
+            <dx:GridViewDataColumn FieldName="PlateNumber" Caption="车牌号码" Width="90" VisibleIndex="7" />
             <dx:GridViewDataColumn FieldName="DepartmentId" Caption="部门归属" Width="80" VisibleIndex="8" />
             <dx:GridViewDataColumn FieldName="Status" Caption="状态" Width="60" VisibleIndex="9" />
             <dx:GridViewDataColumn FieldName="Tel1" Caption="联系电话" Width="110" VisibleIndex="10" />

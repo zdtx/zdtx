@@ -6,7 +6,6 @@
 <%@ Register Src="~/_controls.helper/GridWrapperForDetail.ascx" TagPrefix="uc1" TagName="GridWrapperForDetail" %>
 <%@ Register Src="~/_controls.helper/FormHelper.ascx" TagPrefix="uc1" TagName="FormHelper" %>
 <%@ Register Src="~/_controls.helper/Callback_Generic.ascx" TagPrefix="uc1" TagName="Callback_Generic" %>
-<%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
 <uc1:Popup_DX runat="server" ID="pop" />
 <uc1:FormHelper runat="server" ID="fh" />
 <uc1:Callback_Generic runat="server" ID="cb" />
@@ -38,7 +37,24 @@
     </div>
 </div>
 <div style="padding: 10px;">
-    <uc1:ActionToolbar runat="server" ID="at" Visible="false" />
+    <div class="actionTB" style="padding-top: 2px;">
+        <table>
+            <tr>
+                <td>
+                    <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" AutoPostBack="true" />
+                </td>
+                <td>
+                    <asp:Literal runat="server" ID="lDayRange" />
+                </td>
+                <td>
+                    <dx:ASPxButton runat="server" ID="bSubmit" Text="生成月结单（不会重复生成）">
+                        <Paddings Padding="0" />
+                        <Image Url="~/images/_doc_16_position.gif" />
+                    </dx:ASPxButton>
+                </td>
+            </tr>
+        </table>
+    </div>
     <uc1:GridWrapperForDetail runat="server" ID="gw" />
     <asp:GridView runat="server" ID="gv">
         <HeaderStyle CssClass="gridHeader" />
@@ -52,10 +68,10 @@
 </div>
 <script runat="server">
 
-    private List<TB_driver> _List
+    private List<RentalHeader> _List
     {
-        get { return _ViewStateEx.Get<List<TB_driver>>(DataStates.List, new List<TB_driver>()); }
-        set { _ViewStateEx.Set<List<TB_driver>>(value, DataStates.List); }
+        get { return _ViewStateEx.Get<List<RentalHeader>>(DataStates.List, new List<RentalHeader>()); }
+        set { _ViewStateEx.Set<List<RentalHeader>>(value, DataStates.List); }
     }
 
     private string[] _DriverIds
@@ -64,11 +80,32 @@
         set { _ViewStateEx.Set<string[]>(value, DataStates.Selected); }
     }
 
-    private string _ObjectId { get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); } }
-    public override string ModuleId { get { return Driver.Update_Batch_1; } }
+    private string _ObjectId
+    {
+        get { return _ViewStateEx.Get<string>(DataStates.ObjectId, null); }
+        set { _ViewStateEx.Set<string>(value, DataStates.ObjectId); }
+    }
+
+    private string _MonthId
+    {
+        get { return _ViewStateEx.Get<string>("monthId", null); }
+        set { _ViewStateEx.Set<string>(value, "monthId"); }
+    }
+
+    private int _InvoiceDayIndex
+    {
+        get { return Host.Settings.Get<int>("MonthlyInvoiceDayIndex", 15); }
+    }
+
+    private List<RentalHeader> _UnresolvedList = new List<RentalHeader>();
+    public override string ModuleId { get { return Finance.Account_Update_Batch; } }
     protected override void _SetInitialStates()
     {
         fh.CurrentGroup = ClientID;
+
+        // 获取元数据
+        var context = _DTService.Context;
+        var fields = context.Charges.OrderBy(c => c.Code).ToList();
 
         // 执行反调配置
         cb.Initialize(r => r.Do(tbInput, handle =>
@@ -80,7 +117,6 @@
             if (c == tbInput.ClientID)
             {
                 if (tbInput.Text.Trim().Length == 0) return;
-                var context = _DTContext<CommonContext>(true);
                 var name = tbInput.Text.ToStringEx();
                 var drivers = context.Drivers.Where(d => d.Name.Contains(name)).ToList();
                 if (drivers.Count == 0)
@@ -103,37 +139,6 @@
                 return;
             }
         });
-
-        at
-            .Initialize(cc => cc
-                .Button(BaseControl.EventTypes.Save, b => { b.Visible = true; })
-                .Button(BaseControl.EventTypes.Cancel, b =>
-                {
-                    b.CausesValidation = false;
-                    b.Text = "移除选定的司机（不作修改）";
-                    b.Visible = true;
-                    b.ConfirmText = "确定移除吗？";
-                }), fh.CurrentGroup)
-            .EventSinked += (s, eType, param) =>
-            {
-                switch (eType)
-                {
-                    case BaseControl.EventTypes.Cancel:
-                        var selection = gw.GetSelected();
-                        if (!selection
-                            .Any(kv => kv.Value)) { Alert("请选择待移除的条目。"); return; }
-                        gw.GetSelected(_List, d => d).ForEach(item => _List.Remove(item));
-                        Execute(VisualSections.List);
-                        break;
-                    case BaseControl.EventTypes.Save:
-                        if (Do(Actions.Save, true))
-                        {
-                            Alert("保存成功");
-                            Execute();
-                        }
-                        break;
-                }
-            };
 
         bReset.Click += (s, e) =>
         {
@@ -182,137 +187,84 @@
             });
         };
 
-        gw.Initialize(gv, c => c
-            .TemplateField("Id", "（内码）", new TemplateItem.Literal(l =>
-            {
-            }), f =>
-            {
-            })
-            .TemplateField("Name", "姓名", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 60;
-                fh.Validate(e).IsRequired();
+        gw.Initialize(gv, c =>
+        {
+            c
+                .TemplateField("CarId", "CarId", new TemplateItem.Literal(), f => f.Visible = false)
+                .TemplateField("PaymentId", "PaymentId", new TemplateItem.Literal(), f => f.Visible = false)
+                .TemplateField("DriverId", "（内码）", new TemplateItem.Literal(l =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("Name", "姓名", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("PlateNumber", "车牌号码", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("CHNId", "身份证号", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("Month", "当前月份", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("Month", "期初", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                .TemplateField("Month", "期末", new TemplateItem.Literal(e =>
+                {
+                }), f =>
+                {
+                })
+                ;
 
-            }), f =>
+            fields.ForEach(f =>
             {
-                f.HeaderStyle.Width = 60;
-                f.ItemStyle.Width = 60;
-            })
-            .TemplateField("LastName", "姓", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 30;
-                fh.Validate(e).IsRequired();
+                c.TemplateField(f.Id, f.Name, new TemplateItem.DXTextBox(), ff =>
+                {
 
-            }), f =>
-            {
-                f.HeaderStyle.Width = 30;
-                f.ItemStyle.Width = 30;
-            })
-            .TemplateField("FirstName", "名", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 40;
-                fh.Validate(e).IsRequired();
+                });
+            });
 
-            }), f =>
+        });
+
+        // 月份
+        var monthIds = new List<string>();
+        var todate = DateTime.Now.Date;
+
+        for (var i = 0; i < 10; i++)
+        {
+            if (i == 0)
             {
-                f.HeaderStyle.Width = 40;
-                f.ItemStyle.Width = 40;
-            })
-            .TemplateField("Gender", "性别", new TemplateItem.DXComboBox(e =>
-            {
-                e.Width = 50;
-                e.FromEnum<Gender>(valueAsInteger: true);
-                fh.Validate(e).IsRequired();
-            }), f =>
-            {
-                f.HeaderStyle.Width = 50;
-                f.ItemStyle.Width = 50;
-            })
-            .TemplateField("CHNId", "身份证号", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 150;
-            }), f =>
-            {
-                f.HeaderStyle.Width = 150;
-                f.ItemStyle.Width = 150;
-            })
-            .TemplateField("DayOfBirth", "出生日期", new TemplateItem.DXDateEdit(e =>
-            {
-                e.Width = 100;
-                e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
-            }), f =>
-            {
-                f.HeaderStyle.Width = 50;
-                f.ItemStyle.Width = 50;
-            })
-            .TemplateField("Education", "文化程度", new TemplateItem.DXComboBox(e =>
-            {
-                e.Width = 80;
-                e.FromEnum<Education>(valueAsInteger: true);
-                fh.Validate(e).IsRequired();
-            }), f =>
-            {
-                f.HeaderStyle.Width = 80;
-                f.ItemStyle.Width = 80;
-            })
-            .TemplateField("SocialCat", "政治面貌", new TemplateItem.DXComboBox(e =>
-            {
-                e.Width = 80;
-                e.FromEnum<SocialCat>(valueAsInteger: true);
-                fh.Validate(e).IsRequired();
-            }), f =>
-            {
-                f.HeaderStyle.Width = 80;
-                f.ItemStyle.Width = 80;
-            })
-            .TemplateField("Tel1", "联系电话", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 100;
-                fh.Validate(e).IsRequired();
-            }), f =>
-            {
-                f.HeaderStyle.Width = 100;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("Address", "常住地址", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 200;
-            }), f =>
-            {
-                f.HeaderStyle.Width = 200;
-                f.ItemStyle.Width = 200;
-            })
-            .TemplateField("HKAddress", "户口地址", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 200;
-            }), f =>
-            {
-                f.HeaderStyle.Width = 200;
-                f.ItemStyle.Width = 200;
-            })
-            .TemplateField("CareerStart", "从业时间", new TemplateItem.DXDateEdit(e =>
-            {
-                e.Width = 100;
-                e.DisplayFormatString = e.EditFormatString = "yyyy-MM-dd";
-            }), f =>
-            {
-                f.HeaderStyle.Width = 100;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("CertNumber", "从业资格证", new TemplateItem.DXTextBox(e =>
-            {
-                e.Width = 150;
-            }), f =>
-            {
-                f.HeaderStyle.Width = 150;
-                f.ItemStyle.Width = 150;
-            })
-        );
+                monthIds.AddRange(todate.ToMonthIds(extraMonths: 1));
+                continue;
+            }
+
+            monthIds.AddRange(todate.AddYears(i).ToMonthIds());
+            monthIds.AddRange(todate.AddYears(-1 * i).ToMonthIds());
+        }
+
+        cbMonthIndex.FromList(monthIds, (dd, i) => { i.Text = dd; i.Value = dd; return true; });
+        cbMonthIndex.SelectedIndexChanged += (s, e) => _Execute(VisualSections.List);
+
     }
 
     protected override void _Execute()
     {
         tbInput.Focus();
+        cbMonthIndex.Value = _MonthId = DateTime.Now.ToMonthId();
+
         _List.Clear();
         _Execute(VisualSections.List);
     }
@@ -321,126 +273,173 @@
     {
         if (section == VisualSections.List)
         {
-            gw.Execute(_List, b => b
-                .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
-                .Do<ASPxTextBox>("Name", (c, d) => c.Text = d.Name)
-                .Do<ASPxTextBox>("LastName", (c, d) => c.Text = d.LastName)
-                .Do<ASPxTextBox>("FirstName", (c, d) => c.Text = d.FirstName)
-                .Do<ASPxComboBox>("Gender", (c, d) =>
-                {
-                    c.Value = d.Gender.HasValue ? d.Gender.Value ?
-                        ((int)Gender.Male).ToString() :
-                        ((int)Gender.Female).ToString() :
-                        ((int)Gender.Unknown).ToString();
-                })
-                .Do<ASPxTextBox>("CHNId", (c, d) => c.Text = d.CHNId)
-                .Do<ASPxDateEdit>("DayOfBirth", (c, d) => c.Value = d.DayOfBirth)
-                .Do<ASPxComboBox>("Education", (c, d) => c.Value = d.Education.ToString())
-                .Do<ASPxComboBox>("SocialCat", (c, d) => c.Value = d.SocialCat.ToString())
-                .Do<ASPxTextBox>("Tel1", (c, d) => c.Text = d.Tel1)
-                .Do<ASPxTextBox>("Address", (c, d) => c.Text = d.Address)
-                .Do<ASPxTextBox>("HKAddress", (c, d) => c.Text = d.HKAddress)
-                .Do<ASPxDateEdit>("CareerStart", (c, d) => c.Value = d.CareerStart)
-                .Do<ASPxTextBox>("CertNumber", (c, d) => c.Text = d.CertNumber)
-            );
+            // 根据 DriverIds 取得相关数据
 
-            at.Visible = _List.Count > 0;
-            return;
+            var context = _DTService.Context;
+            var todate = DateTime.Now.SpecificDayDate();
+            var monthIndex = cbMonthIndex.Value.ToStringEx();
+
+            if (!string.IsNullOrEmpty(monthIndex))
+            {
+                todate = string.Format("{0}-{1}-1", monthIndex.Substring(0, 4), monthIndex.Substring(4, 2)).ToDateTime();
+            }
+
+            _ObjectId = todate.ToMonthId();
+
+            // 获取已生成 payment
+
+            var payments = context.CarPayments
+                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                .ToList();
+
+            var rentals = context.CarRentals
+                .Where(r => _DriverIds.Contains(r.DriverId))
+                .ToList();
+
+            var headers = new List<RentalHeader>();
+
+            headers.AddRange(payments.Select(p => new RentalHeader()
+            {
+                DriverId = p.DriverId,
+                CarId = p.CarId,
+            }));
+
+            // 如有未生成的，则马上生成
+
+            
+
+            headers.AddRange(rentals
+                .Where(r => !headers.Any(h => h.CarId == r.CarId && h.DriverId == r.DriverId))
+                .Select(r => new RentalHeader()
+                {
+                    DriverId = r.DriverId,
+                    CarId = r.CarId
+                }));
+
+            _List = headers.Distinct().ToList();
+            
+
+            var carIds = headers.Select(h => h.CarId).Distinct().ToArray();
+            var drivers = context.Drivers.Where(d => _DriverIds.Contains(d.Id)).ToList();
+            var cars = context.Cars.Where(c => carIds.Contains(c.Id)).ToList();
+
+            gw.Execute(_List, b =>
+            {
+                b
+                    .Do<Literal>("PaymentId", (c, d) => payments
+                        .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                        .IfNN(p => c.Text = p.Id))
+                    .Do<Literal>("CarId", (c, d) =>
+                    {
+                        c.Text = d.CarId;
+                    })
+                    .Do<Literal>("DriverId", (c, d) =>
+                    {
+                        c.Text = d.DriverId;
+                    })
+                    .Do<Literal>("Name", (c, d) => drivers.FirstOrDefault(dd => dd.Id == d.DriverId).IfNN(dd =>
+                    {
+                        c.Text = dd.Name;
+                    }))
+                    .Do<Literal>("CHNId", (c, d) => drivers.FirstOrDefault(dd => dd.Id == d.DriverId).IfNN(dd =>
+                    {
+                        c.Text = dd.CHNId;
+                    }))
+                    .Do<Literal>("PlateNumber", (c, d) => cars.FirstOrDefault(cc => cc.Id == d.CarId).IfNN(cc =>
+                    {
+                        c.Text = cc.PlateNumber;
+                    }))
+                    .Do<Literal>("Month", (c, d) =>
+                    {
+                        c.Text = monthIndex;
+                    });
+
+            });
+
         }
+
+        if (section == Actions.Select)
+        {
+            pop.Begin<eTaxi.Web.Controls.Selection.Driver.Item>(
+                "~/_controls.helper/selection/driver/items.ascx", null, c =>
+                {
+                    c.Execute();
+                }, c =>
+                {
+                    c
+                        .Width(650)
+                        .Height(500)
+                        .Title("先选择司机")
+                        .Button(BaseControl.EventTypes.OK, b => b.CausesValidation = true)
+                    ;
+                });
+        }
+
     }
 
     protected override void _Do(string section, string subSection = null)
     {
-        if (section == Actions.Select) _Do_Select();
-        if (section == Actions.Save) _Do_Save();
-    }
-
-    private void _Do_Save()
-    {
-        if (_List.Count == 0) return;
-        _Do_Collect();
-
-        var context = _DTService.Context;
-        _List.ForEach(d =>
+        switch (section)
         {
-            context.Update<TB_driver>(_SessionEx, c => c.Id == d.Id, driver =>
-            {
-                driver.Name = d.Name;
-                driver.LastName = d.LastName;
-                driver.FirstName = d.FirstName;
-                driver.Gender = d.Gender;
-                driver.CHNId = d.CHNId;
-                driver.DayOfBirth = d.DayOfBirth;
-                driver.Education = d.Education;
-                driver.SocialCat = d.SocialCat;
-                driver.Tel1 = d.Tel1;
-                driver.Address = d.Address;
-                driver.HKAddress = d.HKAddress;
-                driver.CareerStart = d.CareerStart;
-                driver.CertNumber = d.CertNumber;
-                driver.Remark = d.Remark;
-            });
-        });
-        context.SubmitChanges();
+            case Actions.Select:
+                _Do_Select();
+                break;
+            case Actions.Process:
+                _Do_Process();
+                break;
+        }
     }
 
     private void _Do_Select()
     {
-        _Do_Collect();
         _DriverIds.ForEach(id =>
         {
-            if (_List.Any(l => l.Id == id)) return;
+            if (_List.Any(l => l.DriverId == id)) return;
             var context = _DTContext<CommonContext>(true);
-            context.Drivers.SingleOrDefault(d => d.Id == id).IfNN(d => _List.Add(d));
+            var newData = context.CarRentals.Where(r => r.DriverId == id).Select(r => new RentalHeader()
+            {
+                CarId = r.CarId,
+                DriverId = r.DriverId
+
+            }).ToList();
+
+            context.CarPayments.Where(p => p.DriverId == id).Select(p => new RentalHeader()
+            {
+                CarId = p.CarId,
+                DriverId = p.DriverId
+            }).ForEach(h =>
+            {
+                if (newData.Any(hh => hh.CarId == h.CarId && hh.DriverId == h.DriverId)) return;
+                newData.Add(new RentalHeader()
+                {
+                    CarId = h.CarId,
+                    DriverId = h.DriverId
+                });
+            });
+
+            _List.AddRange(newData);
         });
     }
 
-    private void _Do_Collect()
+    private void _Do_Process()
     {
-        gw.Syn(_List, col => col
-            .Do<ASPxTextBox>("Name", (d, c) => d.Name = c.Value.ToStringEx())
-            .Do<ASPxTextBox>("LastName", (d, c) => d.LastName = c.Value.ToStringEx())
-            .Do<ASPxTextBox>("FirstName", (d, c) => d.FirstName = c.Value.ToStringEx())
-            .Do<ASPxComboBox>("Gender", (d, c) =>
+        _UnresolvedList.ForEach(item => _DTService.GenerateInvoice(item, _ObjectId));
+    }
+
+    private void _Do_Submit()
+    {
+        gw.GetSelected(_List, d => d).ForEach(item =>
+        {
+            _TransCall(() =>
             {
-                switch (Util.ParseEnum<Gender>(
-                    c.Value.ToStringEx(string.Empty).ToIntOrDefault(-1), Gender.Unknown))
-                {
-                    case Gender.Male: d.Gender = true; break;
-                    case Gender.Female: d.Gender = false; break;
-                    default: d.Gender = null; break;
-                }
-            })
-            .Do<ASPxTextBox>("CHNId", (d, c) => d.CHNId = c.Value.ToStringEx())
-            .Do<ASPxDateEdit>("DayOfBirth", (d, c) =>
+
+
+            }, ex =>
             {
-                if (string.IsNullOrEmpty(c.Value.ToStringEx()))
-                {
-                    d.DayOfBirth = null;
-                }
-                else
-                {
-                    d.DayOfBirth = c.Date.Date;
-                }
-            })
-            .Do<ASPxComboBox>("Education", (d, c) => d.Education = _Util.Convert<int>(c.Value))
-            .Do<ASPxComboBox>("SocialCat", (d, c) => d.SocialCat = _Util.Convert<int>(c.Value))
-            .Do<ASPxTextBox>("Tel1", (d, c) => d.Tel1 = c.Value.ToStringEx())
-            .Do<ASPxTextBox>("Address", (d, c) => d.Address = c.Value.ToStringEx())
-            .Do<ASPxTextBox>("HKAddress", (d, c) => d.HKAddress = c.Value.ToStringEx())
-            .Do<ASPxDateEdit>("CareerStart", (d, c) =>
-            {
-                if (string.IsNullOrEmpty(c.Value.ToString()))
-                {
-                    d.CareerStart = null;
-                }
-                else
-                {
-                    d.CareerStart = c.Date.Date;
-                }
-            })
-            .Do<ASPxTextBox>("CertNumber", (d, c) => d.CertNumber = c.Value.ToStringEx())
-        );
+                throw ex;
+
+            }, true);
+        });
     }
 
 </script>
