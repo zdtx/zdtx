@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using D = eTaxi.Definitions;
 
 namespace eTaxi.Web
 {
@@ -118,6 +113,7 @@ namespace eTaxi.Web
 
                 c.HeaderStyle.CssClass = "gridHeader";
                 c.ItemStyle.CssClass = "gridItem-template";
+                c.ItemStyle.Wrap = false;
 
                 if (templateItem is TemplateItem.DropDownField ||
                     templateItem is TemplateItem.DropDownList ||
@@ -268,7 +264,7 @@ namespace eTaxi.Web
             protected T _Object = default(T);
             protected GridViewRow _Row = null;
             public GridViewRow Row { get { return _Row; } }
-            public RowCollector<TOther> Transform<TOther>() where TOther : class,new() { return new RowCollector<TOther>(_Row, new TOther()); }
+            public RowCollector<TOther> Transform<TOther>() where TOther : class, new() { return new RowCollector<TOther>(_Row, new TOther()); }
             public T GetData(Action<T> handle = null) { if (handle != null) handle(_Object); return _Object; }
             public RowCollector(GridViewRow row, T obj) { _Row = row; _Object = obj; }
             public virtual RowCollector<T> Do<TControl>(

@@ -210,7 +210,6 @@ case'delete':ISEx.loadingPanel.show();break;
             }), f =>
             {
                 f.ItemStyle.Width = 50;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("lp", "管理", new TemplateItem.LinkButton(l =>
             {
@@ -222,7 +221,6 @@ case'delete':ISEx.loadingPanel.show();break;
             }), f =>
             {
                 f.ItemStyle.Width = 50;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("", "备注", new TemplateItem.Label())
 

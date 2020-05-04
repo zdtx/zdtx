@@ -32,7 +32,6 @@
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 100;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("Code", "合同编号", new TemplateItem.Label(), f =>
             {
@@ -58,7 +57,6 @@
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 130;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("CreatedById", "操作人", new TemplateItem.Label(), f =>
             {

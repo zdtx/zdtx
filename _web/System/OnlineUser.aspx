@@ -64,28 +64,23 @@
             {
                 f.HeaderStyle.Width = 50;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("Name", "人员", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.Width = 50;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("Department", "部门", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.Width = 100;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("LastVisitTime", "最后活跃时间", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.Width = 100;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("LastVisitHostAddress", "来自", new TemplateItem.Label(), f =>
             {
-                f.ItemStyle.Wrap = false;
                 f.HeaderStyle.Width = 100;
             })
             .TemplateField("LastVisitUrl", "最后访问页面", new TemplateItem.TextBox(e =>

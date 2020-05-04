@@ -217,12 +217,12 @@
                 }), f =>
                 {
                 })
-                .TemplateField("Month", "期初", new TemplateItem.Literal(e =>
+                .TemplateField("StartDate", "期初", new TemplateItem.Literal(e =>
                 {
                 }), f =>
                 {
                 })
-                .TemplateField("Month", "期末", new TemplateItem.Literal(e =>
+                .TemplateField("EndDate", "期末", new TemplateItem.Literal(e =>
                 {
                 }), f =>
                 {
@@ -297,7 +297,6 @@
                 .ToList();
 
             var headers = new List<RentalHeader>();
-
             headers.AddRange(payments.Select(p => new RentalHeader()
             {
                 DriverId = p.DriverId,
@@ -305,10 +304,8 @@
             }));
 
             // 如有未生成的，则马上生成
-
-            
-
-            headers.AddRange(rentals
+            _UnresolvedList.Clear();
+            _UnresolvedList.AddRange(rentals
                 .Where(r => !headers.Any(h => h.CarId == r.CarId && h.DriverId == r.DriverId))
                 .Select(r => new RentalHeader()
                 {
@@ -316,8 +313,15 @@
                     CarId = r.CarId
                 }));
 
-            _List = headers.Distinct().ToList();
-            
+            if (_UnresolvedList.Count > 0)
+            {
+                if (!Do(Actions.Process, true)) return;
+
+                // Reload payment
+                payments = context.CarPayments
+                    .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                    .ToList();
+            }
 
             var carIds = headers.Select(h => h.CarId).Distinct().ToArray();
             var drivers = context.Drivers.Where(d => _DriverIds.Contains(d.Id)).ToList();
@@ -352,8 +356,21 @@
                     .Do<Literal>("Month", (c, d) =>
                     {
                         c.Text = monthIndex;
+                    })
+                    .Do<Literal>("StartDate", (c, d) =>
+                    {
+                        payments.SingleOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
+                        {
+                            c.Text = p.StartDate.ToISDate();
+                        });
+                    })
+                    .Do<Literal>("EndDate", (c, d) =>
+                    {
+                        payments.SingleOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
+                        {
+                            c.Text = p.EndDate.ToISDate();
+                        });
                     });
-
             });
 
         }

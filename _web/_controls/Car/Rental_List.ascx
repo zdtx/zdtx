@@ -71,7 +71,6 @@
             {
                 f.ItemStyle.Width = 50;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("dl", string.Empty, new TemplateItem.LinkButton(l =>
             {
@@ -82,7 +81,6 @@
             {
                 f.ItemStyle.Width = 30;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("", "备注", new TemplateItem.Label(), f =>
             {

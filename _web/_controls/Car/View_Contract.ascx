@@ -27,7 +27,6 @@
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 130;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("CreatedById", "操作人", new TemplateItem.Label(), f =>
             {

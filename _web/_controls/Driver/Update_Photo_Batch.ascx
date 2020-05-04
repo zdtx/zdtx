@@ -241,7 +241,6 @@
             {
                 f.ItemStyle.Width = 50;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
             .TemplateField("ed2", string.Empty, new TemplateItem.LinkButton(l =>
             {
@@ -252,7 +251,6 @@
             {
                 f.ItemStyle.Width = 30;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Wrap = false;
             })
         );
 
