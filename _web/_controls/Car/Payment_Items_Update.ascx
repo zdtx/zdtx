@@ -46,10 +46,10 @@
         get { return _ViewStateEx.Get<string>("driverId", null); }
     }
 
-    private string _PaymentId
+    private string _MonthIndex
     {
-        set { _ViewStateEx.Set<string>(value, "paymentId"); }
-        get { return _ViewStateEx.Get<string>("paymentId", null); }
+        set { _ViewStateEx.Set<string>(value, "monthIndex"); }
+        get { return _ViewStateEx.Get<string>("monthIndex", null); }
     }
 
     public override string ModuleId { get { return Car.Payment_Items_Update; } }
@@ -125,18 +125,18 @@
             {
                 d.Name,
                 d.CHNId,
-                p.MonthInfo,
+                p.MonthIndex,
                 c.PlateNumber
             };
 
         header.FirstOrDefault().IfNN(h =>
         {
-            lHeader.Text = string.Format("{0}[{1}] - 车：{2} - {3} 结单", h.Name, h.CHNId, h.PlateNumber, h.MonthInfo);
+            lHeader.Text = string.Format("{0}[{1}] - 车：{2} - {3} 结单", h.Name, h.CHNId, h.PlateNumber, h.MonthIndex);
         });
 
         _List = (
             from i in context.CarPaymentItems
-            where i.CarId == _CarId && i.DriverId == _DriverId && i.PaymentId == _PaymentId
+            where i.CarId == _CarId && i.DriverId == _DriverId && i.MonthIndex == _MonthIndex
             orderby i.Code
             select i
             ).ToList();
@@ -198,7 +198,7 @@
             context.Update<TB_car_payment_item>(_SessionEx, c =>
                 c.CarId == _CarId &&
                 c.DriverId == _DriverId &&
-                c.PaymentId == _PaymentId &&
+                c.MonthIndex == _MonthIndex &&
                 c.ChargeId == d.ChargeId, paymentItem =>
                 {
                     paymentItem.Paid = Math.Abs(d.Paid);
@@ -208,7 +208,7 @@
 
         context.SubmitChanges();
 
-        _DTService.UpdatePayment(_CarId, _DriverId, _PaymentId);
+        _DTService.UpdatePayment(_CarId, _DriverId, _MonthIndex);
 
     }
 

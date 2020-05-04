@@ -283,7 +283,6 @@
         /// 1. 将当前的存为历史
         /// 2. 为撤下来的司机生成一张待收单据
         var newHistoryId = context.NewSequence<TB_car_rental_history>(_SessionEx);
-        var newPaymentId = context.NewSequence<TB_car_payment>(_SessionEx);
         var endDate = startDate.AddDays(-1);
 
         /// 如果在一天之内换的，则不产生历史计算记录

@@ -22,8 +22,7 @@
     protected override void _SetInitialStates()
     {
         gw.Initialize(gv, c => c
-            .TemplateField("Id", "（内码）", new TemplateItem.Label(), f => f.Visible = false)
-            .TemplateField("MonthInfo", "月份", new TemplateItem.Label(), f =>
+            .TemplateField("MonthIndex", "月份", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 60;
@@ -97,12 +96,11 @@
             from o in context.CarPayments
             join c in context.Cars on o.CarId equals c.Id
             where o.DriverId == _ObjectId
-            orderby o.MonthInfo descending
+            orderby o.MonthIndex descending
             select new
             {
                 c.PlateNumber,
-                o.Id,
-                o.MonthInfo,
+                o.MonthIndex,
                 o.CreateTime,
                 o.CreatedById,
                 o.Days,
@@ -115,7 +113,7 @@
                 o.Remark,
             }).ToList();
         gw.Execute(data, b => b
-            .Do<Label>("MonthInfo", (l, d, r) => l.Text = d.MonthInfo)
+            .Do<Label>("MonthIndex", (l, d, r) => l.Text = d.MonthIndex)
             .Do<Label>("PlateNumber", (l, d, r) => l.Text = d.PlateNumber)
             .Do<Label>("Name", (l, d, r) => l.Text = d.Name)
             .Do<Label>("Days", (l, d, r) => l.Text = d.Days.ToStringEx())

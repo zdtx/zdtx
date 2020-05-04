@@ -1030,11 +1030,6 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime EndDate { get; set; }
         /// <summary>
-        /// 系统唯一码
-        /// </summary>
-        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
-        public string Id { get; set; }
-        /// <summary>
         /// 修改人
         /// </summary>
         [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false)]
@@ -1045,10 +1040,10 @@ namespace eTaxi.L2SQL
         [ColumnAttribute(DbType = "datetime", CanBeNull = false)]
         public DateTime ModifyTime { get; set; }
         /// <summary>
-        /// 月份信息（例如：201603）
+        /// 系统唯一码
         /// </summary>
-        [ColumnAttribute(DbType = "nvarchar(6)", CanBeNull = false)]
-        public string MonthInfo { get; set; }
+        [ColumnAttribute(DbType = "nchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string MonthIndex { get; set; }
         /// <summary>
         /// 名目
         /// </summary>
@@ -1090,12 +1085,12 @@ namespace eTaxi.L2SQL
         public string DriverId { get; set; }
         [ColumnAttribute(DbType = "bit", CanBeNull = false)]
         public bool IsNegative { get; set; }
+        [ColumnAttribute(DbType = "nchar(6)", CanBeNull = false, IsPrimaryKey = true)]
+        public string MonthIndex { get; set; }
         [ColumnAttribute(DbType = "nvarchar(128)", CanBeNull = false)]
         public string Name { get; set; }
         [ColumnAttribute(DbType = "money", CanBeNull = false)]
         public decimal Paid { get; set; }
-        [ColumnAttribute(DbType = "nvarchar(10)", CanBeNull = false, IsPrimaryKey = true)]
-        public string PaymentId { get; set; }
         [ColumnAttribute(DbType = "nvarchar(128)")]
         public string Remark { get; set; }
         [ColumnAttribute(DbType = "int")]

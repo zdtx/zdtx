@@ -23,7 +23,7 @@
     {
         gw.Initialize(gv, c => c
             .TemplateField("Id", "（内码）", new TemplateItem.Label(), f => f.Visible = false)
-            .TemplateField("MonthInfo", "月份", new TemplateItem.Label(), f =>
+            .TemplateField("MonthIndex", "月份", new TemplateItem.Label(), f =>
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
                 f.ItemStyle.Width = 60;
@@ -97,12 +97,11 @@
             from o in context.CarPayments
             join d in context.Drivers on o.DriverId equals d.Id
             where o.CarId == _ObjectId
-            orderby o.MonthInfo descending
+            orderby o.MonthIndex descending
             select new
             {
-                o.Id,
                 DriverName = d.Name,
-                o.MonthInfo,
+                o.MonthIndex,
                 o.CreateTime,
                 o.CreatedById,
                 o.Days,
@@ -115,7 +114,7 @@
                 o.Remark,
             }).ToList();
         gw.Execute(data, b => b
-            .Do<Label>("MonthInfo", (l, d, r) => l.Text = d.MonthInfo)
+            .Do<Label>("MonthIndex", (l, d, r) => l.Text = d.MonthIndex)
             .Do<Label>("DriverName", (l, d, r) => l.Text = d.DriverName)
             .Do<Label>("Name", (l, d, r) => l.Text = d.Name)
             .Do<Label>("Days", (l, d, r) => l.Text = d.Days.ToStringEx())

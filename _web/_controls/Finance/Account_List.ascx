@@ -42,6 +42,9 @@
         <table>
             <tr>
                 <td>
+                    月份（年月）：
+                </td>
+                <td>
                     <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" AutoPostBack="true" />
                 </td>
                 <td>
@@ -198,7 +201,6 @@
 
         gw.Initialize(gv, c => c
             .TemplateField("CarId", "CarId", new TemplateItem.Literal(), f => f.Visible = false)
-            .TemplateField("PaymentId", "PaymentId", new TemplateItem.Literal(), f => f.Visible = false)
             .TemplateField("DriverId", "（内码）", new TemplateItem.Literal(l =>
             {
             }), f =>
@@ -219,7 +221,7 @@
             }), f =>
             {
             })
-            .TemplateField("Month", "当前月份", new TemplateItem.Literal(e =>
+            .TemplateField("MonthIndex", "当前月份", new TemplateItem.Literal(e =>
             {
             }), f =>
             {
@@ -273,6 +275,7 @@
                 l.CssClass = "aBtn";
                 l.CommandName = CMD_Print;
                 l.Text = "打印";
+                l.Visible = false;
                 l.OnClientClick = "ISEx.loadingPanel.show();";
 
             }), f =>
@@ -293,7 +296,7 @@
 
             var rowIndex = e.CommandArgument.ToStringEx().ToIntOrDefault();
             var v = new GridWrapper.RowVisitor(gv.Rows[rowIndex]);
-            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL => v.Get<Literal>("PaymentId", paymentL =>
+            v.Get<Literal>("CarId", carL => v.Get<Literal>("DriverId", driverL => v.Get<Literal>("MonthIndex", monthL =>
             {
                 switch (e.CommandName)
                 {
@@ -304,7 +307,7 @@
                         {
                             c.ViewStateEx.Set(carL.Text, "carId");
                             c.ViewStateEx.Set(driverL.Text, "driverId");
-                            c.ViewStateEx.Set(paymentL.Text, "paymentId");
+                            c.ViewStateEx.Set(monthL.Text, "monthIndex");
                             c.Execute();
 
                         }, c =>
@@ -396,7 +399,7 @@
             // 获取已生成 payment
 
             var payments = context.CarPayments
-                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthIndex == monthIndex)
                 .ToList();
 
             var rentals = context.CarRentals
@@ -426,9 +429,6 @@
             var cars = context.Cars.Where(c => carIds.Contains(c.Id)).ToList();
 
             gw.Execute(_List, b => b
-                .Do<Literal>("PaymentId", (c, d) => payments
-                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                    .IfNN(p => c.Text = p.Id))
                 .Do<Literal>("CarId", (c, d) =>
                 {
                     c.Text = d.CarId;
@@ -449,7 +449,7 @@
                 {
                     c.Text = cc.PlateNumber;
                 }))
-                .Do<Literal>("Month", (c, d) =>
+                .Do<Literal>("MonthIndex", (c, d) =>
                 {
                     c.Text = monthIndex;
                 })
@@ -527,44 +527,10 @@
     {
         switch (section)
         {
-            case Actions.Select:
-                _Do_Select();
-                break;
             case Actions.Submit:
                 _Do_Submit();
                 break;
         }
-    }
-
-    private void _Do_Select()
-    {
-        _DriverIds.ForEach(id =>
-        {
-            if (_List.Any(l => l.DriverId == id)) return;
-            var context = _DTContext<CommonContext>(true);
-            var newData = context.CarRentals.Where(r => r.DriverId == id).Select(r => new RentalHeader()
-            {
-                CarId = r.CarId,
-                DriverId = r.DriverId
-
-            }).ToList();
-
-            context.CarPayments.Where(p => p.DriverId == id).Select(p => new RentalHeader()
-            {
-                CarId = p.CarId,
-                DriverId = p.DriverId
-            }).ForEach(h =>
-            {
-                if (newData.Any(hh => hh.CarId == h.CarId && hh.DriverId == h.DriverId)) return;
-                newData.Add(new RentalHeader()
-                {
-                    CarId = h.CarId,
-                    DriverId = h.DriverId
-                });
-            });
-
-            _List.AddRange(newData);
-        });
     }
 
     private void _Do_Submit()

@@ -310,10 +310,9 @@
                 from r in context.CarRentals
                 where r.Rental + r.Extra1 + r.Extra2 + r.Extra3 > 0
                 select r).ToList();
-            var monthInfo = march.ToMonthId();
+            var monthIndex = march.ToMonthId();
             rentals.ForEach(r=>
             {
-                var newId = context.NewSequence<TB_car_payment>(new AdminSession(march.LastDayDate()));
                 var lastDay = march.LastDayDate();
                 var gap = (int)lastDay.Subtract(r.StartTime).TotalDays;
                 var days = lastDay.Day;
@@ -326,9 +325,8 @@
                     {
                         payment.CarId = r.CarId;
                         payment.DriverId = r.DriverId;
-                        payment.Id = newId;
-                        payment.Name = monthInfo;
-                        payment.MonthInfo = monthInfo;
+                        payment.MonthIndex = monthIndex;
+                        payment.Name = monthIndex;
                         payment.Days = days;
                         payment.CountDays = countDays;
                         payment.Due = lastDay;

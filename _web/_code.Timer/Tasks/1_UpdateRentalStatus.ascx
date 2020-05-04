@@ -34,10 +34,9 @@
                     (r.LastPaymentGenTime.HasValue && r.LastPaymentGenTime.Value.AddMonths(1) <= _CurrentTime)
                 )
             select r).ToList();
-        var monthInfo = _CurrentTime.ToMonthId();
+        var monthIndex = _CurrentTime.ToMonthId();
         rentals.ForEach(r=>
         {
-            var newId = context.NewSequence<TB_car_payment>(new AdminSession(_CurrentTime));
             var lastDay = _CurrentTime.LastDayDate();
             var gap = (int)lastDay.Subtract(r.StartTime).TotalDays;
             var days = lastDay.Day;
@@ -50,9 +49,8 @@
                 {
                     payment.CarId = r.CarId;
                     payment.DriverId = r.DriverId;
-                    payment.Id = newId;
-                    payment.Name = monthInfo;
-                    payment.MonthInfo = monthInfo;
+                    payment.MonthIndex = monthIndex;
+                    payment.Name = monthIndex;
                     payment.Days = days;
                     payment.CountDays = countDays;
                     payment.Due = lastDay;
@@ -73,10 +71,9 @@
             where
                 r.Rental + r.Extra1 + r.Extra2 + r.Extra3 > 0
             select r).ToList();
-        var monthInfo = _CurrentTime.ToMonthId();
+        var monthIndex = _CurrentTime.ToMonthId();
         rentals.ForEach(r=>
         {
-            var newId = context.NewSequence<TB_car_payment>(new AdminSession(_CurrentTime));
             var lastDay = _CurrentTime.LastDayDate();
             var gap = (int)lastDay.Subtract(r.StartTime).TotalDays;
             var days = lastDay.Day;
@@ -89,9 +86,8 @@
                 {
                     payment.CarId = r.CarId;
                     payment.DriverId = r.DriverId;
-                    payment.Id = newId;
-                    payment.Name = monthInfo;
-                    payment.MonthInfo = monthInfo;
+                    payment.MonthIndex = monthIndex;
+                    payment.Name = monthIndex;
                     payment.Days = days;
                     payment.CountDays = countDays;
                     payment.Due = lastDay;

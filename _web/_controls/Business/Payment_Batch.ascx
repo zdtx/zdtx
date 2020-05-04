@@ -219,11 +219,6 @@
         };
 
         gw.Initialize(gv, c => c
-            .TemplateField("Id", "编码", new TemplateItem.Literal(l =>
-            {
-            }), f =>
-            {
-            })
             .TemplateField("PlateNumber", "车牌号", new TemplateItem.Literal(l =>
             {
             }), f =>
@@ -234,7 +229,7 @@
             }), f =>
             {
             })
-            .TemplateField("MonthInfo", "月份", new TemplateItem.Literal(l =>
+            .TemplateField("MonthIndex", "月份", new TemplateItem.Literal(l =>
             {
             }), f =>
             {
@@ -313,8 +308,7 @@
                     l.DriverId,
                     c.PlateNumber,
                     DriverName = d.Name,
-                    l.Id,
-                    l.MonthInfo,
+                    l.MonthIndex,
                     l.Days,
                     l.CountDays,
                     l.Amount,
@@ -322,10 +316,9 @@
                 }).ToList();
 
             gw.Execute(data, b => b
-                .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
                 .Do<Literal>("PlateNumber", (c, d) => { c.Text = d.PlateNumber; })
                 .Do<Literal>("DriverName", (c, d) => { c.Text = d.DriverName; })
-                .Do<Literal>("MonthInfo", (c, d) => { c.Text = d.MonthInfo; })
+                .Do<Literal>("MonthIndex", (c, d) => { c.Text = d.MonthIndex; })
                 .Do<Literal>("Days", (c, d) => { c.Text = d.Days.ToString(); })
                 .Do<Literal>("CountDays", (c, d) => { c.Text = d.CountDays.ToString(); })
                 .Do<Literal>("Amount", (c, d) => { c.Text = d.Amount.ToStringOrEmpty(comma: true); })
@@ -354,22 +347,22 @@
     {
         if (_List.Count == 0) return;
         var context = _DTService.Context;
-        var monthInfo = cbMonth.Value.ToStringEx();
+        var monthIndex = cbMonth.Value.ToStringEx();
         var carIds = _List.Select(d => d.CarId).ToArray();
         var payments = context.CarPayments.Where(p =>
-            carIds.Contains(p.CarId) && p.MonthInfo == monthInfo).ToList();
+            carIds.Contains(p.CarId) && p.MonthIndex == monthIndex).ToList();
         _Do_Collect();
         _List.ForEach(d =>
         {
             context
                 .Update<TB_car_payment>(_SessionEx,
-                    p => p.CarId == d.CarId && p.Id == d.Id, payment =>
+                    p => p.CarId == d.CarId && p.MonthIndex == d.MonthIndex, payment =>
                     {
                         var delayed =
                             payment.Amount > payment.Paid && payment.Due < _CurrentTime.Date;
                         payment.Paid = d.Paid;
                         payment.Name = (payment.Paid >= payment.Amount && delayed) ? // 建立逾期标记
-                            payment.Name = payment.MonthInfo + ".d" : payment.MonthInfo;
+                            payment.Name = payment.MonthIndex + ".d" : payment.MonthIndex;
                     })
                 .SubmitChanges();
         });
@@ -379,22 +372,22 @@
     {
         if (_List.Count == 0) return;
         var context = _DTService.Context;
-        var monthInfo = cbMonth.Value.ToStringEx();
+        var monthIndex = cbMonth.Value.ToStringEx();
         var carIds = _List.Select(d => d.CarId).ToArray();
         var payments = context.CarPayments.Where(p =>
-            carIds.Contains(p.CarId) && p.MonthInfo == monthInfo).ToList();
+            carIds.Contains(p.CarId) && p.MonthIndex == monthIndex).ToList();
         _Do_Collect();
         _List.ForEach(d =>
         {
             context
                 .Update<TB_car_payment>(_SessionEx,
-                    p => p.CarId == d.CarId && p.Id == d.Id, payment =>
+                    p => p.CarId == d.CarId && p.MonthIndex == d.MonthIndex, payment =>
                     {
                         var delayed =
                             payment.Amount > payment.Paid && payment.Due < _CurrentTime.Date;
                         d.Paid = payment.Paid = payment.Amount;
                         payment.Name = (payment.Paid >= payment.Amount && delayed) ? // 建立逾期标记
-                            payment.Name = payment.MonthInfo + ".d" : payment.MonthInfo;
+                            payment.Name = payment.MonthIndex + ".d" : payment.MonthIndex;
                     })
                 .SubmitChanges();
         });
@@ -411,20 +404,20 @@
             .Where(r => _CarIds.Contains(r.CarId))
             .Select(r => r.DriverId).Distinct().ToArray();
         var driverIds = curDriverIds.Union(hisDriverIds).ToArray();
-        var monthInfo = cbMonth.Value.ToStringEx();
+        var monthIndex = cbMonth.Value.ToStringEx();
         var payments = (
             from p in context.CarPayments
             where
                 _CarIds.Contains(p.CarId) &&
                 driverIds.Contains(p.DriverId) &&
-                p.MonthInfo == monthInfo
+                p.MonthIndex == monthIndex
             select p).ToList();
 
         // 补充没有的部分
         payments.ForEach(p =>
         {
             if (!
-                _List.Any(l => l.CarId == p.CarId && l.Id == p.Id))
+                _List.Any(l => l.CarId == p.CarId && l.MonthIndex == p.MonthIndex))
                 _List.Add(p);
         });
 

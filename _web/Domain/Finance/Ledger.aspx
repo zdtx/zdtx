@@ -3,7 +3,7 @@
 <%@ Register Src="~/_controls.helper/Partial/HeaderInfo.ascx" TagPrefix="uc1" TagName="HeaderInfo" %>
 <%@ Register Src="~/_controls.helper/ActionToolbar.ascx" TagPrefix="uc1" TagName="ActionToolbar" %>
 <%@ Register Src="~/_controls/Finance/Account_Update_Batch.ascx" TagPrefix="uc1" TagName="Account_Update_Batch" %>
-
+<%@ Register Src="~/_controls/Finance/Account_Report.ascx" TagPrefix="uc1" TagName="Account_Report" %>
 <asp:Content runat="server" ID="H" ContentPlaceHolderID="H">
     <script type="text/javascript" src="../../content/scripts/__page.js"></script>
     <script type="text/javascript">
@@ -12,7 +12,6 @@
         });
         
     </script>
-    
 </asp:Content>
 <asp:Content runat="server" ID="N" ContentPlaceHolderID="N">
     <uc1:HeaderInfo runat="server" ID="hi" />
@@ -41,6 +40,7 @@
 </asp:Content>
 <asp:Content runat="server" ID="C" ContentPlaceHolderID="C">
     <uc1:Account_Update_Batch runat="server" ID="uUpdate" />
+    <uc1:Account_Report runat="server" ID="uReport" />
 </asp:Content>
 <script runat="server"> // 分类核算
 
@@ -63,7 +63,7 @@
 
     protected override void _SetInitialStates()
     {
-        tc.Switch(new BaseControl[] { uUpdate, uUpdate }, (index, c) =>
+        tc.Switch(new BaseControl[] { uUpdate, uReport }, (index, c) =>
         {
             c.Execute();
 
@@ -77,7 +77,7 @@
     {
         hi
             .Back("返回桌面", "../../portal/desktop.aspx")
-            .Title("结算管理", "分类核算");
+            .Title("结算管理", "应收款月报表");
         uUpdate.Execute();
     }
 

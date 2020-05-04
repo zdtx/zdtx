@@ -41,15 +41,15 @@
         <table>
             <tr>
                 <td>
+                    月份（年月）：
+                </td>
+                <td>
                     <dx:ASPxComboBox runat="server" ID="cbMonthIndex" Width="100" AutoPostBack="true" />
                 </td>
                 <td>
-                    <asp:Literal runat="server" ID="lDayRange" />
-                </td>
-                <td>
-                    <dx:ASPxButton runat="server" ID="bSubmit" Text="生成月结单（不会重复生成）">
+                    <dx:ASPxButton runat="server" ID="bSave" Text="保存">
                         <Paddings Padding="0" />
-                        <Image Url="~/images/_doc_16_position.gif" />
+                        <Image Url="~/images/_op_flatb_save.gif" />
                     </dx:ASPxButton>
                 </td>
             </tr>
@@ -74,6 +74,12 @@
         set { _ViewStateEx.Set<List<RentalHeader>>(value, DataStates.List); }
     }
 
+    private List<TB_car_payment_item> _Items
+    {
+        get { return _ViewStateEx.Get<List<TB_car_payment_item>>(DataStates.Detail, new List<TB_car_payment_item>()); }
+        set { _ViewStateEx.Set<List<TB_car_payment_item>>(value, DataStates.Detail); }
+    }
+
     private string[] _DriverIds
     {
         get { return _ViewStateEx.Get<string[]>(DataStates.Selected, new string[] { }); }
@@ -86,18 +92,13 @@
         set { _ViewStateEx.Set<string>(value, DataStates.ObjectId); }
     }
 
-    private string _MonthId
-    {
-        get { return _ViewStateEx.Get<string>("monthId", null); }
-        set { _ViewStateEx.Set<string>(value, "monthId"); }
-    }
-
     private int _InvoiceDayIndex
     {
         get { return Host.Settings.Get<int>("MonthlyInvoiceDayIndex", 15); }
     }
 
     private List<RentalHeader> _UnresolvedList = new List<RentalHeader>();
+    private List<TB_charge> _Fields = new List<TB_charge>();
     public override string ModuleId { get { return Finance.Account_Update_Batch; } }
     protected override void _SetInitialStates()
     {
@@ -105,7 +106,7 @@
 
         // 获取元数据
         var context = _DTService.Context;
-        var fields = context.Charges.OrderBy(c => c.Code).ToList();
+        _Fields = context.Charges.OrderBy(c => c.Code).ToList();
 
         // 执行反调配置
         cb.Initialize(r => r.Do(tbInput, handle =>
@@ -191,7 +192,6 @@
         {
             c
                 .TemplateField("CarId", "CarId", new TemplateItem.Literal(), f => f.Visible = false)
-                .TemplateField("PaymentId", "PaymentId", new TemplateItem.Literal(), f => f.Visible = false)
                 .TemplateField("DriverId", "（内码）", new TemplateItem.Literal(l =>
                 {
                 }), f =>
@@ -212,28 +212,52 @@
                 }), f =>
                 {
                 })
-                .TemplateField("Month", "当前月份", new TemplateItem.Literal(e =>
+                .TemplateField("MonthIndex", "当前月份", new TemplateItem.Literal(e =>
                 {
                 }), f =>
                 {
                 })
-                .TemplateField("StartDate", "期初", new TemplateItem.Literal(e =>
+                .TemplateField("StartDate", "期初", new TemplateItem.Label(e =>
                 {
                 }), f =>
                 {
                 })
-                .TemplateField("EndDate", "期末", new TemplateItem.Literal(e =>
+                .TemplateField("EndDate", "期末", new TemplateItem.Label(e =>
                 {
                 }), f =>
                 {
                 })
                 ;
 
-            fields.ForEach(f =>
+            _Fields.ForEach(f =>
             {
-                c.TemplateField(f.Id, f.Name, new TemplateItem.DXTextBox(), ff =>
+                c.TemplateField(f.Id, f.Name, new TemplateItem.DXSpinEdit(e =>
                 {
+                    switch (f.AccountingIndex)
+                    {
+                        case (int)AccountingIndex.AdminFee:
+                        case (int)AccountingIndex.Log:
+                        case (int)AccountingIndex.Violation:
+                            e.Enabled = false;
+                            e.Width = 70;
+                            break;
+                        case (int)AccountingIndex.Rental:
+                            e.Enabled = false;
+                            e.Width = 100;
+                            break;
+                        default:
+                            e.Width = 70;
+                            break;
+                    }
 
+                    e.HorizontalAlign = HorizontalAlign.Right;
+                    e.SpinButtons.ShowIncrementButtons = false;
+                    e.DisplayFormatString = "{0:N2}";
+                    e.DecimalPlaces = 2;
+
+                }), ff =>
+                {
+                    ff.ItemStyle.Width = 10;
                 });
             });
 
@@ -258,13 +282,21 @@
         cbMonthIndex.FromList(monthIds, (dd, i) => { i.Text = dd; i.Value = dd; return true; });
         cbMonthIndex.SelectedIndexChanged += (s, e) => _Execute(VisualSections.List);
 
+        bSave.Click += (s, e) =>
+        {
+            if (Do(Actions.Save, true))
+            {
+                Alert("保存成功");
+                Execute(VisualSections.List);
+            }
+        };
+
     }
 
     protected override void _Execute()
     {
         tbInput.Focus();
-        cbMonthIndex.Value = _MonthId = DateTime.Now.ToMonthId();
-
+        cbMonthIndex.Value = _ObjectId = DateTime.Now.ToMonthId();
         _List.Clear();
         _Execute(VisualSections.List);
     }
@@ -276,20 +308,12 @@
             // 根据 DriverIds 取得相关数据
 
             var context = _DTService.Context;
-            var todate = DateTime.Now.SpecificDayDate();
-            var monthIndex = cbMonthIndex.Value.ToStringEx();
-
-            if (!string.IsNullOrEmpty(monthIndex))
-            {
-                todate = string.Format("{0}-{1}-1", monthIndex.Substring(0, 4), monthIndex.Substring(4, 2)).ToDateTime();
-            }
-
-            _ObjectId = todate.ToMonthId();
+            _ObjectId = cbMonthIndex.Value.ToStringEx();
 
             // 获取已生成 payment
 
             var payments = context.CarPayments
-                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthIndex == _ObjectId)
                 .ToList();
 
             var rentals = context.CarRentals
@@ -300,7 +324,7 @@
             headers.AddRange(payments.Select(p => new RentalHeader()
             {
                 DriverId = p.DriverId,
-                CarId = p.CarId,
+                CarId = p.CarId
             }));
 
             // 如有未生成的，则马上生成
@@ -319,20 +343,23 @@
 
                 // Reload payment
                 payments = context.CarPayments
-                    .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthInfo == monthIndex)
+                    .Where(p => _DriverIds.Contains(p.DriverId) && p.MonthIndex == _ObjectId)
                     .ToList();
             }
 
-            var carIds = headers.Select(h => h.CarId).Distinct().ToArray();
+            _List = payments.Select(p => new RentalHeader() { CarId = p.CarId, DriverId = p.DriverId }).ToList();
+
+            var carIds = rentals.Select(r => r.CarId).Distinct().ToArray();
             var drivers = context.Drivers.Where(d => _DriverIds.Contains(d.Id)).ToList();
             var cars = context.Cars.Where(c => carIds.Contains(c.Id)).ToList();
+
+            _Items = context.CarPaymentItems
+                .Where(i => carIds.Contains(i.CarId) && _DriverIds.Contains(i.DriverId) && i.MonthIndex == _ObjectId)
+                .ToList();
 
             gw.Execute(_List, b =>
             {
                 b
-                    .Do<Literal>("PaymentId", (c, d) => payments
-                        .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
-                        .IfNN(p => c.Text = p.Id))
                     .Do<Literal>("CarId", (c, d) =>
                     {
                         c.Text = d.CarId;
@@ -353,24 +380,52 @@
                     {
                         c.Text = cc.PlateNumber;
                     }))
-                    .Do<Literal>("Month", (c, d) =>
+                    .Do<Literal>("MonthIndex", (c, d) =>
                     {
-                        c.Text = monthIndex;
+                        c.Text = _ObjectId;
                     })
-                    .Do<Literal>("StartDate", (c, d) =>
+                    .Do<Label>("StartDate", (c, d) =>
                     {
-                        payments.SingleOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
+                        payments.FirstOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
                         {
                             c.Text = p.StartDate.ToISDate();
+                        }, ()=>
+                        {
+                            c.Text = "(未生成)";
+                            c.ForeColor = System.Drawing.Color.Red;
                         });
                     })
-                    .Do<Literal>("EndDate", (c, d) =>
+                    .Do<Label>("EndDate", (c, d) =>
                     {
-                        payments.SingleOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
+                        payments.FirstOrDefault(p => p.DriverId == d.DriverId).IfNN(p =>
                         {
                             c.Text = p.EndDate.ToISDate();
+                        }, ()=>
+                        {
+                            c.Text = " - ";
                         });
+                    })
+                    ;
+
+                _Fields.ForEach(f =>
+                {
+                    b.Do<ASPxSpinEdit>(f.Id, (c, d) =>
+                    {
+                        _Items
+                            .FirstOrDefault(i =>
+                                i.CarId == d.CarId && i.DriverId == d.DriverId && i.ChargeId == f.Id)
+                            .IfNN(item =>
+                            {
+                                c.Visible = true;
+                                c.Value = item.Amount;
+
+                            }, ()=>
+                            {
+                                c.Visible = false;
+                            });
                     });
+                });
+
             });
 
         }
@@ -399,64 +454,70 @@
         switch (section)
         {
             case Actions.Select:
-                _Do_Select();
+                _Do_Collect();
                 break;
             case Actions.Process:
                 _Do_Process();
                 break;
+            case Actions.Save:
+                _Do_Save();
+                break;
         }
-    }
-
-    private void _Do_Select()
-    {
-        _DriverIds.ForEach(id =>
-        {
-            if (_List.Any(l => l.DriverId == id)) return;
-            var context = _DTContext<CommonContext>(true);
-            var newData = context.CarRentals.Where(r => r.DriverId == id).Select(r => new RentalHeader()
-            {
-                CarId = r.CarId,
-                DriverId = r.DriverId
-
-            }).ToList();
-
-            context.CarPayments.Where(p => p.DriverId == id).Select(p => new RentalHeader()
-            {
-                CarId = p.CarId,
-                DriverId = p.DriverId
-            }).ForEach(h =>
-            {
-                if (newData.Any(hh => hh.CarId == h.CarId && hh.DriverId == h.DriverId)) return;
-                newData.Add(new RentalHeader()
-                {
-                    CarId = h.CarId,
-                    DriverId = h.DriverId
-                });
-            });
-
-            _List.AddRange(newData);
-        });
     }
 
     private void _Do_Process()
     {
+        // 仅仅支持当月的自动生成
+        if (_ObjectId != DateTime.Now.SpecificDayDate().ToMonthId()) return;
         _UnresolvedList.ForEach(item => _DTService.GenerateInvoice(item, _ObjectId));
     }
 
-    private void _Do_Submit()
+    private void _Do_Save()
     {
-        gw.GetSelected(_List, d => d).ForEach(item =>
+        if (_List.Count == 0) return;
+        _Do_Collect();
+
+        var context = _DTService.Context;
+        var carIds = _List.Select(d => d.CarId).ToArray();
+        var driverIds = _List.Select(d => d.DriverId).ToArray();
+        var items = context.CarPaymentItems
+            .Where(i => carIds.Contains(i.CarId) && _DriverIds.Contains(i.DriverId) && i.MonthIndex == _ObjectId)
+            .ToList();
+
+        items.ForEach(i =>
         {
-            _TransCall(() =>
+            _Items
+                .FirstOrDefault(ii =>
+                    ii.CarId == i.CarId && ii.DriverId == i.DriverId && ii.ChargeId == i.ChargeId)
+                .IfNN(ii =>
+                {
+                    i.Amount = ii.Amount;
+                });
+        });
+
+        context.SubmitChanges();
+
+    }
+
+    private void _Do_Collect()
+    {
+        gw.Syn(_List, col =>
+        {
+            _Fields.ForEach(f =>
             {
-
-
-            }, ex =>
-            {
-                throw ex;
-
-            }, true);
+                col.Do<ASPxSpinEdit>(f.Id, (d, c) =>
+                {
+                    _Items
+                        .FirstOrDefault(i =>
+                            i.CarId == d.CarId && i.DriverId == d.DriverId && i.ChargeId == f.Id)
+                        .IfNN(item =>
+                        {
+                            item.Amount = c.Number;
+                        });
+                });
+            });
         });
     }
+
 
 </script>

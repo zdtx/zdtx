@@ -29,23 +29,15 @@ namespace eTaxi.L2SQL
             var dayCount = (int)endDate.Subtract(startDate).TotalDays;
 
             // 已生成月结，省略
-            if (payments.FirstOrDefault(p => p.MonthInfo == monthIndex) != null) return;
+            if (payments.FirstOrDefault(p => p.MonthIndex == monthIndex) != null) return;
 
             var charges = Context.Charges.Where(c => c.Enabled).ToList();
-            var newId = string.Empty;
             var payment = new TB_car_payment();
             var previousPayment = payments
-                .Where(p => p.MonthInfo.ToIntOrDefault() < monthIndex.ToIntOrDefault())
-                .OrderBy(p => p.MonthInfo)
+                .Where(p => p.MonthIndex.ToIntOrDefault() < monthIndex.ToIntOrDefault())
+                .OrderBy(p => p.MonthIndex)
                 .LastOrDefault();
             var paymentItems = new List<TB_car_payment_item>();
-
-            Context
-                .NewSequence<TB_car_payment>(_CurrentSession, (seq, id) =>
-                {
-                    newId = id;
-                })
-                .SubmitChanges();
 
             charges.ForEach(c =>
             {
@@ -56,7 +48,7 @@ namespace eTaxi.L2SQL
                     ChargeId = c.Id,
                     Code = c.Code,
                     DriverId = header.DriverId,
-                    PaymentId = newId,
+                    MonthIndex = monthIndex,
                     SpecifiedMonth = c.SpecifiedMonth,
                     Type = c.Type,
                     IsNegative = c.IsNegative,
@@ -90,8 +82,7 @@ namespace eTaxi.L2SQL
             payment.Days = dayCount;
             payment.DriverId = header.DriverId;
             payment.Due = DateTime.Now.Date.AddMonths(1);
-            payment.Id = newId;
-            payment.MonthInfo = monthIndex;
+            payment.MonthIndex = monthIndex;
             payment.StartDate = startDate;
             payment.EndDate = endDate;
             payment.Name = monthIndex;
@@ -160,21 +151,21 @@ namespace eTaxi.L2SQL
         /// <summary>
         /// 更新月结金额
         /// </summary>
-        public void UpdatePayment(string carId, string driverId, string paymentId)
+        public void UpdatePayment(string carId, string driverId, string monthIndex)
         {
             var payment = Context.CarPayments
-                .FirstOrDefault(p => p.CarId == carId && p.DriverId == driverId && p.Id == paymentId);
+                .FirstOrDefault(p => p.CarId == carId && p.DriverId == driverId && p.MonthIndex == monthIndex);
             if (payment == null) return;
 
-            var yearIndex = payment.MonthInfo.Substring(0, 4);
+            var yearIndex = payment.MonthIndex.Substring(0, 4);
             var payments = Context.CarPayments
-                .Where(p => p.CarId == carId && p.DriverId == driverId && p.MonthInfo.StartsWith(yearIndex))
-                .OrderBy(p => p.MonthInfo)
+                .Where(p => p.CarId == carId && p.DriverId == driverId && p.MonthIndex.StartsWith(yearIndex))
+                .OrderBy(p => p.MonthIndex)
                 .ToList();
 
-            payment = payments.Single(p => p.Id == payment.Id);
+            payment = payments.Single(p => p.MonthIndex == payment.MonthIndex);
             var paymentItems = Context.CarPaymentItems
-                .Where(i => i.CarId == carId && i.DriverId == driverId && i.PaymentId == paymentId)
+                .Where(i => i.CarId == carId && i.DriverId == driverId && i.MonthIndex == monthIndex)
                 .ToList();
 
             // 更新计算项
@@ -204,7 +195,6 @@ namespace eTaxi.L2SQL
             payment.Paid = paymentItems.Sum(i => i.IsNegative ? -1 * i.Paid : i.Paid);
             payment.ClosingBalance = payment.OpeningBalance - payment.Amount + payment.Paid;
 
-            var monthIndex = payment.MonthInfo;
             var date = new DateTime(
                 monthIndex.Substring(0, 4).ToIntOrDefault(),
                 monthIndex.Substring(4, 2).ToIntOrDefault(), 1);
@@ -212,8 +202,8 @@ namespace eTaxi.L2SQL
             {
                 var p = payments[i];
                 var d = new DateTime(
-                    p.MonthInfo.Substring(0, 4).ToIntOrDefault(),
-                    p.MonthInfo.Substring(4, 2).ToIntOrDefault(), 1);
+                    p.MonthIndex.Substring(0, 4).ToIntOrDefault(),
+                    p.MonthIndex.Substring(4, 2).ToIntOrDefault(), 1);
                 if (d <= date) continue;
 
                 p.OpeningBalance = payment.ClosingBalance;
