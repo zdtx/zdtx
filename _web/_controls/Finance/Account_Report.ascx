@@ -3,6 +3,7 @@
 <%@ Import Namespace="eTaxi.Definitions.Ascx" %>
 <%@ Import Namespace="eTaxi.Exceptions" %>
 <%@ Import Namespace="eTaxi.Reports.Driver" %>
+<%@ Import Namespace="Microsoft.Reporting.WebForms" %>
 <%@ Register Src="~/_controls.helper/Loaders/Popup_DX.ascx" TagPrefix="uc1" TagName="Popup_DX" %>
 <uc1:Popup_DX runat="server" ID="pop" />
 <div style="padding: 10px;">
@@ -73,11 +74,35 @@
             var context = _DTService.Context;
             _ObjectId = cbMonthIndex.Value.ToStringEx();
 
-            Alert("Report 1");
+            var d1 = new List<RPT_MonthlyStatement.DC1>();
+            d1.Add(new RPT_MonthlyStatement.DC1()
+            {
+                Ordinal = "1",
+                Id = "001",
+                Name = "张三",
+                Manager = ""
+
+            });
+
+            d1.Add(new RPT_MonthlyStatement.DC1()
+            {
+                Ordinal = "2",
+                Id = "002",
+                Name = "李四"
+            });
+
+            var report = new RPT_MonthlyStatement();
+            report.Replace(d1);
+
+            report.ReplaceParameters(
+                report.CreateParameter("OpeningBalance", "11123")
 
 
+                );
 
-
+            var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
+            JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
+                _ResolvePath("/report.aspx"), ticketId.ToISFormatted()));
 
         }
     }
