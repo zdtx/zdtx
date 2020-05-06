@@ -222,28 +222,28 @@
                 .Where(i => i.Name == "公交卡销")
                 .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
 
-            //report.ReplaceParameters(
-            //    report.CreateParameter("openingBalance", openingBalance),
-            //    report.CreateParameter("closingBalance", closingBalance),
-            //    report.CreateParameter("amount", amount),
-            //    report.CreateParameter("paid", paid),
-            //    report.CreateParameter("adminFee_Amount", adminFee_Amount),
-            //    report.CreateParameter("adminFee_Paid", adminFee_Paid),
-            //    report.CreateParameter("rental_Amount", rental_Amount),
-            //    report.CreateParameter("rental_Paid", rental_Paid),
-            //    report.CreateParameter("shift_Amount", shift_Amount),
-            //    report.CreateParameter("shift_Paid", shift_Paid),
-            //    report.CreateParameter("tyre_Amount", tyre_Amount),
-            //    report.CreateParameter("tyre_Paid", tyre_Paid),
-            //    report.CreateParameter("violation_Amount", violation_Amount),
-            //    report.CreateParameter("violation_Paid", violation_Paid),
-            //    report.CreateParameter("fine_Amount", fine_Amount),
-            //    report.CreateParameter("fine_Paid", fine_Paid),
-            //    report.CreateParameter("bonus_Amount", bonus_Amount),
-            //    report.CreateParameter("bonus_Paid", bonus_Paid),
-            //    report.CreateParameter("card_Amount", card_Amount),
-            //    report.CreateParameter("card_Paid", card_Paid)
-            //);
+            report.ReplaceParameters(
+                report.CreateParameter("openingBalance", openingBalance),
+                report.CreateParameter("closingBalance", closingBalance),
+                report.CreateParameter("amount", amount),
+                report.CreateParameter("paid", paid),
+                report.CreateParameter("adminFee_Amount", adminFee_Amount),
+                report.CreateParameter("adminFee_Paid", adminFee_Paid),
+                report.CreateParameter("rental_Amount", rental_Amount),
+                report.CreateParameter("rental_Paid", rental_Paid),
+                report.CreateParameter("shift_Amount", shift_Amount),
+                report.CreateParameter("shift_Paid", shift_Paid),
+                report.CreateParameter("tyre_Amount", tyre_Amount),
+                report.CreateParameter("tyre_Paid", tyre_Paid),
+                report.CreateParameter("violation_Amount", violation_Amount),
+                report.CreateParameter("violation_Paid", violation_Paid),
+                report.CreateParameter("fine_Amount", fine_Amount),
+                report.CreateParameter("fine_Paid", fine_Paid),
+                report.CreateParameter("bonus_Amount", bonus_Amount),
+                report.CreateParameter("bonus_Paid", bonus_Paid),
+                report.CreateParameter("card_Amount", card_Amount),
+                report.CreateParameter("card_Paid", card_Paid)
+            );
 
             var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
             JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
