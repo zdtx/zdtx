@@ -43,6 +43,7 @@ namespace eTaxi.L2SQL
             {
                 var item = new TB_car_payment_item()
                 {
+                    Paid = c.Amount,
                     Amount = c.Amount,
                     CarId = header.CarId,
                     ChargeId = c.Id,
@@ -76,6 +77,7 @@ namespace eTaxi.L2SQL
                 }
             });
 
+            payment.Paid =
             payment.Amount = paymentItems.Sum(p => p.IsNegative ? -1 * p.Amount : p.Amount);
             payment.CarId = header.CarId;
             payment.CountDays = dayCount;

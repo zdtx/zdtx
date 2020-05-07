@@ -231,7 +231,7 @@
 
             _Fields.ForEach(f =>
             {
-                c.TemplateField(f.Id, f.Name, new TemplateItem.DXSpinEdit(e =>
+                c.TemplateField(f.Id + "_Amount", f.Name + "-应收", new TemplateItem.DXSpinEdit(e =>
                 {
                     switch (f.AccountingIndex)
                     {
@@ -254,6 +254,34 @@
                     e.SpinButtons.ShowIncrementButtons = false;
                     e.DisplayFormatString = "{0:N2}";
                     e.DecimalPlaces = 2;
+
+                }), ff =>
+                {
+                    ff.ItemStyle.Width = 10;
+                });
+
+                c.TemplateField(f.Id + "_Paid", f.Name + "-实收", new TemplateItem.DXSpinEdit(e =>
+                {
+                    switch (f.AccountingIndex)
+                    {
+                        case (int)AccountingIndex.AdminFee:
+                        case (int)AccountingIndex.Log:
+                        case (int)AccountingIndex.Violation:
+                            e.Width = 70;
+                            break;
+                        case (int)AccountingIndex.Rental:
+                            e.Width = 100;
+                            break;
+                        default:
+                            e.Width = 70;
+                            break;
+                    }
+
+                    e.HorizontalAlign = HorizontalAlign.Right;
+                    e.SpinButtons.ShowIncrementButtons = false;
+                    e.DisplayFormatString = "{0:N2}";
+                    e.DecimalPlaces = 2;
+                    e.ForeColor = System.Drawing.Color.Green;
 
                 }), ff =>
                 {
@@ -409,7 +437,7 @@
 
                 _Fields.ForEach(f =>
                 {
-                    b.Do<ASPxSpinEdit>(f.Id, (c, d) =>
+                    b.Do<ASPxSpinEdit>(f.Id + "_Amount", (c, d) =>
                     {
                         _Items
                             .FirstOrDefault(i =>
@@ -424,6 +452,23 @@
                                 c.Visible = false;
                             });
                     });
+
+                    b.Do<ASPxSpinEdit>(f.Id + "_Paid", (c, d) =>
+                    {
+                        _Items
+                            .FirstOrDefault(i =>
+                                i.CarId == d.CarId && i.DriverId == d.DriverId && i.ChargeId == f.Id)
+                            .IfNN(item =>
+                            {
+                                c.Visible = true;
+                                c.Value = item.Paid;
+
+                            }, ()=>
+                            {
+                                c.Visible = false;
+                            });
+                    });
+
                 });
 
             });
@@ -492,6 +537,7 @@
                 .IfNN(ii =>
                 {
                     i.Amount = ii.Amount;
+                    i.Paid = ii.Paid;
                 });
         });
 
@@ -505,7 +551,7 @@
         {
             _Fields.ForEach(f =>
             {
-                col.Do<ASPxSpinEdit>(f.Id, (d, c) =>
+                col.Do<ASPxSpinEdit>(f.Id + "_Amount", (d, c) =>
                 {
                     _Items
                         .FirstOrDefault(i =>
@@ -513,6 +559,17 @@
                         .IfNN(item =>
                         {
                             item.Amount = c.Number;
+                        });
+                });
+
+                col.Do<ASPxSpinEdit>(f.Id + "_Paid", (d, c) =>
+                {
+                    _Items
+                        .FirstOrDefault(i =>
+                            i.CarId == d.CarId && i.DriverId == d.DriverId && i.ChargeId == f.Id)
+                        .IfNN(item =>
+                        {
+                            item.Paid = c.Number;
                         });
                 });
             });

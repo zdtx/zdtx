@@ -75,13 +75,16 @@
 
             }, GridWrapper.FooterType.Label)
 
-            .TemplateField("Amount", "金额", new TemplateItem.Label(), f =>
+            .TemplateField("Amount", "金额", new TemplateItem.DXSpinEdit(f =>
             {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Width = 80;
-                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
+                f.MinValue = 0;
+                f.Width = 100;
+                f.HorizontalAlign = HorizontalAlign.Right;
+                f.SpinButtons.ShowIncrementButtons = false;
+                f.MinValue = 0;
+                f.ValidationSettings.ValidateOnLeave = true;
 
-            }, GridWrapper.FooterType.Label)
+            }), footer: GridWrapper.FooterType.Label)
 
             .TemplateField("Paid", "已付（绝对金额）", new TemplateItem.DXSpinEdit(f =>
             {
@@ -157,12 +160,7 @@
             {
                 c.Text = d.IsNegative ? "付" : "收";
             })
-            .Do<Label>("Amount", (c, d) =>
-            {
-                var converted = -1 * (d.IsNegative ? -1 * d.Amount : d.Amount);
-                c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                c.ColorizeNumber(converted, s => s > 0, s => s == 0);
-            })
+            .Do<ASPxSpinEdit>("Amount", (c, d) => { c.Number = d.Amount.ToCHNRounded(); })
             .Do<ASPxSpinEdit>("Paid", (c, d) => { c.Number = d.Paid.ToCHNRounded(); })
             .Do<ASPxTextBox>("Remark", (c, d) => { c.Text = d.Remark; })
 
@@ -193,28 +191,40 @@
         _Do_Collect();
 
         var context = _DTService.Context;
+        var payment = context.CarPayments
+            .FirstOrDefault(p => p.CarId == _CarId && p.DriverId == _DriverId && p.MonthIndex == _MonthIndex);
+        var paymentItems = context.CarPaymentItems
+            .Where(i => i.CarId == _CarId && i.DriverId == _DriverId && i.MonthIndex == _MonthIndex)
+            .ToList();
+
         _List.ForEach(d =>
         {
-            context.Update<TB_car_payment_item>(_SessionEx, c =>
-                c.CarId == _CarId &&
-                c.DriverId == _DriverId &&
-                c.MonthIndex == _MonthIndex &&
-                c.ChargeId == d.ChargeId, paymentItem =>
+            paymentItems
+                .SingleOrDefault(i => i.ChargeId == d.ChargeId)
+                .IfNN(i =>
                 {
-                    paymentItem.Paid = Math.Abs(d.Paid);
-                    paymentItem.Remark = d.Remark;
+                    i.Amount = Math.Abs(d.Amount);
+                    i.Paid = Math.Abs(d.Paid);
+                    i.Remark = d.Remark;
                 });
         });
 
+        if (payment != null)
+        {
+            payment.Amount = paymentItems.Sum(i => i.Amount);
+            payment.Paid = paymentItems.Sum(i => i.Paid);
+        }
+
         context.SubmitChanges();
 
-        _DTService.UpdatePayment(_CarId, _DriverId, _MonthIndex);
+        //_DTService.UpdatePayment(_CarId, _DriverId, _MonthIndex);
 
     }
 
     private void _Do_Collect()
     {
         gw.Syn(_List, col => col
+            .Do<ASPxSpinEdit>("Amount", (d, c) => d.Amount = c.Number)
             .Do<ASPxSpinEdit>("Paid", (d, c) => d.Paid = c.Number)
             .Do<ASPxTextBox>("Remark", (d, c) => d.Remark = c.Value.ToStringEx())
         );
