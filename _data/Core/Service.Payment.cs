@@ -37,6 +37,14 @@ namespace eTaxi.L2SQL
                 .Where(p => p.MonthIndex.ToIntOrDefault() < monthIndex.ToIntOrDefault())
                 .OrderBy(p => p.MonthIndex)
                 .LastOrDefault();
+            var previousPaymentItems = new List<TB_car_payment_item>();
+            if (previousPayment != null)
+            {
+                previousPaymentItems = Context.CarPaymentItems
+                    .Where(i => i.CarId == header.CarId && i.DriverId == header.DriverId && i.MonthIndex == previousPayment.MonthIndex)
+                    .ToList();
+            }
+
             var paymentItems = new List<TB_car_payment_item>();
 
             charges.ForEach(c =>
@@ -57,24 +65,18 @@ namespace eTaxi.L2SQL
                     Name = c.Name
                 };
 
-                switch (c.AccountingIndex)
-                {
-                    case (int)AccountingIndex.Rental:
-                        paymentItems.Add(UpdateRentalItem(item, startDate, endDate));
-                        break;
-                    case (int)AccountingIndex.AdminFee:
-                        paymentItems.Add(UpdateAdminFeeItem(item, startDate, endDate));
-                        break;
-                    case (int)AccountingIndex.Violation:
-                        paymentItems.Add(UpdateViolationItem(item, startDate, endDate));
-                        break;
-                    case (int)AccountingIndex.Log:
-                        paymentItems.Add(UpdateLogItem(item, startDate, endDate));
-                        break;
-                    default:
-                        paymentItems.Add(item);
-                        break;
-                }
+                item = UpdatePaymentItem(item, startDate, endDate);
+                previousPaymentItems
+                    .FirstOrDefault(i => i.ChargeId == c.Id)
+                    .IfNN(i =>
+                    {
+                        item.Amount += (i.Amount - i.Paid);
+                    });
+
+                item.Paid = item.Amount;
+
+                paymentItems.Add(item);
+
             });
 
             payment.Paid =
@@ -89,8 +91,8 @@ namespace eTaxi.L2SQL
             payment.EndDate = endDate;
             payment.Name = monthIndex;
             payment.OpeningBalance = previousPayment == null ? 0 : previousPayment.ClosingBalance;
-            payment.Paid = 0;
-            payment.ClosingBalance = payment.OpeningBalance - payment.Amount;
+            // payment.ClosingBalance = payment.OpeningBalance + payment.Paid - payment.Amount; 
+            payment.ClosingBalance = payment.Paid - payment.Amount; // 
             Context.Endorse(_CurrentSession, payment);
 
             Context.CarPayments.InsertOnSubmit(payment);
@@ -173,24 +175,7 @@ namespace eTaxi.L2SQL
             // 更新计算项
             paymentItems.ForEach(item =>
             {
-                switch (item.AccountingIndex)
-                {
-                    case (int)AccountingIndex.Rental:
-                        paymentItems.Add(UpdateRentalItem(item, payment.StartDate, payment.EndDate));
-                        break;
-                    case (int)AccountingIndex.AdminFee:
-                        paymentItems.Add(UpdateAdminFeeItem(item, payment.StartDate, payment.EndDate));
-                        break;
-                    case (int)AccountingIndex.Violation:
-                        paymentItems.Add(UpdateViolationItem(item, payment.StartDate, payment.EndDate));
-                        break;
-                    case (int)AccountingIndex.Log:
-                        paymentItems.Add(UpdateLogItem(item, payment.StartDate, payment.EndDate));
-                        break;
-                    default:
-                        paymentItems.Add(item);
-                        break;
-                }
+                paymentItems.Add(UpdatePaymentItem(item, payment.StartDate, payment.EndDate));
             });
 
             payment.Amount = paymentItems.Sum(i => i.IsNegative ? -1 * i.Amount : i.Amount);
@@ -213,6 +198,24 @@ namespace eTaxi.L2SQL
             }
 
             Context.SubmitChanges();
+        }
+
+
+        public TB_car_payment_item UpdatePaymentItem(TB_car_payment_item item, DateTime startDate, DateTime endDate)
+        {
+            switch (item.AccountingIndex)
+            {
+                case (int)AccountingIndex.Rental:
+                    return UpdateRentalItem(item, startDate, endDate);
+                case (int)AccountingIndex.AdminFee:
+                    return UpdateAdminFeeItem(item, startDate, endDate);
+                case (int)AccountingIndex.Violation:
+                    return UpdateViolationItem(item, startDate, endDate);
+                case (int)AccountingIndex.Log:
+                    return UpdateLogItem(item, startDate, endDate);
+                default:
+                    return item;
+            }
         }
 
     }

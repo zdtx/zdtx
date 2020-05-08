@@ -213,6 +213,7 @@
         {
             payment.Amount = paymentItems.Sum(i => i.Amount);
             payment.Paid = paymentItems.Sum(i => i.Paid);
+            payment.ClosingBalance = payment.Paid - payment.Amount;
         }
 
         context.SubmitChanges();

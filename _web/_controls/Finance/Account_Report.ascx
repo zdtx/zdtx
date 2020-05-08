@@ -107,6 +107,7 @@
                 {
                     Ordinal = ordinal.ToString(),
                     Name = p.Name,
+                    Manager = p.Manager,
                     PlateNumber = p.PlateNumber,
                     OpeningBalance = p.OpeningBalance.ToStringOrEmpty(emptyValue: "0.00"),
                     ClosingBalance = p.ClosingBalance.ToStringOrEmpty(emptyValue: "0.00"),
