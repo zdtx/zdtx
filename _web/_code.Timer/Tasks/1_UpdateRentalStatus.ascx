@@ -15,7 +15,7 @@
         if (last == null) return true; // 1
         var gap = _CurrentTime.Subtract(last.LastActionTime);
         if (gap.TotalHours >= 12 || !last.Completed) return true; // 2
-        if (_CurrentTime.Day >= 25) return true; // 每月最后 5 天才进行生成
+        if (_CurrentTime.Day >= 5) return true; // 每月 5 天才进行生成
         return false;
     }
 
@@ -24,76 +24,24 @@
         var context = _DTService.Context;
         context.CommandTimeout = _CommandExecutionTimeout;
 
-        // 每个月 20 日 - 月底 生成月结单
+        var monthIndex = _CurrentTime.ToMonthId();
         var rentals = (
             from r in context.CarRentals
-            where
-                r.Rental + r.Extra1 + r.Extra2 + r.Extra3 > 0 &&
-                (
-                    !r.LastPaymentGenTime.HasValue ||
-                    (r.LastPaymentGenTime.HasValue && r.LastPaymentGenTime.Value.AddMonths(1) <= _CurrentTime)
-                )
-            select r).ToList();
-        var monthIndex = _CurrentTime.ToMonthId();
-        rentals.ForEach(r=>
-        {
-            var lastDay = _CurrentTime.LastDayDate();
-            var gap = (int)lastDay.Subtract(r.StartTime).TotalDays;
-            var days = lastDay.Day;
-            var countDays = days;
-            var extra = r.Extra1 + r.Extra2 + r.Extra3;
-            if (gap < countDays) countDays = gap;
-            r.LastPaymentGenTime = _CurrentTime;
-            context
-                .Create<TB_car_payment>(new AdminSession(_CurrentTime), payment =>
-                {
-                    payment.CarId = r.CarId;
-                    payment.DriverId = r.DriverId;
-                    payment.MonthIndex = monthIndex;
-                    payment.Name = monthIndex;
-                    payment.Days = days;
-                    payment.CountDays = countDays;
-                    payment.Due = lastDay;
-                    payment.Amount = payment.Paid =
-                        (r.Rental * countDays / days + extra).ToCHNRounded();
-                });
-        });
-    }
+            from p in context.CarPayments.Where(pp =>
+                pp.CarId == r.CarId &&
+                pp.DriverId == r.DriverId &&
+                pp.MonthIndex == monthIndex).DefaultIfEmpty()
+            where p == null
+            select new RentalHeader
+            {
+                CarId = r.CarId,
+                DriverId = r.DriverId
+            });
 
-    private void _Do(DateTime specificTime)
-    {
-        _CurrentTime = specificTime;
-        var context = _DTService.Context;
-        context.CommandTimeout = _CommandExecutionTimeout;
-
-        var rentals = (
-            from r in context.CarRentals
-            where
-                r.Rental + r.Extra1 + r.Extra2 + r.Extra3 > 0
-            select r).ToList();
-        var monthIndex = _CurrentTime.ToMonthId();
-        rentals.ForEach(r=>
+        var batch = rentals.Take(20).ToList();
+        batch.ForEach(header =>
         {
-            var lastDay = _CurrentTime.LastDayDate();
-            var gap = (int)lastDay.Subtract(r.StartTime).TotalDays;
-            var days = lastDay.Day;
-            var countDays = days;
-            var extra = r.Extra1 + r.Extra2 + r.Extra3;
-            if (gap < countDays) countDays = gap;
-            r.LastPaymentGenTime = _CurrentTime;
-            context
-                .Create<TB_car_payment>(new AdminSession(_CurrentTime), payment =>
-                {
-                    payment.CarId = r.CarId;
-                    payment.DriverId = r.DriverId;
-                    payment.MonthIndex = monthIndex;
-                    payment.Name = monthIndex;
-                    payment.Days = days;
-                    payment.CountDays = countDays;
-                    payment.Due = lastDay;
-                    payment.Amount = payment.Paid =
-                        (r.Rental * countDays / days + extra).ToCHNRounded();
-                });
+            _DTService.GenerateInvoice(header, monthIndex);
         });
     }
 
