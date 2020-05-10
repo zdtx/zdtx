@@ -546,8 +546,12 @@
 
         foreach (var payment in payments)
         {
-            payment.Amount = items.Where(i => i.MonthIndex == payment.MonthIndex).Sum(i => i.Amount);
-            payment.Paid = items.Where(i => i.MonthIndex == payment.MonthIndex).Sum(i => i.Paid);
+            payment.Amount = items
+                .Where(i => i.CarId == payment.CarId && i.DriverId == payment.DriverId)
+                .Sum(i => i.Amount);
+            payment.Paid = items
+                .Where(i => i.CarId == payment.CarId && i.DriverId == payment.DriverId)
+                .Sum(i => i.Paid);
             payment.ClosingBalance = payment.Paid - payment.Amount;
         }
 
