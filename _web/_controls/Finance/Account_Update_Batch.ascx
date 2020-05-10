@@ -525,6 +525,9 @@
         var context = _DTService.Context;
         var carIds = _List.Select(d => d.CarId).ToArray();
         var driverIds = _List.Select(d => d.DriverId).ToArray();
+        var payments = context.CarPayments
+            .Where(i => carIds.Contains(i.CarId) && _DriverIds.Contains(i.DriverId) && i.MonthIndex == _ObjectId)
+            .ToList();
         var items = context.CarPaymentItems
             .Where(i => carIds.Contains(i.CarId) && _DriverIds.Contains(i.DriverId) && i.MonthIndex == _ObjectId)
             .ToList();
@@ -540,6 +543,13 @@
                     i.Paid = ii.Paid;
                 });
         });
+
+        foreach (var payment in payments)
+        {
+            payment.Amount = items.Where(i => i.MonthIndex == payment.MonthIndex).Sum(i => i.Amount);
+            payment.Paid = items.Where(i => i.MonthIndex == payment.MonthIndex).Sum(i => i.Paid);
+            payment.ClosingBalance = payment.Paid - payment.Amount;
+        }
 
         context.SubmitChanges();
 
