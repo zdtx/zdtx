@@ -27,6 +27,12 @@
                         <Image Url="~/images/_doc_16_workflowtemplate.gif" />
                     </dx:ASPxButton>
                 </td>
+                <td style="padding-left:5px;">
+                    <dx:ASPxButton runat="server" Text="显示未交齐司机" ID="bOwing">
+                        <ClientSideEvents Click="function(s,e){ISEx.loadingPanel.show();}" />
+                        <Image Url="~/images/_op_flatb_rejectedit.gif" />
+                    </dx:ASPxButton>
+                </td>
                 <td style="padding-left: 10px;">
                     <dx:ASPxButton runat="server" Text="重来" ID="bReset">
                         <ClientSideEvents Click="function(s,e){e.processOnServer=confirm('确定清除数据重新选择吗？');}" />
@@ -151,6 +157,11 @@
                         .Button(BaseControl.EventTypes.OK, b => b.CausesValidation = true)
                     ;
                 });
+        };
+
+        bOwing.Click += (s, e) =>
+        {
+            Execute("owing");
         };
 
         bSubmit.Click += (s, e) =>
@@ -325,13 +336,13 @@
                     case CMD_Print:
 
                         var d1 = new List<object>();
-                        d1.Add(new 
+                        d1.Add(new
                         {
                             Name = "管理费",
                             Amount = "2500"
-                        }); 
+                        });
 
-                        d1.Add(new 
+                        d1.Add(new
                         {
                             Name = "保险费",
                             Amount = "230"
@@ -381,6 +392,19 @@
 
     protected override void _Execute(string section)
     {
+        if (section == "owing")
+        {
+            var context = _DTService.Context;
+            _DriverIds = context.CarPayments
+                .Where(p => p.ClosingBalance < 0 && p.MonthIndex == _ObjectId)
+                .Select(p => p.DriverId)
+                .Distinct()
+                .ToArray();
+
+            _Execute(VisualSections.List);
+
+        }
+
         if (section == VisualSections.List)
         {
             // 根据 DriverIds 取得相关数据
