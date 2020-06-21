@@ -264,12 +264,14 @@
                 person.PositionId = "PS0000";
                 person.DepartmentId = departmentId;
                 person.UserName = username;
-                person.Name = username;
+                person.Name = username.Substring(0, 8);
                 person.FirstName = string.Empty;
                 person.LastName = string.Empty;
                 person.Password = defaultPassword;
                 person.Id = newId;
                 person.UniqueId = Guid.NewGuid();
+
+                _MembershipProvider.DeleteUser(person.UserName, true);
 
                 MembershipCreateStatus status;
                 _MembershipProvider.CreateUser(person.UserName,
