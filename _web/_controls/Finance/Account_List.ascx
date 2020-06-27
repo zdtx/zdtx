@@ -286,7 +286,7 @@
                 l.CssClass = "aBtn";
                 l.CommandName = CMD_Print;
                 l.Text = "打印";
-                l.Visible = false;
+                // l.Visible = false;
                 l.OnClientClick = "ISEx.loadingPanel.show();";
 
             }), f =>
@@ -336,6 +336,15 @@
                     case CMD_Print:
 
                         var d1 = new List<object>();
+
+                        //public string Ordinal { get; set; }
+                        //public string Id { get; set; }
+                        //public string Name { get; set; }
+                        //public string Amount { get; set; }
+                        //public string Paid { get; set; }
+                        //public string Gap { get; set; }
+                        //public string Remark { get; set; }
+
                         d1.Add(new
                         {
                             Name = "管理费",
@@ -348,7 +357,7 @@
                             Amount = "230"
                         });
 
-                        var report = new RPT_MonthlyStatement();
+                        var report = new RPT_MonthlyReceipt();
                         report.Replace(d1);
 
                         var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);

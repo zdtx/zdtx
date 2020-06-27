@@ -1737,6 +1737,7 @@
       <DependentUpon>Flashcam.ascx</DependentUpon>
     </Compile>
     <Compile Include="____legacy.db\L2SQL.00.cs" />
+    <Compile Include="____reports\Driver\MonthlyReceipt.cs" />
     <Compile Include="____reports\ReportViewerMessages.cs" />
     <Compile Include="____reports\Driver\MonthlyStatement.cs" />
   </ItemGroup>
@@ -1757,6 +1758,7 @@
     <EmbeddedResource Include="Properties\licenses.licx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="____reports\Driver\MonthlyReceipt.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
