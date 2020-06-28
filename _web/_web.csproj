@@ -142,6 +142,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\DevExpress\DevExpress.XtraScheduler.v14.2.Core.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.STW.2.5.5631\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelDataReader">
       <HintPath>..\Components\ExcelReader\ExcelDataReader.dll</HintPath>
     </Reference>
@@ -218,6 +221,9 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\Components\Microsoft\office.dll</HintPath>
+    </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.4.11.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpreadsheetLight.3.4.11\lib\net40\SpreadsheetLight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -358,6 +364,7 @@
     <Content Include="Portal\DefaultZD.aspx" />
     <Content Include="Close.aspx" />
     <Content Include="Redirect.aspx" />
+    <Content Include="Excel.aspx" />
     <Content Include="Service\Timer.asmx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -1455,6 +1462,8 @@
     <None Include="_master\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="____reports\Driver\MonthlyStatement.xlsx" />
+    <Content Include="____temp_protected\Driver\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

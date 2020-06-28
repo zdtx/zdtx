@@ -24,26 +24,27 @@ namespace eTaxi.Reports.Driver
             public string Name { get; set; }
             public string Manager { get; set; }
             public string PlateNumber { get; set; }
-            public string OpeningBalance { get; set; }
-            public string ClosingBalance { get; set; }
-            public string AdminFee_Amount { get; set; }
-            public string AdminFee_Paid { get; set; }
-            public string Rental_Amount { get; set; }
-            public string Rental_Paid { get; set; }
-            public string Shift_Amount { get; set; }
-            public string Shift_Paid { get; set; }
-            public string Tyre_Amount { get; set; }
-            public string Tyre_Paid { get; set; }
-            public string Violation_Amount { get; set; }
-            public string Violation_Paid { get; set; }
-            public string Fine_Amount { get; set; }
-            public string Fine_Paid { get; set; }
-            public string Bonus_Amount { get; set; }
-            public string Bonus_Paid { get; set; }
-            public string Card_Amount { get; set; }
-            public string Card_Paid { get; set; }
-            public string Amount { get; set; }
-            public string Paid { get; set; }
+            public string CarriageNum { get; set; }
+            public decimal OpeningBalance { get; set; }
+            public decimal ClosingBalance { get; set; }
+            public decimal AdminFee_Amount { get; set; }
+            public decimal AdminFee_Paid { get; set; }
+            public decimal Rental_Amount { get; set; }
+            public decimal Rental_Paid { get; set; }
+            public decimal Shift_Amount { get; set; }
+            public decimal Shift_Paid { get; set; }
+            public decimal Tyre_Amount { get; set; }
+            public decimal Tyre_Paid { get; set; }
+            public decimal Violation_Amount { get; set; }
+            public decimal Violation_Paid { get; set; }
+            public decimal Fine_Amount { get; set; }
+            public decimal Fine_Paid { get; set; }
+            public decimal Bonus_Amount { get; set; }
+            public decimal Bonus_Paid { get; set; }
+            public decimal Card_Amount { get; set; }
+            public decimal Card_Paid { get; set; }
+            public decimal Amount { get; set; }
+            public decimal Paid { get; set; }
         }
     }
 }
