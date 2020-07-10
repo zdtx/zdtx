@@ -579,7 +579,7 @@
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
                     {
-                        var converted = -1 * pp.Amount;
+                        var converted = pp.Amount; // * -1 ;
                         c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ");
                         // c.ColorizeNumber(converted, dd => dd > 0, dd => dd == 0);
 
