@@ -51,7 +51,7 @@ namespace eTaxi.L2SQL
             {
                 var item = new TB_car_payment_item()
                 {
-                    Paid = c.Amount,
+                    Paid = 0,
                     Amount = c.Amount,
                     CarId = header.CarId,
                     ChargeId = c.Id,
