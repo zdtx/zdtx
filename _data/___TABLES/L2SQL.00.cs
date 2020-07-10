@@ -1063,6 +1063,11 @@ namespace eTaxi.L2SQL
         public string Remark { get; set; }
         [ColumnAttribute(DbType = "smalldatetime", CanBeNull = false)]
         public DateTime StartDate { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> PreviousAmount { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> PreviousPaid { get; set; }
+
     }
     [Serializable]
     [Table(Name = "car_payment_item")]

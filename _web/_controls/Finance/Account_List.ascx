@@ -14,7 +14,7 @@
     <div class="inner" style="padding: 10px;">
         <table style="border-spacing: 0px;">
             <tr>
-                <td style="padding-right: 10px;">请填入司机姓名（然后回车）：
+                <td style="padding-right: 10px;">请填入司机姓名或者车牌（然后回车）：
                 </td>
                 <td>
                     <dx:ASPxTextBox runat="server" ID="tbInput" Width="100" />
@@ -116,10 +116,29 @@
                 var drivers = context.Drivers.Where(d => d.Name.Contains(name)).ToList();
                 if (drivers.Count == 0)
                 {
-                    Alert("找不到司机，请重新输入");
+                    var cars = (
+                        from cc in context.Cars
+                        join rr in context.CarRentals on cc.Id equals rr.CarId
+                        where cc.PlateNumber.Contains(name)
+                        select new
+                        {
+                            rr.DriverId
+
+                        }).Distinct().ToList();
+
+                    if (cars.Count == 0)
+                    {
+                        Alert("找不到车辆，请重新输入");
+                        tbInput.Focus();
+                        return;
+                    }
+
+                    _DriverIds = new string[] { cars[0].DriverId };
+                    if (Do(Actions.Select, false)) Execute(VisualSections.List);
                     tbInput.Text = string.Empty;
                     tbInput.Focus();
                     return;
+
                 }
                 if (drivers.Count == 1)
                 {
@@ -237,6 +256,22 @@
             }), f =>
             {
             })
+            .TemplateField("PreviousAmount", "上期应收", new TemplateItem.Label(e =>
+            {
+            }), f =>
+            {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 80;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
+            })
+            .TemplateField("PreviousPaid", "上期实缴", new TemplateItem.Label(e =>
+            {
+            }), f =>
+            {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
+                f.ItemStyle.Width = 80;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
+            })
             .TemplateField("OpeningBalance", "上期结余", new TemplateItem.Label(e =>
             {
             }), f =>
@@ -245,7 +280,7 @@
                 f.ItemStyle.Width = 80;
                 f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
             })
-            .TemplateField("InvoiceAmount", "本期应缴", new TemplateItem.Label(e =>
+            .TemplateField("InvoiceAmount", "本期应收", new TemplateItem.Label(e =>
             {
             }), f =>
             {
@@ -286,7 +321,7 @@
                 l.CssClass = "aBtn";
                 l.CommandName = CMD_Print;
                 l.Text = "打印";
-                // l.Visible = false;
+                l.Visible = false;
                 l.OnClientClick = "ISEx.loadingPanel.show();";
 
             }), f =>
@@ -395,12 +430,28 @@
     {
         tbInput.Focus();
         cbMonthIndex.Value = DateTime.Now.ToMonthId();
-        _List.Clear();
-        _Execute(VisualSections.List);
+
+        _Execute("initial");
+
+        //_List.Clear();
+        //_Execute(VisualSections.List);
     }
 
     protected override void _Execute(string section)
     {
+        if (section == "initial")
+        {
+            _ObjectId = DateTime.Now.SpecificDayDate().ToMonthId();
+            var context = _DTService.Context;
+            _DriverIds = context.CarPayments
+                .Where(p => p.MonthIndex == _ObjectId)
+                .Select(p => p.DriverId)
+                .Distinct()
+                .ToArray();
+
+            _Execute(VisualSections.List);
+        }
+
         if (section == "owing")
         {
             var context = _DTService.Context;
@@ -461,6 +512,20 @@
             var drivers = context.Drivers.Where(d => _DriverIds.Contains(d.Id)).ToList();
             var cars = context.Cars.Where(c => carIds.Contains(c.Id)).ToList();
 
+            _List = (
+                from l in _List
+                join cc in cars on l.CarId equals cc.Id
+                join dd in drivers on l.DriverId equals dd.Id
+                select new RentalHeader
+                {
+                    DriverId = l.DriverId,
+                    DriverName = dd.Name,
+                    CarId = l.CarId,
+                    Invoiced = l.Invoiced,
+                    PlateNumber = cc.PlateNumber,
+                    Rental = l.Rental
+                }).OrderBy(l => l.PlateNumber).ThenBy(l => l.DriverName).ToList();
+
             gw.Execute(_List, b => b
                 .Do<Literal>("CarId", (c, d) =>
                 {
@@ -486,6 +551,22 @@
                 {
                     c.Text = monthIndex;
                 })
+                .Do<Label>("PreviousInvoiceAmount", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp =>
+                    {
+                        c.Text = pp.PreviousAmount.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                        c.ColorizeNumber(pp.PreviousAmount, dd => dd > 0, dd => dd == 0);
+
+                    }, () => c.Text = " - "))
+                .Do<Label>("PreviousPaidAmount", (c, d) => payments
+                    .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
+                    .IfNN(pp =>
+                    {
+                        c.Text = pp.PreviousPaid.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                        c.ColorizeNumber(pp.PreviousPaid, dd => dd > 0, dd => dd == 0);
+
+                    }, () => c.Text = " - "))
                 .Do<Label>("OpeningBalance", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
@@ -499,16 +580,16 @@
                     .IfNN(pp =>
                     {
                         var converted = -1 * pp.Amount;
-                        c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(converted, dd => dd > 0, dd => dd == 0);
+                        c.Text = converted.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                        // c.ColorizeNumber(converted, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("PaidAmount", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
                     {
-                        c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(pp.Paid, dd => dd > 0, dd => dd == 0);
+                        c.Text = pp.Paid.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                        // c.ColorizeNumber(pp.Paid, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("ClosingBalance", (c, d) => payments

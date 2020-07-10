@@ -12,6 +12,7 @@
                                 <dx:ListEditItem Text="显示 50 笔" Value="50" />
                                 <dx:ListEditItem Text="显示 100 笔" Value="100" />
                                 <dx:ListEditItem Text="显示 200 笔" Value="200" />
+                                <dx:ListEditItem Text="显示 500 笔" Value="500" />
                             </Items>
                         </dx:ASPxComboBox >
                     </td>

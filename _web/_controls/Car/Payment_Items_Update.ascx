@@ -97,7 +97,7 @@
 
             }))
 
-            .TemplateField("Remark", "备注", new TemplateItem.DXTextBox(f =>
+            .TemplateField("Remark", "备注：收款日期", new TemplateItem.DXTextBox(f =>
             {
                 f.Width = 260;
 

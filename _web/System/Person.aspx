@@ -272,7 +272,7 @@ case'delete':ISEx.loadingPanel.show();break;
             }));
         };
 
-        pg.SetDefaultPageSizeIndex(0);
+        pg.SetDefaultPageSizeIndex(5);
         pg.Reload += (s, e) => Execute();
 
         pop.EventSinked += (c, eType, parm) =>

@@ -79,7 +79,7 @@ namespace eTaxi.L2SQL
 
             });
 
-            payment.Paid =
+            payment.Paid = 0;
             payment.Amount = paymentItems.Sum(p => p.IsNegative ? -1 * p.Amount : p.Amount);
             payment.CarId = header.CarId;
             payment.CountDays = dayCount;
@@ -92,7 +92,9 @@ namespace eTaxi.L2SQL
             payment.Name = monthIndex;
             payment.OpeningBalance = previousPayment == null ? 0 : previousPayment.ClosingBalance;
             // payment.ClosingBalance = payment.OpeningBalance + payment.Paid - payment.Amount; 
-            payment.ClosingBalance = payment.Paid - payment.Amount; // 
+            payment.ClosingBalance = payment.Paid - payment.Amount - payment.OpeningBalance ?? 0m; // 
+            payment.PreviousAmount = previousPayment == null ? 0 : previousPayment.Amount;
+            payment.PreviousPaid = previousPayment == null ? 0 : previousPayment.Paid;
             Context.Endorse(_CurrentSession, payment);
 
             Context.CarPayments.InsertOnSubmit(payment);

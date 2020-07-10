@@ -230,7 +230,7 @@
             }
         };
 
-        pg.SetDefaultPageSizeIndex(0);
+        pg.SetDefaultPageSizeIndex(5);
         pg.Reload += (s, e) => Execute();
 
         gw.RowDblClick += (s, e) =>

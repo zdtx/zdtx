@@ -8,6 +8,8 @@ namespace eTaxi.L2SQL
         public string CarId { get; set; }
         public decimal Rental { get; set; }
         public bool Invoiced { get; set; }
+        public string PlateNumber { get; set; }
+        public string DriverName { get; set; }
     }
 }
 

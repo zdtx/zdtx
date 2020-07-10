@@ -96,7 +96,7 @@
             }
         };
 
-        pg.SetDefaultPageSizeIndex(0);
+        pg.SetDefaultPageSizeIndex(5);
         pg.Reload += (s, e) => { Execute(); };
 
         cb_Type.FromEnum<CarType>(valueAsInteger: true);
