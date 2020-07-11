@@ -75,7 +75,7 @@
 
             }, GridWrapper.FooterType.Label)
 
-            .TemplateField("Amount", "金额", new TemplateItem.DXSpinEdit(f =>
+            .TemplateField("Amount", "应收金额", new TemplateItem.DXSpinEdit(f =>
             {
                 f.MinValue = 0;
                 f.Width = 100;

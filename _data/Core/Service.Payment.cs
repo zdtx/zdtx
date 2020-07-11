@@ -73,7 +73,7 @@ namespace eTaxi.L2SQL
                         item.Amount += (i.Amount - i.Paid);
                     });
 
-                item.Paid = item.Amount;
+                // item.Paid = item.Amount;
 
                 paymentItems.Add(item);
 

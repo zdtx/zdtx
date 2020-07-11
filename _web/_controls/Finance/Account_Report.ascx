@@ -113,6 +113,16 @@
             setters.Add((pp, dd) => dd.SetCellValue(string.Format("D{0}", ordinal + startIndex), pp.PlateNumber));
             setters.Add((pp, dd) => dd.SetCellValue(string.Format("E{0}", ordinal + startIndex), pp.CarriageNum));
             setters.Add((pp, dd) => dd.SetCellValue(string.Format("F{0}", ordinal + startIndex), pp.Rental_Amount));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("G{0}", ordinal + startIndex), pp.Tyre_Amount));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("H{0}", ordinal + startIndex), pp.Fine_Amount + pp.Violation_Amount));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("I{0}", ordinal + startIndex), pp.OpeningBalance));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("J{0}", ordinal + startIndex), pp.Card_Paid));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("K{0}", ordinal + startIndex), pp.Compensation_Paid));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("L{0}", ordinal + startIndex), pp.Termination_Paid));
+
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("P{0}", ordinal + startIndex), pp.Rental_Paid));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("Q{0}", ordinal + startIndex), pp.Tyre_Paid));
+            setters.Add((pp, dd) => dd.SetCellValue(string.Format("R{0}", ordinal + startIndex), pp.Fine_Paid + pp.Violation_Paid));
 
             payments.ForEach(p =>
             {
@@ -124,8 +134,8 @@
                     Manager = p.Manager,
                     PlateNumber = p.PlateNumber,
                     CarriageNum = p.CarriageNum,
-                    OpeningBalance = p.OpeningBalance ?? 0,
-                    ClosingBalance = p.ClosingBalance ?? 0,
+                    OpeningBalance = -1 * p.OpeningBalance ?? 0,
+                    ClosingBalance = -1 * p.ClosingBalance ?? 0,
                     Amount = p.Amount,
                     Paid = p.Paid
                 };
@@ -174,7 +184,12 @@
                                     d.Card_Amount = i.Amount;
                                     d.Card_Paid = i.Paid;
                                     break;
-
+                                case "补贴":
+                                    d.Compensation_Paid = i.Paid;
+                                    break;
+                                case "下线解约":
+                                    d.Termination_Paid = i.Paid;
+                                    break;
                             }
                             break;
                     }
@@ -188,93 +203,7 @@
             var targetFile = Util.GetPhysicalPath(string.Format(@"~/____temp_protected/Driver/{0}.xlsx", id));
 
             excel.SaveAs(targetFile);
-
             JS(string.Format("window.open(\"{0}?id={1}&name={2}\");", _ResolvePath("/excel.aspx"), id, _ObjectId));
-
-
-            //var report = new RPT_MonthlyStatement();
-            //report.Replace(d1);
-
-            //var openingBalance = payments.Sum(p => p.OpeningBalance).ToStringOrEmpty(emptyValue: "0.00");
-            //var closingBalance = payments.Sum(p => p.ClosingBalance).ToStringOrEmpty(emptyValue: "0.00");
-            //var amount = payments.Sum(p => p.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var paid = payments.Sum(p => p.Paid).ToStringOrEmpty(emptyValue: "0.00");
-
-            //var adminFee_Amount = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.AdminFee)
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var adminFee_Paid = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.AdminFee)
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var bonus_Amount = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Log)
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var bonus_Paid = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Log)
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var rental_Amount = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Rental)
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var rental_Paid = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Rental)
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var fine_Amount = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Violation)
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var fine_Paid = paymentItems
-            //    .Where(i => i.AccountingIndex == (int)AccountingIndex.Violation)
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var shift_Amount = paymentItems
-            //    .Where(i => i.Name == "代班费")
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var shift_Paid = paymentItems
-            //    .Where(i => i.Name == "代班费")
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var tyre_Amount = paymentItems
-            //    .Where(i => i.Name == "轮胎基金")
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var tyre_Paid = paymentItems
-            //    .Where(i => i.Name == "轮胎基金")
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var violation_Amount = paymentItems
-            //    .Where(i => i.Name == "违纪基金")
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var violation_Paid = paymentItems
-            //    .Where(i => i.Name == "违纪基金")
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-            //var card_Amount = paymentItems
-            //    .Where(i => i.Name == "公交卡销")
-            //    .Sum(i => i.Amount).ToStringOrEmpty(emptyValue: "0.00");
-            //var card_Paid = paymentItems
-            //    .Where(i => i.Name == "公交卡销")
-            //    .Sum(i => i.Paid).ToStringOrEmpty(emptyValue: "0.00");
-
-            //report.ReplaceParameters(
-            //    report.CreateParameter("openingBalance", openingBalance),
-            //    report.CreateParameter("closingBalance", closingBalance),
-            //    report.CreateParameter("amount", amount),
-            //    report.CreateParameter("paid", paid),
-            //    report.CreateParameter("adminFee_Amount", adminFee_Amount),
-            //    report.CreateParameter("adminFee_Paid", adminFee_Paid),
-            //    report.CreateParameter("rental_Amount", rental_Amount),
-            //    report.CreateParameter("rental_Paid", rental_Paid),
-            //    report.CreateParameter("shift_Amount", shift_Amount),
-            //    report.CreateParameter("shift_Paid", shift_Paid),
-            //    report.CreateParameter("tyre_Amount", tyre_Amount),
-            //    report.CreateParameter("tyre_Paid", tyre_Paid),
-            //    report.CreateParameter("violation_Amount", violation_Amount),
-            //    report.CreateParameter("violation_Paid", violation_Paid),
-            //    report.CreateParameter("fine_Amount", fine_Amount),
-            //    report.CreateParameter("fine_Paid", fine_Paid),
-            //    report.CreateParameter("bonus_Amount", bonus_Amount),
-            //    report.CreateParameter("bonus_Paid", bonus_Paid),
-            //    report.CreateParameter("card_Amount", card_Amount),
-            //    report.CreateParameter("card_Paid", card_Paid)
-            //);
-
-            //var ticketId = _SessionEx.TKObjectManager.RegCounter(report, 50);
-            //JS(string.Format("ISEx.openMaxWin(\"{0}?id={1}\");",
-            //    _ResolvePath("/report.aspx"), ticketId.ToISFormatted()));
 
         }
     }

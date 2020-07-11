@@ -385,7 +385,7 @@
                     {
                         var delayed =
                             payment.Amount > payment.Paid && payment.Due < _CurrentTime.Date;
-                        d.Paid = payment.Paid = payment.Amount;
+                        d.Paid = payment.Paid = payment.Amount - (payment.OpeningBalance ?? 0m);
                         payment.Name = (payment.Paid >= payment.Amount && delayed) ? // 建立逾期标记
                             payment.Name = payment.MonthIndex + ".d" : payment.MonthIndex;
                     })

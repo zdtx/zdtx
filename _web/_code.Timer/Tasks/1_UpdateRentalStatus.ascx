@@ -15,7 +15,7 @@
         if (last == null) return true; // 1
         var gap = _CurrentTime.Subtract(last.LastActionTime);
         if (gap.TotalHours >= 12 || !last.Completed) return true; // 2
-        if (_CurrentTime.Day >= 5) return true; // 每月 5 天才进行生成
+        if (_CurrentTime.Day >= 1) return true; // 每月 5 天才进行生成
         return false;
     }
 

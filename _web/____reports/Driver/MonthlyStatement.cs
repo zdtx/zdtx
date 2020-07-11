@@ -43,6 +43,9 @@ namespace eTaxi.Reports.Driver
             public decimal Bonus_Paid { get; set; }
             public decimal Card_Amount { get; set; }
             public decimal Card_Paid { get; set; }
+            public decimal Compensation_Amount { get; set; }
+            public decimal Compensation_Paid { get; set; }
+            public decimal Termination_Paid { get; set; }
             public decimal Amount { get; set; }
             public decimal Paid { get; set; }
         }

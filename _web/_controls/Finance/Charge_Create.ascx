@@ -59,6 +59,7 @@
                     <Items>
                         <dx:ListEditItem Text="收" Value="0" />
                         <dx:ListEditItem Text="付" Value="1" />
+                        <dx:ListEditItem Text="抵" Value="2" />
                     </Items>
                 </dx:ASPxComboBox>
             </td>
@@ -104,7 +105,7 @@
         cb_Type.FromEnum<ChargeType>(valueAsInteger: true);
         cb_SpecifiedMonth.FromEnum<MonthType>(valueAsInteger: true);
         cb_AccountingIndex.FromEnum<AccountingIndex>(valueAsInteger: true);
-        
+
         cb_Type.SelectedIndexChanged += (s, e) =>
         {
             _Util.Convert<ChargeType>(cb_Type.Value, d =>
@@ -120,6 +121,7 @@
         p.Controls.PresentedBy(new TB_charge(), (d, n, c) =>
         {
             cbIsNegative.Value = d.IsNegative ? "1" : "0";
+            if (d.NegativeType.HasValue) cbIsNegative.Value = d.NegativeType.ToStringOrEmpty();
 
         }, recursive: false);
         l_Id.Text = "（保存后系统自动生成）";
@@ -151,6 +153,7 @@
                 charge.Id = newId;
                 if (charge.Type != (int)ChargeType.Yearly) charge.SpecifiedMonth = 0;
                 charge.IsNegative = cbIsNegative.Value.ToStringEx("0") == "0" ? false : true;
+                charge.NegativeType = cbIsNegative.Value.ToStringEx().ToIntOrNull();
             })
             .SubmitChanges();
     }

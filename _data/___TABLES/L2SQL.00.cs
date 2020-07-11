@@ -1596,6 +1596,9 @@ namespace eTaxi.L2SQL
         /// </summary>
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> NegativeType { get; set; } // 付 or 抵
+
     }
     [Serializable]
     [Table(Name = "charge_package")]

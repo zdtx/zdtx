@@ -154,6 +154,7 @@
                 e.Width = 60;
                 e.Items.Add("收", 0);
                 e.Items.Add("付", 1);
+                e.Items.Add("抵", 2);
                 fh.Validate(e).IsRequired();
             }), f =>
             {
@@ -208,7 +209,14 @@
                 .Do<Literal>("Id", (c, d) => { c.Text = d.Id; })
                 .Do<ASPxTextBox>("Code", (c, d) => c.Text = d.Code)
                 .Do<ASPxTextBox>("Name", (c, d) => c.Text = d.Name)
-                .Do<ASPxComboBox>("IsNegative", (c, d) => c.Value = d.IsNegative ? "1" : "0")
+                .Do<ASPxComboBox>("IsNegative", (c, d) =>
+                {
+                    c.Value = d.IsNegative ? "1" : "0";
+                    if (d.NegativeType.HasValue)
+                    {
+                        c.Value = d.NegativeType.ToString();
+                    }
+                })
                 .Do<ASPxComboBox>("AccountingIndex", (c, d) => c.Value = d.AccountingIndex.ToStringEx())
                 .Do<ASPxComboBox>("Type", (c, d) => c.Value = d.Type.ToStringEx())
                 .Do<ASPxComboBox>("SpecifiedMonth", (c, d) => c.Value = d.SpecifiedMonth.ToStringEx())
@@ -242,6 +250,7 @@
                 charge.Amount = d.Amount;
                 charge.SpecifiedMonth = d.SpecifiedMonth;
                 charge.IsNegative = d.IsNegative;
+                charge.NegativeType = d.NegativeType;
                 charge.AccountingIndex = d.AccountingIndex;
                 charge.Remark = d.Remark;
             });
@@ -256,11 +265,15 @@
             .Do<ASPxTextBox>("Name", (d, c) => d.Name = c.Value.ToStringEx())
             .Do<ASPxComboBox>("Type", (d, c) => d.Type = c.Value.ToStringEx().ToIntOrDefault(0))
             .Do<ASPxComboBox>("AccountingIndex", (d, c) => d.AccountingIndex = c.Value.ToStringEx().ToIntOrDefault(0))
-            .Do<ASPxComboBox>("IsNegative", (d, c) => d.IsNegative = c.Value.ToStringEx("0") == "0" ? false : true)
+            .Do<ASPxComboBox>("IsNegative", (d, c) =>
+            {
+                d.IsNegative = c.Value.ToStringEx("0") == "0" ? false : true;
+                d.NegativeType = c.Value.ToStringEx().ToIntOrNull();
+            })
             .Do<ASPxSpinEdit>("Amount", (d, c) => d.Amount = c.Number)
             .Do<ASPxComboBox>("SpecifiedMonth", (d, c) => d.SpecifiedMonth = c.Value.ToStringEx().ToIntOrDefault(0))
             .Do<ASPxTextBox>("Remark", (d, c) => d.Remark = c.Value.ToStringEx())
-        );
+        );;
     }
 
 </script>
