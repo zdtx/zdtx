@@ -187,7 +187,7 @@
                                 case "补贴":
                                     d.Compensation_Paid = i.Paid;
                                     break;
-                                case "下线解约":
+                                case "下线退款":
                                     d.Termination_Paid = i.Paid;
                                     break;
                             }
