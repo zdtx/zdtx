@@ -60,22 +60,27 @@
             .TemplateField("Code", "编号", new TemplateItem.Literal(), f =>
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 50;
             })
             .TemplateField("Name", "名称", new TemplateItem.Literal(), f =>
             {
                 f.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                f.ItemStyle.Width = 100;
-            })
-            .TemplateField("IsNegative", "类型", new TemplateItem.Literal(), f =>
-            {
-                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
-                f.ItemStyle.Width = 50;
-                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
 
             }, GridWrapper.FooterType.Label)
 
-            .TemplateField("Amount", "应收金额", new TemplateItem.DXSpinEdit(f =>
+            .TemplateField("IsNegative", "类型", new TemplateItem.Literal(), f =>
+            {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+            })
+
+            .TemplateField("OpeningBalance", "上期结余", new TemplateItem.Label(), f =>
+            {
+                f.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                f.ItemStyle.HorizontalAlign = HorizontalAlign.Right;
+
+            }, GridWrapper.FooterType.Label)
+
+            .TemplateField("Amount", "本期应收", new TemplateItem.DXSpinEdit(f =>
             {
                 f.MinValue = 0;
                 f.Width = 100;
@@ -159,6 +164,21 @@
             .Do<Literal>("IsNegative", (c, d) =>
             {
                 c.Text = d.IsNegative ? "付" : "收";
+                if (d.NegativeType.HasValue)
+                {
+                    switch (d.NegativeType)
+                    {
+                        case 2:
+                            c.Text = "抵";
+                            break;
+                    }
+                }
+            })
+
+            .Do<Label>("OpeningBalance", (c, d) =>
+            {
+                c.Text = d.OpeningBalance.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                c.ColorizeNumber(d.OpeningBalance, dd => dd > 0, dd => dd == 0);
             })
             .Do<ASPxSpinEdit>("Amount", (c, d) => { c.Number = d.Amount.ToCHNRounded(); })
             .Do<ASPxSpinEdit>("Paid", (c, d) => { c.Number = d.Paid.ToCHNRounded(); })
@@ -168,13 +188,23 @@
 
             f => f
 
-            .Do<Label>("IsNegative", c => c.Text = "合计：")
-            .Do<Label>("Amount", c =>
+            .Do<Label>("Name", c => c.Text = "合计：")
+
+            .Do<Label>("OpeningBalance", c =>
             {
-                var sum = -1 * _List.Sum(i => i.IsNegative ? -1 * i.Amount : i.Amount);
-                c.Text = sum.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
+                var sum = _List.Sum(i => (i.OpeningBalance ?? 0m));
+                c.Text = sum.ToStringOrEmpty(comma: true, emptyValue: " - ");
                 c.ColorizeNumber(sum, s => s > 0, s => s == 0);
             })
+
+            .Do<Label>("Amount", c =>
+            {
+                var sum = _List.Sum(i => i.IsNegative ? -1 * i.Amount : i.Amount);
+                c.Text = sum.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                // c.ColorizeNumber(sum, s => s > 0, s => s == 0);
+            })
+
+
 
         );
     }
@@ -205,6 +235,7 @@
                 {
                     i.Amount = Math.Abs(d.Amount);
                     i.Paid = Math.Abs(d.Paid);
+                    i.ClosingBalance = i.Paid - (i.Amount - (i.OpeningBalance ?? 0m));
                     i.Remark = d.Remark;
                 });
         });
@@ -213,7 +244,7 @@
         {
             payment.Amount = paymentItems.Sum(i => i.Amount);
             payment.Paid = paymentItems.Sum(i => i.Paid);
-            payment.ClosingBalance = payment.Paid - (payment.Amount - payment.OpeningBalance ?? 0m);
+            payment.ClosingBalance = payment.Paid - (payment.Amount - (payment.OpeningBalance ?? 0m));
         }
 
         context.SubmitChanges();

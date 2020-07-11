@@ -552,7 +552,7 @@
             payment.Paid = items
                 .Where(i => i.CarId == payment.CarId && i.DriverId == payment.DriverId)
                 .Sum(i => i.Paid);
-            payment.ClosingBalance = payment.Paid - payment.Amount;
+            payment.ClosingBalance = payment.Paid - (payment.Amount - (payment.OpeningBalance ?? 0m));
         }
 
         context.SubmitChanges();

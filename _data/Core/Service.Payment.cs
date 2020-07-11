@@ -61,6 +61,7 @@ namespace eTaxi.L2SQL
                     SpecifiedMonth = c.SpecifiedMonth,
                     Type = c.Type,
                     IsNegative = c.IsNegative,
+                    NegativeType = c.NegativeType,
                     AccountingIndex = c.AccountingIndex,
                     Name = c.Name
                 };
@@ -70,11 +71,13 @@ namespace eTaxi.L2SQL
                     .FirstOrDefault(i => i.ChargeId == c.Id)
                     .IfNN(i =>
                     {
-                        item.Amount += (i.Amount - i.Paid);
+                        item.PreviousAmount = i.Amount;
+                        item.PreviousPaid = i.Paid;
+                        // item.OpeningBalance = i.ClosingBalance;
+                        item.OpeningBalance = i.Paid - (i.Amount - (i.OpeningBalance ?? 0m));
                     });
 
-                // item.Paid = item.Amount;
-
+                item.ClosingBalance = item.Paid - (item.Amount - (item.OpeningBalance ?? 0m));
                 paymentItems.Add(item);
 
             });
@@ -90,9 +93,9 @@ namespace eTaxi.L2SQL
             payment.StartDate = startDate;
             payment.EndDate = endDate;
             payment.Name = monthIndex;
-            payment.OpeningBalance = previousPayment == null ? 0 : previousPayment.ClosingBalance;
+            payment.OpeningBalance = previousPayment == null ? 0 : (previousPayment.Paid - (previousPayment.Amount - (previousPayment.OpeningBalance ?? 0m)));
             // payment.ClosingBalance = payment.OpeningBalance + payment.Paid - payment.Amount; 
-            payment.ClosingBalance = payment.Paid - (payment.Amount - payment.OpeningBalance ?? 0m); // 
+            payment.ClosingBalance = payment.Paid - (payment.Amount - (payment.OpeningBalance ?? 0m)); // 
             payment.PreviousAmount = previousPayment == null ? 0 : previousPayment.Amount;
             payment.PreviousPaid = previousPayment == null ? 0 : previousPayment.Paid;
             Context.Endorse(_CurrentSession, payment);
@@ -195,8 +198,9 @@ namespace eTaxi.L2SQL
                     p.MonthIndex.Substring(4, 2).ToIntOrDefault(), 1);
                 if (d <= date) continue;
 
-                p.OpeningBalance = payment.ClosingBalance;
-                p.ClosingBalance = p.OpeningBalance - p.Amount + p.Paid;
+                // p.OpeningBalance = payment.ClosingBalance;
+                p.OpeningBalance = payment.Paid - (payment.Amount - (payment.OpeningBalance ?? 0m));
+                p.ClosingBalance = p.Paid - (p.Amount - (p.OpeningBalance ?? 0m));
             }
 
             Context.SubmitChanges();

@@ -551,20 +551,20 @@
                 {
                     c.Text = monthIndex;
                 })
-                .Do<Label>("PreviousInvoiceAmount", (c, d) => payments
+                .Do<Label>("PreviousAmount", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
                     {
-                        c.Text = pp.PreviousAmount.ToStringOrEmpty(comma: true, emptyValue: " - ", alwaysDisplaySign: true);
-                        c.ColorizeNumber(pp.PreviousAmount, dd => dd > 0, dd => dd == 0);
+                        c.Text = pp.PreviousAmount.ToStringOrEmpty(comma: true, emptyValue: " - ");
+                        // c.ColorizeNumber(pp.PreviousAmount, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
-                .Do<Label>("PreviousPaidAmount", (c, d) => payments
+                .Do<Label>("PreviousPaid", (c, d) => payments
                     .FirstOrDefault(p => p.CarId == d.CarId && p.DriverId == d.DriverId)
                     .IfNN(pp =>
                     {
                         c.Text = pp.PreviousPaid.ToStringOrEmpty(comma: true, emptyValue: " - ");
-                        c.ColorizeNumber(pp.PreviousPaid, dd => dd > 0, dd => dd == 0);
+                        // c.ColorizeNumber(pp.PreviousPaid, dd => dd > 0, dd => dd == 0);
 
                     }, () => c.Text = " - "))
                 .Do<Label>("OpeningBalance", (c, d) => payments

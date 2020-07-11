@@ -1102,6 +1102,16 @@ namespace eTaxi.L2SQL
         public Nullable<int> SpecifiedMonth { get; set; }
         [ColumnAttribute(DbType = "int", CanBeNull = false)]
         public int Type { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> ClosingBalance { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> OpeningBalance { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> PreviousAmount { get; set; }
+        [ColumnAttribute(DbType = "money")]
+        public Nullable<decimal> PreviousPaid { get; set; }
+        [ColumnAttribute(DbType = "int")]
+        public Nullable<int> NegativeType { get; set; } // 付 or 抵
     }
     /// <summary>
     /// 车辆 - 承租记录
