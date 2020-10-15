@@ -438,6 +438,8 @@
                             case "Extra1": return GetDecimal(v, 0);
                             case "Extra2": return GetDecimal(v, 0);
                             case "Extra3": return GetDecimal(v, 0);
+                            case "IsProbation": return false;
+                            case "ProbationExpiryDate": return GetDateTime(v);
                             default:
                                 return v.ToStringEx();
                         }
