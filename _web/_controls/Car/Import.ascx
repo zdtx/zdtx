@@ -167,6 +167,8 @@
     private void _Do_Save(int index)
     {
         var dt = _SessionEx.Get<DataTable>();
+        if (dt.Rows.Count <= index + 3) return;
+
         var fields = dt.Rows[1].ItemArray;
         var values = dt.Rows[index + 3].ItemArray;
 
